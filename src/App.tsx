@@ -1,6 +1,6 @@
 import { Switch, Route } from 'wouter';
-import { HomePage } from './pages/Home';
-import { OffersPage } from './pages/Offers';
+import { HomePage } from './pages/HomePage';
+import { OffersPage } from './pages/OffersPage';
 
 export default function App() {
 
