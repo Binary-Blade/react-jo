@@ -1,12 +1,16 @@
-import './App.css'
-import { Calendar } from './components/ui/calendar'
-function App() {
+import { Switch, Route } from 'wouter';
+import { HomePage } from './pages/Home';
+import { OffersPage } from './pages/Offers';
+
+export default function App() {
 
   return (
     <>
-      <Calendar />
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/offers" component={OffersPage} />
+      </Switch>
     </>
   )
 }
 
-export default App
