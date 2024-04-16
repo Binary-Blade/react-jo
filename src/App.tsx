@@ -1,6 +1,7 @@
 import { Switch, Route } from 'wouter';
 import { HomePage } from './pages/HomePage';
-import { OffersPage } from './pages/OffersPage';
+import { TicketOffersPage } from './pages/TicketOffersPage';
+import { AuthPage } from './pages/AuthPage';
 
 export default function App() {
 
@@ -8,7 +9,8 @@ export default function App() {
     <>
       <Switch>
         <Route path="/" component={HomePage} />
-        <Route path="/offers" component={OffersPage} />
+        <Route path="/auth" component={AuthPage} />
+        <Route path="/offers" component={TicketOffersPage} />
       </Switch>
     </>
   )

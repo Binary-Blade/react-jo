@@ -1,5 +1,5 @@
-import { LoginForm } from "@/components/AuthPage/LoginForm"
-import { SignUpForm } from "@/components/AuthPage/SignUpForm"
+import { LoginForm } from "@/components/auth/LoginForm";
+import { SignUpForm } from "@/components/auth/SignUpForm";
 
 export const AuthPage = () => {
 
@@ -10,8 +10,6 @@ export const AuthPage = () => {
       {logged ?
         <SignUpForm /> : <LoginForm />
       }
-
-
     </>
   )
 }
