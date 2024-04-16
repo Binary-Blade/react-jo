@@ -24,9 +24,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Header } from "@/components/common/Header"
+import { Header } from "@/components/ui/Header"
 
-export const OffersPage = () => {
+export const TicketOffersPage = () => {
   return (
     <>
       <Header />
