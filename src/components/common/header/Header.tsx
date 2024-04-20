@@ -1,6 +1,6 @@
 import { NavLink } from "@/types/NavLink";
 import { NavBar } from "./Navbar"
-import { SheetMenu } from "./Sheet"
+import { SheetMenu } from "./SheetMenu"
 
 export const Header = () => {
 
