@@ -1,9 +1,8 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
-import { NavBarProps } from "@/types/NavLink"
-import { CircleUser } from "lucide-react"
-import { Link } from "wouter"
+import React from 'react';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Menu, CircleUser } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +10,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import { NavBarProps } from "@/types/NavLink";
+import { useAuthStore } from '@/stores/useAuthStore';
 
 export const SheetMenu: React.FC<NavBarProps> = ({ navLinks }) => {
+  const logout = useAuthStore((state) => state.logout);
+  const [, navigate] = useLocation();
+
+  const handleLogout = async () => {
+    try {
+      await logout(); // Assume logout() is an async function that clears user session
+      console.log('Logout successful');
+      navigate('/'); // Redirect to home or dashboard as necessary
+    } catch (error: any) {
+      const errorMessage = error.message || "Logout failed due to an unexpected error";
+      console.error('Logout failed:', errorMessage);
+      alert(errorMessage); // Show a user-friendly error message
+    }
+  };
 
   return (
     <>
@@ -39,10 +54,6 @@ export const SheetMenu: React.FC<NavBarProps> = ({ navLinks }) => {
           </nav>
         </SheetContent>
       </Sheet>
-
-      {/*
-      NOTE: CREATE MAP AND ROUTE LOGIC FOR THAT TOO 
-      */}
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -54,14 +65,20 @@ export const SheetMenu: React.FC<NavBarProps> = ({ navLinks }) => {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>My Cart</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/my-cart">My Cart</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/settings">Settings</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/support">Support</Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
     </>
-  )
-}
+  );
+};
