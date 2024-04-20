@@ -1,27 +1,27 @@
 import { ReactNode } from "react";
-
-export interface UserSignupData {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-}
+import { UserLoginData, UserSignupData } from "./FormType";
 
 export type AuthProviderProps = {
     children: ReactNode;
 };
 
 export interface AuthState {
-    token: string | null;
-    refreshToken: string | null;
+    accessToken: string | null;
     expiresAt: Date | null;
+    isAuthenticated: boolean;
+    signup: (userData: UserSignupData) => Promise<{ success: boolean; message?: string }>;
+    login: (userData: UserLoginData) => Promise<{ success: boolean; message?: string }>;
+    logout: () => Promise<void>;
+    refreshToken: () => Promise<void>;
+    initializeSession: () => Promise<void>;
 }
 
-// Interface for your AuthContext's value
 export interface AuthContextType {
     authState: AuthState;
     signup: (userData: UserSignupData) => Promise<void>;
-    login: (email: string, password: string) => Promise<void>;
+    login: (userData: UserLoginData) => Promise<{ success: boolean; message?: string }>;
     logout: () => Promise<void>;
     refreshToken: () => Promise<void>;
 }
+
+export type SetAuthStateFunction = (newState: AuthState | ((prevState: AuthState) => AuthState)) => void;
