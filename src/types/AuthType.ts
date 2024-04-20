@@ -5,6 +5,11 @@ export type AuthProviderProps = {
     children: ReactNode;
 };
 
+export interface AuthContextType {
+    initialized: boolean;
+    isAuthenticated: boolean;
+}
+
 export interface AuthState {
     accessToken: string | null;
     expiresAt: Date | null;
@@ -14,14 +19,6 @@ export interface AuthState {
     logout: () => Promise<void>;
     refreshToken: () => Promise<void>;
     initializeSession: () => Promise<void>;
-}
-
-export interface AuthContextType {
-    authState: AuthState;
-    signup: (userData: UserSignupData) => Promise<void>;
-    login: (userData: UserLoginData) => Promise<{ success: boolean; message?: string }>;
-    logout: () => Promise<void>;
-    refreshToken: () => Promise<void>;
 }
 
 export type SetAuthStateFunction = (newState: AuthState | ((prevState: AuthState) => AuthState)) => void;
