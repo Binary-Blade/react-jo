@@ -7,7 +7,6 @@ export const Header = () => {
   const navLinks: NavLink[] = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
-    { name: 'Offers', href: '/offers' },
     { name: 'Cart', href: '/cart' },
   ];
   return (
