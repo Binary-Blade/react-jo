@@ -7,6 +7,7 @@ export class SessionService {
       return {
         accessToken: response.data.accessToken,
         expiresIn: response.data.expiresIn,
+        userId: response.data.userId
       };
     } catch (error) {
       console.error('Verify session error:', error);

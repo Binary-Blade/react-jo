@@ -10,7 +10,7 @@ export class AuthenticationService {
 
   static async login(userData: LoginFormData) {
     const response = await axiosClient.post('/auth/login', userData);
-    if (response.data.accessToken) {
+    if (response.data) {
       return {
         success: true,
         data: response.data
