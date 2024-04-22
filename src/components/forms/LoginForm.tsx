@@ -27,7 +27,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 render={({ field }) => (
                     <div>
                         <Label htmlFor="email">Email</Label>
-                        <Input {...field} id="email" type="email" placeholder="m@example.com" />
+                        <Input
+                            {...field}
+                            id="email"
+                            type="email"
+                            placeholder="m@example.com"
+                        />
                         {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                     </div>
                 )}
@@ -38,7 +43,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 render={({ field }) => (
                     <div>
                         <Label htmlFor="password">Password</Label>
-                        <Input {...field} id="password" type="password" />
+                        <Input
+                            {...field}
+                            id="password"
+                            type="password"
+                        />
                         {errors.password && <span className="text-red-500">{errors.password.message}</span>}
                     </div>
                 )}
