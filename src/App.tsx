@@ -4,7 +4,6 @@ import { LoginPage } from './pages/auth/LoginPage';
 import { SignUpPage } from './pages/auth/SignUpPage';
 import { AuthProvider } from './context/AuthContext';
 import EventsPage from './pages/event/EventsPage';
-import TicketPage from './pages/event/TicketPage';
 
 export default function App() {
   return (
@@ -14,7 +13,6 @@ export default function App() {
         <Route path="/signup" component={SignUpPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/events" component={EventsPage} />
-        <Route path="/tickets" component={TicketPage} />
       </Switch>
     </AuthProvider>
   );
