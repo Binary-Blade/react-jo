@@ -9,6 +9,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     accessToken: null,
     expiresAt: null,
     isAuthenticated: false,
+    userId: null,
 
     signup: async (userData: SignupFormData) => {
         try {
@@ -41,7 +42,7 @@ export const useAuthStore = create<AuthState>((set) => ({
             set({
                 accessToken: null,
                 expiresAt: null,
-                isAuthenticated: false
+                isAuthenticated: false,
             });
         } catch (error: any) {
             console.error('Logout error:', error);
@@ -64,11 +65,12 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     initializeSession: async () => {
         try {
-            const { accessToken, expiresIn } = await SessionService.initializeSession();
+            const { accessToken, expiresIn, userId } = await SessionService.initializeSession();
             set({
                 isAuthenticated: true,
                 accessToken: accessToken,
-                expiresAt: new Date(new Date().getTime() + expiresIn * 1000)
+                expiresAt: new Date(new Date().getTime() + expiresIn * 1000),
+                userId: userId,
             });
         } catch (error) {
             console.error('Error verifying user session:', error);

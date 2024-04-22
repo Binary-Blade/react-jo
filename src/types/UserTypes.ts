@@ -2,7 +2,7 @@ export interface User {
     id: number;
     name: string;
     email: string;
-    role: string; // or enum if you have defined roles as TypeScript enums
+    role: string;
 }
 
 export interface UserState {
