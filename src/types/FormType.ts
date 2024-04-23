@@ -19,5 +19,6 @@ export interface SignUpFormProps {
 
 export interface LoginFormProps {
     onSubmit: (data: LoginFormData) => void | Promise<void>;
+    disabled?: boolean;
 }
 
