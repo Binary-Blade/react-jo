@@ -15,7 +15,7 @@ export interface AuthState {
     accessToken: string | null;
     expiresAt: Date | null;
     isAuthenticated: boolean;
-    userId: string | null;
+    userId: number | null;
     signup: (userData: UserSignupData) => Promise<{ success: boolean; message?: string }>;
     login: (userData: UserLoginData) => Promise<{ success: boolean; message?: string }>;
     logout: () => Promise<void>;
