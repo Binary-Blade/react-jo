@@ -43,6 +43,7 @@ export const useAuthStore = create<AuthState>((set) => ({
                 accessToken: null,
                 expiresAt: null,
                 isAuthenticated: false,
+                userId: null,
             });
         } catch (error: any) {
             console.error('Logout error:', error);
@@ -53,10 +54,13 @@ export const useAuthStore = create<AuthState>((set) => ({
     refreshToken: async () => {
         try {
             const data = await AuthenticationService.refreshToken();
-            set({
-                accessToken: data.accessToken,
-                expiresAt: new Date(new Date().getTime() + data.expiresIn * 1000)
-            });
+            if (data.accessToken && data.expiresIn) {
+
+                set({
+                    accessToken: data.accessToken,
+                    expiresAt: new Date(new Date().getTime() + data.expiresIn * 1000)
+                });
+            }
         } catch (error: any) {
             console.error('Error refreshing token:', error);
             throw new Error(error.message || "Failed to refresh token");
@@ -66,18 +70,21 @@ export const useAuthStore = create<AuthState>((set) => ({
     initializeSession: async () => {
         try {
             const { accessToken, expiresIn, userId } = await SessionService.initializeSession();
-            set({
-                isAuthenticated: true,
-                accessToken: accessToken,
-                expiresAt: new Date(new Date().getTime() + expiresIn * 1000),
-                userId: userId,
-            });
+            if (accessToken || expiresIn || userId) {
+                set({
+                    isAuthenticated: true,
+                    accessToken: accessToken,
+                    expiresAt: new Date(new Date().getTime() + expiresIn * 1000),
+                    userId: userId,
+                });
+            }
         } catch (error) {
             console.error('Error verifying user session:', error);
             set({
                 isAuthenticated: false,
                 accessToken: null,
-                expiresAt: null
+                expiresAt: null,
+                userId: null,
             });
         }
     },
