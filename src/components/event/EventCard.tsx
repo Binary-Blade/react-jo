@@ -1,6 +1,6 @@
 import React from "react";
 import { EventPropsType } from "@/types/EventTypes";
-import { EventDrawerTicket } from "./EventDrawerTicket";
+import { EventDrawer } from "./EventTicket";
 
 export const EventCard: React.FC<EventPropsType> = ({
     eventId,
@@ -18,7 +18,7 @@ export const EventCard: React.FC<EventPropsType> = ({
                 src={imageSrc}
             />
             <div className="p-4 flex flex-col gap-2">
-                <EventDrawerTicket
+                <EventDrawer
                     eventId={eventId}
                     title={title}
                     description={description}
