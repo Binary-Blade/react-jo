@@ -66,9 +66,6 @@ export const SheetMenu: React.FC<NavBarProps> = ({ navLinks }) => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/my-cart">My Cart</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
               <Link href="/settings">Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -82,3 +79,4 @@ export const SheetMenu: React.FC<NavBarProps> = ({ navLinks }) => {
     </>
   );
 };
+
