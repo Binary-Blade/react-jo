@@ -3,6 +3,7 @@ import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/auth/LoginPage';
 import { SignUpPage } from './pages/auth/SignUpPage';
 import { AuthProvider } from './context/AuthContext';
+import { CartPage } from './pages/cart/CartPage';
 import EventsPage from './pages/event/EventsPage';
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/signup" component={SignUpPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/events" component={EventsPage} />
+        <Route path="/cart" component={CartPage} />
       </Switch>
     </AuthProvider>
   );
