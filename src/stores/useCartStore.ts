@@ -1,7 +1,15 @@
 import { create } from 'zustand';
 import { CartService } from '@/services/CartService';
-import { CartState } from '@/types/CartTypes';
+import { CartItem, CreateCartItemDto, UpdateCartItemDto } from '@/types/CartTypes';
 
+interface CartState {
+    cartItems: CartItem[];
+    cartId?: number;  // Optional if some carts might not yet have an ID
+    fetchCartItems: (userId: number, cartId: number) => Promise<void>;
+    addItemToCart: (userId: number, cartItem: CreateCartItemDto) => Promise<void>;
+    updateCartItem: (userId: number, cartId: number, cartItemId: number, updateData: UpdateCartItemDto) => Promise<void>;
+    removeCartItem: (userId: number, cartId: number, cartItemId: number) => Promise<void>;
+}
 
 export const useCartStore = create<CartState>((set, get) => ({
     cartItems: [],

@@ -20,11 +20,14 @@ export class CartService {
     }
   }
 
-  static async updateCartItem(userId: number, cartId: number, cartItemId: number, updateData: UpdateCartItemDto) {
+  static async updateCartItem(userId: number, cartId: number, cartItemId: number, quantity: number) {
     try {
-      const response = await axiosClient.patch(`/carts/${cartId}/items/${cartItemId}`, { ...updateData, userId });
+      const response = await axiosClient.patch(`/carts/${cartId}/items/${cartItemId}`, {
+        quantity  // Include the quantity in the request body
+      });
       return response.data;
     } catch (error) {
+      console.error("Failed to update cart item", error);
       throw new Error("Failed to update cart item");
     }
   }
