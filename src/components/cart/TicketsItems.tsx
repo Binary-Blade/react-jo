@@ -5,6 +5,9 @@ import { Input } from "../ui/input";
 import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { Label } from "../ui/label";
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "../ui/use-toast";
+import { TrashIcon } from "lucide-react";
 
 interface TicketItemProps {
     cartId: number;
@@ -15,17 +18,35 @@ interface TicketItemProps {
 }
 
 const TicketItem: FC<TicketItemProps> = ({ cartId, cartItemId, eventName, ticketPrice, quantity: initialQuantity }) => {
+    const { toast } = useToast();
     const updateCartItem = useCartStore((state) => state.updateCartItem);
     const removeCartItem = useCartStore((state) => state.removeCartItem);
     const [quantity, setQuantity] = useState<number>(initialQuantity);
     const userId = useAuthStore((state) => state.userId);
 
     const handleQuantityChange = (newQuantity: number) => {
-        setQuantity(newQuantity);
-        updateCartItem(userId, cartId, cartItemId, newQuantity);
+        if (cartId === null || userId === null) {
+            console.error('Invalid operation without cartId or cartItemId');
+            return; // Stop further execution
+        }
+        if (newQuantity < 1) {
+            setQuantity(1);
+        } else {
+            setQuantity(newQuantity);
+            updateCartItem(userId, cartId, cartItemId, newQuantity);
+        }
     };
+
     const handleRemoveItem = () => {
+        if (cartId === null || userId === null) {
+            console.error('Invalid operation without cartId or cartItemId');
+            return; // Stop further execution
+        }
         removeCartItem(userId, cartId, cartItemId).catch(console.error);
+        toast({
+            title: "Ticket removed from cart",
+            description: `You have removed ${quantity} ${eventName} ticket(s) from your cart.`,
+        });
     };
 
     return (
@@ -73,27 +94,8 @@ export const TicketsItems: FC<TicketsItemsProps> = ({ items, ticketType }) => {
                     />
                 ))}
             </div>
+            <Toaster />
         </div>
     );
 };
 
-function TrashIcon(props) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-        </svg>
-    )
-}
