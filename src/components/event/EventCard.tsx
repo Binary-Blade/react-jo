@@ -1,6 +1,7 @@
 import React from "react";
 import { EventPropsType } from "@/types/EventTypes";
 import { EventDrawer } from "./EventTicket";
+import { Toaster } from "../ui/toaster";
 
 export const EventCard: React.FC<EventPropsType> = ({
     eventId,
@@ -10,6 +11,7 @@ export const EventCard: React.FC<EventPropsType> = ({
     basePrice,
     quantityAvailable
 }) => {
+
     return (
         <div className="relative group grid gap-4 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 transition-all hover:scale-[1.02] hover:shadow-lg">
             <img
@@ -26,6 +28,7 @@ export const EventCard: React.FC<EventPropsType> = ({
                     quantityAvailable={quantityAvailable}
                     basePrice={basePrice}
                 />
+                <Toaster />
             </div>
         </div >
     );

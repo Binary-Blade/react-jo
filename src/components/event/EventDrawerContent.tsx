@@ -1,10 +1,13 @@
 import { EventSelectTypes, TicketType } from "./EventSelectTypes";
-import { BuyTicketButton } from "../cart/BuyTicketButton";
 import { FC } from "react";
 import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useTicketManager } from "@/hooks/useTicketManage";
 import { EventPropsType } from "@/types/EventTypes";
+import { useToast } from "../ui/use-toast";
+import { Toaster } from "../ui/toaster";
+import { TicketButton } from "../common/buttons/TicketButton";
+import { navigate } from "wouter/use-browser-location";
 
 export const EventDrawerContent: FC<EventPropsType> = ({
     title,
@@ -14,6 +17,7 @@ export const EventDrawerContent: FC<EventPropsType> = ({
     basePrice,
     eventId
 }) => {
+    const { toast } = useToast()
     const addItemToCart = useCartStore((state) => state.addItemToCart);
     const userId = useAuthStore((state) => state.userId);
     const {
@@ -36,7 +40,10 @@ export const EventDrawerContent: FC<EventPropsType> = ({
         };
         try {
             await addItemToCart(userId, cartItem);
-            alert('Ticket added to cart successfully!');
+            toast({
+                title: "Ticket added to cart",
+                description: `You have added ${quantity} ${selectedTicketType} ticket(s) to your cart.`,
+            })
         } catch (error) {
             console.error('Error adding ticket to cart:', error);
             alert('Failed to add ticket to cart.');
@@ -74,9 +81,23 @@ export const EventDrawerContent: FC<EventPropsType> = ({
                         selectedType={selectedTicketType}
                         onChange={handleTicketTypeChange}
                     />
-                    <BuyTicketButton onClick={handleBuyTicket} isLoading={false} />
+                    <div className="flex gap-2">
+                        <TicketButton
+                            onClick={handleBuyTicket}
+                            isLoading={false}
+                            variant="default"
+                            text="Add to cart"
+                        />
+                        <TicketButton
+                            onClick={() => navigate('/cart')}
+                            isLoading={false}
+                            variant="outline"
+                            text="Buy now"
+                        />
+                    </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };
