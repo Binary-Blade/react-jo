@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { CartService } from '@/services/CartService';
 import { CartItem, CreateCartItemDto } from '@/types/CartTypes';
-import { getStoredCartId, setStoredCartId } from '@/utils/storeCardId';
+import { StoreLocalStorage } from '@/utils/storeLocalStorage';
 
 interface CartState {
     cartItems: CartItem[];
@@ -14,11 +14,11 @@ interface CartState {
 
 export const useCartStore = create<CartState>((set, get) => ({
     cartItems: [],
-    cartId: getStoredCartId(),
+    cartId: StoreLocalStorage.getStoredCartId(),
 
     addItemToCart: async (userId, cartItem) => {
         const data = await CartService.addItemToCart(userId, cartItem);
-        setStoredCartId(data.cart.cartId);
+        StoreLocalStorage.setStoredCartId(data.cart.cartId);
         set({ cartItems: [...get().cartItems, data], cartId: data.cart.cartId });
     },
     fetchCartItems: async (userId, cartId) => {
