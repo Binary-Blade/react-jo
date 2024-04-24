@@ -1,5 +1,5 @@
-import { CreateCartItemDto, UpdateCartItemDto } from '@/types/CartTypes';
-import axiosClient from '@/utils/axiosConfig';
+import { CreateCartItemDto } from '@/types/CartTypes';
+import axiosClient from './axiosConfig';
 
 export class CartService {
   static async addItemToCart(userId: number, cartItem: CreateCartItemDto) {
@@ -23,7 +23,8 @@ export class CartService {
   static async updateCartItem(userId: number, cartId: number, cartItemId: number, quantity: number) {
     try {
       const response = await axiosClient.patch(`/carts/${cartId}/items/${cartItemId}`, {
-        quantity  // Include the quantity in the request body
+        userId, // Include userId in the request body
+        quantity
       });
       return response.data;
     } catch (error) {

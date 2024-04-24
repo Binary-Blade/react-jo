@@ -1,5 +1,5 @@
 import { Event, EventResponse } from '@/types/EventTypes';
-import axiosClient from '@/utils/axiosConfig';
+import axiosClient from './axiosConfig';
 
 /**
  * Service class for handling API requests related to events.
