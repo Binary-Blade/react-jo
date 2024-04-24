@@ -1,13 +1,12 @@
-import Footer from "@/components/common/footer/Footer";
-import { Header } from "@/components/common/header/Header";
 import imageTicket from '@/assets/images/GamesTicketOptions.svg'
-import { EventCard } from "@/components/event/EventCard";
-import { EventHero } from "@/components/event/EventHero";
-import { EventTitle } from "@/components/event/EventTitle";
+import { Footer } from '@/features/Footer';
+import { Header } from '@/features/Header';
+import { EventCard } from '@/features/events/EventCard';
+import { EventHero } from '@/features/events/EventHero';
 import { useEventStore } from "@/stores/useEventStore";
 import { useEffect } from "react";
 
-export default function EventsPage() {
+export const EventsPage = () => {
 
   const { events, fetchEvents } = useEventStore(state => ({
     events: state.events,
@@ -25,7 +24,12 @@ export default function EventsPage() {
         <EventHero />
       </div>
       <div className="container grid gap-8 md:py-4 px-4 md:px-6">
-        <EventTitle />
+        < div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8" >
+          <div className="grid gap-1">
+            <h1 className="text-3xl font-bold tracking-tight">2024 Olympic Games</h1>
+            <p className="text-gray-500 dark:text-gray-400">Secure your tickets to the biggest event of the year.</p>
+          </div>
+        </div >
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {events.map(event => (
             <EventCard

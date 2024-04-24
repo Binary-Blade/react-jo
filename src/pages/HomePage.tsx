@@ -1,10 +1,10 @@
-import Events from "@/components/home/Events"
-import Hero from "@/components/home/Hero"
-import SectionTickets from "@/components/home/SectionTickets"
-import { CounterDate } from "@/components/home/CounterDate"
-import { PresentSports } from "@/components/home/PresentSports"
-import { Header } from "@/components/common/header/Header"
-import Footer from "@/components/common/footer/Footer"
+import { Footer } from "@/features/Footer"
+import { Header } from "@/features/Header"
+import Events from "@/features/home/Events"
+import { ExploreVenue } from "@/features/home/ExploreVenue"
+import Hero from "@/features/home/Hero"
+import { NewsPresents } from "@/features/home/PresentSports"
+import SectionTickets from "@/features/home/SectionTickets"
 
 export const HomePage = () => {
 
@@ -12,9 +12,9 @@ export const HomePage = () => {
     <>
       <Header />
       <Hero />
-      <CounterDate />
       <Events />
-      <PresentSports />
+      <ExploreVenue />
+      <NewsPresents />
       <SectionTickets />
       <Footer />
     </>

@@ -1,8 +1,8 @@
 import image from "@/assets/images/2024.png"
 import { Link, useLocation } from "wouter"
-import { LoginForm } from "@/components/forms/LoginForm"
-import { LoginFormData } from "@/validation/schemas/loginSchema"
 import { useAuthStore } from "@/stores/useAuthStore"
+import { LoginFormData } from "@/utils/validation/schemas/loginSchema";
+import { LoginForm } from "@/features/auth/LoginForm";
 
 export const LoginPage = () => {
   const login = useAuthStore(state => state.login);
