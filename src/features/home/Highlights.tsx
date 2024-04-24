@@ -1,7 +1,7 @@
 import { FlameIcon, MedalIcon } from "@/assets/icons/IconComponents"
 import { Separator } from "@/components/ui/separator"
 
-export default function Events() {
+export const Highlights = () => {
   return (
     <>
       <Separator />
