@@ -1,20 +1,19 @@
 import { Switch, Route } from 'wouter';
 import { HomePage } from './pages/HomePage';
-import { LoginPage } from './pages/auth/LoginPage';
 import { AuthProvider } from './context/AuthContext';
-import { CartPage } from './pages/cart/CartPage';
-import EventsPage from './pages/event/EventsPage';
 import { useEffect } from 'react';
-import useCartStore from './stores/useCartStore';
+import { ReservationPage } from '@/pages/ReservationPage';
 import { useAuthStore } from './stores/useAuthStore';
-import { ReservationPage } from './pages/ReservationPage';
+import useCartStore from './stores/useCartStore';
+import { LoginPage } from './pages/LoginPage';
+import { EventsPage } from './pages/EventsPage';
+import { CartPage } from './pages/CartPage';
 
 export default function App() {
 
   const { userId } = useAuthStore(state => ({
     userId: state.userId,
   }));
-
 
   const { cartId, fetchCartItems } = useCartStore(state => ({
     fetchCartItems: state.fetchCartItems,
@@ -24,10 +23,9 @@ export default function App() {
   useEffect(() => {
     if (userId && cartId) {
       fetchCartItems(userId, cartId);
-    } else {
-      console.log("Missing userId or cartId, cannot fetch cart items.");
     }
   }, [fetchCartItems, userId, cartId]);
+
   return (
     <AuthProvider>
       <Switch>
