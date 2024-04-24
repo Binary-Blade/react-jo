@@ -1,28 +1,33 @@
-import { FC } from "react";
-import { Button } from "@/components/ui/button";
+import { FC, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { TicketsItems } from "./TicketsItems";
 import { CartTicketProps } from "@/types/CartTypes";
 import useGroupByTicketType from "@/hooks/useGroupByTicketType";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { navigate } from "wouter/use-browser-location";
+import useCartStore from "@/stores/useCartStore";
+import { CheckOutPayment } from "../payment/CheckOutPayment";
 
 
 export const CartTicket: FC<CartTicketProps> = ({ cartItems }) => {
     const groupedItems = useGroupByTicketType(cartItems);
-    const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+    const { fetchCartItems, cartId } = useCartStore(state => ({
+        fetchCartItems: state.fetchCartItems,
+        cartId: state.cartId,
+    }));
+
     const total = cartItems.reduce((acc, item) => acc + item.price, 0);
     const taxes = total * 0.1;
     const totalTaxes = total + taxes;
 
-    const handleCheckout = () => {
-        if (!isAuthenticated) {
-            console.log("Please login to proceed to payment");
-            return navigate("/login");
-        }
-        console.log("Redirecting to payment gateway");
-    }
 
+    const userId = useAuthStore(state => state.userId);
+
+    useEffect(() => {
+        if (userId && cartId) {
+            fetchCartItems(userId, cartId);
+        }
+    }, [userId, fetchCartItems]);
+    // FIX: Fix items ticketsitems
     return (
         <>
             <div className="container mx-auto py-12 px-4 md:px-6">
@@ -52,9 +57,7 @@ export const CartTicket: FC<CartTicketProps> = ({ cartItems }) => {
                             <span className="font-bold">Total</span>
                             <span className="font-bold">${totalTaxes}</span>
                         </div>
-                        <Button className="w-full" size="lg" onClick={handleCheckout}>
-                            Proceed to Payment
-                        </Button>
+                        <CheckOutPayment cartId={cartId} />
                     </div>
                 </div>
             </div>

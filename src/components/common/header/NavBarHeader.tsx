@@ -1,16 +1,14 @@
 import { Link, useLocation } from 'wouter';
-import imageParis from "../../../assets/icons/Logo.png";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { FC, useEffect, useState } from 'react';
-import { SignUpForm } from '@/components/forms/SignUpForm';
 import { DropDownAccount } from './DropDownAccount';
 import useCartStore from '@/stores/useCartStore';
-import { ShoppingCartIcon } from '@/assets/icons/IconComponents';
+import { MedalIcon, ShoppingCartIcon } from '@/assets/icons/IconComponents';
+import { SignUpForm } from '@/features/auth/SignUpForm';
 
 interface NavLinkProps {
   navLinks: { name: string, href: string }[];
 }
-
 
 export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
   const logout = useAuthStore((state) => state.logout);
@@ -40,10 +38,13 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
       <div className="container flex items-center justify-between h-16 px-4 md:px-6">
-        <img src={imageParis} alt="Paris 2024" className="w-16" />
-        <nav className="hidden md:flex items-center gap-20 text-md font-medium">
+        <div className="flex items-center gap-2">
+          <MedalIcon className="w-8 h-8 text-rose-500" />
+          <span className="text-xl font-semibold tracking-tight">Paris 2024</span>
+        </div>
+        <nav className="hidden md:flex items-center gap-6 text-md font-medium">
           {navLinks.map(link => (
-            <Link key={link.name} href={link.href} className="hover:text-gray-900 dark:hover:text-gray-50">
+            <Link key={link.name} href={link.href} className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
               {link.name}
             </Link>
           ))}

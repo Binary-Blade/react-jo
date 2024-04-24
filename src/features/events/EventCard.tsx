@@ -1,7 +1,6 @@
 import React from "react";
 import { EventPropsType } from "@/types/EventTypes";
 import { EventDrawer } from "./EventTicket";
-import { Toaster } from "../ui/toaster";
 
 export const EventCard: React.FC<EventPropsType> = ({
     eventId,
@@ -28,7 +27,6 @@ export const EventCard: React.FC<EventPropsType> = ({
                     quantityAvailable={quantityAvailable}
                     basePrice={basePrice}
                 />
-                <Toaster />
             </div>
         </div >
     );

@@ -1,12 +1,12 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { SignupFormData, signupSchema } from '@/validation/schemas/signupSchema';
 import { DialogTrigger, DialogTitle, DialogDescription, DialogHeader, DialogFooter, DialogContent, Dialog } from "@/components/ui/dialog"
 import { Link, useLocation } from 'wouter';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { SignupFormData, signupSchema } from '@/utils/zod-schemas/signupSchema';
 
 export const SignUpForm = () => {
     const signup = useAuthStore((state) => state.signup);

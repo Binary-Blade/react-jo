@@ -1,10 +1,10 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from '@/validation/schemas/loginSchema';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
 import { LoginFormProps } from '@/types/FormType';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { loginSchema } from '@/utils/zod-schemas/loginSchema';
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     const {

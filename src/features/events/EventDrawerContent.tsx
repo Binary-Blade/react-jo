@@ -4,10 +4,10 @@ import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useTicketManager } from "@/hooks/useTicketManage";
 import { EventPropsType } from "@/types/EventTypes";
-import { useToast } from "../ui/use-toast";
-import { Toaster } from "../ui/toaster";
-import { TicketButton } from "../common/buttons/TicketButton";
 import { navigate } from "wouter/use-browser-location";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+import { TicketButton } from "@/components/common/buttons/TicketButton";
 
 export const EventDrawerContent: FC<EventPropsType> = ({
     title,
@@ -25,7 +25,7 @@ export const EventDrawerContent: FC<EventPropsType> = ({
         quantity,
         currentPrice,
         handleTicketTypeChange
-    } = useTicketManager(basePrice, eventId, TicketType.SOLO);
+    } = useTicketManager(basePrice, eventId, TicketType.SOLO); //FIX: Fix that types
 
     const handleBuyTicket = async () => {
         if (!eventId || !selectedTicketType) {
@@ -39,6 +39,10 @@ export const EventDrawerContent: FC<EventPropsType> = ({
             price: currentPrice
         };
         try {
+            if (!userId) {
+                alert('Please login to add tickets to your cart.');
+                return;
+            }
             await addItemToCart(userId, cartItem);
             toast({
                 title: "Ticket added to cart",

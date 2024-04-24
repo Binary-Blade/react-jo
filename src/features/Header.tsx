@@ -1,6 +1,6 @@
+import { NavBarHeader } from "@/components/common/header/NavBarHeader";
+import { SheetMenu } from "@/components/common/header/SheetMenu";
 import { NavLink } from "@/types/NavLink";
-import { SheetMenu } from "./SheetMenu"
-import { NavBarHeader } from "./NavBarHeader";
 
 export const Header = () => {
 

@@ -1,5 +1,5 @@
+import { Separator } from "@/components/ui/separator";
 import { Link } from "wouter";
-import { Separator } from "../ui/separator";
 
 export default function SectionTickets() {
     return (
