@@ -1,6 +1,6 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useEventStore } from '@/stores/useEventStore';
-import { TicketType } from '@/components/event/EventSelectTypes';
+import { TicketType } from '@/features/events/EventSelectTypes';
 
 export const useTicketManager = (basePrice: number, eventId: number, initialTicketType: TicketType) => {
   const [selectedTicketType, setSelectedTicketType] = useState<TicketType>(initialTicketType);
