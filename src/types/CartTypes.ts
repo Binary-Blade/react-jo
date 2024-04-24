@@ -1,4 +1,3 @@
-
 // Interface for the functions available in the cart store
 export interface CartState {
     cartItems: CartItem[];
@@ -28,10 +27,6 @@ export interface CartItem {
 
 export interface CreateCartItemDto {
     eventId: number;
-    quantity: number;
-}
-
-export interface UpdateCartItemDto {
     quantity: number;
 }
 
