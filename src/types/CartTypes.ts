@@ -1,4 +1,3 @@
-// Interface for the functions available in the cart store
 export interface CartState {
     cartItems: CartItem[];
     cartId: number | null;
@@ -8,7 +7,6 @@ export interface CartState {
     removeCartItem: (userId: number, cartId: number, cartItemId: number) => Promise<void>;
 }
 
-// src/types/CartItemTypes.ts
 export interface CartItem {
     cartItemId: number;
     quantity: number;

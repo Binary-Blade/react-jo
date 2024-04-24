@@ -27,7 +27,7 @@ export const CheckOutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
         setLoading(true); // Set loading to true when the checkout process starts
         if (userId && cartId) {
             try {
-                await addReservation(userId, cartId); // Assuming you need to pass an object to addReservation
+                await addReservation(userId, cartId);
                 setTimeout(() => {
                     navigate("/");
                     setLoading(false); // Set loading to false after navigation or at the end of the process

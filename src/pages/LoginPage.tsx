@@ -1,8 +1,8 @@
 import image from "@/assets/images/2024.png"
 import { Link, useLocation } from "wouter"
 import { useAuthStore } from "@/stores/useAuthStore"
-import { LoginFormData } from "@/utils/validation/schemas/loginSchema";
 import { LoginForm } from "@/features/auth/LoginForm";
+import { LoginFormData } from "@/utils/zod-schemas/loginSchema";
 
 export const LoginPage = () => {
   const login = useAuthStore(state => state.login);
@@ -13,7 +13,7 @@ export const LoginPage = () => {
       const result = await login(formData);
       if (result.success) {
         console.log('Login successful');
-        navigate('/'); // Redirect to home or dashboard as necessary
+        navigate('/');
       } else {
         throw new Error(result.message);
       }

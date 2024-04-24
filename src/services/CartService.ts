@@ -23,7 +23,7 @@ export class CartService {
   static async updateCartItem(userId: number, cartId: number, cartItemId: number, quantity: number) {
     try {
       const response = await axiosClient.patch(`/carts/${cartId}/items/${cartItemId}`, {
-        userId, // Include userId in the request body
+        userId,
         quantity
       });
       return response.data;

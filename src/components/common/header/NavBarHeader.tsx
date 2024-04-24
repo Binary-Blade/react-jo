@@ -24,13 +24,13 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
 
   const handleLogout = async () => {
     try {
-      await logout(); // Assume logout() is an async function that clears user session
+      await logout();
       console.log('Logout successful');
-      navigate('/'); // Redirect to home or dashboard as necessary
+      navigate('/');
     } catch (error: any) {
       const errorMessage = error.message || "Logout failed due to an unexpected error";
       console.error('Logout failed:', errorMessage);
-      alert(errorMessage); // Show a user-friendly error message
+      alert(errorMessage);
     }
   };
 

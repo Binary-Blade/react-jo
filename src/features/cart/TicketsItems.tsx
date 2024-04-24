@@ -32,7 +32,7 @@ export const TicketsItems: FC<TicketsItemsProps> = ({ items, ticketType }) => {
                 {items.map((item) => (
                     <TicketItem
                         key={item.cartItemId}
-                        cartId={item.cart.cartId} // Ensure this property is passed down correctly
+                        cartId={item.cart.cartId}
                         cartItemId={item.cartItemId}
                         eventName={item.event.title}
                         ticketPrice={item.price}

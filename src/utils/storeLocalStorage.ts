@@ -16,7 +16,7 @@ export class StoreLocalStorage {
             return parseInt(item);
         } catch (error) {
             console.error("Failed to retrieve 'cartId' from localStorage:", error);
-            return null; // Optionally handle errors differently
+            return null;
         }
     }
 
