@@ -1,8 +1,8 @@
 import { FC } from "react";
 import useCartStore from "@/stores/useCartStore";
 import { Header } from "@/features/Header";
-import { CartTicket } from "@/features/cart/CartTicket";
 import { Footer } from "@/features/Footer";
+import { CartContent } from "@/features/cart/CartContent";
 
 export const CartPage: FC = () => {
   const { cartItems } = useCartStore(
@@ -13,7 +13,7 @@ export const CartPage: FC = () => {
   return (
     <>
       <Header />
-      <CartTicket cartItems={cartItems} />
+      <CartContent cartItems={cartItems} />
       <Footer />
     </>
   );

@@ -7,3 +7,7 @@ export interface NavLink {
 export interface NavBarProps {
     navLinks: NavLink[];
 }
+
+export interface NavLinkProps {
+    navLinks: { name: string, href: string }[];
+}

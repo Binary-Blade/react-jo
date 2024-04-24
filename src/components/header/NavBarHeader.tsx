@@ -5,10 +5,7 @@ import { DropDownAccount } from './DropDownAccount';
 import useCartStore from '@/stores/useCartStore';
 import { MedalIcon, ShoppingCartIcon } from '@/assets/icons/IconComponents';
 import { SignUpForm } from '@/features/auth/SignUpForm';
-
-interface NavLinkProps {
-  navLinks: { name: string, href: string }[];
-}
+import { NavLinkProps } from '@/types/NavLink';
 
 export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
   const logout = useAuthStore((state) => state.logout);
@@ -33,7 +30,6 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
       alert(errorMessage);
     }
   };
-
 
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
