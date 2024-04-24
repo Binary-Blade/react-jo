@@ -1,9 +1,9 @@
 export interface CartState {
     cartItems: CartItem[];
-    cartId: number | null;
+    cartId?: number | null;
     fetchCartItems: (userId: number, cartId: number) => Promise<void>;
     addItemToCart: (userId: number, cartItem: CreateCartItemDto) => Promise<void>;
-    updateCartItem: (userId: number, cartId: number, cartItemId: number, quantity: number) => Promise<void>;
+    updateCartItem: (userId: number, cartId: number, cartItemId: number, updateData: number) => Promise<void>;
     removeCartItem: (userId: number, cartId: number, cartItemId: number) => Promise<void>;
 }
 
@@ -23,12 +23,26 @@ export interface CartItem {
     };
 }
 
+
+export interface CartItemsProps {
+    cartId: number;
+    cartItemId: number;
+    eventName: string;
+    ticketPrice: number;
+    quantity: number;
+}
+
+export interface CartCategoriesProps {
+    items: CartItem[];
+    ticketType: string;
+}
+
 export interface CreateCartItemDto {
     eventId: number;
     quantity: number;
 }
 
-export interface CartTicketProps {
+export interface CartContentProps {
     cartItems: CartItem[];
 }
 
