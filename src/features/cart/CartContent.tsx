@@ -1,14 +1,14 @@
 import { FC, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import { TicketsItems } from "./TicketsItems";
-import { CartTicketProps } from "@/types/CartTypes";
+import { CartContentProps } from "@/types/CartTypes";
 import useGroupByTicketType from "@/hooks/useGroupByTicketType";
 import { useAuthStore } from "@/stores/useAuthStore";
 import useCartStore from "@/stores/useCartStore";
 import { CheckOutPayment } from "../payment/CheckOutPayment";
+import { CartCategories } from "./CartCategories";
 
 
-export const CartTicket: FC<CartTicketProps> = ({ cartItems }) => {
+export const CartContent: FC<CartContentProps> = ({ cartItems }) => {
     const groupedItems = useGroupByTicketType(cartItems);
     const { fetchCartItems, cartId } = useCartStore(state => ({
         fetchCartItems: state.fetchCartItems,
@@ -27,14 +27,13 @@ export const CartTicket: FC<CartTicketProps> = ({ cartItems }) => {
             fetchCartItems(userId, cartId);
         }
     }, [userId, fetchCartItems]);
-    // FIX: Fix items ticketsitems
     return (
         <>
             <div className="container mx-auto py-12 px-4 md:px-6">
                 <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {Object.entries(groupedItems).map(([type, items]) => (
-                        <TicketsItems
+                        <CartCategories
                             key={type}
                             ticketType={type}
                             items={items}
