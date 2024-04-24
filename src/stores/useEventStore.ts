@@ -1,6 +1,6 @@
-import { create } from 'zustand';
 import { EventService } from '@/services/EventService';
-import { Event, EventState } from '@/types/EventTypes';
+import { EventState, Event } from '@/types/EventTypes';
+import { create } from 'zustand';
 
 
 export const useEventStore = create<EventState>((set, get) => ({

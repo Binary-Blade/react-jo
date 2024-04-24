@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { CartService } from '@/services/CartService';
-import { CartItem, CreateCartItemDto } from '@/types/CartTypes';
 import { StoreLocalStorage } from '@/utils/storeLocalStorage';
+import { CartItem, CreateCartItemDto } from '@/types/CartTypes';
+import { CartService } from '@/services/CartService';
 
 interface CartState {
     cartItems: CartItem[];

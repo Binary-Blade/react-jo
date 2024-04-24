@@ -1,8 +1,8 @@
 import { AuthenticationService } from '@/services/AuthenticationService';
 import { SessionService } from '@/services/SessionService';
 import { AuthState } from '@/types/AuthType';
-import { LoginFormData } from '@/validation/schemas/loginSchema';
-import { SignupFormData } from '@/validation/schemas/signupSchema';
+import { LoginFormData } from '@/utils/zod-schemas/loginSchema';
+import { SignupFormData } from '@/utils/zod-schemas/signupSchema';
 import { create } from 'zustand';
 
 export const useAuthStore = create<AuthState>((set) => ({
