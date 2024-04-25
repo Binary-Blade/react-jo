@@ -1,6 +1,6 @@
 import { Switch, Route } from 'wouter';
-import { lazy, Suspense, useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
+import { useEffect, lazy, Suspense } from 'react';
 import { useAuthStore } from './stores/useAuthStore';
 import useCartStore from './stores/useCartStore';
 import HomePage from './pages/HomePage';
@@ -13,12 +13,12 @@ const CartPage = lazy(() => import('./pages/CartPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
-
 export default function App() {
-  const { userId } = useAuthStore((state: any) => ({
+  const { userId } = useAuthStore(state => ({
     userId: state.userId,
   }));
-  const { cartId, fetchCartItems } = useCartStore((state: any) => ({
+
+  const { cartId, fetchCartItems } = useCartStore(state => ({
     fetchCartItems: state.fetchCartItems,
     cartId: state.cartId,
   }));
