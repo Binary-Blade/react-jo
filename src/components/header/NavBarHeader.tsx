@@ -4,7 +4,6 @@ import { FC, useEffect, useState } from 'react';
 import { DropDownAccount } from './DropDownAccount';
 import useCartStore from '@/stores/useCartStore';
 import { MedalIcon, ShoppingCartIcon } from '@/assets/icons/IconComponents';
-import { SignUpForm } from '@/features/auth/SignUpForm';
 import { NavLinkProps } from '@/types/NavLink';
 
 export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
@@ -33,7 +32,7 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
 
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
-      <div className="container flex items-center justify-between h-16 px-4 md:px-6">
+      <div className="container flex items-center justify-between h-16 px-4 md:px-2">
         <div className="flex items-center gap-2">
           <MedalIcon className="w-8 h-8 text-rose-500" />
           <span className="text-xl font-semibold tracking-tight">Paris 2024</span>
@@ -45,7 +44,7 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <Link className="relative" href="/cart">
             <ShoppingCartIcon className="w-6 h-6" />
             {totalItems > 0 && (
@@ -56,8 +55,8 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
           </Link>
           {!isAuthenticated ? (
             <>
-              <SignUpForm />
-              <Link href="/login" className="text-primary-500 dark:text-primary-400 font-medium">Login</Link>
+
+              <Link href="/auth" className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50">Signup</Link>
             </>
           ) : (
             <DropDownAccount handleLogout={handleLogout} />

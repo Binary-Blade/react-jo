@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 import { ReservationPage } from '@/pages/ReservationPage';
 import { useAuthStore } from './stores/useAuthStore';
 import useCartStore from './stores/useCartStore';
-import { LoginPage } from './pages/LoginPage';
 import { EventsPage } from './pages/EventsPage';
 import { CartPage } from './pages/CartPage';
+import { AuthPage } from './pages/AuthPage';
 
 export default function App() {
 
@@ -30,7 +30,7 @@ export default function App() {
     <AuthProvider>
       <Switch>
         <Route path="/" component={HomePage} />
-        <Route path="/login" component={LoginPage} />
+        <Route path="/auth" component={AuthPage} />
         <Route path="/events" component={EventsPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/reservations" component={ReservationPage} />
