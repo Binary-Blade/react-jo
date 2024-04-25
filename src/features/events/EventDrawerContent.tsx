@@ -25,7 +25,7 @@ export const EventDrawerContent: FC<EventPropsType> = ({
         quantity,
         currentPrice,
         handleTicketTypeChange
-    } = useTicketManager(basePrice, eventId, TicketType.SOLO); //FIX: Fix that types
+    } = useTicketManager(basePrice, eventId, TicketType.SOLO);
 
     const handleBuyTicket = async () => {
         if (!eventId || !selectedTicketType) {
