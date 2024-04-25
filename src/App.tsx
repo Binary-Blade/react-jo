@@ -1,22 +1,24 @@
 import { Switch, Route } from 'wouter';
-import { HomePage } from './pages/HomePage';
+import { lazy, Suspense, useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
-import { useEffect } from 'react';
-import { ReservationPage } from '@/pages/ReservationPage';
 import { useAuthStore } from './stores/useAuthStore';
 import useCartStore from './stores/useCartStore';
-import { EventsPage } from './pages/EventsPage';
-import { CartPage } from './pages/CartPage';
-import { AuthPage } from './pages/AuthPage';
-import { ProfilePage } from './pages/ProfilePage';
-import { DashboardPage } from './pages/DashboardPage';
+import HomePage from './pages/HomePage';
+
+// Lazy loading pages
+const AuthPage = lazy(() => import('./pages/AuthPage'));
+const EventsPage = lazy(() => import('./pages/EventsPage'));
+const ReservationPage = lazy(() => import('./pages/ReservationPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+
 
 export default function App() {
-  const { userId } = useAuthStore(state => ({
+  const { userId } = useAuthStore((state: any) => ({
     userId: state.userId,
   }));
-
-  const { cartId, fetchCartItems } = useCartStore(state => ({
+  const { cartId, fetchCartItems } = useCartStore((state: any) => ({
     fetchCartItems: state.fetchCartItems,
     cartId: state.cartId,
   }));
@@ -29,15 +31,17 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <Switch>
-        <Route path="/" component={HomePage} />
-        <Route path="/auth" component={AuthPage} />
-        <Route path="/events" component={EventsPage} />
-        <Route path="/reservations" component={ReservationPage} />
-        <Route path="/cart" component={CartPage} />
-        <Route path="/profile*" component={ProfilePage} />
-        <Route path="/dashboard*" component={DashboardPage} />
-      </Switch>
-    </AuthProvider >
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/" component={HomePage} />
+          <Route path="/auth" component={AuthPage} />
+          <Route path="/events" component={EventsPage} />
+          <Route path="/reservations" component={ReservationPage} />
+          <Route path="/cart" component={CartPage} />
+          <Route path="/profile*" component={ProfilePage} />
+          <Route path="/dashboard*" component={DashboardPage} />
+        </Switch>
+      </Suspense>
+    </AuthProvider>
   );
 }
