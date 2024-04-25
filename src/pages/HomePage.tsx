@@ -7,7 +7,6 @@ import { NewsPresents } from "@/features/home/PresentSports"
 import SectionTickets from "@/features/home/SectionTickets"
 
 export default function HomePage() {
-
   return (
     <>
       <Header />

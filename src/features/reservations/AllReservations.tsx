@@ -4,9 +4,9 @@ import { Card, CardTitle, CardDescription, CardHeader, CardContent, CardFooter }
 import { Button } from "@/components/ui/button";
 import { TicketIcon } from "@/assets/icons/IconComponents";
 import useReservationStore from "@/stores/useReservationStore";
-import { TicketPage } from '@/pages/TicketPage';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { STATUSCOLOR } from '@/utils/constants';
+import TicketPage from '@/pages/TicketPage';
 
 export const AllReservations = () => {
     const { reservations, fetchReservations } = useReservationStore(state => ({
