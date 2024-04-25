@@ -8,9 +8,10 @@ import useCartStore from './stores/useCartStore';
 import { EventsPage } from './pages/EventsPage';
 import { CartPage } from './pages/CartPage';
 import { AuthPage } from './pages/AuthPage';
+import { ProfilePage } from './pages/ProfilePage';
+import { DashboardPage } from './pages/DashboardPage';
 
 export default function App() {
-
   const { userId } = useAuthStore(state => ({
     userId: state.userId,
   }));
@@ -32,9 +33,11 @@ export default function App() {
         <Route path="/" component={HomePage} />
         <Route path="/auth" component={AuthPage} />
         <Route path="/events" component={EventsPage} />
-        <Route path="/cart" component={CartPage} />
         <Route path="/reservations" component={ReservationPage} />
+        <Route path="/cart" component={CartPage} />
+        <Route path="/profile*" component={ProfilePage} />
+        <Route path="/dashboard*" component={DashboardPage} />
       </Switch>
-    </AuthProvider>
+    </AuthProvider >
   );
 }
