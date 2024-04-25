@@ -1,11 +1,27 @@
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
-import { FC } from "react";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useLocation } from "wouter";
 
-interface DropDownAccountProps {
-    handleLogout: () => any;
-}
-export const DropDownAccount: FC<DropDownAccountProps> = ({ handleLogout }) => {
+export const DropDownAccount = () => {
+    const logout = useAuthStore((state) => state.logout);
+    const [, navigate] = useLocation();
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            console.log('Logout successful');
+            navigate('/');
+        } catch (error: any) {
+            const errorMessage = error.message || "Logout failed due to an unexpected error";
+            console.error('Logout failed:', errorMessage);
+            alert(errorMessage);
+        }
+    };
+
+    const handleSettings = () => {
+        navigate('/profile')
+    }
 
     return (
         <DropdownMenu>
@@ -17,8 +33,7 @@ export const DropDownAccount: FC<DropDownAccountProps> = ({ handleLogout }) => {
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuItem>My Account</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSettings}>My Account</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>

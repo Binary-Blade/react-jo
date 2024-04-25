@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'wouter';
+import { Link } from 'wouter';
 import { useAuthStore } from "@/stores/useAuthStore";
 import { FC, useEffect, useState } from 'react';
 import { DropDownAccount } from './DropDownAccount';
@@ -7,8 +7,6 @@ import { MedalIcon, ShoppingCartIcon } from '@/assets/icons/IconComponents';
 import { NavLinkProps } from '@/types/NavLink';
 
 export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
-  const logout = useAuthStore((state) => state.logout);
-  const [, navigate] = useLocation();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const cartItems = useCartStore((state) => state.cartItems);
   const [totalItems, setTotalItems] = useState(0);
@@ -18,17 +16,6 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
     setTotalItems(total);
   }, [cartItems]);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      console.log('Logout successful');
-      navigate('/');
-    } catch (error: any) {
-      const errorMessage = error.message || "Logout failed due to an unexpected error";
-      console.error('Logout failed:', errorMessage);
-      alert(errorMessage);
-    }
-  };
 
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
@@ -55,11 +42,13 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
           </Link>
           {!isAuthenticated ? (
             <>
-
-              <Link href="/auth" className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50">Signup</Link>
+              <Link href="/auth" className="inline-flex items-center justify-center px-6 py-3 text-base 
+                font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50">
+                Signup
+              </Link>
             </>
           ) : (
-            <DropDownAccount handleLogout={handleLogout} />
+            <DropDownAccount />
           )}
         </div>
       </div>
