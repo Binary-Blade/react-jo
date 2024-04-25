@@ -6,8 +6,7 @@ import { Switch } from "@/components/ui/switch"
 import { CreditCardIcon, PlusIcon, WalletIcon } from "@/assets/icons/IconComponents"
 import { Header } from "@/features/Header"
 
-export const ProfilePage = () => {
-
+export default function ProfilePage() {
   return (
     <>
       <Header />

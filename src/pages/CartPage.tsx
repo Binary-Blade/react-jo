@@ -1,18 +1,11 @@
-import { FC } from "react";
-import useCartStore from "@/stores/useCartStore";
 import { Header } from "@/features/Header";
 import { CartContent } from "@/features/cart/CartContent";
 
-export const CartPage: FC = () => {
-  const { cartItems } = useCartStore(
-    state => ({
-      cartItems: state.cartItems,
-    }));
-
+export default function CartPage() {
   return (
     <>
       <Header />
-      <CartContent cartItems={cartItems} />
+      <CartContent />
     </>
   );
 };

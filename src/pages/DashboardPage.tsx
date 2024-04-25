@@ -7,7 +7,7 @@ import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMen
 import { CalendarIcon, LayoutDashboardIcon, MapIcon, MedalIcon, MoreHorizontalIcon, PlusIcon, SettingsIcon, UsersIcon } from "@/assets/icons/IconComponents"
 import { Link } from "wouter"
 
-export const DashboardPage = () => {
+export default function DashboardPage() {
   return (
     <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">

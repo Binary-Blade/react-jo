@@ -3,7 +3,7 @@ import { MedalIcon } from "@/assets/icons/IconComponents";
 import { SignUpForm } from "@/features/auth/SignUpForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export const AuthPage = () => {
+export default function AuthPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-gray-950">
       <div className="mx-auto flex w-full max-w-md flex-col items-center justify-center gap-6 px-4 sm:px-0">

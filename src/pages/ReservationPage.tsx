@@ -2,7 +2,7 @@ import { Footer } from "@/features/Footer"
 import { Header } from "@/features/Header"
 import { AllReservations } from "@/features/reservations/AllReservations"
 
-export const ReservationPage = () => {
+export default function ReservationPage() {
   return (
     <>
       <Header />

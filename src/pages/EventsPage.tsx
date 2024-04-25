@@ -6,7 +6,7 @@ import { EventHero } from '@/features/events/EventHero';
 import { useEventStore } from "@/stores/useEventStore";
 import { useEffect } from "react";
 
-export const EventsPage = () => {
+export default function EventsPage() {
 
   const { events, fetchEvents } = useEventStore(state => ({
     events: state.events,

@@ -6,7 +6,7 @@ import { Highlights } from "@/features/home/Highlights"
 import { NewsPresents } from "@/features/home/PresentSports"
 import SectionTickets from "@/features/home/SectionTickets"
 
-export const HomePage = () => {
+export default function HomePage() {
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FC, useEffect, } from "react";
+import { useEffect, } from "react";
 import { DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog"
 import useReservationStore from "@/stores/useReservationStore";
 
@@ -7,7 +7,7 @@ interface TicketPageProps {
   reservationId: number;
 }
 
-export const TicketPage: FC<TicketPageProps> = ({ reservationId }) => {
+export default function TicketPage({ reservationId }: TicketPageProps) {
   const { fetchOneReservation, reservation } = useReservationStore(state => ({
     reservation: state.reservation,
     fetchOneReservation: state.fetchOneReservation,
