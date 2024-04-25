@@ -1,7 +1,6 @@
 import { FC } from "react";
 import useCartStore from "@/stores/useCartStore";
 import { Header } from "@/features/Header";
-import { Footer } from "@/features/Footer";
 import { CartContent } from "@/features/cart/CartContent";
 
 export const CartPage: FC = () => {
@@ -14,7 +13,6 @@ export const CartPage: FC = () => {
     <>
       <Header />
       <CartContent cartItems={cartItems} />
-      <Footer />
     </>
   );
 };

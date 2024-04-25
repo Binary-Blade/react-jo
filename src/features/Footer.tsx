@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-800 py-8">
+    <footer className="bg-gray-800 mt-10 py-8 mt-auto">
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
         <div className="flex items-center">
           <MedalIcon className="w-8 h-8 text-rose-500" />

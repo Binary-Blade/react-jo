@@ -6,7 +6,9 @@ export const ReservationPage = () => {
   return (
     <>
       <Header />
-      <AllReservations />
+      <div className="flex flex-col min-h-screen">
+        <AllReservations />
+      </div>
       <Footer />
     </>
   )
