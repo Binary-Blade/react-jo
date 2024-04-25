@@ -13,9 +13,9 @@ export const CartCategories: FC<CartCategoriesProps> = ({ items, ticketType }) =
             </button>
             <h2 className="text-2xl font-bold mb-4 border-b pb-4">{ticketType} Tickets</h2>
             <div className="grid gap-4">
-                {items.map((item) => (
+                {items.map((item, index) => (
                     <CartItems
-                        key={item.cartItemId}
+                        key={`${item.cartItemId}-${index}`}
                         cartId={item.cart.cartId}
                         cartItemId={item.cartItemId}
                         eventName={item.event.title}

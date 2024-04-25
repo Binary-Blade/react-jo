@@ -1,6 +1,5 @@
 import { FC, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import { CartContentProps } from "@/types/CartTypes";
 import useGroupByTicketType from "@/hooks/useGroupByTicketType";
 import { useAuthStore } from "@/stores/useAuthStore";
 import useCartStore from "@/stores/useCartStore";
@@ -8,25 +7,24 @@ import { CheckOutPayment } from "../payment/CheckOutPayment";
 import { CartCategories } from "./CartCategories";
 
 
-export const CartContent: FC<CartContentProps> = ({ cartItems }) => {
-    const groupedItems = useGroupByTicketType(cartItems);
-    const { fetchCartItems, cartId } = useCartStore(state => ({
+export const CartContent: FC = () => {
+    const { fetchCartItems, cartId, cartItems } = useCartStore(state => ({
         fetchCartItems: state.fetchCartItems,
+        cartItems: state.cartItems,
         cartId: state.cartId,
     }));
-
+    const userId = useAuthStore(state => state.userId);
+    const groupedItems = useGroupByTicketType(cartItems);
     const total = cartItems.reduce((acc, item) => acc + item.price, 0);
     const taxes = total * 0.1;
     const totalTaxes = total + taxes;
-
-
-    const userId = useAuthStore(state => state.userId);
 
     useEffect(() => {
         if (userId && cartId) {
             fetchCartItems(userId, cartId);
         }
     }, [userId, fetchCartItems]);
+
     return (
         <>
             <div className="container mx-auto py-12 px-4 md:px-6">

@@ -1,4 +1,4 @@
-import { FC, useState, } from "react";
+import { FC, useEffect, useState, } from "react";
 import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useToast } from "@/components/ui/use-toast";
@@ -36,6 +36,10 @@ export const CartItems: FC<CartItemsProps> = ({ cartId, cartItemId, eventName, t
             description: `You have removed ${quantity} ${eventName} ticket(s) from your cart.`,
         });
     };
+
+    useEffect(() => {
+        setQuantity(initialQuantity);
+    }, [initialQuantity]);
 
     return (
         <div>
