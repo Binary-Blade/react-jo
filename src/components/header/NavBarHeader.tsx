@@ -15,7 +15,6 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
     return total;
   }, [cartItems]);
 
-
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
       <div className="container flex items-center justify-between h-16 px-4 md:px-2">

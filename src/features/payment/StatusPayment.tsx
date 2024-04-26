@@ -9,7 +9,6 @@ interface StatusPaymentProps {
     reservation: { status: string; totalPrice: number; paymentId: string; reservationId: string; createdAt: string; }[];
     totalTaxes: string;
 }
-
 export const StatusPayment: FC<StatusPaymentProps> = ({ totalTaxes, reservation }) => {
     const data = reservation[0];
     const clearCart = useCartStore(state => state.clearCart);
