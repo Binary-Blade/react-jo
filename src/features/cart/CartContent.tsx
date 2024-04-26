@@ -4,9 +4,9 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import useCartStore from "@/stores/useCartStore";
 import { CartCategories } from "./CartCategories";
 import { CartEmpty } from "./CartEmpty";
-import { CheckoutTotal } from "../payment/CheckoutTotal";
 import { TAXES_10 } from "@/utils/constants";
 import { useReducePrice } from "@/hooks/useReducePrice";
+import { CartCheckoutTotalPrice } from "./CartCheckoutTotalPrice";
 
 export const CartContent: FC = () => {
     const { fetchCartItems, cartId, cartItems } = useCartStore(state => ({
@@ -45,7 +45,7 @@ export const CartContent: FC = () => {
                     ))}
                 </div>
                 <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mt-8">
-                    <CheckoutTotal
+                    <CartCheckoutTotalPrice
                         total={total}
                         taxes={taxes}
                         totalTaxes={totalTaxes}

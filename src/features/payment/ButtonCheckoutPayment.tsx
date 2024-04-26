@@ -16,7 +16,7 @@ interface CheckOutPaymentProps {
     totalTaxes: string;
 }
 
-export const CheckOutPayment: FC<CheckOutPaymentProps> = ({ totalTaxes, cartId }) => {
+export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ totalTaxes, cartId }) => {
     const [progress, setProgress] = useState(0);
     const [loading, setLoading] = useState(false);
     const [paymentProcess] = useState(false);
