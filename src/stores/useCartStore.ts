@@ -57,6 +57,13 @@ export const useCartStore = create<CartState>((set) => ({
         } catch (error) {
             console.error('Failed to remove cart item:', error);
         }
+    },
+    clearCart: async () => {
+        try {
+            set({ cartItems: [], cartId: null });
+        } catch (error) {
+            console.error('Failed to clear cart:', error);
+        }
     }
 }));
 

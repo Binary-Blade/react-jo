@@ -5,6 +5,7 @@ export interface CartState {
     addItemToCart: (userId: number, cartItem: CreateCartItemDto) => Promise<void>;
     updateCartItem: (userId: number, cartId: number, cartItemId: number, updateData: number) => Promise<void>;
     removeCartItem: (userId: number, cartId: number, cartItemId: number) => Promise<void>;
+    clearCart: () => void;
 }
 
 export interface CartItem {
