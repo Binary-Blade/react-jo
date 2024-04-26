@@ -3,11 +3,13 @@ import { AuthProvider } from './context/AuthContext';
 import { useEffect, lazy, Suspense } from 'react';
 import { useAuthStore } from './stores/useAuthStore';
 import useCartStore from './stores/useCartStore';
+
+// Eager loading pages
 import HomePage from './pages/HomePage';
+import EventsPage from './pages/EventsPage';
 
 // Lazy loading pages
 const AuthPage = lazy(() => import('./pages/AuthPage'));
-const EventsPage = lazy(() => import('./pages/EventsPage'));
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
