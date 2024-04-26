@@ -6,7 +6,7 @@ import { TicketIcon } from "@/assets/icons/IconComponents";
 import useReservationStore from "@/stores/useReservationStore";
 import { useAuthStore } from '@/stores/useAuthStore';
 import { STATUSCOLOR } from '@/utils/constants';
-import TicketPage from '@/pages/TicketPage';
+import { TicketModal } from './TicketModal';
 
 export const AllReservations = () => {
     const { reservations, fetchReservations } = useReservationStore(state => ({
@@ -19,8 +19,11 @@ export const AllReservations = () => {
         if (userId) {
             fetchReservations(userId);
         }
-    }, [fetchReservations, userId, reservations]);
+    }, [fetchReservations, userId]);
 
+    if (!reservations.length) {
+        return <p>No reservation data available.</p>;
+    }
 
     return (
         <div className="max-w-6xl mx-auto p-4 lg:px-6 sm:py-8 md:py-10">
@@ -33,7 +36,7 @@ export const AllReservations = () => {
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <CardTitle>{reservation.cartItem?.event?.title}</CardTitle>
-                                <div className={`px-2 py-1 rounded-md text-xs font-medium ${STATUSCOLOR[reservation.status.toLowerCase()]}`}>
+                                <div className={`px-2 py-1 rounded-md text-xs font-medium ${STATUSCOLOR[reservation.status]}`}>
                                     {reservation.status}
                                 </div>
                             </div>
@@ -64,9 +67,10 @@ export const AllReservations = () => {
                                                     <TicketIcon className="w-4 h-4" />
                                                     View Ticket
                                                 </Button>
+
                                             </DialogTrigger>
                                             <DialogContent className="sm:max-w-[425px]">
-                                                <TicketPage reservationId={reservation.reservationId} />
+                                                <TicketModal reservationId={reservation.reservationId} />
                                             </DialogContent>
                                         </Dialog>
                                     )}
