@@ -1,37 +1,42 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useEventStore } from '@/stores/useEventStore';
 import { TicketType } from '@/features/events/EventSelectTypes';
 
-export const useTicketManager = (basePrice: number, eventId: number, initialTicketType: TicketType) => {
+export const useTicketManager = (basePrice: number | undefined, eventId: number | undefined, initialTicketType: TicketType) => {
   const [selectedTicketType, setSelectedTicketType] = useState<TicketType>(initialTicketType);
   const [quantity, setQuantity] = useState<number>(1);
-  const [currentPrice, setCurrentPrice] = useState<number>(basePrice);
+  const [currentPrice, setCurrentPrice] = useState<number | undefined>(basePrice);
 
-  const ticketQuantities: Record<TicketType, number> = {
-    [TicketType.SOLO]: 1,
-    [TicketType.DUO]: 2,
-    [TicketType.FAMILY]: 4
-  };
+  useEffect(() => {
+    const updatePrice = async () => {
+      if (!eventId) {
+        console.error("Event ID is missing");
+        return;
+      }
 
-  const fetchPrice = useCallback(async () => {
-    if (!eventId) {
-      console.error("Event ID is missing");
-      return;
-    }
+      const priceResponse = await useEventStore.getState().getTicketPrice(eventId, selectedTicketType);
+      if (priceResponse) {
+        setCurrentPrice(priceResponse.price * quantity);
+      } else {
+        console.error("Failed to fetch ticket price");
+      }
+    };
 
-    const priceResponse = await useEventStore.getState().getTicketPrice(eventId, selectedTicketType);
-    if (priceResponse) {
-      setCurrentPrice(priceResponse.price);
-    } else {
-      console.error("Failed to fetch ticket price");
-    }
-  }, [eventId, selectedTicketType]);
-
+    updatePrice();
+  }, [eventId, selectedTicketType, quantity]);
 
   const handleTicketTypeChange = (newType: TicketType) => {
     setSelectedTicketType(newType);
-    setQuantity(ticketQuantities[newType] || 1);
-    fetchPrice();
+    setQuantity(getTicketQuantity(newType));
+  };
+
+  const getTicketQuantity = (type: TicketType): number => {
+    const ticketQuantities: Record<TicketType, number> = {
+      [TicketType.SOLO]: 1,
+      [TicketType.DUO]: 2,
+      [TicketType.FAMILY]: 4
+    };
+    return ticketQuantities[type] || 1;
   };
 
   return {
