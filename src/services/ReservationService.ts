@@ -4,7 +4,7 @@ export class ReservationService {
   static async addReservation(userId: number, cartId: number) {
     try {
       const response = await axiosClient.post(`/reservations/${cartId}`, { userId, cartId });
-      return response.data;
+      return response.data[0];
     } catch (error) {
       console.error("Failed to add reservation", error);
       throw new Error("Failed to add reservation");

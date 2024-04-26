@@ -2,6 +2,7 @@ import { ReservationService } from '@/services/ReservationService';
 import { create } from 'zustand';
 
 interface ReservationState {
+    newReservation: any;  // This holds a single reservation for the list view
     reservations: any[];  // This holds all reservations
     reservation: any;     // This holds a single reservation for details view
     addReservation: (userId: number, cartId: number) => Promise<void>;
@@ -10,13 +11,14 @@ interface ReservationState {
 }
 
 export const useReservationStore = create<ReservationState>((set) => ({
+    newReservation: null,
     reservations: [],
     reservation: null,
 
     addReservation: async (userId, cartId) => {
         try {
             const data = await ReservationService.addReservation(userId, cartId);
-            set(state => ({ reservations: [...state.reservations, data] }));
+            set(state => ({ newReservation: [...state.reservations, data] }));
         } catch (error) {
             console.error('Failed to add reservation', error);
         }
