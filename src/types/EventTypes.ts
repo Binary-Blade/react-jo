@@ -1,17 +1,17 @@
 export type EventPropsType = {
-    eventId?: number,
+    eventId?: number | undefined,
     title: string,
     description: string,
     imageSrc?: string,
-    basePrice?: number,
+    basePrice?: number | undefined,
     quantityAvailable: number
 }
 
 export type Event = {
-    eventId?: number;
+    eventId?: number | undefined;
     title: string;
     description: string;
-    basePrice: number;
+    basePrice: number | undefined;
     quantityAvailable: number;
 }
 
