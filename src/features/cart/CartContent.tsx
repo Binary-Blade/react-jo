@@ -1,11 +1,12 @@
 import { FC, useEffect } from "react";
-import { Separator } from "@/components/ui/separator";
 import useGroupByTicketType from "@/hooks/useGroupByTicketType";
 import { useAuthStore } from "@/stores/useAuthStore";
 import useCartStore from "@/stores/useCartStore";
-import { CheckOutPayment } from "../payment/CheckOutPayment";
 import { CartCategories } from "./CartCategories";
-
+import { CartEmpty } from "./CartEmpty";
+import { CheckoutTotal } from "../payment/CheckoutTotal";
+import { TAXES_10 } from "@/utils/constants";
+import { useReducePrice } from "@/hooks/useReducePrice";
 
 export const CartContent: FC = () => {
     const { fetchCartItems, cartId, cartItems } = useCartStore(state => ({
@@ -14,16 +15,21 @@ export const CartContent: FC = () => {
         cartId: state.cartId,
     }));
     const userId = useAuthStore(state => state.userId);
-    const groupedItems = useGroupByTicketType(cartItems);
-    const total = cartItems.reduce((acc, item) => acc + item.price, 0);
-    const taxes = total * 0.1;
-    const totalTaxes = total + taxes;
 
     useEffect(() => {
         if (userId && cartId) {
             fetchCartItems(userId, cartId);
         }
-    }, [userId, fetchCartItems]);
+    }, [userId, cartId, fetchCartItems]);
+
+    const groupedItems = useGroupByTicketType(cartItems);
+    const { total, taxes, totalTaxes } = useReducePrice(cartItems, item => item.price, TAXES_10);
+
+    if (cartItems.length === 0) {
+        return (
+            <CartEmpty />
+        );
+    }
 
     return (
         <>
@@ -39,23 +45,12 @@ export const CartContent: FC = () => {
                     ))}
                 </div>
                 <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mt-8">
-                    <h2 className="text-xl font-bold mb-4">Checkout</h2>
-                    <div className="grid gap-4">
-                        <div className="flex items-center justify-between">
-                            <span>Subtotal</span>
-                            <span className="font-medium">${total}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span>Taxes</span>
-                            <span className="font-medium">${taxes}</span>
-                        </div>
-                        <Separator />
-                        <div className="flex items-center justify-between">
-                            <span className="font-bold">Total</span>
-                            <span className="font-bold">${totalTaxes}</span>
-                        </div>
-                        <CheckOutPayment cartId={cartId} />
-                    </div>
+                    <CheckoutTotal
+                        total={total}
+                        taxes={taxes}
+                        totalTaxes={totalTaxes}
+                        cartId={cartId}
+                    />
                 </div>
             </div>
         </>
