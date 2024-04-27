@@ -17,7 +17,7 @@ export const SignUpForm = () => {
         try {
             await signup(formData);
             console.log('Signup successful');
-            navigate('/login');
+            navigate('/');
         } catch (error: any) {
             console.error('Signup failed:', error.response?.data || error.message);
             alert('Signup failed: ' + (error.response?.data?.message || error.message));

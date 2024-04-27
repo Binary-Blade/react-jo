@@ -1,8 +1,10 @@
 import { Link } from 'wouter';
 import placeholderImage from '@/assets/images/PlaceholderParis.svg';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 // TODO: Create a Link Universal Component that accepts a path and text as props
 const Hero = () => {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   return (
     <section className="relative bg-gray-900">
       <div className="absolute inset-0 overflow-hidden">
@@ -27,16 +29,26 @@ const Hero = () => {
         <div className="flex gap-4 mt-12">
           <Link
             className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-rose-500 border border-transparent rounded-md shadow-sm hover:bg-rose-600"
-            href="#"
+            href="/events"
           >
             Explore
           </Link>
-          <Link
-            className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
-            href="#"
-          >
-            Buy Tickets
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
+              href="/reservations"
+            >
+              My Reservations
+            </Link>
+          ) :
+            (
+              <Link
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
+                href="/auth">
+                Login
+              </Link>
+            )
+          }
         </div>
       </div>
     </section>
