@@ -27,7 +27,7 @@ export const DropDownAccount = () => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Avatar className="h-9 w-9">
-                    <AvatarImage alt="@shadcn" src="/placeholder-avatar.jpg" />
+                    <AvatarImage alt="@shadcn" />
                     <AvatarFallback>JP</AvatarFallback>
                     <span className="sr-only">Toggle user menu</span>
                 </Avatar>
