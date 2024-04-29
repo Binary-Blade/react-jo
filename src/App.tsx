@@ -7,6 +7,7 @@ import useCartStore from './stores/useCartStore';
 // Eager loading pages
 import HomePage from './pages/HomePage';
 import EventsPage from './pages/EventsPage';
+import { NotFoundPage } from './pages/NotFound';
 
 // Lazy loading pages
 const AuthPage = lazy(() => import('./pages/AuthPage'));
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/cart" component={CartPage} />
           <Route path="/profile*" component={ProfilePage} />
           <Route path="/dashboard*" component={DashboardPage} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </Suspense>
     </AuthProvider>
