@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { StoreLocalStorage } from '@/utils/storeLocalStorage';
-import { CartState } from '@/types/CartTypes';
 import { CartService } from '@/services/CartService';
+import { CartStoreType } from '@/config/types/CartTypes';
+import { StoreLocalStorage } from '@/config/storeLocalStorage';
 
-export const useCartStore = create<CartState>((set) => ({
+export const useCartStore = create<CartStoreType>((set) => ({
     cartItems: [],
     cartId: StoreLocalStorage.getStoredCartId(),
 

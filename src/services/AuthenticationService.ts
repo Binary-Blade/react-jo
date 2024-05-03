@@ -1,6 +1,6 @@
-import axiosClient from '@/utils/axiosConfig';
-import { LoginFormData } from '@/utils/zod-schemas/loginSchema';
-import { SignupFormData } from '@/utils/zod-schemas/signupSchema';
+import axiosClient from "@/config/axiosConfig";
+import { LoginFormData } from "@/config/zod-schemas/loginSchema";
+import { SignupFormData } from "@/config/zod-schemas/signupSchema";
 
 export class AuthenticationService {
   static async signup(userData: SignupFormData) {

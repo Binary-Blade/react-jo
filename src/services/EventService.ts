@@ -1,5 +1,5 @@
-import { Event, EventResponse } from '@/types/EventTypes';
-import axiosClient from '@/utils/axiosConfig';
+import axiosClient from "@/config/axiosConfig";
+import { EventResponse, EventType } from "@/config/types/EventTypes";
 
 /**
  * Service class for handling API requests related to events.
@@ -28,7 +28,7 @@ export class EventService {
    * @param {Event} createEventDto - The event data to create.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the created event data.
    */
-  static async createEvent(createEventDto: Event): Promise<EventResponse> {
+  static async createEvent(createEventDto: EventType): Promise<EventResponse> {
     try {
       const response = await axiosClient.post('/events/create', createEventDto);
       return {
@@ -83,7 +83,7 @@ export class EventService {
    * @param {Event} updateEventDto - The data to update the event with.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the updated event data.
    */
-  static async updateEvent(eventId: number, updateEventDto: Event): Promise<EventResponse> {
+  static async updateEvent(eventId: number, updateEventDto: EventType): Promise<EventResponse> {
     try {
       const response = await axiosClient.patch(`/events/${eventId}`, updateEventDto);
       return {

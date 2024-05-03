@@ -1,4 +1,4 @@
-import axiosClient from "@/utils/axiosConfig";
+import axiosClient from "@/config/axiosConfig";
 
 export class ReservationService {
   static async addReservation(userId: number, cartId: number) {

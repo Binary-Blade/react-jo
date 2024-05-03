@@ -1,9 +1,9 @@
+import { EventStoreType, EventType } from '@/config/types/EventTypes';
 import { EventService } from '@/services/EventService';
-import { EventState, Event } from '@/types/EventTypes';
 import { create } from 'zustand';
 
 
-export const useEventStore = create<EventState>((set, get) => ({
+export const useEventStore = create<EventStoreType>((set, get) => ({
     events: [],
 
     fetchEvents: async () => {
@@ -30,7 +30,7 @@ export const useEventStore = create<EventState>((set, get) => ({
         }
     },
 
-    addEvent: async (eventData: Event) => {
+    addEvent: async (eventData: EventType) => {
         try {
             const response = await EventService.createEvent(eventData);
             if (response.success) {
@@ -42,7 +42,7 @@ export const useEventStore = create<EventState>((set, get) => ({
         }
     },
 
-    updateEvent: async (eventId: number, eventData: Event) => {
+    updateEvent: async (eventId: number, eventData: EventType) => {
         try {
             const response = await EventService.updateEvent(eventId, eventData);
             if (response.success) {

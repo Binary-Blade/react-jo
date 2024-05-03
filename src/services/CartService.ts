@@ -1,5 +1,5 @@
-import { CreateCartItemDto } from '@/types/CartTypes';
-import axiosClient from '@/utils/axiosConfig';
+import axiosClient from "@/config/axiosConfig";
+import { CreateCartItemDto } from "@/config/types/CartTypes";
 
 export class CartService {
   static async addItemToCart(userId: number, cartItem: CreateCartItemDto) {

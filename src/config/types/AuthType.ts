@@ -11,7 +11,7 @@ export interface AuthContextType {
     userId: number | null;
 }
 
-export interface AuthState {
+export interface AuthStoreTypes {
     accessToken: string | null;
     expiresAt: Date | null;
     isAuthenticated: boolean;
@@ -23,4 +23,4 @@ export interface AuthState {
     initializeSession: () => Promise<void>;
 }
 
-export type SetAuthStateFunction = (newState: AuthState | ((prevState: AuthState) => AuthState)) => void;
+export type SetAuthStateFunction = (newState: AuthStoreTypes | ((prevState: AuthStoreTypes) => AuthStoreTypes)) => void;

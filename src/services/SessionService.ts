@@ -1,9 +1,9 @@
-import axiosClient from "@/utils/axiosConfig";
+import axiosClient from "@/config/axiosConfig";
 
 export class SessionService {
   static async initializeSession() {
     try {
-      const response = await axiosClient.get('/auth/get-refresh-token');
+      const response = await axiosClient.get('/auth/refresh');
       return {
         accessToken: response.data.accessToken,
         expiresIn: response.data.expiresIn,

@@ -1,5 +1,5 @@
+import { UserStore } from '@/config/types/UserTypes';
 import { UserService } from '@/services/UserService';
-import { UserStore } from '@/types/UserTypes';
 import { create } from 'zustand';
 
 export const useUserStore = create<UserStore>((set, get) => ({

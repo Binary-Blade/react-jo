@@ -7,7 +7,7 @@ export type EventPropsType = {
     quantityAvailable: number
 }
 
-export type Event = {
+export type EventType = {
     eventId?: number | undefined;
     title: string;
     description: string;
@@ -22,11 +22,11 @@ export type EventResponse = {
 }
 
 
-export interface EventState {
-    events: Event[];
+export interface EventStoreType {
+    events: EventType[];
     fetchEvents: () => Promise<void>;
     getTicketPrice: (eventId: number, ticketType: string) => Promise<any>;
-    addEvent: (eventData: Event) => Promise<void>;
-    updateEvent: (eventId: number, eventData: Event) => Promise<void>;
+    addEvent: (eventData: EventType) => Promise<void>;
+    updateEvent: (eventId: number, eventData: EventType) => Promise<void>;
     deleteEvent: (eventId: number) => Promise<void>;
 }

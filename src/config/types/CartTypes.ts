@@ -1,4 +1,4 @@
-export interface CartState {
+export interface CartStoreType {
     cartItems: CartItem[];
     cartId?: number | null;
     fetchCartItems: (userId: number, cartId: number) => Promise<void>;

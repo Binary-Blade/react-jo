@@ -1,11 +1,11 @@
+import { AuthStoreTypes } from '@/config/types/AuthType';
+import { LoginFormData } from '@/config/zod-schemas/loginSchema';
+import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import { AuthenticationService } from '@/services/AuthenticationService';
 import { SessionService } from '@/services/SessionService';
-import { AuthState } from '@/types/AuthType';
-import { LoginFormData } from '@/utils/zod-schemas/loginSchema';
-import { SignupFormData } from '@/utils/zod-schemas/signupSchema';
 import { create } from 'zustand';
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthStoreTypes>((set) => ({
     accessToken: null,
     expiresAt: null,
     isAuthenticated: false,
