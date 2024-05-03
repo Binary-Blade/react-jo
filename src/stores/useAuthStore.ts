@@ -2,14 +2,13 @@ import { AuthStoreTypes } from '@/config/types/AuthType';
 import { LoginFormData } from '@/config/zod-schemas/loginSchema';
 import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import { AuthenticationService } from '@/services/AuthenticationService';
-import { SessionService } from '@/services/SessionService';
 import { create } from 'zustand';
 
 export const useAuthStore = create<AuthStoreTypes>((set) => ({
     accessToken: null,
-    expiresAt: null,
     isAuthenticated: false,
     userId: null,
+    expireIn: null,
 
     signup: async (userData: SignupFormData) => {
         try {
@@ -26,7 +25,8 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
             const { data } = await AuthenticationService.login(userData);
             set({
                 accessToken: data.accessToken,
-                expiresAt: new Date(new Date().getTime() + (data.expiresIn || 3600) * 1000),
+                userId: data.userId,
+                expireIn: data.expireIn,
                 isAuthenticated: true,
             });
             return { success: true };
@@ -41,8 +41,8 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
             await AuthenticationService.logout();
             set({
                 accessToken: null,
-                expiresAt: null,
                 isAuthenticated: false,
+                expireIn: null,
                 userId: null,
             });
         } catch (error: any) {
@@ -54,11 +54,13 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
     refreshToken: async () => {
         try {
             const data = await AuthenticationService.refreshToken();
-            if (data.accessToken && data.expiresIn) {
+            if (data.accessToken) {
 
                 set({
                     accessToken: data.accessToken,
-                    expiresAt: new Date(new Date().getTime() + data.expiresIn * 1000)
+                    userId: data.userId,
+                    expireIn: data.expireIn,
+                    isAuthenticated: true,
                 });
             }
         } catch (error: any) {
@@ -67,14 +69,14 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
         }
     },
 
-    initializeSession: async () => {
+    accessProtectedRoute: async () => {
         try {
-            const { accessToken, expiresIn, userId } = await SessionService.initializeSession();
-            if (accessToken || expiresIn || userId) {
+            const { accessToken, userId, expireIn } = await AuthenticationService.accessProtectedRoute();
+            if (accessToken || userId || expireIn) {
                 set({
                     isAuthenticated: true,
                     accessToken: accessToken,
-                    expiresAt: new Date(new Date().getTime() + expiresIn * 1000),
+                    expireIn: expireIn,
                     userId: userId,
                 });
             }
@@ -83,7 +85,6 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
             set({
                 isAuthenticated: false,
                 accessToken: null,
-                expiresAt: null,
                 userId: null,
             });
         }

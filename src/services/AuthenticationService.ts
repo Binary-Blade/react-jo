@@ -31,4 +31,9 @@ export class AuthenticationService {
     const response = await axiosClient.post('/auth/refresh-token');
     return response.data;
   }
+
+  static async accessProtectedRoute() {
+    const response = await axiosClient.get('/auth/access-token');
+    return response.data;
+  }
 }

@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useMemo, useState, } from 'react';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { AuthContextType, AuthProviderProps } from '@/types/AuthType';
+import { AuthContextType, AuthProviderProps } from '@/config/types/AuthType';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const { initializeSession, isAuthenticated, userId } = useAuthStore(state => ({
-        initializeSession: state.initializeSession,
+    const { accessProtectedRoute, isAuthenticated, userId } = useAuthStore(state => ({
+        accessProtectedRoute: state.accessProtectedRoute,
         isAuthenticated: state.isAuthenticated,
         userId: state.userId,
     }));
@@ -14,14 +14,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        initializeSession()
+        accessProtectedRoute()
             .then(() => setInitialized(true))
             .catch((err) => {
                 console.error('Failed to initialize session:', err);
                 setError('Failed to load user data.');
                 setInitialized(true);  // Consider setting initialized to true even on error to render children with error message
             });
-    }, [initializeSession]);
+    }, [accessProtectedRoute]);
 
     const value = useMemo(() => ({
         initialized,
