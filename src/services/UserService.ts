@@ -1,4 +1,4 @@
-import axiosClient from "./axiosConfig";
+import axiosClient from "@/utils/axiosConfig";
 
 export class UserService {
   /**

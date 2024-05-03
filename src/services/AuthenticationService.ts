@@ -1,4 +1,4 @@
-import axiosClient from './axiosConfig';
+import axiosClient from '@/utils/axiosConfig';
 import { LoginFormData } from '@/utils/zod-schemas/loginSchema';
 import { SignupFormData } from '@/utils/zod-schemas/signupSchema';
 
