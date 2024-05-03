@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useEventStore } from '@/stores/useEventStore';
-import { TicketType } from '@/enums/TicketType.enum';
+import { TicketType } from '@/config/enums/TicketType.enum';
 
 export const useTicketManager = (basePrice: number | undefined, eventId: number | undefined, initialTicketType: TicketType) => {
   const [selectedTicketType, setSelectedTicketType] = useState<TicketType>(initialTicketType);

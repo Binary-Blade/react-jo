@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { LoginFormData, loginSchema } from '@/utils/zod-schemas/loginSchema';
+import { LoginFormData, loginSchema } from '@/config/zod-schemas/loginSchema';
 import { Link, useLocation } from 'wouter';
 import { useAuthStore } from '@/stores/useAuthStore';
 

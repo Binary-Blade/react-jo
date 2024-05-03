@@ -1,5 +1,5 @@
 import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from "@/components/ui/select";
-import { TicketType } from "@/enums/TicketType.enum";
+import { TicketType } from "@/config/enums/TicketType.enum";
 import React, { useCallback } from "react";
 
 interface SelectTypesProps {

@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { SignupFormData, signupSchema } from '@/utils/zod-schemas/signupSchema';
+import { SignupFormData, signupSchema } from '@/config/zod-schemas/signupSchema';
 import { Checkbox } from '@/components/ui/checkbox';
 
 export const SignUpForm = () => {

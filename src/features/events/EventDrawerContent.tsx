@@ -2,12 +2,12 @@ import { FC, useCallback } from "react";
 import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useTicketManager } from "@/hooks/useTicketManage";
-import { EventPropsType } from "@/types/EventTypes";
+import { EventPropsType } from "@/config/types/EventTypes";
 import { navigate } from "wouter/use-browser-location";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { TicketButton } from "@/components/common/buttons/TicketButton";
-import { TicketType } from "@/enums/TicketType.enum";
+import { TicketType } from "@/config/enums/TicketType.enum";
 import { EventSelectTypes } from "@/components/events/EventSelectTypes";
 
 export const EventDrawerContent: FC<EventPropsType> = ({
