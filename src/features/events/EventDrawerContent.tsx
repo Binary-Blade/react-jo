@@ -1,5 +1,4 @@
-import { EventSelectTypes, TicketType } from "./EventSelectTypes";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useTicketManager } from "@/hooks/useTicketManage";
@@ -8,6 +7,8 @@ import { navigate } from "wouter/use-browser-location";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { TicketButton } from "@/components/common/buttons/TicketButton";
+import { TicketType } from "@/enums/TicketType.enum";
+import { EventSelectTypes } from "@/components/events/EventSelectTypes";
 
 export const EventDrawerContent: FC<EventPropsType> = ({
     title,
@@ -27,7 +28,7 @@ export const EventDrawerContent: FC<EventPropsType> = ({
         handleTicketTypeChange
     } = useTicketManager(basePrice, eventId, TicketType.SOLO);
 
-    const handleBuyTicket = async () => {
+    const handleBuyTicket = useCallback(async () => {
         if (!eventId || !selectedTicketType) {
             alert('Please select a valid event and ticket type.');
             return;
@@ -47,12 +48,12 @@ export const EventDrawerContent: FC<EventPropsType> = ({
             toast({
                 title: "Ticket added to cart",
                 description: `You have added ${quantity} ${selectedTicketType} ticket(s) to your cart.`,
-            })
+            });
         } catch (error) {
             console.error('Error adding ticket to cart:', error);
             alert('Failed to add ticket to cart.');
         }
-    };
+    }, [userId, eventId, selectedTicketType, quantity, currentPrice, addItemToCart, toast]);
 
     return (
         <div className="m-10 grid md:grid-cols-2 gap-6 lg:gap-12 items-center">

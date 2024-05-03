@@ -19,7 +19,6 @@ export const LoginForm = () => {
         }
     });
 
-    // TODO: Improve error handling and feedback
     const handleLogin = async (formData: LoginFormData) => {
         try {
             const result = await login(formData);
