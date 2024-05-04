@@ -30,4 +30,32 @@ export class StoreLocalStorage {
             console.error("Failed to set 'cartId' in localStorage:", error);
         }
     }
+
+    static getStoredCartItems() {
+        try {
+            const items = localStorage.getItem('cartItems');
+            return items ? JSON.parse(items) : [];
+        } catch (error) {
+            console.error("Failed to retrieve 'cartItems' from localStorage:", error);
+            return [];
+        }
+    }
+
+    static setStoredCartItems(cartItems: any[]) {
+        try {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        } catch (error) {
+            console.error("Failed to set 'cartItems' in localStorage:", error);
+        }
+    }
+
+    static clearStoredCartItems() {
+        try {
+            localStorage.removeItem('cartItems');
+            localStorage.removeItem('cartId');
+            localStorage.removeItem('cartIdExpiry');
+        } catch (error) {
+            console.error("Failed to clear cart data from localStorage:", error);
+        }
+    }
 }
