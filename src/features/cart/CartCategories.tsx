@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Toaster } from "@/components/ui/toaster"
 import { XIcon } from "@/assets/icons/IconComponents";
 import { CartItems } from "./CartItems";
-import { CartCategoriesProps } from "@/types/CartTypes";
+import { CartCategoriesProps } from "@/config/types/CartTypes";
 
 export const CartCategories: FC<CartCategoriesProps> = ({ items, ticketType }) => {
     return (

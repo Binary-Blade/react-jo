@@ -3,7 +3,7 @@ import useCartStore from "@/stores/useCartStore";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
-import { CartItemsProps } from "@/types/CartTypes";
+import { CartItemsProps } from "@/config/types/CartTypes";
 
 export const CartItems: FC<CartItemsProps> = ({ cartId, cartItemId, eventName, ticketPrice, quantity: initialQuantity }) => {
     const { toast } = useToast();

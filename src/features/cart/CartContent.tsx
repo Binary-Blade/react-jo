@@ -3,10 +3,10 @@ import useGroupByTicketType from "@/hooks/useGroupByTicketType";
 import { useAuthStore } from "@/stores/useAuthStore";
 import useCartStore from "@/stores/useCartStore";
 import { CartCategories } from "./CartCategories";
-import { CartEmpty } from "./CartEmpty";
 import { useReducePrice } from "@/hooks/useReducePrice";
-import { CartCheckoutTotalPrice } from "./CartCheckoutTotalPrice";
 import { TAXES_10 } from "@/config/constants";
+import { CartCheckoutTotalPrice } from "@/components/cart/CartCheckoutTotalPrice";
+import { CartEmpty } from "@/components/cart/CartEmpty";
 
 export const CartContent: FC = () => {
     const { fetchCartItems, cartId, cartItems } = useCartStore(state => ({

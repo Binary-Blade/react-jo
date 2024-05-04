@@ -1,6 +1,6 @@
+import { ButtonCheckoutPayment } from "@/features/payment/ButtonCheckoutPayment";
 import { Separator } from "@radix-ui/react-dropdown-menu"
 import { FC } from "react";
-import { ButtonCheckoutPayment } from "../payment/ButtonCheckoutPayment";
 
 
 interface CheckoutTotalProps {
