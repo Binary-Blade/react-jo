@@ -33,7 +33,8 @@ export class AuthenticationService {
   }
 
   static async accessProtectedRoute() {
-    const response = await axiosClient.get('/auth/access-token');
+    const response = await axiosClient.post('/auth/access-token');
+    console.log(' accessProtectedRoute response:', response.data)
     return response.data;
   }
 }
