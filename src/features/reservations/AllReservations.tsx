@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { TicketIcon } from "@/assets/icons/IconComponents";
 import useReservationStore from "@/stores/useReservationStore";
 import { useAuthStore } from '@/stores/useAuthStore';
-import { STATUSCOLOR } from '@/utils/constants';
+import { STATUSCOLOR } from '@/config/constants';
 import { TicketModal } from './TicketModal';
 
 export const AllReservations = () => {
