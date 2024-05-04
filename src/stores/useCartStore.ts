@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { CartService } from '@/services/CartService';
 import { CartStoreType } from '@/config/types/CartTypes';
 import { StoreLocalStorage } from '@/config/storeLocalStorage';
+import { debounce } from '@/lib/utils';
 
 export const useCartStore = create<CartStoreType>((set) => ({
     cartItems: [],
@@ -25,6 +26,21 @@ export const useCartStore = create<CartStoreType>((set) => ({
         }
     },
 
+    updateCartItem: debounce(async (userId, cartId, cartItemId, updateData) => {
+        try {
+            const data = await CartService.updateCartItem(userId, cartId, cartItemId, updateData);
+            set((state) => {
+                const updatedCartItems = state.cartItems.map(item =>
+                    item.cartItemId === cartItemId ? { ...item, ...data } : item
+                );
+                StoreLocalStorage.setStoredCartItems(updatedCartItems);
+                return { cartItems: updatedCartItems };
+            });
+        } catch (error) {
+            console.error('Failed to update cart item:', error);
+        }
+    }, 500),
+
     fetchCartItems: async (userId, cartId) => {
         try {
             const data = await CartService.findAllItemsInCart(userId, cartId);
@@ -34,19 +50,6 @@ export const useCartStore = create<CartStoreType>((set) => ({
         }
     },
 
-    updateCartItem: async (userId, cartId, cartItemId, updateData) => {
-        try {
-            const data = await CartService.updateCartItem(userId, cartId, cartItemId, updateData);
-            set((state) => {
-                const updatedCartItems = state.cartItems.map(item =>
-                    item.cartItemId === cartItemId ? { ...item, ...data } : item
-                );
-                return { cartItems: updatedCartItems };
-            });
-        } catch (error) {
-            console.error('Failed to update cart item:', error);
-        }
-    },
 
     removeCartItem: async (userId, cartId, cartItemId) => {
         try {
