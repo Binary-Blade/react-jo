@@ -12,7 +12,11 @@ export type EventType = {
     title: string;
     description: string;
     basePrice: number | undefined;
+    categoryType: string;
     quantityAvailable: number;
+    startDate: string;
+    endDate: string;
+    category: string;
 }
 
 
