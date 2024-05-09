@@ -2,13 +2,13 @@ import { Link } from 'wouter';
 import { useAuthStore } from "@/stores/useAuthStore";
 import { FC, useMemo } from 'react';
 import { DropDownAccount } from './DropDownAccount';
-import useCartStore from '@/stores/useCartStore';
 import { MedalIcon, ShoppingCartIcon } from '@/assets/icons/IconComponents';
-import { NavLinkProps } from '@/types/NavLink';
+import { NavLinkProps } from '@/config/types/NavLink';
+import useLocalCartStore from '@/stores/useLocalCartStore';
 
 export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const cartItems = useCartStore((state) => state.cartItems);
+  const cartItems = useLocalCartStore((state) => state.cartItems);
 
   const totalItems = useMemo(() => {
     const total = cartItems.reduce((acc, item) => acc + item.quantity, 0);

@@ -1,22 +1,22 @@
 import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from "@/components/ui/select";
-import { TicketType } from "@/config/enums/TicketType.enum";
+import { PriceFormula } from "@/config/enums/PriceFormula.enum";
 import React, { useCallback } from "react";
 
 interface SelectTypesProps {
-    selectedType: TicketType;
-    onChange: (type: TicketType, quantity: number) => void;
+    selectedType: PriceFormula;
+    onChange: (type: PriceFormula, quantity: number) => void;
 }
 
 export const EventSelectTypes: React.FC<SelectTypesProps> = ({ selectedType, onChange }) => {
 
     const ticketQuantities = {
-        [TicketType.SOLO]: 1,
-        [TicketType.DUO]: 2,
-        [TicketType.FAMILY]: 4
+        [PriceFormula.SOLO]: 1,
+        [PriceFormula.DUO]: 2,
+        [PriceFormula.FAMILY]: 4
     };
 
     const handleSelectChange = useCallback((newValue: string) => {
-        const newType = newValue as TicketType;
+        const newType = newValue as PriceFormula;
         onChange(newType, ticketQuantities[newType]);
     }, [onChange]);
 
@@ -26,7 +26,7 @@ export const EventSelectTypes: React.FC<SelectTypesProps> = ({ selectedType, onC
                 <SelectValue />
             </SelectTrigger>
             <SelectContent>
-                {Object.values(TicketType).map(type => (
+                {Object.values(PriceFormula).map(type => (
                     <SelectItem
                         key={type}
                         value={type}>
