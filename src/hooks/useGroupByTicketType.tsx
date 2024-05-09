@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { CartItem, GroupedItems } from "@/types/CartTypes";
+import { CartItem, GroupedItems } from "@/config/types/CartTypes";
 
 const useGroupByTicketType = (items: CartItem[]): GroupedItems => {
   return useMemo(() => {

@@ -1,12 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useEventStore } from '@/stores/useEventStore';
-import { TicketType } from '@/config/enums/TicketType.enum';
+import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 
-export const useTicketManager = (basePrice: number | undefined, eventId: number | undefined, initialTicketType: TicketType) => {
-  const [selectedTicketType, setSelectedTicketType] = useState<TicketType>(initialTicketType);
+export const useTicketManager = (basePrice: number | undefined, eventId: number | undefined, initialTicketType: PriceFormula) => {
+  const [selectedTicketType, setSelectedTicketType] = useState<PriceFormula>(initialTicketType);
   const [quantity, setQuantity] = useState<number>(1);
   const [currentPrice, setCurrentPrice] = useState<number | undefined>(basePrice);
 
+  const getTicketQuantity = (type: PriceFormula): number => {
+    const ticketQuantities: Record<PriceFormula, number> = {
+      [PriceFormula.SOLO]: 1,
+      [PriceFormula.DUO]: 2,
+      [PriceFormula.FAMILY]: 4
+    };
+    return ticketQuantities[type] || 1;
+  };
+  const handleTicketTypeChange = (newType: PriceFormula) => {
+    setSelectedTicketType(newType);
+    setQuantity(getTicketQuantity(newType));
+  };
   useEffect(() => {
     const updatePrice = async () => {
       if (!eventId) {
@@ -25,23 +37,12 @@ export const useTicketManager = (basePrice: number | undefined, eventId: number 
     updatePrice();
   }, [eventId, selectedTicketType, quantity]);
 
-  const handleTicketTypeChange = (newType: TicketType) => {
-    setSelectedTicketType(newType);
-    setQuantity(getTicketQuantity(newType));
-  };
 
-  const getTicketQuantity = (type: TicketType): number => {
-    const ticketQuantities: Record<TicketType, number> = {
-      [TicketType.SOLO]: 1,
-      [TicketType.DUO]: 2,
-      [TicketType.FAMILY]: 4
-    };
-    return ticketQuantities[type] || 1;
-  };
 
   return {
     selectedTicketType,
     quantity,
+    setQuantity,
     currentPrice,
     handleTicketTypeChange
   };
