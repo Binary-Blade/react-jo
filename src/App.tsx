@@ -38,7 +38,7 @@ export default function App() {
         <Switch>
           <Route path="/" component={HomePage} />
           <Route path="/auth" component={AuthPage} />
-          <Route path="/events-test" component={EventSelected} />
+          <Route path="/events/:eventId" component={EventSelected} />
           <Route path="/events" component={EventsPage} />
           <Route path="/reservations" component={ReservationPage} />
           <Route path="/cart" component={CartPage} />
