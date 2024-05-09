@@ -9,30 +9,69 @@ import { OlympicsOverviewEventSelected } from '@/features/selected-event/Olympic
 import { EventSelectAvailabilityCard } from '@/features/selected-event/EventSelectAvailabilityCard';
 import { TicketPriceReserveCart } from '@/features/selected-event/TicketPriceReserveCart';
 import { ReportedIssueButtonEvent } from '@/features/selected-event/ReportedIssueButtonEvent';
+import { useParams } from 'wouter';
+import { useEventStore } from '@/stores/useEventStore';
+import { useEffect } from 'react';
+import useFormattedDateRange from '@/hooks/useFormattedEventDates';
+import { useTicketManager } from '@/hooks/useTicketManage';
+import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 
 export default function EventSelected() {
+  const params = useParams();
+  const eventId = Number(params.eventId);
+  const { getEvent, event } = useEventStore(state => ({
+    getEvent: state.getEvent,
+    event: state.event
+  }));
+
+  const basePrice = event?.basePrice;
+  const eventDate = useFormattedDateRange(event?.startDate, event?.endDate);
+  const initialTicketType = PriceFormula.SOLO;
+  const {
+    selectedTicketType,
+    quantity,
+    setQuantity,
+    currentPrice,
+    handleTicketTypeChange
+  } = useTicketManager(basePrice, eventId, initialTicketType);
+
+  useEffect(() => {
+    getEvent(eventId)
+  }, [eventId, getEvent])
+
+
   return (
     <>
       <Header />
       <div className="flex flex-col min-h-screen">
         <div className="max-w-6xl mx-auto p-4 lg:px-6 sm:py-8 md:py-10">
           <section className="hidden sm:flex flex-col gap-4 sm:flex-row sm:items-center pb-4 sm:pb-8">
-            <DesktopTitleEvent />
+            <h1 className="text-xl lg:text-3xl font-semibold tracking-tight">
+              Buy Tickets for the Olympic Games Paris 2024
+            </h1>
           </section>
 
           <ImagesCoverEvent />
 
           <section className="py-8 grid md:grid-cols-2 lg:grid-cols-[1fr_400px] gap-8 sm:gap-12 md:gap-16 items-start">
             <div className="grid gap-8 row-start-2 md:row-start-auto">
-              <OlympicsOverviewEventSelected />
+              <DesktopTitleEvent title={event?.title} eventDate={eventDate} />
+              <OlympicsOverviewEventSelected quantitySold={event?.quantitySold} />
               <Separator />
-              <EventSelectAvailabilityCard />
+              <EventSelectAvailabilityCard quantityAvailable={event?.quantityAvailable} basePrice={event?.basePrice} />
               <Separator />
-              <DescriptionSelectedEvent />
+              <DescriptionSelectedEvent description={event?.description} />
             </div>
             <div className="grid gap-4 row-start-1 md:row-start-auto">
-              <MobileTitleEvent />
-              <TicketPriceReserveCart />
+              <MobileTitleEvent title={event?.title} eventDate={eventDate} />
+              <TicketPriceReserveCart
+                eventId={eventId}
+                currentPrice={currentPrice}
+                selectedTicketType={selectedTicketType}
+                quantity={quantity}
+                setQuantity={setQuantity}
+                handleTicketTypeChange={handleTicketTypeChange}
+              />
               <ReportedIssueButtonEvent />
             </div>
           </section>

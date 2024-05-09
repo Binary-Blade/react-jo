@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator"
 import { CardContent, Card } from "@/components/ui/card"
 import { AwardIcon, StarIcon } from "@/assets/icons/IconComponents"
 
-export const OlympicsOverviewEventSelected = () => {
+export const OlympicsOverviewEventSelected = ({ quantitySold }) => {
   return (
     <Card>
       <CardContent className="p-4 sm:p-6 flex items-center gap-6 relative">
@@ -23,7 +23,7 @@ export const OlympicsOverviewEventSelected = () => {
           </div>
           <Separator className="h-9" orientation="vertical" />
           <div className="flex flex-col gap-0.5 text-center">
-            <div className="text-2xl font-semibold tracking-tighter">2.5M</div>
+            <div className="text-2xl font-semibold tracking-tighter">{quantitySold}</div>
             <div className="text-xs font-semibold">Tickets Sold</div>
           </div>
         </div>
