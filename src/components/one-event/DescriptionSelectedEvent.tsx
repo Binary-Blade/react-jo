@@ -1,17 +1,13 @@
 import { CollapsibleTrigger, CollapsibleContent, Collapsible } from "@/components/ui/collapsible"
 import { ChevronRightIcon } from "@/assets/icons/IconComponents"
 
-export const DescriptionSelectedEvent = () => {
+// TODO: CREATE TWO DESCRIPTION BACKEND 
+
+export const DescriptionSelectedEvent = ({ description }) => {
   return (
     <div className="prose">
       <p>
-        The Olympic Games are the world's premier sporting event, bringing together the best athletes from around
-        the globe to compete in a celebration of human achievement and international unity.
-      </p>
-      <p>
-        In 2024, the Olympic Games return to Paris, the iconic French capital that previously hosted the Games in
-        1900 and 1924. This historic city will provide a stunning backdrop for the world's greatest athletes to
-        showcase their skills and determination.
+        {description}
       </p>
       <Collapsible className="py-4">
         <CollapsibleTrigger className="font-semibold flex items-center gap-1 [&[data-state=open]>svg]:-rotate-90">

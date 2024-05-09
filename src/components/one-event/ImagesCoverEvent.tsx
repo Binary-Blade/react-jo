@@ -3,6 +3,7 @@ import imageTicket from '@/assets/images/GamesTicketOptions.svg'
 import { Button } from "../ui/button";
 import { GripIcon } from "@/assets/icons/IconComponents";
 
+// TODO: ADD LATER LINK TO THE BACKEND IMAGE
 export const ImagesCoverEvent = () => (
     <section className="relative bg-gray-100 dark:bg-gray-800">
         <div className="grid sm:grid-cols-4 gap-2">
