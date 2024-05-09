@@ -5,13 +5,11 @@ import { AuthContextType, AuthProviderProps } from '@/config/types/AuthType';
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const { accessToken, accessProtectedRoute, isAuthenticated, userId } = useAuthStore(state => ({
+    const { accessProtectedRoute, isAuthenticated, userId } = useAuthStore(state => ({
         accessProtectedRoute: state.accessProtectedRoute,
-        accessToken: state.accessToken,
         isAuthenticated: state.isAuthenticated,
         userId: state.userId,
     }));
-    console.log('isAuthenticated:', isAuthenticated, 'userId:', userId, 'accessToken:', accessToken)
     const [initialized, setInitialized] = useState(false);
 
     useEffect(() => {
