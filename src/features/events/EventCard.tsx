@@ -1,47 +1,85 @@
-import React, { useState } from "react";
-import { EventPropsType } from "@/types/EventTypes";
-import { EventDrawerContent } from "./EventDrawerContent";
-import { Drawer, DrawerTrigger, DrawerContent } from "@/components/ui/drawer";
+import { FC } from "react";
+import { CardTitle, CardDescription, CardHeader, CardContent, Card, CardFooter } from "@/components/ui/card";
+import { ActivityIcon } from "@/assets/icons/IconComponents";
 import { Button } from "@/components/ui/button";
+import { Link } from 'wouter'; // Import Link from wouter
 
-export const EventCard: React.FC<EventPropsType> = ({
-    eventId,
-    title,
-    description,
-    imageSrc,
-    basePrice,
-    quantityAvailable
+interface EventCardProps {
+  eventId: number | undefined;
+  title: string;
+  description: string;
+  categoryType: string;
+  quantityAvailable: number;
+  startDate: string;
+  endDate: string;
+}
+
+export const EventCard: FC<EventCardProps> = ({
+  eventId,
+  title,
+  description,
+  categoryType,
+  quantityAvailable,
+  startDate,
+  endDate,
 }) => {
-    const [isDrawerOpen, setDrawerOpen] = useState(false);
-
-    return (
-        <div className="relative group grid gap-4 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 transition-all hover:scale-[1.02] hover:shadow-lg">
-            <img
-                alt={title}
-                className="object-cover w-full aspect-[3/2] group-hover:opacity-90 transition-opacity"
-                src={imageSrc}
-            />
-            <div className="p-4 flex flex-col gap-2">
-                <h3 className="font-semibold text-lg group-hover:underline">{title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 line-clamp-2">{description}</p>
-                <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen}>
-                    <DrawerTrigger asChild>
-                        <Button className="w-full" variant="default">Buy Tickets</Button>
-                    </DrawerTrigger>
-                    <DrawerContent>
-                        <EventDrawerContent
-                            eventId={eventId}
-                            basePrice={basePrice}
-                            title={title}
-                            description={description}
-                            imageSrc={imageSrc}
-                            quantityAvailable={quantityAvailable}
-                        />
-                    </DrawerContent>
-                </Drawer>
-            </div>
-        </div >
-    );
-};
+  // MODIFY ICON FOR EACH CATEGORY TYPE
+  return (
+    <Card className="group hover:shadow-xl transition-shadow duration-300">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center gap-4">
+          <ActivityIcon className="h-8 w-8 text-primary group-hover:text-primary-600 transition-colors duration-300" />
+          <div>
+            <div className="font-medium">{categoryType}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">Place available: {quantityAvailable}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">{startDate} to {endDate}</div>
+          </div>
+        </div>
+      </CardContent>
+      <CardFooter>
+        {eventId && (
+          <Link to={`/events/${eventId}`}>
+            <Button variant="default">View Event</Button>
+          </Link>
+        )}
+      </CardFooter>
+    </Card>
+  );
+}
 
 
+// const iconType = (
+//   < div className="grid gap-8" >
+//     <h3 className="text-xl font-semibold">Featured Events</h3>
+//     <ul className="grid lg:grid-cols-2 gap-6">
+//       <li className="flex gap-4">
+//         <ActivityIcon className="w-6 h-6" />
+//         Track & Field
+//       </li>
+//       <li className="flex gap-4">
+//         <FishIcon className="w-6 h-6" />
+//         Swimming
+//       </li>
+//       <li className="flex gap-4">
+//         <ShoppingBasketIcon className="w-6 h-6" />
+//         Basketball
+//       </li>
+//       <li className="flex gap-4">
+//         <DumbbellIcon className="w-6 h-6" />
+//         Gymnastics
+//       </li>
+//       <li className="flex gap-4">
+//         <GoalIcon className="w-6 h-6" />
+//         Soccer
+//       </li>
+//       <li className="flex gap-4">
+//         <TurtleIcon className="w-6 h-6" />
+//         Tennis
+//       </li>
+//     </ul>
+//   </div >
+// )

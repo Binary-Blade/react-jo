@@ -10,7 +10,6 @@ export const EventsMainContent: React.FC = () => {
         events: state.events,
         fetchEvents: state.fetchEvents,
     }));
-    console.log(events)
 
     useEffect(() => {
         if (events.length === 0) {
