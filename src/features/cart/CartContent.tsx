@@ -39,7 +39,7 @@ export const CartContent: FC = () => {
                     {Object.entries(groupedItems).map(([type, items]) => (
                         <CartCategories
                             key={type}
-                            ticketType={type}
+                            formuleType={type}
                             items={items}
                         />
                     ))}
