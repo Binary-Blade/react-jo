@@ -5,6 +5,7 @@ import { create } from 'zustand';
 
 export const useEventStore = create<EventStoreType>((set, get) => ({
     events: [],
+    event: null,
 
     fetchEvents: async () => {
         try {
@@ -15,6 +16,30 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
         } catch (error) {
             console.error("Failed to fetch events:", error);
             throw new Error("Unable to fetch events.");
+        }
+    },
+
+    addEvent: async (eventData: EventType) => {
+        try {
+            const response = await EventService.createEvent(eventData);
+            if (response.success) {
+                set({ events: [...get().events, response.data] });
+            }
+        } catch (error) {
+            console.error("Failed to add event:", error);
+            throw new Error("Unable to add event.");
+        }
+    },
+
+    getEvent: async (eventId: number) => {
+        try {
+            const response = await EventService.getEventById(eventId);
+            if (response.success) {
+                set({ event: response.data })
+            }
+        } catch (error) {
+            console.error("Failed to fetch event:", error);
+            throw new Error("Unable to fetch event.");
         }
     },
 
@@ -30,17 +55,6 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
         }
     },
 
-    addEvent: async (eventData: EventType) => {
-        try {
-            const response = await EventService.createEvent(eventData);
-            if (response.success) {
-                set({ events: [...get().events, response.data] });
-            }
-        } catch (error) {
-            console.error("Failed to add event:", error);
-            throw new Error("Unable to add event.");
-        }
-    },
 
     updateEvent: async (eventId: number, eventData: EventType) => {
         try {

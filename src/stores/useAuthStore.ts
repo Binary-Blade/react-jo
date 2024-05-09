@@ -3,6 +3,7 @@ import { LoginFormData } from '@/config/zod-schemas/loginSchema';
 import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import { AuthenticationService } from '@/services/AuthenticationService';
 import { create } from 'zustand';
+import useCartStore from './useCartStore';
 
 export const useAuthStore = create<AuthStoreTypes>((set) => ({
     accessToken: null,
@@ -29,6 +30,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
                 expireIn: data.expireIn,
                 isAuthenticated: true,
             });
+            await useCartStore.getState().syncCartItems(data.userId);
             return { success: true };
         } catch (error: any) {
             console.error('Login error:', error);

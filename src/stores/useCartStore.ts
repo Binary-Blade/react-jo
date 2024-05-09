@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 import { CartService } from '@/services/CartService';
-import { CartStoreType } from '@/config/types/CartTypes';
-import { StoreLocalStorage } from '@/config/storeLocalStorage';
+import { CartItem, CartStoreType } from '@/config/types/CartTypes';
 import { debounce } from '@/lib/utils';
+import { LocalCartService } from '@/services/LocalCartService';
 
-export const useCartStore = create<CartStoreType>((set) => ({
+export const useCartStore = create<CartStoreType>((set, get) => ({
     cartItems: [],
-    cartId: StoreLocalStorage.getStoredCartId(),
+    cartId: LocalCartService.getStoredCartId(),
 
     addItemToCart: async (userId, cartItem) => {
         try {
@@ -18,14 +18,13 @@ export const useCartStore = create<CartStoreType>((set) => ({
                     : [...state.cartItems, data];
 
                 // Update local storage and state
-                StoreLocalStorage.setStoredCartId(data.cart.cartId);
+                LocalCartService.setStoredCartId(data.cart.cartId);
                 return { cartItems: newCartItems, cartId: data.cart.cartId };
             });
         } catch (error) {
             console.error('Failed to add item to cart:', error);
         }
     },
-
     updateCartItem: debounce(async (userId, cartId, cartItemId, updateData) => {
         try {
             const data = await CartService.updateCartItem(userId, cartId, cartItemId, updateData);
@@ -33,7 +32,7 @@ export const useCartStore = create<CartStoreType>((set) => ({
                 const updatedCartItems = state.cartItems.map(item =>
                     item.cartItemId === cartItemId ? { ...item, ...data } : item
                 );
-                StoreLocalStorage.setStoredCartItems(updatedCartItems);
+                LocalCartService.setStoredCartItems(updatedCartItems);
                 return { cartItems: updatedCartItems };
             });
         } catch (error) {
@@ -50,7 +49,6 @@ export const useCartStore = create<CartStoreType>((set) => ({
         }
     },
 
-
     removeCartItem: async (userId, cartId, cartItemId) => {
         try {
             await CartService.removeItemFromCart(userId, cartId, cartItemId);
@@ -61,6 +59,16 @@ export const useCartStore = create<CartStoreType>((set) => ({
             console.error('Failed to remove cart item:', error);
         }
     },
+
+    syncCartItems: async (userId: number) => {
+        const localCartItems = LocalCartService.getStoredCartItems();
+        console.log('localCartItems', localCartItems)
+        if (localCartItems && localCartItems.length > 0) {
+            await Promise.all(localCartItems.map((item: CartItem) => get().addItemToCart(userId, item)));
+            LocalCartService.clearStoredCartItems();
+        }
+    },
+
     clearCart: async () => {
         try {
             set({ cartItems: [], cartId: null });
