@@ -12,8 +12,15 @@ export type EventType = {
     title: string;
     description: string;
     basePrice: number | undefined;
+    prices: {
+        eventPriceId: number;
+        priceFormula: string;
+        price: number;
+    };
     categoryType: string;
     quantityAvailable: number;
+    quantitySold: number;
+    revenueGenerated: number;
     startDate: string;
     endDate: string;
     category: string;
@@ -28,7 +35,9 @@ export type EventResponse = {
 
 export interface EventStoreType {
     events: EventType[];
+    event: EventType | null;
     fetchEvents: () => Promise<void>;
+    getEvent: (eventId: number) => Promise<any>;
     getTicketPrice: (eventId: number, ticketType: string) => Promise<any>;
     addEvent: (eventData: EventType) => Promise<void>;
     updateEvent: (eventId: number, eventData: EventType) => Promise<void>;
