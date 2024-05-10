@@ -1,6 +1,6 @@
-import { useEffect, } from "react";
-import { DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog"
-import useReservationStore from "@/stores/useReservationStore";
+import { useEffect } from 'react';
+import { DialogTitle, DialogDescription, DialogHeader } from '@/components/ui/dialog';
+import useReservationStore from '@/stores/useReservationStore';
 
 interface TicketPageProps {
   reservationId: number;
@@ -9,7 +9,7 @@ interface TicketPageProps {
 export const TicketModal = ({ reservationId }: TicketPageProps) => {
   const { fetchOneReservation, reservation } = useReservationStore(state => ({
     reservation: state.reservation,
-    fetchOneReservation: state.fetchOneReservation,
+    fetchOneReservation: state.catchTicket
   }));
 
   useEffect(() => {
@@ -31,8 +31,8 @@ export const TicketModal = ({ reservationId }: TicketPageProps) => {
             alt="Ticket QR Code"
             className="object-contain"
             style={{
-              aspectRatio: "200/200",
-              objectFit: "cover",
+              aspectRatio: '200/200',
+              objectFit: 'cover'
             }}
             width="200"
             height="200"
@@ -40,11 +40,12 @@ export const TicketModal = ({ reservationId }: TicketPageProps) => {
         </div>
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold mb-2">Paris 2024</h1>
-          <p className="text-gray-600 dark:text-gray-400">Scan the QR code to access your digital ticket</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            Scan the QR code to access your digital ticket
+          </p>
         </div>
-        <div className="flex flex-col items-center">
-        </div>
+        <div className="flex flex-col items-center"></div>
       </div>
     </div>
   );
-}
+};
