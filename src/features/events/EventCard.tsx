@@ -3,6 +3,7 @@ import { CardTitle, CardDescription, CardHeader, CardContent, Card, CardFooter }
 import { ActivityIcon } from "@/assets/icons/IconComponents";
 import { Button } from "@/components/ui/button";
 import { Link } from 'wouter'; // Import Link from wouter
+import useFormattedDateRange from "@/hooks/useFormattedEventDates";
 
 interface EventCardProps {
   eventId: number | undefined;
@@ -23,7 +24,9 @@ export const EventCard: FC<EventCardProps> = ({
   startDate,
   endDate,
 }) => {
-  // MODIFY ICON FOR EACH CATEGORY TYPE
+  const dateText = useFormattedDateRange(startDate, endDate);
+
+  // TODO: MODIFY ICON FOR EACH CATEGORY TYPE
   return (
     <Card className="group hover:shadow-xl transition-shadow duration-300">
       <CardHeader>
@@ -36,7 +39,7 @@ export const EventCard: FC<EventCardProps> = ({
           <div>
             <div className="font-medium">{categoryType}</div>
             <div className="text-sm text-gray-500 dark:text-gray-400">Place available: {quantityAvailable}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">{startDate} to {endDate}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">{dateText}</div>
           </div>
         </div>
       </CardContent>
