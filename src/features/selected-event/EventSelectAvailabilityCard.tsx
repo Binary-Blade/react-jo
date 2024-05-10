@@ -1,6 +1,14 @@
-import { CalendarCheckIcon, TicketIcon } from "@/assets/icons/IconComponents"
+import { CalendarCheckIcon, TicketIcon } from '@/assets/icons/IconComponents';
+import { FC } from 'react';
 
-export const EventSelectAvailabilityCard = ({ quantityAvailable, basePrice }) => {
+type EventSelectAvailabilityCardProps = {
+  quantityAvailable: number | undefined;
+  basePrice: number | undefined;
+};
+export const EventSelectAvailabilityCard: FC<EventSelectAvailabilityCardProps> = ({
+  quantityAvailable,
+  basePrice
+}) => {
   return (
     <>
       <div className="flex items-center gap-6">
@@ -9,7 +17,9 @@ export const EventSelectAvailabilityCard = ({ quantityAvailable, basePrice }) =>
         </div>
         <div className="grid gap-0.5">
           <div className="font-semibold">Available Spots : {quantityAvailable}</div>
-          <div className="text-gray-500 text-sm dark:text-gray-400">Hurry, limited spots available!</div>
+          <div className="text-gray-500 text-sm dark:text-gray-400">
+            Hurry, limited spots available!
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-6">
@@ -24,5 +34,5 @@ export const EventSelectAvailabilityCard = ({ quantityAvailable, basePrice }) =>
         </div>
       </div>
     </>
-  )
+  );
 };
