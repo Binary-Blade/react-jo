@@ -6,3 +6,12 @@ export const STATUSCOLOR: { [key: string]: string } = {
 };
 
 export const TAXES_10 = 0.1;
+
+interface TicketDescriptions {
+    [key: string]: string;
+}
+export const ticketDescriptions: TicketDescriptions = {
+    SOLO: "Individual tickets for the 2024 Olympic Games.",
+    DUO: "Tickets for two people to attend the 2024 Olympic Games.",
+    FAMILY: "Tickets for a family of four to attend the 2024 Olympic Games."
+};
