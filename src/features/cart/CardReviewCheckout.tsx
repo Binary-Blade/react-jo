@@ -9,7 +9,7 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ButtonCheckoutPayment } from '../payment/ButtonCheckoutPayment';
+import { ButtonCheckoutPayment } from '@/components/payment/ButtonCheckoutPayment';
 
 export const CardReviewCheckout = () => {
   const { cartId, cartItems } = useCartStore(state => ({
@@ -17,7 +17,7 @@ export const CardReviewCheckout = () => {
     cartId: state.cartId
   }));
   const groupedItems = useGroupByTicketType(cartItems);
-  const { total, taxes, totalTaxes } = useCartStore(state => state.aggregateCartData());
+  const { total, totalTaxes } = useCartStore(state => state.aggregateCartData());
   return (
     <Card>
       <CardHeader>
