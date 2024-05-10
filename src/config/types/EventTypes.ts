@@ -12,6 +12,7 @@ export type EventType = {
     title: string;
     description: string;
     basePrice: number | undefined;
+    eventName: string;
     prices: {
         eventPriceId: number;
         priceFormula: string;
@@ -20,10 +21,10 @@ export type EventType = {
     categoryType: string;
     quantityAvailable: number;
     quantitySold: number;
+    category: string;
     revenueGenerated: number;
     startDate: string;
     endDate: string;
-    category: string;
 }
 
 
