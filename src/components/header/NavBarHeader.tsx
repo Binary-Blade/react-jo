@@ -1,19 +1,26 @@
 import { Link } from 'wouter';
-import { useAuthStore } from "@/stores/useAuthStore";
+import { useAuthStore } from '@/stores/useAuthStore';
 import { FC, useMemo } from 'react';
 import { DropDownAccount } from './DropDownAccount';
 import { MedalIcon, ShoppingCartIcon } from '@/assets/icons/IconComponents';
 import { NavLinkProps } from '@/config/types/NavLink';
 import useLocalCartStore from '@/stores/useLocalCartStore';
+import useCartStore from '@/stores/useCartStore';
 
 export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const cartItems = useLocalCartStore((state) => state.cartItems);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+  const cartItemsLocal = useLocalCartStore(state => state.cartItemsLocal);
+  const cartItems = useCartStore(state => state.cartItems);
 
   const totalItems = useMemo(() => {
-    const total = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    let total = 0;
+    if (!isAuthenticated) {
+      total = cartItemsLocal.reduce((acc, item) => acc + item.quantity, 0);
+    } else {
+      total = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    }
     return total;
-  }, [cartItems]);
+  }, [cartItems, isAuthenticated]);
 
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
@@ -24,7 +31,11 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
         </div>
         <nav className="hidden md:flex items-center gap-6 text-md font-medium">
           {navLinks.map(link => (
-            <Link key={link.name} href={link.href} className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            >
               {link.name}
             </Link>
           ))}
@@ -40,8 +51,11 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
           </Link>
           {!isAuthenticated ? (
             <>
-              <Link href="/auth" className="inline-flex items-center justify-center px-6 py-3 text-base 
-                font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50">
+              <Link
+                href="/auth"
+                className="inline-flex items-center justify-center px-6 py-3 text-base 
+                font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
+              >
                 Login
               </Link>
             </>
@@ -50,7 +64,6 @@ export const NavBarHeader: FC<NavLinkProps> = ({ navLinks }) => {
           )}
         </div>
       </div>
-    </header >
-  )
-}
-
+    </header>
+  );
+};
