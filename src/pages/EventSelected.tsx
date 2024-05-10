@@ -1,22 +1,24 @@
 import { Footer } from '@/features/Footer';
 import { Header } from '@/features/Header';
-import { Separator } from "@/components/ui/separator"
-import { ImagesCoverEvent } from "@/components/one-event/ImagesCoverEvent"
+import { Separator } from '@/components/ui/separator';
+import { ImagesCoverEvent } from '@/components/one-event/ImagesCoverEvent';
 import { DesktopTitleEvent } from '@/components/one-event/DesktopTitleEvent';
 import { MobileTitleEvent } from '@/components/one-event/MobileTitleEvent';
 import { DescriptionSelectedEvent } from '@/components/one-event/DescriptionSelectedEvent';
 import { OlympicsOverviewEventSelected } from '@/features/selected-event/OlympicsOverviewEventSelected';
 import { EventSelectAvailabilityCard } from '@/features/selected-event/EventSelectAvailabilityCard';
 import { TicketPriceReserveCart } from '@/features/selected-event/TicketPriceReserveCart';
-import { ReportedIssueButtonEvent } from '@/features/selected-event/ReportedIssueButtonEvent';
 import { useParams } from 'wouter';
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
 import useFormattedDateRange from '@/hooks/useFormattedEventDates';
 import { useTicketManager } from '@/hooks/useTicketManage';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { ReportedIssueButtonEvent } from '@/components/one-event/ReportedIssueButtonEvent';
 
 export default function EventSelected() {
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   const params = useParams();
   const eventId = Number(params.eventId);
   const { getEvent, event } = useEventStore(state => ({
@@ -27,18 +29,12 @@ export default function EventSelected() {
   const basePrice = event?.basePrice;
   const eventDate = useFormattedDateRange(event?.startDate, event?.endDate);
   const initialTicketType = PriceFormula.SOLO;
-  const {
-    selectedTicketType,
-    quantity,
-    setQuantity,
-    currentPrice,
-    handleTicketTypeChange
-  } = useTicketManager(basePrice, eventId, initialTicketType);
+  const { selectedTicketType, quantity, setQuantity, currentPrice, handleTicketTypeChange } =
+    useTicketManager(basePrice, eventId, initialTicketType);
 
   useEffect(() => {
-    getEvent(eventId)
-  }, [eventId, getEvent])
-
+    getEvent(eventId);
+  }, [eventId, getEvent]);
 
   return (
     <>
@@ -58,7 +54,10 @@ export default function EventSelected() {
               <DesktopTitleEvent title={event?.title} eventDate={eventDate} />
               <OlympicsOverviewEventSelected quantitySold={event?.quantitySold} />
               <Separator />
-              <EventSelectAvailabilityCard quantityAvailable={event?.quantityAvailable} basePrice={event?.basePrice} />
+              <EventSelectAvailabilityCard
+                quantityAvailable={event?.quantityAvailable}
+                basePrice={event?.basePrice}
+              />
               <Separator />
               <DescriptionSelectedEvent description={event?.description} />
             </div>
@@ -71,6 +70,7 @@ export default function EventSelected() {
                 quantity={quantity}
                 setQuantity={setQuantity}
                 handleTicketTypeChange={handleTicketTypeChange}
+                isAuthenticated={isAuthenticated}
               />
               <ReportedIssueButtonEvent />
             </div>
@@ -79,5 +79,5 @@ export default function EventSelected() {
       </div>
       <Footer />
     </>
-  )
+  );
 }
