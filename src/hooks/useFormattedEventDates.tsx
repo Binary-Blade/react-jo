@@ -14,10 +14,10 @@ function useFormattedDateRange(startDate: string | undefined, endDate: string | 
     const endYear = format(parseISO(endDate), 'yyyy');
 
     if (startYear === endYear) {
-      return `${formattedStartDate} - ${formattedEndDate} · Paris, France`;
+      return `${formattedStartDate} - ${formattedEndDate}`;
     } else {
       const formattedStartDateWithYear = format(parseISO(startDate), 'MMMM d, yyyy');
-      return `${formattedStartDateWithYear} - ${formattedEndDate} · Paris, France`;
+      return `${formattedStartDateWithYear} - ${formattedEndDate}`;
     }
   } catch (error) {
     console.error('Error formatting dates:', error);

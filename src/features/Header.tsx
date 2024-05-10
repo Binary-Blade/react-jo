@@ -1,13 +1,12 @@
-import { NavBarHeader } from "@/components/header/NavBarHeader";
-import { SheetMenu } from "@/components/header/SheetMenu";
-import { NavLink } from "@/types/NavLink";
+import { NavBarHeader } from '@/components/header/NavBarHeader';
+import { SheetMenu } from '@/components/header/SheetMenu';
+import { NavLink } from '@/config/types/NavLink';
 
 export const Header = () => {
-
   const navLinks: NavLink[] = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
-    { name: 'Reservations', href: '/reservations' },
+    { name: 'Reservations', href: '/reservations' }
   ];
 
   return (
@@ -17,5 +16,5 @@ export const Header = () => {
       </div>
       <NavBarHeader navLinks={navLinks} />
     </header>
-  )
-}
+  );
+};

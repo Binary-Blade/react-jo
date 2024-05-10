@@ -1,8 +1,15 @@
-import { Separator } from "@/components/ui/separator"
-import { CardContent, Card } from "@/components/ui/card"
-import { AwardIcon, StarIcon } from "@/assets/icons/IconComponents"
+import { Separator } from '@/components/ui/separator';
+import { CardContent, Card } from '@/components/ui/card';
+import { AwardIcon, StarIcon } from '@/assets/icons/IconComponents';
+import { FC } from 'react';
 
-export const OlympicsOverviewEventSelected = ({ quantitySold }) => {
+type OlympicsOverviewEventSelectedProps = {
+  quantitySold: number | undefined;
+};
+
+export const OlympicsOverviewEventSelected: FC<OlympicsOverviewEventSelectedProps> = ({
+  quantitySold
+}) => {
   return (
     <Card>
       <CardContent className="p-4 sm:p-6 flex items-center gap-6 relative">
@@ -29,5 +36,5 @@ export const OlympicsOverviewEventSelected = ({ quantitySold }) => {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 };

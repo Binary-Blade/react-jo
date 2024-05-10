@@ -1,4 +1,4 @@
-import { CartItemLocal } from "@/config/types/CartTypes";
+import { CartItemLocal } from "@/config/types/LocalStorageTypes";
 
 export class LocalCartService {
 
