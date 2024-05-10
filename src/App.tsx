@@ -11,19 +11,19 @@ import EventSelected from './pages/EventSelected';
 
 // Lazy loading pages
 const AuthPage = lazy(() => import('./pages/AuthPage'));
-const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
+const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
 export default function App() {
   const { userId } = useAuthStore(state => ({
-    userId: state.userId,
+    userId: state.userId
   }));
 
   const { cartId, fetchCartItems } = useCartStore(state => ({
     fetchCartItems: state.fetchCartItems,
-    cartId: state.cartId,
+    cartId: state.cartId
   }));
 
   useEffect(() => {
