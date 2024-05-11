@@ -1,13 +1,14 @@
 export interface NavLink {
-    name: string;
-    href: string;
-    icon?: JSX.Element;
+  name: string;
+  href: string;
+  icon?: JSX.Element;
 }
 
 export interface NavBarProps {
-    navLinks: NavLink[];
+  navLinksPublic: NavLink[];
+  navLinksAdmin: NavLink[];
 }
 
 export interface NavLinkProps {
-    navLinks: { name: string, href: string }[];
+  navLinks: { name: string; href: string }[];
 }
