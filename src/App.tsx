@@ -42,8 +42,8 @@ export default function App() {
           <Route path="/events" component={EventsPage} />
           <Route path="/reservations" component={ReservationPage} />
           <Route path="/cart" component={CartPage} />
-          <Route path="/profile*" component={ProfilePage} />
-          <Route path="/dashboard*" component={DashboardPage} />
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/dashboard" component={DashboardPage} />
         </Switch>
       </Suspense>
     </AuthProvider>
