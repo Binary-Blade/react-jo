@@ -1,5 +1,5 @@
-import { MedalIcon } from "@/assets/icons/IconComponents";
-import { Link } from "wouter";
+import { MedalIcon } from '@/components/ui/IconComponents';
+import { Link } from 'wouter';
 
 export const Footer = () => {
   return (
@@ -22,7 +22,5 @@ export const Footer = () => {
         </nav>
       </div>
     </footer>
-  )
-}
-
-
+  );
+};

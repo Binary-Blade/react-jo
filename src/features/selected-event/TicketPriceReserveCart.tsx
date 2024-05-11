@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { XIcon } from '@/assets/icons/IconComponents';
+import { XIcon } from '@/components/ui/IconComponents';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import useLocalCartStore from '@/stores/useLocalCartStore';
 import useCartStore from '@/stores/useCartStore';

@@ -1,7 +1,7 @@
-import { LoginForm } from "@/features/auth/LoginForm";
-import { MedalIcon } from "@/assets/icons/IconComponents";
-import { SignUpForm } from "@/features/auth/SignUpForm";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LoginForm } from '@/features/auth/LoginForm';
+import { MedalIcon } from '@/components/ui/IconComponents';
+import { SignUpForm } from '@/features/auth/SignUpForm';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function AuthPage() {
   return (
@@ -25,5 +25,5 @@ export default function AuthPage() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

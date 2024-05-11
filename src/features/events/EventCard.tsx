@@ -1,9 +1,16 @@
-import { FC } from "react";
-import { CardTitle, CardDescription, CardHeader, CardContent, Card, CardFooter } from "@/components/ui/card";
-import { ActivityIcon } from "@/assets/icons/IconComponents";
-import { Button } from "@/components/ui/button";
+import { FC } from 'react';
+import {
+  CardTitle,
+  CardDescription,
+  CardHeader,
+  CardContent,
+  Card,
+  CardFooter
+} from '@/components/ui/card';
+import { ActivityIcon } from '@/components/ui/IconComponents';
+import { Button } from '@/components/ui/button';
 import { Link } from 'wouter'; // Import Link from wouter
-import useFormattedDateRange from "@/hooks/useFormattedEventDates";
+import useFormattedDateRange from '@/hooks/useFormattedEventDates';
 
 interface EventCardProps {
   eventId: number | undefined;
@@ -22,7 +29,7 @@ export const EventCard: FC<EventCardProps> = ({
   categoryType,
   quantityAvailable,
   startDate,
-  endDate,
+  endDate
 }) => {
   const dateText = useFormattedDateRange(startDate, endDate);
 
@@ -38,7 +45,9 @@ export const EventCard: FC<EventCardProps> = ({
           <ActivityIcon className="h-8 w-8 text-primary group-hover:text-primary-600 transition-colors duration-300" />
           <div>
             <div className="font-medium">{categoryType}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">Place available: {quantityAvailable}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Place available: {quantityAvailable}
+            </div>
             <div className="text-sm text-gray-500 dark:text-gray-400">{dateText}</div>
           </div>
         </div>
@@ -52,8 +61,7 @@ export const EventCard: FC<EventCardProps> = ({
       </CardFooter>
     </Card>
   );
-}
-
+};
 
 // const iconType = (
 //   < div className="grid gap-8" >

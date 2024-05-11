@@ -1,4 +1,4 @@
-import { CalendarCheckIcon, TicketIcon } from '@/assets/icons/IconComponents';
+import { CalendarCheckIcon, TicketIcon } from '@/components/ui/IconComponents';
 import { FC } from 'react';
 
 type EventSelectAvailabilityCardProps = {

@@ -1,7 +1,7 @@
 import { DialogTrigger, Dialog, DialogContent } from '@/components/ui/dialog';
 import { Card, CardTitle, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CalendarIcon, TableIcon, TicketIcon } from '@/assets/icons/IconComponents';
+import { CalendarIcon, TableIcon, TicketIcon } from '@/components/ui/IconComponents';
 import { STATUSCOLOR } from '@/config/constants';
 import { TicketModal } from './TicketModal';
 import { FC } from 'react';

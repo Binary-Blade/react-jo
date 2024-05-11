@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { FC } from 'react';
 import { navigate } from 'wouter/use-browser-location';
-import { CheckIcon, CircleEllipsisIcon, XIcon } from '@/assets/icons/IconComponents';
+import { CheckIcon, CircleEllipsisIcon, XIcon } from '@/components/ui/IconComponents';
 import { Button } from '@/components/ui/button';
 
 interface StatusPaymentProps {

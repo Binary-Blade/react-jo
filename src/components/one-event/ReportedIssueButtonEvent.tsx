@@ -1,15 +1,25 @@
-import { DialogTrigger, DialogTitle, DialogDescription, DialogHeader, DialogContent, Dialog } from "@/components/ui/dialog"
-import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { FlagIcon } from "@/assets/icons/IconComponents"
-import { Separator } from "@/components/ui/separator"
+import {
+  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogContent,
+  Dialog
+} from '@/components/ui/dialog';
+import { RadioGroupItem, RadioGroup } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { FlagIcon } from '@/components/ui/IconComponents';
+import { Separator } from '@/components/ui/separator';
 
 export const ReportedIssueButtonEvent = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="gap-2 underline text-gray-500 hover:text-inherit dark:text-gray-400" variant="link">
+        <Button
+          className="gap-2 underline text-gray-500 hover:text-inherit dark:text-gray-400"
+          variant="link"
+        >
           <FlagIcon className="w-4 h-4" />
           Report an issue
         </Button>
@@ -47,5 +57,5 @@ export const ReportedIssueButtonEvent = () => {
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  )
+  );
 };

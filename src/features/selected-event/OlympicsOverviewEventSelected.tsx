@@ -1,6 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 import { CardContent, Card } from '@/components/ui/card';
-import { AwardIcon, StarIcon } from '@/assets/icons/IconComponents';
+import { AwardIcon, StarIcon } from '@/components/ui/IconComponents';
 import { FC } from 'react';
 
 type OlympicsOverviewEventSelectedProps = {
