@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { navigate } from 'wouter/use-browser-location';
-import { ButtonBack } from '../common/ButtonBack';
+import { ButtonBack } from '../button/ButtonBack';
 
 export const CartEmpty = () => (
   <div className="container mx-auto py-12 px-4 md:px-6">
