@@ -1,4 +1,4 @@
-import { EventStoreType, EventType } from '@/config/types/EventTypes';
+import { EventRequest, EventStoreType, EventType } from '@/config/types/EventTypes';
 import { EventService } from '@/services/EventService';
 import { create } from 'zustand';
 
@@ -18,7 +18,7 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
     }
   },
 
-  addEvent: async (eventData: EventType) => {
+  addEvent: async (eventData: EventRequest) => {
     try {
       const response = await EventService.createEvent(eventData);
       if (response.success) {

@@ -1,11 +1,10 @@
-import axiosClient from "@/config/axiosConfig";
-import { EventResponse, EventType } from "@/config/types/EventTypes";
+import axiosClient from '@/config/axiosConfig';
+import { EventRequest, EventResponse, EventType } from '@/config/types/EventTypes';
 
 /**
  * Service class for handling API requests related to events.
  */
 export class EventService {
-
   /**
    * Fetches all events from the server.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the events data.
@@ -19,7 +18,7 @@ export class EventService {
       };
     } catch (error) {
       console.error('Get all events error:', error);
-      throw new Error("Failed to fetch events");
+      throw new Error('Failed to fetch events');
     }
   }
 
@@ -28,7 +27,7 @@ export class EventService {
    * @param {Event} createEventDto - The event data to create.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the created event data.
    */
-  static async createEvent(createEventDto: EventType): Promise<EventResponse> {
+  static async createEvent(createEventDto: EventRequest): Promise<EventResponse> {
     try {
       const response = await axiosClient.post('/events/create', createEventDto);
       return {
@@ -37,7 +36,7 @@ export class EventService {
       };
     } catch (error) {
       console.error('Create event error:', error);
-      throw new Error("Failed to create event");
+      throw new Error('Failed to create event');
     }
   }
   /**
@@ -46,7 +45,10 @@ export class EventService {
    * @param {string} ticketType - The type of ticket to get the price for.
    * @returns {Promise<{success: boolean; price: number}>} A promise that resolves with the ticket price.
    */
-  static async getTicketPrice(eventId: number, ticketType: string): Promise<{ success: boolean; price: number }> {
+  static async getTicketPrice(
+    eventId: number,
+    ticketType: string
+  ): Promise<{ success: boolean; price: number }> {
     try {
       const response = await axiosClient.get(`/events/${eventId}/price/${ticketType}`);
       return {
@@ -55,7 +57,7 @@ export class EventService {
       };
     } catch (error) {
       console.error('Get ticket price error:', error);
-      throw new Error("Failed to fetch ticket price");
+      throw new Error('Failed to fetch ticket price');
     }
   }
 
@@ -73,7 +75,7 @@ export class EventService {
       };
     } catch (error) {
       console.error(`Get event by ID error: ${eventId}`, error);
-      throw new Error("Failed to fetch event");
+      throw new Error('Failed to fetch event');
     }
   }
 
@@ -92,7 +94,7 @@ export class EventService {
       };
     } catch (error) {
       console.error(`Update event error: ${eventId}`, error);
-      throw new Error("Failed to update event");
+      throw new Error('Failed to update event');
     }
   }
 
@@ -110,7 +112,7 @@ export class EventService {
       };
     } catch (error) {
       console.error(`Delete event error: ${eventId}`, error);
-      throw new Error("Failed to delete event");
+      throw new Error('Failed to delete event');
     }
   }
 }
