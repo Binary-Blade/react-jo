@@ -9,15 +9,18 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ButtonCheckoutPayment } from '@/components/payment/ButtonCheckoutPayment';
+import { ButtonCheckoutPayment } from '@/features/payment/ButtonCheckoutPayment';
+import { TicketCheckout } from './TicketCheckout';
 
 export const CardReviewCheckout = () => {
-  const { cartId, cartItems } = useCartStore(state => ({
+  const { cartId, cartItems, grandTotal } = useCartStore(state => ({
     cartItems: state.cartItems,
-    cartId: state.cartId
+    cartId: state.cartId,
+    grandTotal: state.aggregateCartData().grandTotal
   }));
+
   const groupedItems = useGroupByTicketType(cartItems);
-  const { total, totalTaxes } = useCartStore(state => state.aggregateCartData());
+
   return (
     <Card>
       <CardHeader>
@@ -27,32 +30,18 @@ export const CardReviewCheckout = () => {
       <CardContent>
         <div className="grid gap-4">
           {Object.entries(groupedItems).map(([priceFormula, items]) => (
-            <div key={priceFormula} className="flex items-center justify-between">
-              <div>
-                <h3 className="font-semibold">{priceFormula} Tickets</h3>
-                <p className="text-gray-500 dark:text-gray-400">
-                  {items.map((item, index) => (
-                    <span key={`${priceFormula}-${item.cartItemId}-${index}`}>
-                      {`${item.event.title} x ${item.quantity}`}
-                      {index < items.length - 1 ? ', ' : ''}
-                    </span>
-                  ))}
-                </p>
-              </div>
-              <div className="font-medium pl-2">
-                ${items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
-              </div>
-            </div>
+            <TicketCheckout key={priceFormula} priceFormula={priceFormula} items={items} />
           ))}
         </div>
         <Separator className="my-4" />
         <div className="flex items-center justify-between font-semibold ">
           <div>Total</div>
-          <div>{total}</div>
+          <div>{grandTotal}</div>
         </div>
       </CardContent>
       <CardFooter>
-        <ButtonCheckoutPayment cartId={cartId} totalTaxes={totalTaxes} />
+        <ButtonCheckoutPayment cartId={cartId} totalTaxes={grandTotal * 0.1} />{' '}
+        {/* Assuming tax rate of 10% */}
       </CardFooter>
     </Card>
   );
