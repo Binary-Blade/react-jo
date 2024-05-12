@@ -6,15 +6,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { CartItemsProps } from '@/config/types/CartTypes';
 import useFormattedDateRange from '@/hooks/useFormattedEventDates';
 import { Separator } from '@radix-ui/react-dropdown-menu';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogTitle
-} from '@/components/ui/alert-dialog';
+import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
 
 export const CardOneTicket: FC<CartItemsProps> = ({
   cartId,
@@ -87,18 +79,13 @@ export const CardOneTicket: FC<CartItemsProps> = ({
         </Button>
       </div>
       <Separator />
-      <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
-        <AlertDialogContent>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently remove the item from your cart.
-          </AlertDialogDescription>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={cancelRemoveItem}>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmRemoveItem}>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <GenericAlertDialog
+        isOpen={showDialog}
+        onClose={cancelRemoveItem}
+        onConfirm={confirmRemoveItem}
+        title="Are you sure?"
+        description="This action cannot be undone. This will permanently remove the item from your cart."
+      />
     </div>
   );
 };
