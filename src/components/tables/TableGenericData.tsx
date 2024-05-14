@@ -30,9 +30,10 @@ type TableGenericProps = {
   data: Record<string, any>[];
   columns: Column[];
   onDelete?: (item: Record<string, any>) => void;
+  onEdit?: (item: any) => void; // Specific handler for edit actions
 };
 
-export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelete }) => {
+export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelete, onEdit }) => {
   return (
     <div className="overflow-x-auto">
       <Table>
@@ -63,7 +64,9 @@ export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelet
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => onEdit && onEdit(item)}>
+                      Edit
+                    </DropdownMenuItem>
                     <DropdownMenuItem onSelect={() => onDelete && onDelete(item)}>
                       Delete
                     </DropdownMenuItem>
