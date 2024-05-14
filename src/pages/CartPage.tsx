@@ -5,11 +5,11 @@ import { CardReviewCheckout } from '@/features/cart/CardReviewCheckout';
 import useCartStore from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useEffect } from 'react';
-import useGroupByTicketType from '@/hooks/useGroupByTicketType';
 import { CartEmpty } from '@/components/cart/CartEmpty';
 import { CardFormule } from '@/features/cart/CardFormule';
 import { Header } from '@/features/Header';
 import { Link } from 'wouter';
+import { useGroupByTicketType } from '@/hooks';
 
 export default function CartPage() {
   const { fetchCartItems, cartId, cartItems } = useCartStore(state => ({

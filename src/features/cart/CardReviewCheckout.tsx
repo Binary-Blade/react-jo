@@ -1,5 +1,4 @@
 import { useCartStore } from '@/stores/useCartStore';
-import useGroupByTicketType from '@/hooks/useGroupByTicketType';
 import {
   Card,
   CardContent,
@@ -11,6 +10,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { ButtonCheckoutPayment } from '@/features/payment/ButtonCheckoutPayment';
 import { TicketCheckout } from './TicketCheckout';
+import { useGroupByTicketType } from '@/hooks';
 
 export const CardReviewCheckout = () => {
   const { cartId, cartItems, grandTotal } = useCartStore(state => ({

@@ -1,4 +1,5 @@
 export enum CategoryEvent {
+  ALL = 'ALL',
   ATHLETICS = 'ATHLETICS',
   BASKETBALL = 'BASKETBALL',
   CYCLING = 'CYCLING',

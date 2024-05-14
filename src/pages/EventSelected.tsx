@@ -11,11 +11,10 @@ import { TicketPriceReserveCart } from '@/features/selected-event/TicketPriceRes
 import { useParams } from 'wouter';
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
-import useFormattedDateRange from '@/hooks/useFormattedEventDates';
-import { useTicketManager } from '@/hooks/useTicketManage';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { ReportedIssueButtonEvent } from '@/components/one-event/ReportedIssueButtonEvent';
+import { useFormattedDates, useTicketManager } from '@/hooks';
 
 export default function EventSelected() {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
@@ -27,7 +26,7 @@ export default function EventSelected() {
   }));
 
   const basePrice = event?.basePrice;
-  const eventDate = useFormattedDateRange(event?.startDate, event?.endDate);
+  const eventDate = useFormattedDates(event?.startDate, event?.endDate);
   const initialTicketType = PriceFormula.SOLO;
   const { selectedTicketType, quantity, setQuantity, currentPrice, handleTicketTypeChange } =
     useTicketManager(basePrice, eventId, initialTicketType);

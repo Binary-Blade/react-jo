@@ -10,7 +10,7 @@ import {
 import { ActivityIcon } from '@/components/ui/IconComponents';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter'; // Import Link from wouter
-import useFormattedDateRange from '@/hooks/useFormattedEventDates';
+import { useFormattedDates } from '@/hooks';
 
 interface EventCardProps {
   eventId: number | undefined;
@@ -31,7 +31,7 @@ export const EventCard: FC<EventCardProps> = ({
   startDate,
   endDate
 }) => {
-  const dateText = useFormattedDateRange(startDate, endDate);
+  const dateText = useFormattedDates(startDate, endDate);
 
   // TODO: MODIFY ICON FOR EACH CATEGORY TYPE
   return (

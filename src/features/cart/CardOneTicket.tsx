@@ -4,9 +4,9 @@ import { FC, useEffect, useState } from 'react';
 import useCartStore from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { CartItemsProps } from '@/config/types/CartTypes';
-import useFormattedDateRange from '@/hooks/useFormattedEventDates';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
+import { useFormattedDates } from '@/hooks';
 
 export const CardOneTicket: FC<CartItemsProps> = ({
   cartId,
@@ -20,7 +20,7 @@ export const CardOneTicket: FC<CartItemsProps> = ({
   const removeCartItem = useCartStore(state => state.removeCartItem);
   const userId = useAuthStore(state => state.userId);
 
-  const dateText = useFormattedDateRange(startDate, endDate);
+  const dateText = useFormattedDates(startDate, endDate);
   const [quantity, setQuantity] = useState<number>(initialQuantity);
   const [showDialog, setShowDialog] = useState<boolean>(false);
 

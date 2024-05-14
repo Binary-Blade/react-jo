@@ -6,6 +6,7 @@ import { ArrowLeftIcon, CalendarClockIcon } from '@/components/ui/IconComponents
 type FilterBarDashboardProps = {
   title: string;
 };
+
 export const FilterBarDashboard = ({ title }: FilterBarDashboardProps) => {
   return (
     <div className="flex items-center gap-4">
