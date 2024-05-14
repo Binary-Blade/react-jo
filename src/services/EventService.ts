@@ -1,5 +1,14 @@
 import axiosClient from '@/config/axiosConfig';
-import { EventRequest, EventResponse, EventType } from '@/config/types/EventTypes';
+import { EventRequest, EventRequestUpdate, EventResponse } from '@/config/types/EventTypes';
+
+export interface PaginationParams {
+  limit?: number;
+  offset?: number;
+  sortBy?: string;
+  sortOrder?: string;
+  filterBy?: string;
+  filterValue?: any;
+}
 
 /**
  * Service class for handling API requests related to events.
@@ -9,9 +18,22 @@ export class EventService {
    * Fetches all events from the server.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the events data.
    */
-  static async getAllEvents(): Promise<EventResponse> {
+  static async getAllValues(): Promise<EventResponse> {
     try {
-      const response = await axiosClient.get('/events/get-all');
+      const response = await axiosClient.get('/events/get-events-values');
+      return {
+        success: true,
+        data: response.data
+      };
+    } catch (error) {
+      console.error('Get all events error:', error);
+      throw new Error('Failed to fetch events');
+    }
+  }
+
+  static async getAllEventsFiltered(params?: PaginationParams): Promise<EventResponse> {
+    try {
+      const response = await axiosClient.get('/events/get-all-filtered', { params });
       return {
         success: true,
         data: response.data
@@ -85,7 +107,10 @@ export class EventService {
    * @param {Event} updateEventDto - The data to update the event with.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the updated event data.
    */
-  static async updateEvent(eventId: number, updateEventDto: EventType): Promise<EventResponse> {
+  static async updateEvent(
+    eventId: number,
+    updateEventDto: EventRequestUpdate
+  ): Promise<EventResponse> {
     try {
       const response = await axiosClient.patch(`/events/${eventId}`, updateEventDto);
       return {

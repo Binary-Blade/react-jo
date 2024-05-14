@@ -14,7 +14,7 @@ export class ReservationService {
   static async findAllReservations(userId: number) {
     try {
       const response = await axiosClient.get(`/reservations/${userId}/find-all`);
-      return response.data;
+      return response.data.reservations;
     } catch (error) {
       console.error('Failed to retrieve all reservations', error);
       throw new Error('Failed to retrieve all reservations');

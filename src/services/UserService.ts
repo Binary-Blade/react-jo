@@ -1,19 +1,33 @@
-import axiosClient from "@/config/axiosConfig";
+import axiosClient from '@/config/axiosConfig';
+import { PaginationParams } from './EventService';
 
 export class UserService {
   /**
    * Fetches all users from the server. This is typically restricted to admin users.
    */
-  static async getAllUsers() {
+  static async getAllUsers(params?: PaginationParams) {
     try {
-      const response = await axiosClient.get('/users/get-all');
+      const response = await axiosClient.get('/users/get-all', { params });
       return {
         success: true,
         data: response.data
       };
     } catch (error) {
       console.error('Get all users error:', error);
-      throw new Error("Failed to fetch users");
+      throw new Error('Failed to fetch users');
+    }
+  }
+
+  static async getAllValuesUsers() {
+    try {
+      const response = await axiosClient.get('/users/get-all-values');
+      return {
+        success: true,
+        data: response.data
+      };
+    } catch (error) {
+      console.error('Get all users error:', error);
+      throw new Error('Failed to fetch users');
     }
   }
 
@@ -30,7 +44,7 @@ export class UserService {
       };
     } catch (error) {
       console.error(`Get user by ID error: ${userId}`, error);
-      throw new Error("Failed to fetch user");
+      throw new Error('Failed to fetch user');
     }
   }
 
@@ -48,7 +62,7 @@ export class UserService {
       };
     } catch (error) {
       console.error(`Update user error: ${userId}`, error);
-      throw new Error("Failed to update user");
+      throw new Error('Failed to update user');
     }
   }
 
@@ -65,7 +79,7 @@ export class UserService {
       };
     } catch (error) {
       console.error(`Delete user error: ${userId}`, error);
-      throw new Error("Failed to delete user");
+      throw new Error('Failed to delete user');
     }
   }
 }
