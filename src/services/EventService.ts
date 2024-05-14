@@ -1,14 +1,6 @@
 import axiosClient from '@/config/axiosConfig';
 import { EventRequest, EventRequestUpdate, EventResponse } from '@/config/types/EventTypes';
-
-export interface PaginationParams {
-  limit?: number;
-  offset?: number;
-  sortBy?: string;
-  sortOrder?: string;
-  filterBy?: string;
-  filterValue?: any;
-}
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 
 /**
  * Service class for handling API requests related to events.

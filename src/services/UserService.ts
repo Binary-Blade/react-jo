@@ -1,5 +1,5 @@
 import axiosClient from '@/config/axiosConfig';
-import { PaginationParams } from './EventService';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 
 export class UserService {
   /**
