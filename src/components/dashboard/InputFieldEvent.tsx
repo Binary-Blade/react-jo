@@ -5,9 +5,9 @@ import { Label } from '../ui/label';
 type InputFieldEventProps = {
   id: string;
   label: string;
-  type?: string;
+  type?: 'text' | 'number' | 'date'; // Specify possible types explicitly
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  value: string | number; // Keep string or number to support text and date inputs
   errors?: string[];
 };
 
@@ -21,14 +21,14 @@ export const InputFieldEvent: FC<InputFieldEventProps> = ({
 }) => (
   <div className="space-y-2">
     <Label className="font-medium" htmlFor={id}>
-      Event {label}*
+      {label}
     </Label>
     <Input
       className="w-full"
       id={id}
       name={id}
       type={type}
-      placeholder={`Enter event ${id}`}
+      placeholder={`Enter event ${label.toLowerCase()}`}
       required
       onChange={onChange}
       value={value}
