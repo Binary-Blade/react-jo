@@ -1,6 +1,9 @@
 import { format, parseISO } from 'date-fns';
 
-function useFormattedDateRange(startDate: string | undefined, endDate: string | undefined): string | undefined {
+export const useFormattedDates = (
+  startDate: string | undefined,
+  endDate: string | undefined
+): string | undefined => {
   // Ensure dates are defined and are valid ISO strings
   if (!startDate || !endDate) {
     return 'Invalid date range';
@@ -23,6 +26,4 @@ function useFormattedDateRange(startDate: string | undefined, endDate: string | 
     console.error('Error formatting dates:', error);
     return 'Error formatting dates';
   }
-}
-
-export default useFormattedDateRange;
+};

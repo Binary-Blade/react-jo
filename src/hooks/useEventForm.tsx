@@ -4,16 +4,7 @@ import { FormErrors, eventSchema } from '@/config/zod-schemas/eventSchema';
 import { useEventStore } from '@/stores/useEventStore';
 import { CategoryEvent } from '@/config/enums/CategoryEvent.enum';
 
-export const useEventForm = () => {
-  const initialData = {
-    title: '',
-    startDate: '',
-    endDate: '',
-    categoryType: '',
-    basePrice: '',
-    quantityAvailable: '',
-    description: ''
-  };
+export const useEventForm = initialData => {
   const [formData, setFormData] = useState(initialData);
   const [errors, setErrors] = useState<FormErrors>({});
   const { addEvent } = useEventStore(state => state);
@@ -35,6 +26,7 @@ export const useEventForm = () => {
         basePrice: parseFloat(formData.basePrice),
         quantityAvailable: parseInt(formData.quantityAvailable)
       });
+      console.log('Validated data:', validatedData);
       await addEvent(validatedData);
       console.log('Event added successfully');
       setErrors({});

@@ -17,7 +17,7 @@ const priceFormulaOrder: { [key in PriceFormula]: number } = {
  * @param items The cart items to group.
  * @returns The grouped items.
  */
-const useGroupByTicketType = (items: CartItem[]): GroupedItems => {
+export const useGroupByTicketType = (items: CartItem[]): GroupedItems => {
   return useMemo(() => {
     // Group the items by price formula
     const grouped = items.reduce((acc: GroupedItems, item) => {
@@ -35,5 +35,3 @@ const useGroupByTicketType = (items: CartItem[]): GroupedItems => {
     }, {});
   }, [items]);
 };
-
-export default useGroupByTicketType;
