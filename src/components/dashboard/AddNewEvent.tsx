@@ -16,7 +16,17 @@ import { useEventForm } from '@/hooks/useEventForm';
 import { InputFieldEvent } from '@/components/dashboard/InputFieldEvent';
 
 export const AddNewEvent = () => {
-  const { formData, handleChange, handleCategoryChange, handleSubmit, errors } = useEventForm();
+  const initialData = {
+    title: '',
+    startDate: '',
+    endDate: '',
+    categoryType: '',
+    basePrice: 0,
+    quantityAvailable: 0,
+    description: ''
+  };
+  const { formData, handleChange, handleCategoryChange, handleSubmit, errors } =
+    useEventForm(initialData);
 
   return (
     <>
