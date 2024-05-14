@@ -1,3 +1,5 @@
+import { PaginationParams } from '@/services/EventService';
+
 export type EventPropsType = {
   eventId?: number | undefined;
   title: string;
@@ -27,6 +29,7 @@ export type EventType = {
 };
 
 export type EventRequest = {
+  eventId?: number;
   title: string;
   description: string;
   basePrice: number;
@@ -36,18 +39,31 @@ export type EventRequest = {
   endDate: string;
 };
 
+export type EventRequestUpdate = {
+  title?: string;
+  description?: string;
+  basePrice?: number;
+  categoryType?: string;
+  quantityAvailable?: number;
+  startDate?: string;
+  endDate?: string;
+};
+
 export type EventResponse = {
   success: boolean;
   data: any;
 };
 
 export interface EventStoreType {
-  events: EventType[];
+  allEventsValues: EventType[];
   event: EventType | null;
-  fetchEvents: () => Promise<void>;
+  total?: number; // Optional or required based on your design
+  events: EventType[];
+  fetchValues: () => Promise<void>;
+  fetchEvents: (params: PaginationParams) => Promise<void>;
   getEvent: (eventId: number) => Promise<any>;
   getTicketPrice: (eventId: number, ticketType: string) => Promise<any>;
   addEvent: (eventData: EventRequest) => Promise<void>;
-  updateEvent: (eventId: number, eventData: EventType) => Promise<void>;
+  updateEvent: (eventId: number, eventData: EventRequestUpdate) => Promise<void>;
   deleteEvent: (eventId: number) => Promise<void>;
 }

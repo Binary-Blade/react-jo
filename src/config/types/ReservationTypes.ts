@@ -4,5 +4,6 @@ export interface ReservationStoreType {
   reservation: any; // This holds a single reservation for details view
   addReservation: (userId: number, cartId: number) => Promise<void>;
   fetchReservations: (userId: number) => Promise<void>;
+  fetchReservationsAdmin: () => Promise<void>;
   catchTicket: (reservationId: number) => Promise<void>;
 }

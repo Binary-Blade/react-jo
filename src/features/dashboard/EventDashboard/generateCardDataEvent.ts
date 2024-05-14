@@ -11,7 +11,7 @@ export const generateCardDataEvent = (
     Icon: PackageIcon
   },
   {
-    title: 'Total Sold',
+    title: 'Total Ticket Sold',
     value: totalSold.toLocaleString(),
     Icon: ShoppingCartIcon
   },
