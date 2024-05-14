@@ -31,13 +31,16 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
 
   aggregateCartData: () => {
     const items = get().cartItems;
-    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const taxes = total * TAXES_10;
-    return {
-      total,
-      taxes,
-      totalTaxes: total + taxes
-    };
+    const totalsByCategory = {};
+    let grandTotal = 0;
+
+    items.forEach(item => {
+      const categoryTotal = (totalsByCategory[item.priceFormula] || 0) + item.price * item.quantity;
+      totalsByCategory[item.priceFormula] = categoryTotal;
+      grandTotal += item.price * item.quantity;
+    });
+
+    return { totalsByCategory, grandTotal };
   },
 
   updateCartItem: debounce(async (userId, cartId, cartItemId, newQuantity) => {

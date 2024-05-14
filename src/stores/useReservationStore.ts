@@ -23,6 +23,16 @@ export const useReservationStore = create<ReservationStoreType>(set => ({
       console.error('Failed to fetch reservations', error);
     }
   },
+
+  fetchReservationsAdmin: async () => {
+    try {
+      const data = await ReservationService.findAllAdminReservations();
+      set({ reservations: data });
+    } catch (error) {
+      console.error('Failed to fetch reservations', error);
+    }
+  },
+
   catchTicket: async reservationId => {
     try {
       const data = await ReservationService.catchTicketById(reservationId);

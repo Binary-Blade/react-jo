@@ -1,16 +1,34 @@
-import { EventRequest, EventStoreType, EventType } from '@/config/types/EventTypes';
-import { EventService } from '@/services/EventService';
+import { EventRequest, EventRequestUpdate, EventStoreType } from '@/config/types/EventTypes';
+import { filterProperties } from '@/lib/utils';
+import { EventService, PaginationParams } from '@/services/EventService';
 import { create } from 'zustand';
 
 export const useEventStore = create<EventStoreType>((set, get) => ({
   events: [],
   event: null,
+  allEventsValues: [],
+  total: 0,
 
-  fetchEvents: async () => {
+  fetchEvents: async (params: PaginationParams) => {
     try {
-      const response = await EventService.getAllEvents();
+      const response = await EventService.getAllEventsFiltered(params);
       if (response.success) {
-        set({ events: response.data });
+        set({
+          events: response.data.events,
+          total: response.data.total
+        });
+      }
+    } catch (error) {
+      console.error('Failed to fetch events:', error);
+      throw new Error('Unable to fetch events.');
+    }
+  },
+
+  fetchValues: async () => {
+    try {
+      const response = await EventService.getAllValues();
+      if (response.success) {
+        set({ allEventsValues: response.data });
       }
     } catch (error) {
       console.error('Failed to fetch events:', error);
@@ -54,9 +72,18 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
     }
   },
 
-  updateEvent: async (eventId: number, eventData: EventType) => {
+  updateEvent: async (eventId: number, eventData: EventRequestUpdate) => {
+    const allowedProps = [
+      'title',
+      'description',
+      'startDate',
+      'endDate',
+      'basePrice',
+      'quantityAvailable'
+    ];
+    const dataToSend = filterProperties(eventData, allowedProps);
     try {
-      const response = await EventService.updateEvent(eventId, eventData);
+      const response = await EventService.updateEvent(eventId, dataToSend);
       if (response.success) {
         const updatedEvents = get().events.map(event =>
           event.eventId === eventId ? { ...event, ...response.data } : event
