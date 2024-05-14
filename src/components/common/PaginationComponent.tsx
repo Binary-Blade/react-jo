@@ -1,38 +1,60 @@
+import { FC } from 'react';
 import {
   PaginationPrevious,
   PaginationItem,
   PaginationLink,
-  PaginationEllipsis,
   PaginationNext,
   PaginationContent,
   Pagination
 } from '@/components/ui/pagination';
-import { FC } from 'react';
+import { usePaginationRange } from '@/hooks/usePaginationRange';
 
-export const PaginationComponent: FC = () => {
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+export const PaginationComponent: FC<PaginationProps> = ({
+  currentPage,
+  totalPages,
+  onPageChange
+}) => {
+  const paginationRange = usePaginationRange(currentPage, totalPages);
+  const handleClick = (page: number) => {
+    console.log('Attempting to change page to:', page);
+    onPageChange(page);
+  };
+
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
-        </PaginationItem>
+        {/* Previous Button */}
+        {currentPage > 1 && (
+          <PaginationItem>
+            <PaginationPrevious href="#" onClick={() => handleClick(currentPage - 1)} />
+          </PaginationItem>
+        )}
+
+        {/* Pagination Page Numbers */}
+        {paginationRange.map(page => (
+          <PaginationItem key={page}>
+            <PaginationLink
+              href="#"
+              isActive={currentPage === page}
+              onClick={() => handleClick(page)}
+            >
+              {page}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
+        {/* Next Button */}
+        {currentPage < totalPages && (
+          <PaginationItem>
+            <PaginationNext href="#" onClick={() => handleClick(currentPage + 1)} />
+          </PaginationItem>
+        )}
       </PaginationContent>
     </Pagination>
   );
