@@ -17,12 +17,6 @@ export const FilterBarDashboard = ({ title }: FilterBarDashboardProps) => {
       </div>
       <h1 className="font-semibold text-lg md:text-xl">{title}</h1>
       <div className="ml-auto flex items-center gap-2">
-        <Button className="hidden sm:flex" variant="outline">
-          Today
-        </Button>
-        <Button className="hidden md:flex" variant="outline">
-          This Month
-        </Button>
         <Popover>
           <PopoverTrigger asChild>
             <Button
