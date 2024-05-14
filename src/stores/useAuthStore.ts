@@ -1,15 +1,14 @@
-import { AuthStoreTypes } from '@/config/types/AuthType';
+import { create } from 'zustand';
 import { LoginFormData } from '@/config/zod-schemas/loginSchema';
 import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import { AuthenticationService } from '@/services/AuthenticationService';
-import { create } from 'zustand';
 import useCartStore from './useCartStore';
+import { AuthStoreTypes } from '@/config/types/Auth/AuthStoreType';
 
 export const useAuthStore = create<AuthStoreTypes>(set => ({
   accessToken: null,
   isAuthenticated: false,
   userId: null,
-  expireIn: null,
 
   signup: async (userData: SignupFormData) => {
     try {
@@ -27,7 +26,6 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
       set({
         accessToken: data.accessToken,
         userId: data.userId,
-        expireIn: data.expireIn,
         isAuthenticated: true
       });
       await useCartStore.getState().syncCartItems(data.userId);
@@ -44,7 +42,6 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
       set({
         accessToken: null,
         isAuthenticated: false,
-        expireIn: null,
         userId: null
       });
     } catch (error: any) {
@@ -60,7 +57,6 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
         set({
           accessToken: data.accessToken,
           userId: data.userId,
-          expireIn: data.expireIn,
           isAuthenticated: true
         });
       }
@@ -72,12 +68,11 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
 
   accessProtectedRoute: async () => {
     try {
-      const { accessToken, userId, expireIn } = await AuthenticationService.accessProtectedRoute();
-      if (accessToken || userId || expireIn) {
+      const { accessToken, userId } = await AuthenticationService.accessProtectedRoute();
+      if (accessToken || userId) {
         set({
           isAuthenticated: true,
           accessToken: accessToken,
-          expireIn: expireIn,
           userId: userId
         });
       }
