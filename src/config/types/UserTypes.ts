@@ -1,4 +1,4 @@
-import { PaginationParams } from '@/services/EventService';
+import { PaginationParams } from './common/PaginationTypes';
 
 export interface User {
   id: number;
