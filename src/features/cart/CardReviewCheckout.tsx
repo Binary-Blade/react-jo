@@ -1,4 +1,5 @@
 import { useCartStore } from '@/stores/useCartStore';
+import { useGroupByTicketType } from '@/hooks/useGroupByTicketType';
 import {
   Card,
   CardContent,
@@ -10,13 +11,11 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { ButtonCheckoutPayment } from '@/features/payment/ButtonCheckoutPayment';
 import { TicketCheckout } from './TicketCheckout';
-import { useGroupByTicketType } from '@/hooks';
 
 export const CardReviewCheckout = () => {
-  const { cartId, cartItems, grandTotal } = useCartStore(state => ({
+  const { cartId, cartItems } = useCartStore(state => ({
     cartItems: state.cartItems,
-    cartId: state.cartId,
-    grandTotal: state.aggregateCartData().grandTotal
+    cartId: state.cartId
   }));
 
   const groupedItems = useGroupByTicketType(cartItems);
@@ -36,12 +35,11 @@ export const CardReviewCheckout = () => {
         <Separator className="my-4" />
         <div className="flex items-center justify-between font-semibold ">
           <div>Total</div>
-          <div>{grandTotal}</div>
+          <div></div>
         </div>
       </CardContent>
       <CardFooter>
-        <ButtonCheckoutPayment cartId={cartId} totalTaxes={grandTotal * 0.1} />{' '}
-        {/* Assuming tax rate of 10% */}
+        <ButtonCheckoutPayment cartId={cartId} totalTaxes={1} /> {/* Assuming tax rate of 10% */}
       </CardFooter>
     </Card>
   );

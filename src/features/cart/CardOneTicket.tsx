@@ -3,10 +3,18 @@ import { MinusIcon, PlusIcon } from '@/components/ui/IconComponents';
 import { FC, useEffect, useState } from 'react';
 import useCartStore from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { CartItemsProps } from '@/config/types/CartTypes';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
 import { useFormattedDates } from '@/hooks';
+
+interface CartItemsProps {
+  cartId: number;
+  cartItemId: number;
+  eventName: string;
+  quantity: number;
+  startDate: string;
+  endDate: string;
+}
 
 export const CardOneTicket: FC<CartItemsProps> = ({
   cartId,

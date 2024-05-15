@@ -2,7 +2,12 @@ import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/com
 import { FC } from 'react';
 import { ticketDescriptions } from '@/config/constants';
 import { CardOneTicket } from './CardOneTicket';
-import { CartFormuleProps } from '@/config/types/CartTypes';
+import { CartItem } from '@/config/types/Cart/CartTypes';
+
+interface CartFormuleProps {
+  priceFormula: string;
+  items: CartItem[];
+}
 
 export const CardFormule: FC<CartFormuleProps> = ({ priceFormula, items }) => {
   const description = ticketDescriptions[priceFormula];
