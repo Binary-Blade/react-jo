@@ -1,6 +1,6 @@
 import axiosClient from '@/config/axiosConfig';
-import { CreateCartItemDto } from '@/config/dtos/CreateCartItem.dto';
-import { CartItem } from '@/config/types/CartTypes';
+import { CreateCartItemDto } from '@/config/dtos/CartItem.dto';
+import { CartItem } from '@/config/types/Cart/CartTypes';
 
 /**
  * Service class for handling cart-related requests

@@ -1,14 +1,13 @@
-import { CartItemLocal } from "@/config/types/LocalStorageTypes";
+import { CreateCartItemLocalDto } from '@/config/dtos/LocalCartItem.dto';
 
 export class LocalCartService {
-
   /**
-  * Fetches the cart ID stored in localStorage.
-  *
-  * @returns {number | null} The cart ID if found, otherwise null.
-  * @static
-  * @memberof LocalCartService
-  */
+   * Fetches the cart ID stored in localStorage.
+   *
+   * @returns {number | null} The cart ID if found, otherwise null.
+   * @static
+   * @memberof LocalCartService
+   */
   static getStoredCartId(): number | null {
     try {
       const item = localStorage.getItem('cartId');
@@ -51,7 +50,7 @@ export class LocalCartService {
     }
   }
 
-  static setStoredCartItems(cartItems: CartItemLocal[]): void {
+  static setStoredCartItems(cartItems: CreateCartItemLocalDto[]): void {
     try {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     } catch (error) {
@@ -62,10 +61,18 @@ export class LocalCartService {
   static clearStoredCartItems(): void {
     try {
       localStorage.removeItem('cartItems');
+    } catch (error) {
+      console.error('Failed to clear cart data from localStorage:', error);
+    }
+  }
+
+  static clearStoredCartAll(): void {
+    try {
+      localStorage.removeItem('cartItems');
       localStorage.removeItem('cartId');
       localStorage.removeItem('cartIdExpiry');
     } catch (error) {
-      console.error("Failed to clear cart data from localStorage:", error);
+      console.error('Failed to clear cart data from localStorage:', error);
     }
   }
 }

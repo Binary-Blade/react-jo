@@ -38,7 +38,8 @@ describe('EventService', () => {
   it('createEvent should successfully create an event', async () => {
     const eventData = {
       title: 'New Event',
-      description: 'A brand new event',
+      shortDescription: 'A brand new event',
+      longDescription: 'A brand new event',
       basePrice: 100,
       categoryType: 'Conference',
       quantityAvailable: 150,
@@ -78,7 +79,8 @@ describe('EventService', () => {
     const eventId = 1;
     const updateData = {
       title: 'Updated Event Title',
-      description: 'Updated description',
+      shortDescription: 'A brand new event',
+      longDescription: 'A brand new event',
       basePrice: 120,
       categoryType: 'Seminar',
       quantityAvailable: 100,

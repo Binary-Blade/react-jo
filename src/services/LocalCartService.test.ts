@@ -1,6 +1,6 @@
+import { CreateCartItemLocalDto } from '@/config/dtos/LocalCartItem.dto';
 import { LocalCartService } from './LocalCartService';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { CartItemLocal } from '@/config/types/LocalStorageTypes';
 
 interface MockLocalStorage {
   [key: string]: string | null;
@@ -41,6 +41,16 @@ describe('LocalCartService', () => {
     localStorage.clear(); // Clear localStorage before each test
   });
 
+  it('should handle exceptions during localStorage operations', () => {
+    const badData = {
+      get me() {
+        throw new Error('Failed to access data');
+      }
+    };
+    localStorage.setItem('badData', JSON.stringify(badData)); // Simulate an error during serialization
+
+    expect(() => LocalCartService.getStoredCartItems()).toThrow('Failed to access data');
+  });
   it('should retrieve a valid stored cart ID', () => {
     const now = new Date();
     const expiry = now.getTime() + 6 * 60 * 60 * 1000;
@@ -70,7 +80,7 @@ describe('LocalCartService', () => {
   });
 
   it('should retrieve stored cart items', () => {
-    const cartItems: CartItemLocal[] = [
+    const cartItems: CreateCartItemLocalDto[] = [
       {
         quantity: 2,
         priceFormula: 'fixed',
@@ -90,7 +100,7 @@ describe('LocalCartService', () => {
   });
 
   it('should store cart items', () => {
-    const cartItems: CartItemLocal[] = [
+    const cartItems: CreateCartItemLocalDto[] = [
       {
         quantity: 2,
         priceFormula: 'fixed',

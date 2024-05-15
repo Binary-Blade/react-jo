@@ -1,5 +1,6 @@
 import axiosClient from '@/config/axiosConfig';
-import { EventRequest, EventRequestUpdate, EventResponse } from '@/config/types/EventTypes';
+import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
+import { EventResponse } from '@/config/types/Event/ResponseEventTypes';
 import { PaginationParams } from '@/config/types/common/PaginationTypes';
 
 /**
@@ -55,7 +56,7 @@ export class EventService {
    * @param {Event} createEventDto - The event data to create.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the created event data.
    */
-  static async createEvent(createEventDto: EventRequest): Promise<EventResponse> {
+  static async createEvent(createEventDto: CreateEventDto): Promise<EventResponse> {
     try {
       const response = await axiosClient.post('/events/create', createEventDto);
       return {
@@ -121,7 +122,7 @@ export class EventService {
    */
   static async updateEvent(
     eventId: number,
-    updateEventDto: EventRequestUpdate
+    updateEventDto: UpdateEventDto
   ): Promise<EventResponse> {
     try {
       const response = await axiosClient.patch(`/events/${eventId}`, updateEventDto);
