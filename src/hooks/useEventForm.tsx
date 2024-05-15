@@ -26,7 +26,6 @@ export const useEventForm = initialData => {
         basePrice: parseFloat(formData.basePrice),
         quantityAvailable: parseInt(formData.quantityAvailable)
       });
-      console.log('Validated data:', validatedData);
       await addEvent(validatedData);
       console.log('Event added successfully');
       setErrors({});
