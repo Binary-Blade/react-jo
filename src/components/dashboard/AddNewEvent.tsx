@@ -23,7 +23,8 @@ export const AddNewEvent = () => {
     categoryType: '',
     basePrice: 0,
     quantityAvailable: 0,
-    description: ''
+    shortDescription: '',
+    longDescription: ''
   };
   const { formData, handleChange, handleCategoryChange, handleSubmit, errors } =
     useEventForm(initialData);
@@ -98,14 +99,28 @@ export const AddNewEvent = () => {
             />
           </div>
           <div className="space-y-2">
-            <Label className="font-medium" htmlFor="description">
-              Description *
+            <Label className="font-medium" htmlFor="shortDescription">
+              Short Description *
             </Label>
             <Textarea
               className="w-full"
-              id="description"
-              name="description"
+              id="shortDescription"
+              name="shortDescription"
               placeholder="Enter a short description (max 250 characters)"
+              required
+              onChange={handleChange}
+              value={formData.description}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label className="font-medium" htmlFor="longDescription">
+              Long Description *
+            </Label>
+            <Textarea
+              className="w-full"
+              id="longDescription"
+              name="longDescription"
+              placeholder="Enter a long description (max 500 characters)"
               required
               onChange={handleChange}
               value={formData.description}
