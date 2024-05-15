@@ -1,7 +1,8 @@
 export type CreateEventDto = {
   eventId?: number;
   title: string;
-  description: string;
+  shortDescription: string;
+  longDescription: string;
   basePrice: number;
   categoryType: string;
   quantityAvailable: number;
@@ -11,7 +12,8 @@ export type CreateEventDto = {
 
 export type UpdateEventDto = {
   title?: string;
-  description?: string;
+  shortDescription: string;
+  longDescription: string;
   basePrice?: number;
   categoryType?: string;
   quantityAvailable?: number;
