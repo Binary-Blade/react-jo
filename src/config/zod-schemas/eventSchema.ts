@@ -19,7 +19,11 @@ export const eventSchema = z.object({
     .number()
     .min(0, 'Quantity must be a non-negative number')
     .max(1000000, 'Quantity must be less than 1000'),
-  description: z
+  shortDescription: z
+    .string()
+    .min(10, 'Description is required')
+    .max(255, 'Description must be less than 250 characters'),
+  longDescription: z
     .string()
     .min(10, 'Description is required')
     .max(500, 'Description must be less than 500 characters')
