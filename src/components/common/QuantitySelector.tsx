@@ -8,7 +8,7 @@ interface QuantitySelectorProps {
 
 export const QuantitySelector = ({ quantity, onQuantityChange }: QuantitySelectorProps) => {
   const decrementQuantity = () => {
-    const newQuantity = Math.max(0, quantity - 1);
+    const newQuantity = quantity - 1;
     onQuantityChange(newQuantity);
   };
 
