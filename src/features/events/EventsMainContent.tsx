@@ -14,7 +14,6 @@ export const EventsMainContent: React.FC = () => {
     initialLimit: 9,
     totalCount: total
   });
-
   const { sortBy, setSortBy, sortOrder, setSortOrder, filterBy, filterValue, setFilterValue } =
     useFilter('title', 'DESC', 'categoryType', 'ALL');
   useEffect(() => {
@@ -48,7 +47,7 @@ export const EventsMainContent: React.FC = () => {
               key={event.eventId}
               title={event.title}
               categoryType={event.categoryType}
-              description={event.description}
+              shortDescription={event.shortDescription}
               quantityAvailable={event.quantityAvailable}
               startDate={event.startDate}
               endDate={event.endDate}
