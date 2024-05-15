@@ -5,31 +5,26 @@ import { ImagesCoverEvent } from '@/components/one-event/ImagesCoverEvent';
 import { DesktopTitleEvent } from '@/components/one-event/DesktopTitleEvent';
 import { MobileTitleEvent } from '@/components/one-event/MobileTitleEvent';
 import { DescriptionSelectedEvent } from '@/components/one-event/DescriptionSelectedEvent';
-import { OlympicsOverviewEventSelected } from '@/features/selected-event/OlympicsOverviewEventSelected';
-import { EventSelectAvailabilityCard } from '@/features/selected-event/EventSelectAvailabilityCard';
-import { TicketPriceReserveCart } from '@/features/selected-event/TicketPriceReserveCart';
 import { useParams } from 'wouter';
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
-import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { ReportedIssueButtonEvent } from '@/components/one-event/ReportedIssueButtonEvent';
-import { useFormattedDates, useTicketManager } from '@/hooks';
+import { useFormattedDates } from '@/hooks';
+import { OverviewOneEvent } from '@/features/selected-event/OverviewOneEvent';
+import { CardEventPrices } from '@/features/selected-event/CardEventPrices';
+import useCartStore from '@/stores/useCartStore';
+import useLocalCartStore from '@/stores/useLocalCartStore';
 
 export default function EventSelected() {
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+  const { userId, isAuthenticated } = useAuthStore();
   const params = useParams();
   const eventId = Number(params.eventId);
-  const { getEvent, event } = useEventStore(state => ({
-    getEvent: state.getEvent,
-    event: state.event
-  }));
-
+  const { syncCartItems } = useCartStore();
+  const { cartItemsLocal, addItemToCartLocal, removeCartItemLocal } = useLocalCartStore();
+  const { getEvent, event } = useEventStore();
   const basePrice = event?.basePrice;
   const eventDate = useFormattedDates(event?.startDate, event?.endDate);
-  const initialTicketType = PriceFormula.SOLO;
-  const { selectedTicketType, quantity, setQuantity, currentPrice, handleTicketTypeChange } =
-    useTicketManager(basePrice, eventId, initialTicketType);
 
   useEffect(() => {
     getEvent(eventId);
@@ -45,31 +40,32 @@ export default function EventSelected() {
               Buy Tickets for the Olympic Games Paris 2024
             </h1>
           </section>
-
           <ImagesCoverEvent />
-
           <section className="py-8 grid md:grid-cols-2 lg:grid-cols-[1fr_400px] gap-8 sm:gap-12 md:gap-16 items-start">
             <div className="grid gap-8 row-start-2 md:row-start-auto">
               <DesktopTitleEvent title={event?.title} eventDate={eventDate} />
-              <OlympicsOverviewEventSelected quantitySold={event?.quantitySold} />
-              <Separator />
-              <EventSelectAvailabilityCard
+              <OverviewOneEvent
+                quantitySold={event?.quantitySold}
                 quantityAvailable={event?.quantityAvailable}
                 basePrice={event?.basePrice}
               />
               <Separator />
-              <DescriptionSelectedEvent description={event?.description} />
+              <DescriptionSelectedEvent
+                shortDescription={event?.shortDescription}
+                longDescription={event?.longDescription}
+              />
             </div>
             <div className="grid gap-4 row-start-1 md:row-start-auto">
               <MobileTitleEvent title={event?.title} eventDate={eventDate} />
-              <TicketPriceReserveCart
+              <CardEventPrices
                 eventId={eventId}
-                currentPrice={currentPrice}
-                selectedTicketType={selectedTicketType}
-                quantity={quantity}
-                setQuantity={setQuantity}
-                handleTicketTypeChange={handleTicketTypeChange}
+                userId={userId}
                 isAuthenticated={isAuthenticated}
+                basePrice={basePrice}
+                syncCartItems={syncCartItems}
+                cartItemsLocal={cartItemsLocal}
+                addItemToCartLocal={addItemToCartLocal}
+                removeCartItemLocal={removeCartItemLocal}
               />
               <ReportedIssueButtonEvent />
             </div>
