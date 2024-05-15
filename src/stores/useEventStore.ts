@@ -1,6 +1,8 @@
-import { EventRequest, EventRequestUpdate, EventStoreType } from '@/config/types/EventTypes';
+import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
+import { EventStoreType } from '@/config/types/Event/EventStoreType';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 import { filterProperties } from '@/lib/utils';
-import { EventService, PaginationParams } from '@/services/EventService';
+import { EventService } from '@/services/EventService';
 import { create } from 'zustand';
 
 export const useEventStore = create<EventStoreType>((set, get) => ({
@@ -36,7 +38,7 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
     }
   },
 
-  addEvent: async (eventData: EventRequest) => {
+  addEvent: async (eventData: CreateEventDto) => {
     try {
       const response = await EventService.createEvent(eventData);
       if (response.success) {
@@ -72,10 +74,11 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
     }
   },
 
-  updateEvent: async (eventId: number, eventData: EventRequestUpdate) => {
+  updateEvent: async (eventId: number, eventData: UpdateEventDto) => {
     const allowedProps = [
       'title',
-      'description',
+      'shortDescription',
+      'longDescription',
       'startDate',
       'endDate',
       'basePrice',

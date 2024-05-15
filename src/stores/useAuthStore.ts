@@ -4,6 +4,7 @@ import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import { AuthenticationService } from '@/services/AuthenticationService';
 import useCartStore from './useCartStore';
 import { AuthStoreTypes } from '@/config/types/Auth/AuthStoreType';
+import useLocalCartStore from './useLocalCartStore';
 
 export const useAuthStore = create<AuthStoreTypes>(set => ({
   accessToken: null,
@@ -44,6 +45,7 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
         isAuthenticated: false,
         userId: null
       });
+      useLocalCartStore.getState().clearCartLocal();
     } catch (error: any) {
       console.error('Logout error:', error);
       throw new Error(error.message || 'Logout failed: Server error');

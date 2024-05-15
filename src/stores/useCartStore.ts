@@ -1,17 +1,19 @@
 import { create } from 'zustand';
 import { CartService } from '@/services/CartService';
-import { CartItem, CartStoreType } from '@/config/types/CartTypes';
-import { debounce } from '@/lib/utils';
+import { debounce, filterProperties } from '@/lib/utils';
 import { LocalCartService } from '@/services/LocalCartService';
-import { TAXES_10 } from '@/config/constants';
+import { useLocalCartStore } from './useLocalCartStore';
+import { CartStoreType } from '@/config/types/Cart/CartStoreType';
 
 export const useCartStore = create<CartStoreType>((set, get) => ({
   cartItems: [],
   cartId: LocalCartService.getStoredCartId(),
 
-  addItemToCart: async (userId, cartItem) => {
+  addItemToCart: async (userId: number, cartItem) => {
+    const allowedProps = ['eventId', 'priceFormula', 'quantity'] as const;
+    const dataToSend = filterProperties(cartItem, allowedProps);
     try {
-      const data = await CartService.addItemToCart(userId, cartItem);
+      const data = await CartService.addItemToCart(userId, dataToSend);
       set(state => {
         // Ensure unique cart items by cartItemId
         const newCartItems = state.cartItems.some(item => item.cartItemId === data.cartItemId)
@@ -20,27 +22,13 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
             )
           : [...state.cartItems, data];
 
-        // Update local storage and state
-        LocalCartService.setStoredCartId(data.cart.cartId);
+        const cartId = data.cart.cartId;
+        LocalCartService.setStoredCartId(cartId);
         return { cartItems: newCartItems, cartId: data.cart.cartId };
       });
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     }
-  },
-
-  aggregateCartData: () => {
-    const items = get().cartItems;
-    const totalsByCategory = {};
-    let grandTotal = 0;
-
-    items.forEach(item => {
-      const categoryTotal = (totalsByCategory[item.priceFormula] || 0) + item.price * item.quantity;
-      totalsByCategory[item.priceFormula] = categoryTotal;
-      grandTotal += item.price * item.quantity;
-    });
-
-    return { totalsByCategory, grandTotal };
   },
 
   updateCartItem: debounce(async (userId, cartId, cartItemId, newQuantity) => {
@@ -50,7 +38,6 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
         const updatedCartItems = state.cartItems.map(item =>
           item.cartItemId === cartItemId ? { ...item, ...data } : item
         );
-        LocalCartService.setStoredCartItems(updatedCartItems);
         return { cartItems: updatedCartItems };
       });
     } catch (error) {
@@ -61,8 +48,14 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
   syncCartItems: async (userId: number) => {
     const localCartItems = LocalCartService.getStoredCartItems();
     if (localCartItems && localCartItems.length > 0) {
-      await Promise.all(localCartItems.map((item: CartItem) => get().addItemToCart(userId, item)));
-      LocalCartService.clearStoredCartItems();
+      try {
+        await Promise.all(localCartItems.map(item => get().addItemToCart(userId, item)));
+        // Assuming useLocalCartStore is accessible here
+        useLocalCartStore.getState().clearCartItemsLocal();
+      } catch (error) {
+        console.error('Error syncing local cart items:', error);
+        throw error;
+      }
     }
   },
 
@@ -88,7 +81,7 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
 
   clearCart: async () => {
     try {
-      set({ cartItems: [], cartId: null });
+      useLocalCartStore.getState().clearCartLocal();
     } catch (error) {
       console.error('Failed to clear cart:', error);
     }

@@ -1,5 +1,5 @@
 import { UserStore } from '@/config/types/UserTypes';
-import { PaginationParams } from '@/services/EventService';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 import { UserService } from '@/services/UserService';
 import { create } from 'zustand';
 
