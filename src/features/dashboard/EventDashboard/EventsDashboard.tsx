@@ -13,8 +13,8 @@ import { PaginationComponent } from '@/components/common/PaginationComponent';
 import { FilterDropdown, SortByDropdown, SortOrderDropdown } from '@/components/button';
 import { useAggregateEventData, useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useSidebarForm } from '@/hooks/useSideBarForm';
-import { EventRequest, EventRequestUpdate } from '@/config/types/EventTypes';
-import { categoryDashboardOptions, sortingDashboardOptions } from './dashboardEventOptions';
+import { categoryDashboardGroups, sortingDashboardOptions } from './dashboardEventOptions';
+import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
 
 export const EventsDashboard = () => {
   const eventColumn = eventColumns();
@@ -36,7 +36,7 @@ export const EventsDashboard = () => {
     handleEdit,
     handleCloseSidebar,
     handleSave
-  } = useSidebarForm<EventRequest, EventRequestUpdate, number>(
+  } = useSidebarForm<CreateEventDto, UpdateEventDto, number>(
     updateEvent,
     event => event.eventId as number
   );
@@ -63,10 +63,9 @@ export const EventsDashboard = () => {
           />
           <SortOrderDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
           <FilterDropdown
-            options={categoryDashboardOptions}
+            groups={categoryDashboardGroups}
             filterValue={filterValue}
             onChange={setFilterValue}
-            label="Filter by Category"
           />
         </div>
       </div>

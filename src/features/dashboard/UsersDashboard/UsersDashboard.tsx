@@ -41,10 +41,9 @@ export const UsersDashboard = () => {
           <SortByDropdown sortBy={sortBy} onSortChange={setSortBy} options={sortingOptions} />
           <SortOrderDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
           <FilterDropdown
-            options={roleOptions}
+            groups={roleOptions}
             filterValue={filterValue}
             onChange={setFilterValue}
-            label="Filter by Role"
           />
         </div>
       </div>

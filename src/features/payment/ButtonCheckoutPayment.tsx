@@ -9,13 +9,12 @@ import { PaymentProcessLoading } from './PaymentProcessLoading';
 
 interface CheckOutPaymentProps {
   cartId: number | null | undefined;
-  totalTaxes: number | undefined;
 }
 
 /**
  * ButtonCheckoutPayment component.
  */
-export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId, totalTaxes }) => {
+export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [paymentProcess] = useState(false);
@@ -78,7 +77,7 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId, totalT
             {loading ? (
               <PaymentProcessLoading progress={progress} />
             ) : (
-              <StatusPayment totalTaxes={totalTaxes} reservation={newReservation} />
+              <StatusPayment reservation={newReservation} />
             )}
           </AlertDialogContent>
         </AlertDialog>

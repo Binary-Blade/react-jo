@@ -5,7 +5,8 @@ import { EventTitlePage } from '@/components/all-events/EventTitlePage';
 import { PaginationComponent } from '@/components/common/PaginationComponent';
 import { useFilter, usePagination } from '@/hooks';
 import { FilterDropdown, SortByDropdown, SortOrderDropdown } from '@/components/button';
-import { categoryOptions, sortingOptions } from './eventOptions';
+import { sortingOptions } from './eventOptions';
+import { categoryDashboardGroups } from '../dashboard/EventDashboard/dashboardEventOptions';
 
 export const EventsMainContent: React.FC = () => {
   const { events, fetchEvents, total } = useEventStore();
@@ -33,10 +34,9 @@ export const EventsMainContent: React.FC = () => {
             <SortByDropdown sortBy={sortBy} onSortChange={setSortBy} options={sortingOptions} />
             <SortOrderDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
             <FilterDropdown
-              options={categoryOptions}
+              groups={categoryDashboardGroups}
               filterValue={filterValue}
               onChange={setFilterValue}
-              label="Filter by Category"
             />
           </div>
         </div>
