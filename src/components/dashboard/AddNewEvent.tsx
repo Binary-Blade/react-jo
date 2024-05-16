@@ -20,7 +20,7 @@ export const AddNewEvent = () => {
     title: '',
     startDate: '',
     endDate: '',
-    categoryType: '',
+    categoryType: CategoryEvent.ARCHERY,
     basePrice: 0,
     quantityAvailable: 0,
     shortDescription: '',
@@ -109,7 +109,7 @@ export const AddNewEvent = () => {
               placeholder="Enter a short description (max 250 characters)"
               required
               onChange={handleChange}
-              value={formData.description}
+              value={formData.shortDescription}
             />
           </div>
           <div className="space-y-2">
@@ -123,7 +123,7 @@ export const AddNewEvent = () => {
               placeholder="Enter a long description (max 500 characters)"
               required
               onChange={handleChange}
-              value={formData.description}
+              value={formData.longDescription}
             />
           </div>
 
