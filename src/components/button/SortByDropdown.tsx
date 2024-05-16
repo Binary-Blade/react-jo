@@ -3,10 +3,12 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem
+  DropdownMenuRadioItem,
+  DropdownMenuLabel
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { FC } from 'react';
+import { ListIcon } from '../ui/IconComponents';
 
 interface SortProps {
   sortBy: string;
@@ -19,10 +21,12 @@ export const SortByDropdown: FC<SortProps> = ({ sortBy, onSortChange, options })
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="hidden sm:flex" variant="outline">
-          Sort by
+          <ListIcon className="w-5 h-5 mr-2" />
+          Sort
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <DropdownMenuLabel>Sort by</DropdownMenuLabel>
         <DropdownMenuRadioGroup value={sortBy} onValueChange={onSortChange}>
           {options.map(option => (
             <DropdownMenuRadioItem key={option.value} value={option.value}>
