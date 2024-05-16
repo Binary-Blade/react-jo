@@ -12,12 +12,8 @@ import { Link } from 'wouter';
 import { useGroupByTicketType } from '@/hooks';
 
 export default function CartPage() {
-  const { fetchCartItems, cartId, cartItems } = useCartStore(state => ({
-    fetchCartItems: state.fetchCartItems,
-    cartItems: state.cartItems,
-    cartId: state.cartId
-  }));
-  const userId = useAuthStore(state => state.userId);
+  const { fetchCartItems, cartId, cartItems } = useCartStore();
+  const { userId } = useAuthStore();
 
   useEffect(() => {
     if (userId && cartId) {
