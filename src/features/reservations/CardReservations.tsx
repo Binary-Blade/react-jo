@@ -5,26 +5,25 @@ import { CalendarIcon, TableIcon, TicketIcon } from '@/components/ui/IconCompone
 import { STATUSCOLOR } from '@/config/constants';
 import { TicketModal } from './TicketModal';
 import { FC } from 'react';
+import { Badge } from '@/components/ui/badge';
 
 type CardReservationsProps = {
-  index: number;
   reservation: any;
 };
 
-export const CardReservations: FC<CardReservationsProps> = ({ index, reservation }) => {
+export const CardReservations: FC<CardReservationsProps> = ({ reservation }) => {
   return (
     <>
-      <Card key={index} id={reservation.reservationId}>
+      <Card id={reservation.reservationId}>
         <CardHeader>
-          <div className="flex items-center gap-4">
-            <CardTitle>{reservation.reservationDetails?.title}</CardTitle>
-            <div
-              className={`px-2 py-1 rounded-md text-xs font-medium ${STATUSCOLOR[reservation.transaction.statusPayment]}`}
+          <div className="flex items-center justify-between gap-8">
+            <CardTitle className="text-xl">{reservation.reservationDetails?.title}</CardTitle>
+            <Badge
+              className={`px-2 py-1 rounded-md text-sm font-medium ${STATUSCOLOR[reservation.transaction.statusPayment]}`}
             >
               {reservation.transaction.statusPayment}
-            </div>
+            </Badge>
           </div>
-
           <div className="flex items-center gap-2">
             <div className="text-sm text-gray-500 dark:text-gray-400">
               Ref: {reservation.user?.userId}-{reservation.reservationId}-
@@ -42,12 +41,14 @@ export const CardReservations: FC<CardReservationsProps> = ({ index, reservation
             <span>{reservation.reservationDetails?.priceFormula} Formula</span>
           </div>
           <div className="mt-4 flex items-center justify-between">
-            <div className="text-lg font-semibold">${reservation.reservationDetails.price}</div>
+            <div className="text-lg font-semibold">
+              ${reservation.reservationDetails.price.toFixed(2)}
+            </div>
             <div className="flex items-center gap-2">
               {reservation.transaction.statusPayment === 'APPROVED' && (
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button size="lg" variant="outline" className="gap-2">
+                    <Button size="sm" variant="outline" className="gap-2">
                       <TicketIcon className="w-4 h-4" />
                       View Ticket
                     </Button>
