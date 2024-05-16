@@ -1,4 +1,5 @@
 import axiosClient from '@/config/axiosConfig';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 
 export class ReservationService {
   static async addReservation(userId: number, cartId: number) {
@@ -11,10 +12,10 @@ export class ReservationService {
     }
   }
 
-  static async findAllReservations(userId: number) {
+  static async findAllReservations(userId: number, params: PaginationParams) {
     try {
-      const response = await axiosClient.get(`/reservations/${userId}/find-all`);
-      return response.data.reservations;
+      const response = await axiosClient.get(`/reservations/${userId}/find-all`, { params });
+      return response.data;
     } catch (error) {
       console.error('Failed to retrieve all reservations', error);
       throw new Error('Failed to retrieve all reservations');

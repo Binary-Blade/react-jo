@@ -1,4 +1,5 @@
 import { ReservationStoreType } from '@/config/types/ReservationTypes';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 import { ReservationService } from '@/services/ReservationService';
 import { create } from 'zustand';
 
@@ -6,19 +7,28 @@ export const useReservationStore = create<ReservationStoreType>(set => ({
   newReservation: null,
   reservations: [],
   reservation: null,
+  total: 0,
+  loading: false,
+  error: null,
 
   addReservation: async (userId, cartId) => {
+    set({ loading: true, error: null });
     try {
       const data = await ReservationService.addReservation(userId, cartId);
-      set(state => ({ newReservation: [...state.reservations, data] }));
+      set(state => ({ newReservation: [...state.reservations, data], loading: false }));
     } catch (error) {
       console.error('Failed to add reservation', error);
     }
   },
-  fetchReservations: async (userId: number) => {
+  fetchReservations: async (userId: number, params: PaginationParams) => {
+    set({ loading: true, error: null });
     try {
-      const data = await ReservationService.findAllReservations(userId);
-      set({ reservations: data });
+      const data = await ReservationService.findAllReservations(userId, params);
+      set({
+        reservations: data.reservations,
+        total: data.total,
+        loading: false
+      });
     } catch (error) {
       console.error('Failed to fetch reservations', error);
     }
