@@ -12,6 +12,10 @@ import { Separator } from '@/components/ui/separator';
 import { ButtonCheckoutPayment } from '@/features/payment/ButtonCheckoutPayment';
 import { TicketCheckout } from './TicketCheckout';
 
+interface Totals {
+  [key: string]: number;
+}
+
 export const CardReviewCheckout = () => {
   const { cartId, cartItems } = useCartStore(state => ({
     cartItems: state.cartItems,
@@ -19,6 +23,17 @@ export const CardReviewCheckout = () => {
   }));
 
   const groupedItems = useGroupByTicketType(cartItems);
+
+  const totals: Totals = Object.entries(groupedItems).reduce(
+    (acc: Totals, [priceFormula, items]) => {
+      const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      acc[priceFormula] = total;
+      return acc;
+    },
+    {}
+  );
+
+  const total = Object.values(totals).reduce((sum, value) => sum + value, 0);
 
   return (
     <Card>
@@ -35,11 +50,11 @@ export const CardReviewCheckout = () => {
         <Separator className="my-4" />
         <div className="flex items-center justify-between font-semibold ">
           <div>Total</div>
-          <div></div>
+          <div>${total}</div>
         </div>
       </CardContent>
       <CardFooter>
-        <ButtonCheckoutPayment cartId={cartId} totalTaxes={1} /> {/* Assuming tax rate of 10% */}
+        <ButtonCheckoutPayment cartId={cartId} /> {/* Assuming tax rate of 10% */}
       </CardFooter>
     </Card>
   );
