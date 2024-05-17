@@ -89,17 +89,31 @@ export const EditEventSidebar: FC<EditEventSidebarProps> = ({ event, onClose, on
               </div>
             </div>
             <div className="space-y-2">
-              <Label className="font-medium" htmlFor="description">
+              <Label className="font-medium" htmlFor="shortDescription">
                 Description *
               </Label>
               <Textarea
                 rows={3}
-                id="description"
-                name="description"
+                id="shortDescription"
+                name="shortDescription"
                 placeholder="Enter a short description (max 250 characters)"
                 required
                 onChange={handleChange}
-                value={formData.description}
+                value={formData.shortDescription}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="font-medium" htmlFor="longDescription">
+                Description *
+              </Label>
+              <Textarea
+                rows={3}
+                id="longDescription"
+                name="longDescription"
+                placeholder="Enter a short description (max 250 characters)"
+                required
+                onChange={handleChange}
+                value={formData.longDescription}
               />
             </div>
           </CardContent>

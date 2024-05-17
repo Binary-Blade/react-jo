@@ -1,23 +1,26 @@
-import { FilterBarDashboard } from '@/components/dashboard/FilterBarDashboard';
-import { HeaderCardInfo } from '@/components/dashboard/HeaderCardInfo';
 import { TableGenericData } from '@/components/tables/TableGenericData';
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
-import { DashboardHeader } from '@/components/navigation/DashboardHeader';
-import { eventColumns } from './eventColumns';
-import { generateCardDataEvent } from './generateCardDataEvent';
 import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
-import { CardAddEvent } from './CardAddEvent';
 import { EditEventSidebar } from './EditEventSideBar';
-import { PaginationComponent } from '@/components/common/PaginationComponent';
-import { FilterDropdown, SortByDropdown, SortOrderDropdown } from '@/components/button';
 import { useAggregateEventData, useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useSidebarForm } from '@/hooks/useSideBarForm';
-import { categoryDashboardGroups, sortingDashboardOptions } from './dashboardEventOptions';
 import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
+import { DashboardHeader } from '@/components/header/DashboardHeader';
+import { HeaderCardInfo } from '@/components/header/HeaderCardInfo';
+import { PaginationComponent } from '@/components/pagination/PaginationComponent';
+import { SortByDropdown } from '@/components/dropdown/SortByDropdown';
+import { SortOrderDropdown } from '@/components/dropdown/SortOrderDropdown';
+import { FilterDropdown } from '@/components/dropdown/FilterDropdown';
+import { CollapsibleAddEvent } from '@/components/collapsible/CollapsibleAddEvent';
+import { eventColumnsTable } from '@/config/columns-table/eventColumnsTable';
+import { SORTING_EVENTS_DASHBOARD } from '@/config/sorting/sortingEvents';
+import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
+import { cardDataEvents } from '@/utils/cardDataDashbord';
+import { FilterBarDashboard } from '@/components/hero/FilterBarDashboard';
 
 export const EventsDashboard = () => {
-  const eventColumn = eventColumns();
+  const eventColumn = eventColumnsTable();
   const { events, fetchEvents, total, updateEvent, deleteEvent } = useEventStore();
   const { isDialogOpen, error, requestDelete, confirmDeletion, cancelDeletion } =
     useDelConfirmation(deleteEvent, 'eventId');
@@ -29,7 +32,7 @@ export const EventsDashboard = () => {
     totalCount: total
   });
   const { totalQuantity, totalSold, totalRevenue } = useAggregateEventData();
-  const cardDataEvent = generateCardDataEvent(totalQuantity, totalSold, totalRevenue);
+  const cardDataEvent = cardDataEvents(totalQuantity, totalSold, totalRevenue);
   const {
     isSidebarOpen,
     selectedItem: selectedEvent,
@@ -54,16 +57,16 @@ export const EventsDashboard = () => {
       <FilterBarDashboard title="Events" />
       <HeaderCardInfo cardData={cardDataEvent} />
       <div className="flex items-center gap-4">
-        <CardAddEvent />
+        <CollapsibleAddEvent />
         <div className="ml-auto flex items-center gap-2">
           <SortByDropdown
             sortBy={sortBy}
             onSortChange={setSortBy}
-            options={sortingDashboardOptions}
+            options={SORTING_EVENTS_DASHBOARD}
           />
           <SortOrderDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
           <FilterDropdown
-            groups={categoryDashboardGroups}
+            groups={FILTERS_EVENT}
             filterValue={filterValue}
             onChange={setFilterValue}
           />
