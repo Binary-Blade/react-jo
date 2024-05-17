@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { CartItem } from '@/config/types/CartTypes';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
+import { CartItem } from '@/config/types/Cart/CartTypes';
 
 interface GroupedItems {
   [key: string]: CartItem[];
