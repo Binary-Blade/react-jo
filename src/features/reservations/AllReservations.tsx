@@ -1,13 +1,16 @@
-import { CardReservations } from './CardReservations';
 import { useEffect } from 'react';
 import useReservationStore from '@/stores/useReservationStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useFilter, usePagination } from '@/hooks';
-import { PaginationComponent } from '@/components/common/PaginationComponent';
-import { FilterDropdown, SortByDropdown, SortOrderDropdown } from '@/components/button';
-import { sortingReservationOptions } from './reservationsOptions';
-import { categoryDashboardGroups } from '../dashboard/EventDashboard/dashboardEventOptions';
 import { Button } from '@/components/ui/button';
+import { PaginationComponent } from '@/components/pagination/PaginationComponent';
+import { CardReservations } from '@/components/cards/CardReservations';
+import { SortOrderDropdown } from '@/components/dropdown/SortOrderDropdown';
+import { FilterDropdown } from '@/components/dropdown/FilterDropdown';
+import { SortByDropdown } from '@/components/dropdown/SortByDropdown';
+import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
+import { SORTING_RESERVATION_PUBLIC } from '@/config/sorting/sortingReservation';
+import { ReservationEmpty } from '@/components/empty/ReservationEmpty';
 
 export const AllReservations = () => {
   const { reservations, fetchReservations, total } = useReservationStore();
@@ -24,7 +27,14 @@ export const AllReservations = () => {
 
   useEffect(() => {
     if (userId) {
-      fetchReservations(userId, { limit, offset, sortBy, sortOrder, filterBy, filterValue });
+      fetchReservations(userId, {
+        limit,
+        offset,
+        sortBy,
+        sortOrder,
+        filterBy,
+        filterValue
+      });
     }
   }, [
     currentPage,
@@ -49,11 +59,11 @@ export const AllReservations = () => {
           <SortByDropdown
             sortBy={sortBy}
             onSortChange={setSortBy}
-            options={sortingReservationOptions}
+            options={SORTING_RESERVATION_PUBLIC}
           />
           <SortOrderDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
           <FilterDropdown
-            groups={categoryDashboardGroups}
+            groups={FILTERS_EVENT}
             filterValue={filterValue}
             onChange={setFilterValue}
           />
@@ -68,6 +78,7 @@ export const AllReservations = () => {
         {reservations.map(reservation => (
           <CardReservations key={reservation.reservationId} reservation={reservation} />
         ))}
+        {reservations.length === 0 && <ReservationEmpty />}
       </div>
 
       <PaginationComponent

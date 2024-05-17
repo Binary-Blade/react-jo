@@ -1,13 +1,13 @@
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { navigate } from 'wouter/use-browser-location';
-import { CardPreviewCart } from '@/components/one-event/CardPreviewCart';
-import { CardTicketSelect } from '@/components/one-event/CardTicketSelect';
 import { useTicketManager } from '@/hooks';
+import { CardTicketSelect } from '@/components/cards/CardTicketSelect';
+import { CardPreviewCart } from '@/components/cards/CardPreviewCart';
 
 type CardEventPricesProps = {
   eventId: number | undefined;
-  userId: number;
+  userId: number | null;
   basePrice: number | undefined;
   isAuthenticated: boolean;
   syncCartItems: (userId: number) => Promise<void>;
@@ -66,6 +66,10 @@ export const CardEventPrices: FC<CardEventPricesProps> = ({
     if (!isAuthenticated) {
       navigate('/auth');
     } else {
+      if (!userId) {
+        console.error('User ID is missing.');
+        return;
+      }
       await syncCartItems(userId);
       navigate('/cart');
     }

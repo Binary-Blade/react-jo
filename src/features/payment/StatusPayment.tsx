@@ -7,17 +7,22 @@ import { Button } from '@/components/ui/button';
 
 interface StatusPaymentProps {
   reservation: {
-    status: string;
-    totalPrice: number;
-    paymentId: string;
-    reservationId: string;
-    createdAt: string;
+    reservationId: number;
+    reservationDetails: any[];
+    user: {
+      firstName: string;
+      lastName: string;
+    };
+    transaction: {
+      statusPayment: string;
+      paymentId: string;
+      totalAmount: number;
+    };
   }[];
-  totalTaxes: number | undefined;
 }
 
 // HACK: MAKE A TYPE ENUM FOR STATUS
-export const StatusPayment: FC<StatusPaymentProps> = ({ totalTaxes, reservation }) => {
+export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
   const data = reservation[0];
   const clearCart = useCartStore(state => state.clearCart);
   const handleHome = () => {
@@ -26,7 +31,7 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ totalTaxes, reservation 
   };
   const descriptionStatus = useMemo(() => {
     if (!data) return 'No payment data available.';
-    switch (data.status) {
+    switch (data.transaction.statusPayment) {
       case 'APPROVED':
         return 'Your payment has been processed successfully.';
       case 'PENDING':
@@ -40,7 +45,7 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ totalTaxes, reservation 
 
   const StatusIcon = () => {
     if (!data) return null;
-    switch (data.status) {
+    switch (data.transaction.statusPayment) {
       case 'APPROVED':
         return <CheckIcon className="w-10 h-10 text-green-600 dark:text-green-400" />;
       case 'PENDING':
@@ -60,23 +65,25 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ totalTaxes, reservation 
     <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900 sm:py-8 sm:px-12">
       <StatusIcon />
       <div className="space-y-2 text-center">
-        <h1 className="text-2xl font-bold sm:text-3xl">PAYMENT {data.status}</h1>
+        <h1 className="text-2xl font-bold sm:text-3xl">PAYMENT {data.transaction.statusPayment}</h1>
         <p className="text-gray-500 dark:text-gray-400">{descriptionStatus}</p>
       </div>
       <div className="w-full space-y-4 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Transaction ID</p>
-          <p className="text-sm font-medium">
-            {data.paymentId}-{data.reservationId}
-          </p>
+          <p className="text-sm font-medium">{data.transaction.paymentId}</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">First Name</p>
+          <p className="text-sm font-medium">{data.user.firstName}</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Last Name</p>
+          <p className="text-sm font-medium">{data.user.lastName}</p>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Amount</p>
-          <p className="text-sm font-medium">{totalTaxes}</p>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Date</p>
-          <p className="text-sm font-medium">{data.createdAt}</p>
+          <p className="text-sm font-medium">${data.transaction.totalAmount.toFixed(2)}</p>
         </div>
       </div>
       <Button

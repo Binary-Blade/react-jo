@@ -1,12 +1,14 @@
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
-import { EventCard } from './EventCard';
-import { EventTitlePage } from '@/components/all-events/EventTitlePage';
-import { PaginationComponent } from '@/components/common/PaginationComponent';
 import { useFilter, usePagination } from '@/hooks';
-import { FilterDropdown, SortByDropdown, SortOrderDropdown } from '@/components/button';
-import { sortingOptions } from './eventOptions';
-import { categoryDashboardGroups } from '../dashboard/EventDashboard/dashboardEventOptions';
+import { EventCard } from '@/components/cards/EventCard';
+import { PaginationComponent } from '@/components/pagination/PaginationComponent';
+import { SortByDropdown } from '@/components/dropdown/SortByDropdown';
+import { SortOrderDropdown } from '@/components/dropdown/SortOrderDropdown';
+import { FilterDropdown } from '@/components/dropdown/FilterDropdown';
+import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
+import { SORTING_EVENTS_PUBLIC } from '@/config/sorting/sortingEvents';
+import { GenericTitle } from '@/components/hero/GenericTitle';
 
 export const EventsMainContent: React.FC = () => {
   const { events, fetchEvents, total } = useEventStore();
@@ -29,12 +31,23 @@ export const EventsMainContent: React.FC = () => {
     <section className="w-full py-12 md:py-14 lg:py-14 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <EventTitlePage />
+          <div className="space-y-2">
+            <GenericTitle
+              title="Explore All Events"
+              subtitle="Browse the complete schedule of events and competitions for the Paris 2024 Olympic Games."
+              titleClass="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-100"
+              subtitleClass="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300"
+            />
+          </div>
           <div className="ml-auto flex items-center gap-2">
-            <SortByDropdown sortBy={sortBy} onSortChange={setSortBy} options={sortingOptions} />
+            <SortByDropdown
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+              options={SORTING_EVENTS_PUBLIC}
+            />
             <SortOrderDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
             <FilterDropdown
-              groups={categoryDashboardGroups}
+              groups={FILTERS_EVENT}
               filterValue={filterValue}
               onChange={setFilterValue}
             />
