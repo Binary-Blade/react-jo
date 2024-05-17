@@ -1,15 +1,15 @@
 import { Separator } from '@/components/ui/separator';
-import { CardPaymentCheckout } from '@/components/cart/CardPaymentCheckout';
-import { CardPromoCode } from '@/components/cart/CardPromoCode';
-import { CardReviewCheckout } from '@/features/cart/CardReviewCheckout';
 import useCartStore from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useEffect } from 'react';
-import { CartEmpty } from '@/components/cart/CartEmpty';
 import { CardFormule } from '@/features/cart/CardFormule';
-import { Header } from '@/features/Header';
 import { Link } from 'wouter';
 import { useGroupByTicketType } from '@/hooks';
+import { Header } from '@/features/header/Header';
+import { CardPromoCode } from '@/components/cards/CardPromoCode';
+import { CardPaymentCheckout } from '@/components/cards/CardPaymentCheckout';
+import { CartSummary } from '@/features/cart/CartSummary';
+import { CartEmpty } from '@/components/empty/CartEmpty';
 
 export default function CartPage() {
   const { fetchCartItems, cartId, cartItems } = useCartStore();
@@ -43,7 +43,7 @@ export default function CartPage() {
         </div>
         <Separator className="my-12" />
         <div className="grid md:grid-cols-2 gap-8">
-          <CardReviewCheckout />
+          <CartSummary />
           <div className="grid gap-4">
             <CardPromoCode />
             <CardPaymentCheckout />

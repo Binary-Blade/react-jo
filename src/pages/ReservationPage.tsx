@@ -1,31 +1,37 @@
+import { HeroReservation } from '@/components/hero/HeroReservation';
 import { Footer } from '@/features/Footer';
-import { Header } from '@/features/Header';
+import { Header } from '@/features/header/Header';
 import { AllReservations } from '@/features/reservations/AllReservations';
-import { HeroReservation } from '@/features/reservations/HeroReservation';
-import { useAuthStore } from '@/stores/useAuthStore';
 import useReservationStore from '@/stores/useReservationStore';
-import { useEffect } from 'react';
 
-// FIX: Fix to refresh the page when the user will navigate to that page
 export default function ReservationPage() {
-  const { reservations, fetchReservations } = useReservationStore(state => ({
-    reservations: state.reservations,
-    fetchReservations: state.fetchReservations
-  }));
+  const { reservations, total } = useReservationStore();
 
-  const userId = useAuthStore(state => state.userId);
+  // count number of event by reservation
+  const uniqueEventCount = () => {
+    const eventIds = new Set(); // Création d'un Set pour stocker les eventId uniques
+    reservations.forEach(reservation => {
+      if (
+        reservation &&
+        reservation.reservationDetails.event &&
+        reservation.transaction.statusPayment === 'APPROVED'
+      ) {
+        eventIds.add(reservation.reservationDetails.event.eventId);
+      }
+    });
+    return eventIds.size; // Retourne le nombre d'éléments uniques dans le Set
+  };
 
-  useEffect(() => {
-    if (userId) {
-      fetchReservations(userId);
-    }
-  }, [fetchReservations, userId]);
-  console.log(reservations);
+  const firstName = reservations[0]?.user?.firstName;
+  const lastName = reservations[0]?.user?.lastName;
+  const fullName = `${firstName} ${lastName}`;
+
+  const numberEvents = uniqueEventCount();
+
   return (
     <>
       <Header />
-
-      <HeroReservation />
+      <HeroReservation fullName={fullName} numberEvents={numberEvents} totalTickets={total} />
       <div className="flex flex-col min-h-screen">
         <AllReservations />
       </div>

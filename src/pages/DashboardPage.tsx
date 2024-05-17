@@ -1,9 +1,8 @@
-import { SideBarDesktop } from '@/components/dashboard/SideBarDesktop';
-import { SideBarMenu } from '@/components/header/SideBarMenu';
 import { useEffect, useState } from 'react';
-import { StatisticDashboard } from '@/features/dashboard/StatisticDashboard';
 import { EventsDashboard } from '@/features/dashboard/EventDashboard/EventsDashboard';
 import { UsersDashboard } from '@/features/dashboard/UsersDashboard/UsersDashboard';
+import { SideBarDesktop } from '@/components/navbar/SideBarDesktop';
+import { SideBarMenu } from '@/components/navbar/SideBarMenu';
 
 export default function DashboardPage() {
   const [activeComponent, setActiveComponent] = useState(() => {
@@ -18,8 +17,6 @@ export default function DashboardPage() {
     switch (activeComponent) {
       case 'users':
         return <UsersDashboard />;
-      case 'statistic':
-        return <StatisticDashboard />;
       default:
         return <EventsDashboard />;
     }

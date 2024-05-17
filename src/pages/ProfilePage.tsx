@@ -1,8 +1,8 @@
-import { Header } from '@/features/Header';
 import { CardProfile } from '@/features/profile-user/CardProfile';
 import { CardAccount } from '@/features/profile-user/CardAccount';
 import { CardNotification } from '@/features/profile-user/CardNotification';
 import { HeroProfile } from '@/features/profile-user/HeaderProfileUser';
+import { Header } from '@/features/header/Header';
 
 export default function ProfilePage() {
   return (

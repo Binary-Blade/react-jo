@@ -1,7 +1,7 @@
-import { EventHero } from '@/components/all-events/EventHero';
+import { EventHero } from '@/components/hero/EventHero';
 import { Footer } from '@/features/Footer';
-import { Header } from '@/features/Header';
-import { EventsMainContent } from '@/features/events/EventsMainContent';
+import { EventsMainContent } from '@/features/events/all-events/EventsMainContent';
+import { Header } from '@/features/header/Header';
 
 export default function EventsPage() {
   return (
@@ -13,5 +13,5 @@ export default function EventsPage() {
       </div>
       <Footer />
     </>
-  )
+  );
 }
