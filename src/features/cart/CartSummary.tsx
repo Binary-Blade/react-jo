@@ -10,13 +10,13 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ButtonCheckoutPayment } from '@/features/payment/ButtonCheckoutPayment';
-import { TicketCheckout } from './TicketCheckout';
+import { TotalEventTicketPerFormula } from './TotalEventTicketPerFormula';
 
 interface Totals {
   [key: string]: number;
 }
 
-export const CardReviewCheckout = () => {
+export const CartSummary = () => {
   const { cartId, cartItems } = useCartStore(state => ({
     cartItems: state.cartItems,
     cartId: state.cartId
@@ -44,7 +44,11 @@ export const CardReviewCheckout = () => {
       <CardContent>
         <div className="grid gap-4">
           {Object.entries(groupedItems).map(([priceFormula, items]) => (
-            <TicketCheckout key={priceFormula} priceFormula={priceFormula} items={items} />
+            <TotalEventTicketPerFormula
+              key={priceFormula}
+              priceFormula={priceFormula}
+              items={items}
+            />
           ))}
         </div>
         <Separator className="my-4" />

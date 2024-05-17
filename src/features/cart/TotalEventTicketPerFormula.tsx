@@ -15,7 +15,7 @@ interface TicketCheckoutProps {
   items: TicketItem[];
 }
 
-export const TicketCheckout = ({ priceFormula, items }: TicketCheckoutProps) => {
+export const TotalEventTicketPerFormula = ({ priceFormula, items }: TicketCheckoutProps) => {
   const totalPriceForGroup = useMemo(() => {
     return items.reduce((total, item) => total + item.price, 0);
   }, [items]);

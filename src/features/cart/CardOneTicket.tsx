@@ -4,8 +4,8 @@ import { FC, useEffect, useState } from 'react';
 import useCartStore from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Separator } from '@radix-ui/react-dropdown-menu';
-import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
 import { useFormattedDates } from '@/hooks';
+import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 
 interface CartItemsProps {
   cartId: number;
