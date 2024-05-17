@@ -13,9 +13,9 @@ import {
 } from '@/components/ui/select';
 import { CategoryEvent } from '@/config/enums/CategoryEvent.enum';
 import { useEventForm } from '@/hooks/useEventForm';
-import { InputFieldEvent } from '@/components/dashboard/InputFieldEvent';
+import { InputFieldEvent } from './InputFieldEvent';
 
-export const AddNewEvent = () => {
+export const FormAddNewEvent = () => {
   const initialData = {
     title: '',
     startDate: '',

@@ -1,9 +1,9 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { FC } from 'react';
-import { SelectEventPrices } from './SelectEventPrices';
-import { QuantitySelector } from '../common/QuantitySelector';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
+import { SelectEventPrices } from '../select/SelectEventPrices';
+import { QuantitySelector } from '../select/QuantitySelector';
 
 interface CardTicketPriceProps {
   currentPrice: number | undefined;

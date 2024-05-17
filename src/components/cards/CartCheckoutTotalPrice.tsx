@@ -1,4 +1,4 @@
-import { ButtonCheckoutPayment } from '@/components/payment/ButtonCheckoutPayment';
+import { ButtonCheckoutPayment } from '@/features/payment/ButtonCheckoutPayment';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { FC } from 'react';
 
@@ -32,7 +32,7 @@ export const CartCheckoutTotalPrice: FC<CheckoutTotalProps> = ({
           <span className="font-bold">Total</span>
           <span className="font-bold">{totalTaxes}</span>
         </div>
-        <ButtonCheckoutPayment totalTaxes={totalTaxes} cartId={cartId} />
+        <ButtonCheckoutPayment cartId={cartId} />
       </div>
     </>
   );

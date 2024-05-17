@@ -1,9 +1,9 @@
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { PreviewItemsTicket } from './PreviewItemsTicket';
 import { Link } from 'wouter';
 import { Button } from '../ui/button';
 import { FC } from 'react';
+import { PreviewItemsTicket } from './PreviewItemsTicket';
 
 interface CardPreviewCartProps {
   cartItemsLocal: any;

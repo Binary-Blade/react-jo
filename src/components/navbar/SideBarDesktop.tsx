@@ -1,10 +1,4 @@
-import {
-  CalendarIcon,
-  MedalIcon,
-  PieChartIcon,
-  SettingsIcon,
-  UsersIcon
-} from '@/components/ui/IconComponents';
+import { CalendarIcon, MedalIcon, SettingsIcon, UsersIcon } from '@/components/ui/IconComponents';
 import { HomeIcon } from 'lucide-react';
 import { Link } from 'wouter';
 
@@ -47,14 +41,6 @@ export const SideBarDesktop = ({ setActiveComponent }: SideBarDesktopProps) => {
             >
               <UsersIcon className="h-4 w-4" />
               Users
-            </button>
-            <button
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 
-              transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              onClick={() => setActiveComponent('statistic')}
-            >
-              <PieChartIcon className="h-4 w-4" />
-              Statistics
             </button>
             <Link
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"

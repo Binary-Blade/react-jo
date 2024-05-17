@@ -22,7 +22,6 @@ export const PaginationComponent: FC<PaginationProps> = ({
 }) => {
   const paginationRange = usePaginationRange(currentPage, totalPages);
   const handleClick = (page: number) => {
-    console.log('Attempting to change page to:', page);
     onPageChange(page);
   };
 

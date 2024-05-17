@@ -6,8 +6,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
+import { DropDownAccount } from '@/features/header/DropDownAccount';
 import { Link } from 'wouter';
-import { DropDownAccount } from '../header/DropDownAccount';
 
 export const DashboardHeader = () => {
   return (

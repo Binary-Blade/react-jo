@@ -1,28 +1,15 @@
 import { Link } from 'wouter';
-import { useAuthStore } from '@/stores/useAuthStore';
-import { useMemo } from 'react';
-import { DropDownAccount } from './DropDownAccount';
-import { MedalIcon, ShoppingCartIcon } from '@/components/ui/IconComponents';
-import useLocalCartStore from '@/stores/useLocalCartStore';
-import useCartStore from '@/stores/useCartStore';
+import { MedalIcon, ShoppingCartIcon } from '../ui/IconComponents';
 import { NAVLINKS_PUBLIC } from '@/config/navlink';
+import { FC } from 'react';
+import { DropDownAccount } from '@/features/header/DropDownAccount';
 
-export const NavBar = () => {
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-  const cartItemsLocal = useLocalCartStore(state => state.cartItemsLocal);
-  const cartItems = useCartStore(state => state.cartItems);
+interface NavBarProps {
+  isAuthenticated: boolean;
+  totalItems: number;
+}
 
-  const totalItems = useMemo(() => {
-    let total = 0;
-    if (!isAuthenticated) {
-      total = cartItemsLocal.reduce((acc, item) => acc + item.quantity, 0);
-    } else {
-      total = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-    }
-    return total;
-  }, [cartItems, isAuthenticated]);
-
-  // TODO: ADD USER ROLE ADMIN LINK TO NAVBAR ADMIN
+export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems }) => {
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
       <div className="container flex items-center justify-between h-16 px-4 md:px-2">
