@@ -9,14 +9,14 @@ import useCartStore from '@/stores/useCartStore';
 import useLocalCartStore from '@/stores/useLocalCartStore';
 import { Header } from '@/features/header/Header';
 import { OverviewOneEvent } from '@/features/events/selected-event/OverviewOneEvent';
-import { CardEventPrices } from '@/features/events/selected-event/CardEventPrices';
 import { ButtonToEvent } from '@/components/button/ButtonToEvent';
 import { ImagesCoverEvent } from '@/components/cards/ImagesCoverEvent';
 import { GenericTitle } from '@/components/hero/GenericTitle';
 import { DescriptionSelectedEvent } from '@/components/collapsible/DescriptionSelectedEvent';
 import { ReportedIssueButtonEvent } from '@/components/dialog/ReportedIssueButtonEvent';
+import { ChooseEventPrices } from '@/features/events/selected-event/ChooseEventPrices';
 
-export default function EventSelected() {
+export default function EventSelectedPage() {
   const { userId, isAuthenticated } = useAuthStore();
   const params = useParams();
   const eventId = Number(params.eventId);
@@ -58,7 +58,7 @@ export default function EventSelected() {
             </div>
             <div className="grid gap-4 row-start-1 md:row-start-auto">
               <GenericTitle title={event?.title} subtitle={eventDate} isMobile={true} />
-              <CardEventPrices
+              <ChooseEventPrices
                 eventId={eventId}
                 userId={userId}
                 isAuthenticated={isAuthenticated}

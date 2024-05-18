@@ -12,12 +12,13 @@ type CardEventPricesProps = {
   isAuthenticated: boolean;
   syncCartItems: (userId: number) => Promise<void>;
   cartItemsLocal: any[];
+  addItemToCartLocal: (item: any) => void;
+  removeCartItemLocal: (eventId: number, priceFormula: PriceFormula) => void;
 };
 
-export const CardEventPrices: FC<CardEventPricesProps> = ({
+export const ChooseEventPrices: FC<CardEventPricesProps> = ({
   eventId,
   userId,
-  isAuthenticated,
   basePrice,
   syncCartItems,
   cartItemsLocal,
@@ -25,28 +26,37 @@ export const CardEventPrices: FC<CardEventPricesProps> = ({
   removeCartItemLocal
 }) => {
   const initialTicketType = PriceFormula.SOLO;
-  const { selectedTicketType, quantity, setQuantity, currentPrice, handleTicketTypeChange } =
-    useTicketManager(basePrice, eventId, initialTicketType);
+  const {
+    selectedTicketType,
+    quantity,
+    setQuantity,
+    unitPrice,
+    totalPrice,
+    handleTicketTypeChange
+  } = useTicketManager(basePrice, eventId, initialTicketType);
 
-  const { totalItems, totalPrice } = useMemo(() => {
+  const { totalItems, totalCartPrice } = useMemo(() => {
     const totalItems = cartItemsLocal.reduce((acc, item) => acc + item.quantity, 0);
-    const totalPrice = cartItemsLocal.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    return { totalItems, totalPrice };
+    const totalCartPrice = cartItemsLocal.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    return { totalItems, totalCartPrice };
   }, [cartItemsLocal]);
 
   const handleAddToCart = useCallback(() => {
-    if (eventId && currentPrice && selectedTicketType) {
+    if (eventId && unitPrice && selectedTicketType) {
       const cartItemLocal = {
         eventId,
         quantity,
-        price: currentPrice,
+        price: unitPrice, // Use unit price here
         priceFormula: selectedTicketType
       };
       addItemToCartLocal(cartItemLocal);
     } else {
       console.error('Required information is missing for adding item to cart.');
     }
-  }, [eventId, currentPrice, selectedTicketType, addItemToCartLocal]);
+  }, [eventId, unitPrice, selectedTicketType, quantity, addItemToCartLocal]);
 
   const handleDelete = useCallback(
     (item: any) => {
@@ -61,24 +71,19 @@ export const CardEventPrices: FC<CardEventPricesProps> = ({
 
   const showPreview = useMemo(() => cartItemsLocal.length > 0, [cartItemsLocal]);
 
-  // FIX: Fix route to auth
   const handleReserve = useCallback(async () => {
-    if (!isAuthenticated) {
-      navigate('/auth');
-    } else {
-      if (!userId) {
-        console.error('User ID is missing.');
-        return;
-      }
-      await syncCartItems(userId);
-      navigate('/cart');
+    if (!userId) {
+      console.error('User ID is missing.');
+      return;
     }
-  }, [isAuthenticated, userId, navigate, syncCartItems]);
+    await syncCartItems(userId);
+    navigate('/cart');
+  }, [userId, navigate, syncCartItems]);
 
   return (
     <>
       <CardTicketSelect
-        currentPrice={currentPrice}
+        currentPrice={totalPrice} // Use total price here
         selectedTicketType={selectedTicketType}
         quantity={quantity}
         setQuantity={setQuantity}
@@ -90,7 +95,7 @@ export const CardEventPrices: FC<CardEventPricesProps> = ({
           cartItemsLocal={cartItemsLocal}
           handleDelete={handleDelete}
           totalItems={totalItems}
-          totalPrice={totalPrice}
+          totalPrice={totalCartPrice}
           handleReserve={handleReserve}
         />
       )}
