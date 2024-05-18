@@ -2,10 +2,15 @@ import { HeroReservation } from '@/components/hero/HeroReservation';
 import { Footer } from '@/features/Footer';
 import { Header } from '@/features/header/Header';
 import { AllReservations } from '@/features/reservations/AllReservations';
+import { useAuthStore } from '@/stores/useAuthStore';
 import useReservationStore from '@/stores/useReservationStore';
+import { useUserStore } from '@/stores/useUserStore';
+import { useEffect } from 'react';
 
 export default function ReservationPage() {
   const { reservations, total } = useReservationStore();
+  const { userId } = useAuthStore();
+  const { selectedUser, fetchUserById } = useUserStore();
 
   // count number of event by reservation
   const uniqueEventCount = () => {
@@ -21,11 +26,13 @@ export default function ReservationPage() {
     });
     return eventIds.size; // Retourne le nombre d'éléments uniques dans le Set
   };
+  useEffect(() => {
+    if (userId) {
+      fetchUserById(userId);
+    }
+  }, [userId, fetchUserById]);
 
-  const firstName = reservations[0]?.user?.firstName;
-  const lastName = reservations[0]?.user?.lastName;
-  const fullName = `${firstName} ${lastName}`;
-
+  const fullName = `${selectedUser?.firstName} ${selectedUser?.lastName}`;
   const numberEvents = uniqueEventCount();
 
   return (
