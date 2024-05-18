@@ -26,7 +26,7 @@ export const PaginationComponent: FC<PaginationProps> = ({
   };
 
   return (
-    <Pagination>
+    <Pagination className="py-6">
       <PaginationContent>
         {/* Previous Button */}
         {currentPage > 1 && (

@@ -6,7 +6,7 @@ export const Highlights = () => {
   return (
     <>
       <Separator />
-      <section className="py-12 md:py-16 bg-gray-100 dark:bg-gray-800">
+      <section className="py-12 md:py-16 bg-gray-100 dark:bg-gray-800 z-10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-8 text-center">
             <div className="space-y-2 ">

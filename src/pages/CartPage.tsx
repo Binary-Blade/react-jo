@@ -10,10 +10,12 @@ import { CardPromoCode } from '@/components/cards/CardPromoCode';
 import { CardPaymentCheckout } from '@/components/cards/CardPaymentCheckout';
 import { CartSummary } from '@/features/cart/CartSummary';
 import { CartEmpty } from '@/components/empty/CartEmpty';
+import { CartNotLogging } from '@/components/notlogging/CartNotLogging';
+import LoadingPage from './LoadingPage';
 
 export default function CartPage() {
-  const { fetchCartItems, cartId, cartItems } = useCartStore();
-  const { userId } = useAuthStore();
+  const { fetchCartItems, cartId, cartItems, loading } = useCartStore();
+  const { userId, isAuthenticated } = useAuthStore();
 
   useEffect(() => {
     if (userId && cartId) {
@@ -23,13 +25,14 @@ export default function CartPage() {
 
   const groupedItems = useGroupByTicketType(cartItems);
 
-  if (cartItems.length === 0) {
-    return (
-      <>
-        <Header />
-        <CartEmpty />
-      </>
-    );
+  if (loading) {
+    return <LoadingPage />;
+  }
+
+  if (cartItems.length === 0 && isAuthenticated) {
+    return <CartEmpty />;
+  } else if (cartItems.length === 0 && !isAuthenticated) {
+    return <CartNotLogging />;
   }
   return (
     <>
