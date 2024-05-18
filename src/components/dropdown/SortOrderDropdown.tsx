@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { FC } from 'react';
+import { ArrowUpDownIcon } from '../ui/IconComponents';
 
 interface SortOrderDropdownProps {
   sortOrder: string;
@@ -18,6 +19,7 @@ export const SortOrderDropdown: FC<SortOrderDropdownProps> = ({ sortOrder, setSo
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="hidden md:flex" variant="outline">
+          <ArrowUpDownIcon className="w-4 h-4 mr-2" />
           Order by
         </Button>
       </DropdownMenuTrigger>
