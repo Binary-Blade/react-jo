@@ -4,3 +4,9 @@ export interface CreateCartItemDto {
   price: number;
   priceFormula: string;
 }
+
+export interface UpdateCartItemDto {
+  quantity: number;
+  priceFormula: string;
+  eventId: number;
+}

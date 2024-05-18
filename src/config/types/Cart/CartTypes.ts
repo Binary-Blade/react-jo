@@ -1,19 +1,27 @@
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 
 export interface CartItem {
-  price: number;
-  priceFormula: PriceFormula;
+  cartItemId: number;
+  eventId: number;
+  priceFormula: string;
+  quantity: number;
+  price: number; // Ensure price is a number
   event: {
     eventId: number;
     title: string;
     startDate: string;
     endDate: string;
   };
-  cartItemId: number;
-  quantity: number;
+  createdAt: string;
+  updatedAt: string;
   cart: {
     cartId: number;
   };
-  createdAt: string;
-  updatedAt: string;
+}
+
+export interface CartItemLocal {
+  price: number;
+  priceFormula: PriceFormula;
+  eventId: number;
+  quantity: number;
 }

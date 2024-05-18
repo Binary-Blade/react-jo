@@ -34,10 +34,12 @@ export interface EventValues {
 }
 
 export interface EventStoreType {
-  allEventsValues: EventValues[] | null;
+  allEventsValues: EventValues[];
   event: EventType | null;
   total?: number; // Optional or required based on your design
   events: EventType[];
+  loading: boolean;
+  error: string | null;
   fetchValues: () => Promise<void>;
   fetchEvents: (params: PaginationParams) => Promise<void>;
   getEvent: (eventId: number) => Promise<any>;

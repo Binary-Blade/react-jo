@@ -34,11 +34,21 @@ export function debounce<F extends (...args: any[]) => Promise<void>>(
   };
 }
 
-export const filterProperties = (obj, allowedProps) => {
+type PickProperties<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+export const filterProperties = <T extends Record<string, any>, K extends keyof T>(
+  obj: T,
+  allowedProps: K[]
+): PickProperties<T, K> => {
   return Object.keys(obj)
-    .filter(key => allowedProps.includes(key))
-    .reduce((acc, key) => {
-      acc[key] = obj[key];
-      return acc;
-    }, {});
+    .filter(key => allowedProps.includes(key as K))
+    .reduce(
+      (acc, key) => {
+        acc[key as K] = obj[key as K];
+        return acc;
+      },
+      {} as PickProperties<T, K>
+    );
 };
