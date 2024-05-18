@@ -9,7 +9,7 @@ export const useTicketManager = (
 ) => {
   const [selectedTicketType, setSelectedTicketType] = useState<PriceFormula>(initialTicketType);
   const [quantity, setQuantity] = useState<number>(1);
-  const [currentPrice, setCurrentPrice] = useState<number | undefined>(basePrice);
+  const [unitPrice, setUnitPrice] = useState<number | undefined>(basePrice);
 
   const updatePrice = useCallback(async () => {
     if (eventId === undefined || selectedTicketType === undefined) {
@@ -21,7 +21,7 @@ export const useTicketManager = (
         .getState()
         .getTicketPrice(eventId, selectedTicketType);
       if (priceResponse) {
-        setCurrentPrice(priceResponse.price); // Set only the base price fetched
+        setUnitPrice(priceResponse.price); // Set only the base price fetched
       }
     } catch (error) {
       console.error('Failed to fetch ticket price', error);
@@ -32,15 +32,15 @@ export const useTicketManager = (
     updatePrice();
   }, [updatePrice]);
 
-  // Returns the calculated price multiplied by quantity when needed
-  const totalPrice = currentPrice ? currentPrice * quantity : undefined;
+  const totalPrice = unitPrice ? unitPrice * quantity : undefined;
 
   return {
     selectedTicketType,
     setSelectedTicketType,
     quantity,
     setQuantity,
-    currentPrice: totalPrice, // Return calculated total price
+    unitPrice, // Return unit price
+    totalPrice, // Return total price
     handleTicketTypeChange: setSelectedTicketType
   };
 };
