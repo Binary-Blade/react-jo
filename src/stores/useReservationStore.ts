@@ -15,9 +15,12 @@ export const useReservationStore = create<ReservationStoreType>(set => ({
     set({ loading: true, error: null });
     try {
       const data = await ReservationService.addReservation(userId, cartId);
-      set(state => ({ newReservation: [...state.reservations, data], loading: false }));
-    } catch (error) {
-      console.error('Failed to add reservation', error);
+      set(state => ({
+        newReservation: [...state.reservations, data],
+        loading: false
+      }));
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to add reservation' });
     }
   },
   fetchReservations: async (userId: number, params: PaginationParams) => {
@@ -29,26 +32,21 @@ export const useReservationStore = create<ReservationStoreType>(set => ({
         total: data.total,
         loading: false
       });
-    } catch (error) {
-      console.error('Failed to fetch reservations', error);
-    }
-  },
-
-  fetchReservationsAdmin: async () => {
-    try {
-      const data = await ReservationService.findAllAdminReservations();
-      set({ reservations: data });
-    } catch (error) {
-      console.error('Failed to fetch reservations', error);
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch reservation' });
     }
   },
 
   catchTicket: async reservationId => {
+    set({ loading: true, error: null });
     try {
       const data = await ReservationService.catchTicketById(reservationId);
-      set({ reservation: data }); // Update the single reservation state
-    } catch (error) {
-      console.error('Failed to fetch reservation', error);
+      set({
+        reservation: data,
+        loading: false
+      }); // Update the single reservation state
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch reservation' });
     }
   }
 }));

@@ -10,72 +10,85 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
   event: null,
   allEventsValues: [],
   total: 0,
+  loading: false,
+  error: null,
 
   fetchEvents: async (params: PaginationParams) => {
+    set({ loading: true, error: null });
     try {
       const response = await EventService.getAllEventsFiltered(params);
       if (response.success) {
         set({
           events: response.data.events,
-          total: response.data.total
+          total: response.data.total,
+          loading: false
         });
       }
-    } catch (error) {
-      console.error('Failed to fetch events:', error);
-      throw new Error('Unable to fetch events.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch events' });
     }
   },
 
   fetchValues: async () => {
+    set({ loading: true, error: null });
     try {
       const response = await EventService.getAllValues();
       if (response.success) {
-        set({ allEventsValues: response.data });
+        set({
+          allEventsValues: response.data,
+          loading: false
+        });
       }
-    } catch (error) {
-      console.error('Failed to fetch events:', error);
-      throw new Error('Unable to fetch events.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch events' });
     }
   },
 
   addEvent: async (eventData: CreateEventDto) => {
+    set({ loading: true, error: null });
     try {
       const response = await EventService.createEvent(eventData);
       if (response.success) {
-        set({ events: [...get().events, response.data] });
+        set({
+          events: [...get().events, response.data],
+          loading: false
+        });
       }
-    } catch (error) {
-      console.error('Failed to add event:', error);
-      throw new Error('Unable to add event.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to add events' });
     }
   },
 
   getEvent: async (eventId: number) => {
+    set({ loading: true, error: null });
     try {
       const response = await EventService.getEventById(eventId);
       if (response.success) {
-        set({ event: response.data });
+        set({
+          event: response.data,
+          loading: false
+        });
       }
-    } catch (error) {
-      console.error('Failed to fetch event:', error);
-      throw new Error('Unable to fetch event.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to get a events' });
     }
   },
 
   getTicketPrice: async (eventId, ticketType) => {
+    set({ loading: true, error: null });
     try {
       const response = await EventService.getTicketPrice(eventId, ticketType);
       if (response.success) {
         return response.price;
       }
-    } catch (error) {
-      console.error('Failed to fetch ticket price:', error);
-      throw new Error('Unable to fetch ticket price.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to get a ticket price' });
     }
   },
 
   updateEvent: async (eventId: number, eventData: UpdateEventDto) => {
-    const allowedProps = [
+    set({ loading: true, error: null });
+    const allowedProps: (keyof UpdateEventDto)[] = [
       'title',
       'shortDescription',
       'longDescription',
@@ -91,24 +104,26 @@ export const useEventStore = create<EventStoreType>((set, get) => ({
         const updatedEvents = get().events.map(event =>
           event.eventId === eventId ? { ...event, ...response.data } : event
         );
-        set({ events: updatedEvents });
+        set({
+          events: updatedEvents,
+          loading: false
+        });
       }
-    } catch (error) {
-      console.error('Failed to update event:', error);
-      throw new Error('Unable to update event.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to update Event' });
     }
   },
 
   deleteEvent: async (eventId: number) => {
+    set({ loading: true, error: null });
     try {
       const response = await EventService.deleteEvent(eventId);
       if (response.success) {
         const filteredEvents = get().events.filter(event => event.eventId !== eventId);
         set({ events: filteredEvents });
       }
-    } catch (error) {
-      console.error('Failed to delete event:', error);
-      throw new Error('Unable to delete event.');
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to delete Event' });
     }
   }
 }));
