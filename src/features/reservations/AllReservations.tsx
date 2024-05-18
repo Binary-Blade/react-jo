@@ -16,9 +16,6 @@ import { Separator } from '@/components/ui/separator';
 export const AllReservations = () => {
   const { reservations, fetchReservations, total } = useReservationStore();
   const { userId } = useAuthStore();
-
-  console.log(reservations);
-
   const { currentPage, setPage, limit, totalPages, offset } = usePagination({
     initialPage: 1,
     initialLimit: 12,

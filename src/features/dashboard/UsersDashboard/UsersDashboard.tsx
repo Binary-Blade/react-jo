@@ -1,7 +1,6 @@
 import { TableGenericData } from '@/components/tables/TableGenericData';
 import { useUserStore } from '@/stores/useUserStore';
 import { useEffect } from 'react';
-import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
 import { useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useAggregateUsersData } from '@/hooks/useAggregateUsersData';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
@@ -15,6 +14,7 @@ import { FILTER_USERS_DASHBOARD } from '@/config/filters/filterUsers';
 import { usersColumnsTable } from '@/config/columns-table/usersColumnsTable';
 import { SORTING_USERS_DASHBOARD } from '@/config/sorting/sortingUsers';
 import { FilterBarDashboard } from '@/components/hero/FilterBarDashboard';
+import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 
 export const UsersDashboard = () => {
   const { users, fetchAllUsersFiltered, deleteUser, total } = useUserStore();

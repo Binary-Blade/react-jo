@@ -21,7 +21,6 @@ interface StatusPaymentProps {
   }[];
 }
 
-// HACK: MAKE A TYPE ENUM FOR STATUS
 export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
   const data = reservation[0];
   const clearCart = useCartStore(state => state.clearCart);
@@ -34,8 +33,6 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
     switch (data.transaction.statusPayment) {
       case 'APPROVED':
         return 'Your payment has been processed successfully.';
-      case 'PENDING':
-        return 'Your payment is pending.';
       case 'REJECTED':
         return 'Your payment has been declined.';
       default:
@@ -83,7 +80,7 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
         </div>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Amount</p>
-          <p className="text-sm font-medium">${data.transaction.totalAmount.toFixed(2)}</p>
+          <p className="text-sm font-medium">${data.transaction.totalAmount}</p>
         </div>
       </div>
       <Button

@@ -21,9 +21,7 @@ export const CartSummary = () => {
     cartItems: state.cartItems,
     cartId: state.cartId
   }));
-
   const groupedItems = useGroupByTicketType(cartItems);
-
   const totals: Totals = Object.entries(groupedItems).reduce(
     (acc: Totals, [priceFormula, items]) => {
       const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);

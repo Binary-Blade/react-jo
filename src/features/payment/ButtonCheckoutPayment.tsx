@@ -18,14 +18,8 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [paymentProcess] = useState(false);
-  const { userId, isAuthenticated } = useAuthStore(state => ({
-    userId: state.userId,
-    isAuthenticated: state.isAuthenticated
-  }));
-  const { newReservation, addReservation } = useReservationStore(state => ({
-    newReservation: state.newReservation,
-    addReservation: state.addReservation
-  }));
+  const { userId, isAuthenticated } = useAuthStore();
+  const { newReservation, addReservation } = useReservationStore();
 
   useEffect(() => {
     if (loading) {

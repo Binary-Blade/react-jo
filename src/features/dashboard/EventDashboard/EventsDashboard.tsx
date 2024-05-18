@@ -1,7 +1,6 @@
 import { TableGenericData } from '@/components/tables/TableGenericData';
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
-import { GenericAlertDialog } from '@/components/common/AlertDialogGeneric';
 import { EditEventSidebar } from './EditEventSideBar';
 import { useAggregateEventData, useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useSidebarForm } from '@/hooks/useSideBarForm';
@@ -18,6 +17,7 @@ import { SORTING_EVENTS_DASHBOARD } from '@/config/sorting/sortingEvents';
 import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
 import { cardDataEvents } from '@/utils/cardDataDashbord';
 import { FilterBarDashboard } from '@/components/hero/FilterBarDashboard';
+import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 
 export const EventsDashboard = () => {
   const eventColumn = eventColumnsTable();

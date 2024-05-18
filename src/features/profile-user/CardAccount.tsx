@@ -1,7 +1,13 @@
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { FC } from 'react';
 
-export const CardAccount = () => {
+interface CardAccountProps {
+  handleDelete: () => void;
+  handleLogout: () => void;
+}
+
+export const CardAccount: FC<CardAccountProps> = ({ handleDelete, handleLogout }) => {
   return (
     <Card>
       <CardHeader>
@@ -16,14 +22,18 @@ export const CardAccount = () => {
               Permanently delete your account and all its data.
             </p>
           </div>
-          <Button variant="destructive">Delete</Button>
+          <Button variant="destructive" onClick={handleDelete}>
+            Delete
+          </Button>
         </div>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium">Logout</p>
             <p className="text-sm text-gray-500 dark:text-gray-400">Sign out of your account.</p>
           </div>
-          <Button variant="outline">Logout</Button>
+          <Button variant="outline" onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
       </CardContent>
     </Card>
