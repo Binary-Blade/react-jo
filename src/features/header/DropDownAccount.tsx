@@ -6,13 +6,27 @@ import {
   DropdownMenuContent,
   DropdownMenu
 } from '@/components/ui/dropdown-menu';
+import { useUserInitials } from '@/hooks/useUserInitial';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useUserStore } from '@/stores/useUserStore';
+import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
 export const DropDownAccount = () => {
-  const logout = useAuthStore(state => state.logout);
+  const { logout, userId } = useAuthStore();
+  const { fetchUserById, selectedUser } = useUserStore();
   const [, navigate] = useLocation();
 
+  useEffect(() => {
+    if (userId) {
+      fetchUserById(userId);
+    }
+  }, [userId, fetchUserById]);
+
+  const initials = useUserInitials({
+    firstName: selectedUser?.firstName,
+    lastName: selectedUser?.lastName
+  });
   const handleLogout = async () => {
     try {
       await logout();
@@ -34,7 +48,7 @@ export const DropDownAccount = () => {
       <DropdownMenuTrigger asChild>
         <Avatar className="h-9 w-9">
           <AvatarImage alt="@shadcn" src="/placeholder-avatar.jpg" />
-          <AvatarFallback>JP</AvatarFallback>
+          <AvatarFallback>{initials}</AvatarFallback>
           <span className="sr-only">Toggle user menu</span>
         </Avatar>
       </DropdownMenuTrigger>
