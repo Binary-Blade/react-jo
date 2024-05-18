@@ -36,7 +36,7 @@ export const EventCard: FC<EventCardProps> = ({
   const IconComponent = iconMapping[categoryType] || ActivityIcon;
 
   return (
-    <Card className="group hover:shadow-xl transition-shadow duration-300">
+    <Card className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-950">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{shortDescription}</CardDescription>

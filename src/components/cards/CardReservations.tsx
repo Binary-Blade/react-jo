@@ -14,7 +14,10 @@ type CardReservationsProps = {
 export const CardReservations: FC<CardReservationsProps> = ({ reservation }) => {
   return (
     <>
-      <Card id={reservation.reservationId}>
+      <Card
+        id={reservation.reservationId}
+        className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-950"
+      >
         <CardHeader>
           <div className="flex items-center justify-between gap-10">
             <CardTitle className="text-xl">{reservation.reservationDetails?.title}</CardTitle>
