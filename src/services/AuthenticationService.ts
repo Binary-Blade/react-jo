@@ -7,6 +7,7 @@ import {
   TokenResponse,
   GenericResponse
 } from '@/config/types/Auth/AuthResponse';
+import { ChangePasswordSchema } from '@/config/zod-schemas/changePasswordSchema';
 
 /**
  * A service class for handling authentication-related requests.
@@ -37,6 +38,17 @@ export class AuthenticationService {
    */
   static async login(userData: LoginFormData): Promise<LoginResponse> {
     const response = await axiosClient.post('/auth/login', userData);
+    if (response.data) {
+      return {
+        success: true,
+        data: response.data
+      };
+    }
+    throw new Error('Login failed: No access token received');
+  }
+
+  static async changePassword(userData: ChangePasswordSchema): Promise<LoginResponse> {
+    const response = await axiosClient.patch('/auth/change-password', userData);
     if (response.data) {
       return {
         success: true,
