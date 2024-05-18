@@ -8,6 +8,7 @@ interface QuantitySelectorProps {
 
 export const QuantitySelector = ({ quantity, onQuantityChange }: QuantitySelectorProps) => {
   const decrementQuantity = () => {
+    if (quantity === 1) return;
     const newQuantity = quantity - 1;
     onQuantityChange(newQuantity);
   };
