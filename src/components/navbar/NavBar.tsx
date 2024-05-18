@@ -3,13 +3,15 @@ import { MedalIcon, ShoppingCartIcon } from '../ui/IconComponents';
 import { NAVLINKS_PUBLIC } from '@/config/navlink';
 import { FC } from 'react';
 import { DropDownAccount } from '@/features/header/DropDownAccount';
+import { UserRole } from '@/config/enums/UserRole.enum';
 
 interface NavBarProps {
   isAuthenticated: boolean;
   totalItems: number;
+  role: string | null;
 }
 
-export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems }) => {
+export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) => {
   return (
     <header className="w-full bg-white shadow-sm dark:bg-gray-950">
       <div className="container flex items-center justify-between h-16 px-4 md:px-2">
@@ -27,12 +29,14 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems }) => {
               {link.name}
             </Link>
           ))}
-          <Link
-            href={'/dashboard'}
-            className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-          >
-            Dashboard
-          </Link>
+          {isAuthenticated && role === UserRole.ADMIN && (
+            <Link
+              href={'/dashboard'}
+              className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            >
+              Dashboard
+            </Link>
+          )}
         </nav>
         <div className="flex items-center gap-6">
           <Link className="relative" href="/cart">
