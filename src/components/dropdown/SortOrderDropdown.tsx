@@ -20,13 +20,13 @@ export const SortOrderDropdown: FC<SortOrderDropdownProps> = ({ sortOrder, setSo
       <DropdownMenuTrigger asChild>
         <Button className="hidden md:flex" variant="outline">
           <ArrowUpDownIcon className="w-4 h-4 mr-2" />
-          Order by
+          Ordre
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup value={sortOrder} onValueChange={setSortOrder}>
-          <DropdownMenuRadioItem value="ASC">Ascending</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="DESC">Descending</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="ASC">Ascendant</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="DESC">Descendant</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

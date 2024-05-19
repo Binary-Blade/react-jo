@@ -25,9 +25,9 @@ export const CardTicketSelect: FC<CardTicketPriceProps> = ({
 }) => (
   <Card>
     <CardHeader>
-      <CardTitle>Ticket Prices </CardTitle>
+      <CardTitle>Prix des billets</CardTitle>
       <CardDescription className="text-md">
-        {currentPrice ? `Price: $${currentPrice}` : 'Select a ticket type'}{' '}
+        {currentPrice ? `Prix : ${currentPrice} €` : 'Sélectionnez un type de billet'}
       </CardDescription>
     </CardHeader>
     <CardContent className="grid gap-6">
@@ -41,22 +41,22 @@ export const CardTicketSelect: FC<CardTicketPriceProps> = ({
           >
             <div className="flex items-center space-x-2">
               <RadioGroupItem value={PriceFormula.SOLO} id="r1" />
-              <Label htmlFor="r1">Solo</Label>
+              <Label htmlFor="r1">SOLO</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value={PriceFormula.DUO} id="r2" />
-              <Label htmlFor="r2">Duo</Label>
+              <Label htmlFor="r2">DUO</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value={PriceFormula.FAMILY} id="r3" />
-              <Label htmlFor="r3">Family</Label>
+              <Label htmlFor="r3">FAMILY</Label>
             </div>
           </RadioGroup>
         </div>
         <QuantitySelector quantity={quantity} onQuantityChange={setQuantity} />
       </div>
       <Button type="submit" onClick={handleAddToCart} className="w-full">
-        Add to Cart
+        Ajouter au panier
       </Button>
     </CardContent>
     <CardFooter>

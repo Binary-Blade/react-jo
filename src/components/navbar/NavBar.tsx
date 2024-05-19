@@ -1,9 +1,10 @@
 import { Link } from 'wouter';
-import { MedalIcon, ShoppingCartIcon } from '../ui/IconComponents';
+import { MedalIcon } from '../ui/IconComponents';
 import { NAVLINKS_PUBLIC } from '@/config/navlink';
 import { FC } from 'react';
 import { DropDownAccount } from '@/features/header/DropDownAccount';
 import { UserRole } from '@/config/enums/UserRole.enum';
+import { CartPopoverPreview } from '@/features/cart/CartPopoverPreview';
 
 interface NavBarProps {
   isAuthenticated: boolean;
@@ -39,14 +40,14 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) =
           )}
         </nav>
         <div className="flex items-center gap-6">
-          <Link className="relative" href="/cart">
-            <ShoppingCartIcon className="w-6 h-6" />
+          <div className="relative">
+            <CartPopoverPreview />
             {totalItems > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-medium">
                 {totalItems}
               </span>
             )}
-          </Link>
+          </div>
           {!isAuthenticated ? (
             <>
               <Link
@@ -54,7 +55,7 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) =
                 className="inline-flex items-center justify-center px-6 py-3 text-base 
                 font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
               >
-                Login
+                Connexion
               </Link>
             </>
           ) : (

@@ -6,8 +6,8 @@ import { CreditCardIcon, WalletCardsIcon } from '@/components/ui/IconComponents'
 export const CardPaymentCheckout = () => (
   <Card>
     <CardHeader>
-      <CardTitle>Payment Method</CardTitle>
-      <CardDescription>Select your preferred payment method.</CardDescription>
+      <CardTitle>Méthode de Paiement</CardTitle>
+      <CardDescription>Sélectionnez votre méthode de paiement préférée.</CardDescription>
     </CardHeader>
     <CardContent>
       <RadioGroup className="grid gap-4" defaultValue="credit-card">
@@ -15,7 +15,7 @@ export const CardPaymentCheckout = () => (
           <RadioGroupItem id="credit-card" value="credit-card" />
           <Label className="flex items-center gap-2" htmlFor="credit-card">
             <CreditCardIcon className="h-6 w-6" />
-            Credit Card
+            Carte de Crédit
           </Label>
         </div>
         <div className="flex items-center gap-2">

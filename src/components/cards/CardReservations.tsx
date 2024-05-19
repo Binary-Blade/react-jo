@@ -45,7 +45,7 @@ export const CardReservations: FC<CardReservationsProps> = ({ reservation }) => 
           </div>
           <div className="mt-4 flex items-center justify-between">
             <div className="text-lg font-semibold">
-              ${reservation.reservationDetails.price.toFixed(2)}
+              €{reservation.reservationDetails.price.toFixed(2)}
             </div>
             <div className="flex items-center gap-2">
               {reservation.transaction.statusPayment === 'APPROVED' && (

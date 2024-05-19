@@ -16,7 +16,7 @@ export const DescriptionSelectedEvent: FC<DescriptionSelectedEventProps> = ({
       <p>{shortDescription}</p>
       <Collapsible className="py-4">
         <CollapsibleTrigger className="font-semibold flex items-center gap-1 [&[data-state=open]>svg]:-rotate-90">
-          Show more
+          Voir plus
           <ChevronRightIcon className="w-4 h-4 translate-y-px transition-all" />
         </CollapsibleTrigger>
         <CollapsibleContent>

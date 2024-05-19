@@ -27,7 +27,7 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({ groups, filterValue, o
       <DropdownMenuTrigger asChild>
         <Button className="hidden sm:flex" variant="outline">
           <FilterIcon className="w-5 h-5 mr-2" />
-          Filter
+          Filtrer
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
