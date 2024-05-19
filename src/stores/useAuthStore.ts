@@ -6,11 +6,11 @@ import { AuthenticationService } from '@/services/AuthenticationService';
 import useCartStore from './useCartStore';
 import { AuthStoreTypes } from '@/config/types/Auth/AuthStoreType';
 import useLocalCartStore from './useLocalCartStore';
+import { handleAsyncError } from '@/config/errors/handleErrorResponse';
 
 interface DecodedToken {
   role: string;
 }
-
 export const useAuthStore = create<AuthStoreTypes>(set => ({
   accessToken: null,
   isAuthenticated: false,
@@ -26,8 +26,7 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
       set({ loading: false });
       return { success: true, message: 'Signup successful' };
     } catch (error: any) {
-      set({ loading: false, error: error.message || 'Signup failed' });
-      return { success: false, message: error.message || 'Signup failed' };
+      return handleAsyncError(error, set);
     }
   },
 
@@ -46,8 +45,9 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
       await useCartStore.getState().syncCartItems(data.userId);
       return { success: true };
     } catch (error: any) {
-      set({ loading: false, error: error.message || 'Login failed' });
-      return { success: false, message: error.message || 'Login failed' };
+      const errorMessage = error.response?.data?.message || 'An error occurred';
+      set({ loading: false, error: errorMessage });
+      return { success: false, error: errorMessage };
     }
   },
 
@@ -74,8 +74,9 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
       set({ loading: false });
       return { success: true, message: 'Password changed successfully' };
     } catch (error: any) {
-      set({ loading: false, error: error.message || 'Password change failed' });
-      return { success: false, message: error.message || 'Password change failed' };
+      const errorMessage = error.response?.data.message || 'An error occurred';
+      set({ loading: false, error: errorMessage });
+      return { success: false, error: errorMessage };
     }
   },
 

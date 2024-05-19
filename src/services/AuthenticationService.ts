@@ -2,7 +2,7 @@ import axiosClient from '@/config/axiosConfig';
 import { LoginFormData } from '@/config/zod-schemas/loginSchema';
 import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import {
-  SuccessResponse,
+  Response,
   LoginResponse,
   TokenResponse,
   GenericResponse
@@ -22,9 +22,9 @@ export class AuthenticationService {
    * Sends a signup request to the server with the provided user data.
    *
    * @param {SignupFormData} userData - The data to be sent in the signup request.
-   * @returns {Promise<SuccessResponse>} - A promise that resolves to the server's response.
+   * @returns {Promise<Response>} - A promise that resolves to the server's response.
    */
-  static async signup(userData: SignupFormData): Promise<SuccessResponse> {
+  static async signup(userData: SignupFormData): Promise<Response> {
     const response = await axiosClient.post('/auth/signup', userData);
     return response.data;
   }
