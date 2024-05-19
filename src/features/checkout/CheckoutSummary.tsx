@@ -16,7 +16,7 @@ interface Totals {
   [key: string]: number;
 }
 
-export const CartSummary = () => {
+export const CheckoutSummary = () => {
   const { cartId, cartItems } = useCartStore(state => ({
     cartItems: state.cartItems,
     cartId: state.cartId
@@ -36,8 +36,8 @@ export const CartSummary = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Review & Checkout</CardTitle>
-        <CardDescription>Confirm your order and complete the purchase.</CardDescription>
+        <CardTitle>Revue & Paiement</CardTitle>
+        <CardDescription>Confirmez votre commande et complétez l'achat.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
@@ -52,7 +52,7 @@ export const CartSummary = () => {
         <Separator className="my-4" />
         <div className="flex items-center justify-between font-semibold ">
           <div>Total</div>
-          <div>${total}</div>
+          <div>€{total}</div>
         </div>
       </CardContent>
       <CardFooter>

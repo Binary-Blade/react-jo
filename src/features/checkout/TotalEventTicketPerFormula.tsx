@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-// Define the types for the items
 interface TicketItem {
   cartItemId: number;
   event: {
@@ -33,7 +32,7 @@ export const TotalEventTicketPerFormula = ({ priceFormula, items }: TicketChecko
           ))}
         </p>
       </div>
-      <div className="font-medium pl-2">${totalPriceForGroup.toFixed(2)}</div>
+      <div className="font-medium pl-2">€{totalPriceForGroup.toFixed(2)}</div>
     </div>
   );
 };
