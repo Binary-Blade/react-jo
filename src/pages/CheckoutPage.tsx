@@ -2,18 +2,18 @@ import { Separator } from '@/components/ui/separator';
 import useCartStore from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useEffect } from 'react';
-import { CardFormule } from '@/features/cart/CardFormule';
 import { Link } from 'wouter';
 import { useGroupByTicketType } from '@/hooks';
 import { Header } from '@/features/header/Header';
 import { CardPromoCode } from '@/components/cards/CardPromoCode';
 import { CardPaymentCheckout } from '@/components/cards/CardPaymentCheckout';
-import { CartSummary } from '@/features/cart/CartSummary';
-import { CartEmpty } from '@/components/empty/CartEmpty';
 import { CartNotLogging } from '@/components/notlogging/CartNotLogging';
 import LoadingPage from './LoadingPage';
+import { CheckoutSummary } from '@/features/checkout/CheckoutSummary';
+import { CardFormule } from '@/features/checkout/CardFormule';
+import { CheckoutEmpty } from '@/components/empty/CartEmpty';
 
-export default function CartPage() {
+export default function CheckoutPage() {
   const { fetchCartItems, cartId, cartItems, loading } = useCartStore();
   const { userId, isAuthenticated } = useAuthStore();
 
@@ -30,7 +30,7 @@ export default function CartPage() {
   }
 
   if (cartItems.length === 0 && isAuthenticated) {
-    return <CartEmpty />;
+    return <CheckoutEmpty />;
   } else if (cartItems.length === 0 && !isAuthenticated) {
     return <CartNotLogging />;
   }
@@ -38,7 +38,7 @@ export default function CartPage() {
     <>
       <Header />
       <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold mb-8">2024 Olympic Games Tickets</h1>
+        <h1 className="text-3xl font-bold mb-8">Payez vos billets pour les Jeux Olympiques 2024</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Object.entries(groupedItems).map(([type, items]) => (
             <CardFormule key={type} priceFormula={type} items={items} />
@@ -46,7 +46,7 @@ export default function CartPage() {
         </div>
         <Separator className="my-12" />
         <div className="grid md:grid-cols-2 gap-8">
-          <CartSummary />
+          <CheckoutSummary />
           <div className="grid gap-4">
             <CardPromoCode />
             <CardPaymentCheckout />
@@ -61,7 +61,7 @@ export default function CartPage() {
           disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
           href="#"
         >
-          Continue Shopping
+          Continuer vos achats
         </Link>
       </div>
     </>
