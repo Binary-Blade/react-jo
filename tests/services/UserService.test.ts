@@ -1,30 +1,20 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axiosClient from '@/config/axiosConfig';
-import { UserService } from './UserService';
+import { UserService } from '@/services/UserService';
 
-// Correctly mock the axios client
-vi.mock('@/config/axiosConfig', async () => {
-  const actual = await vi.importActual('@/config/axiosConfig');
-  return {
-    ...actual,
-    default: {
-      get: vi.fn(() => Promise.resolve({ data: [] })), // Default response to prevent unhandled rejections
-      patch: vi.fn(() => Promise.resolve({ data: [] })),
-      delete: vi.fn(() => Promise.resolve({ data: [] }))
-    }
-  };
-});
+vi.mock('@/config/axiosConfig');
 
 describe('UserService', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getAllUsers', () => {
     it('should fetch all users successfully', async () => {
       const mockResponse = { data: [{ id: 1, name: 'John Doe' }] };
       vi.mocked(axiosClient.get).mockResolvedValueOnce(mockResponse);
 
-      const result = await UserService.getAllUsers({
-        offset: 1,
-        limit: 10
-      });
+      const result = await UserService.getAllUsers({ offset: 1, limit: 10 });
       expect(result).toEqual({ success: true, data: mockResponse.data });
       expect(axiosClient.get).toHaveBeenCalledWith('/users/get-all', {
         params: { offset: 1, limit: 10 }
@@ -33,7 +23,14 @@ describe('UserService', () => {
 
     it('should handle errors when fetching all users', async () => {
       vi.mocked(axiosClient.get).mockRejectedValueOnce(new Error('Network error'));
-      await expect(UserService.getAllUsers()).rejects.toThrow('Failed to fetch users');
+
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await expect(UserService.getAllUsers({ offset: 1, limit: 10 })).rejects.toThrow(
+        'Failed to fetch users'
+      );
+
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -48,7 +45,12 @@ describe('UserService', () => {
 
     it('should handle errors when fetching user values', async () => {
       vi.mocked(axiosClient.get).mockRejectedValueOnce(new Error('Network error'));
+
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
       await expect(UserService.getAllValuesUsers()).rejects.toThrow('Failed to fetch users');
+
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -66,7 +68,12 @@ describe('UserService', () => {
     it('should handle errors when fetching a user by ID', async () => {
       const userId = 1;
       vi.mocked(axiosClient.get).mockRejectedValueOnce(new Error('Network error'));
+
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
       await expect(UserService.getUserById(userId)).rejects.toThrow('Failed to fetch user');
+
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -86,9 +93,14 @@ describe('UserService', () => {
       const userId = 1;
       const updateData = { name: 'Jane Doe' };
       vi.mocked(axiosClient.patch).mockRejectedValueOnce(new Error('Network error'));
+
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
       await expect(UserService.updateUser(userId, updateData)).rejects.toThrow(
         'Failed to update user'
       );
+
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -106,7 +118,12 @@ describe('UserService', () => {
     it('should handle errors when deleting a user', async () => {
       const userId = 1;
       vi.mocked(axiosClient.delete).mockRejectedValueOnce(new Error('Network error'));
+
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
       await expect(UserService.deleteUser(userId)).rejects.toThrow('Failed to delete user');
+
+      consoleErrorSpy.mockRestore();
     });
   });
 });

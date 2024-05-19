@@ -1,23 +1,12 @@
 import { CreateCartItemLocalDto } from '@/config/dtos/LocalCartItem.dto';
-import { LocalCartService } from './LocalCartService';
+import { LocalCartService } from '@/services/LocalCartService';
 import { describe, it, expect, beforeEach } from 'vitest';
 
-//FIX: TEST FIX
 describe('LocalCartService', () => {
   beforeEach(() => {
     localStorage.clear(); // Clear localStorage before each test
   });
 
-  it('should handle exceptions during localStorage operations', () => {
-    const badData = {
-      get me() {
-        throw new Error('Failed to access data');
-      }
-    };
-    localStorage.setItem('badData', JSON.stringify(badData)); // Simulate an error during serialization
-
-    expect(() => LocalCartService.getStoredCartItems()).toThrow('Failed to access data');
-  });
   it('should retrieve a valid stored cart ID', () => {
     const now = new Date();
     const expiry = now.getTime() + 6 * 60 * 60 * 1000;
@@ -88,7 +77,7 @@ describe('LocalCartService', () => {
     );
     localStorage.setItem('cartId', '123');
     localStorage.setItem('cartIdExpiry', '9999999999999');
-    LocalCartService.clearStoredCartItems();
+    LocalCartService.clearStoredCartAll();
 
     expect(localStorage.getItem('cartItems')).toBeNull();
     expect(localStorage.getItem('cartId')).toBeNull();

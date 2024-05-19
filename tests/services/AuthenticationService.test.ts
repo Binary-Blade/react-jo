@@ -1,4 +1,4 @@
-import { AuthenticationService } from './AuthenticationService';
+import { AuthenticationService } from '@/services/AuthenticationService';
 import axiosClient from '@/config/axiosConfig';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 

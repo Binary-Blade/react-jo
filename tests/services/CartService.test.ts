@@ -1,5 +1,5 @@
+import { CartService } from '@/services/CartService';
 import axiosClient from '@/config/axiosConfig';
-import { CartService } from './CartService';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock the axiosClient imports
@@ -34,9 +34,13 @@ describe('CartService', () => {
     const cartItemData = { productId: 2, quantity: 3 };
     vi.mocked(axiosClient.post).mockRejectedValue(new Error('Network error'));
 
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
     await expect(CartService.addItemToCart(userId, cartItemData)).rejects.toThrow(
       'Failed to add item to cart'
     );
+
+    consoleErrorSpy.mockRestore();
   });
 
   // Test for findAllItemsInCart
@@ -56,9 +60,13 @@ describe('CartService', () => {
     const cartId = 2;
     vi.mocked(axiosClient.get).mockRejectedValue(new Error('Network error'));
 
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
     await expect(CartService.findAllItemsInCart(userId, cartId)).rejects.toThrow(
       'Failed to find items in cart'
     );
+
+    consoleErrorSpy.mockRestore();
   });
 
   // Test for updateCartItem
@@ -85,9 +93,13 @@ describe('CartService', () => {
     const quantity = 4;
     vi.mocked(axiosClient.patch).mockRejectedValue(new Error('Network error'));
 
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
     await expect(CartService.updateCartItem(userId, cartId, cartItemId, quantity)).rejects.toThrow(
       'Failed to update cart item'
     );
+
+    consoleErrorSpy.mockRestore();
   });
 
   // Test for removeItemFromCart
@@ -111,8 +123,12 @@ describe('CartService', () => {
     const cartItemId = 3;
     vi.mocked(axiosClient.delete).mockRejectedValue(new Error('Network error'));
 
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
     await expect(CartService.removeItemFromCart(userId, cartId, cartItemId)).rejects.toThrow(
       'Failed to remove item from cart'
     );
+
+    consoleErrorSpy.mockRestore();
   });
 });
