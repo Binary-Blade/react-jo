@@ -1,6 +1,6 @@
-import { LoginForm } from '@/features/auth/LoginForm';
+import { LoginForm } from '@/components/form/LoginForm';
+import { SignUpForm } from '@/components/form/SignUpForm';
 import { MedalIcon } from '@/components/ui/IconComponents';
-import { SignUpForm } from '@/features/auth/SignUpForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function AuthPage() {

@@ -11,7 +11,7 @@ import { CartNotLogging } from '@/components/notlogging/CartNotLogging';
 import LoadingPage from './LoadingPage';
 import { CheckoutSummary } from '@/features/checkout/CheckoutSummary';
 import { CardFormule } from '@/features/checkout/CardFormule';
-import { CheckoutEmpty } from '@/components/empty/CartEmpty';
+import { CheckoutEmpty } from '@/components/empty/CheckoutEmpty';
 
 export default function CheckoutPage() {
   const { fetchCartItems, cartId, cartItems, loading } = useCartStore();

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { EventsDashboard } from '@/features/dashboard/EventDashboard/EventsDashboard';
 import { UsersDashboard } from '@/features/dashboard/UsersDashboard/UsersDashboard';
-import { SideBarDesktop } from '@/components/navbar/SideBarDesktop';
-import { SideBarMenu } from '@/components/navbar/SideBarMenu';
+import { SideBarDesktop } from '@/features/navbar/SideBarDesktop';
+import { SideBarMenu } from '@/features/navbar/SideBarMenu';
 
 export default function DashboardPage() {
   const [activeComponent, setActiveComponent] = useState(() => {

@@ -10,9 +10,8 @@ import { OverviewOneEvent } from '@/features/events/selected-event/OverviewOneEv
 import { ButtonToEvent } from '@/components/button/ButtonToEvent';
 import { ImagesCoverEvent } from '@/components/cards/ImagesCoverEvent';
 import { GenericTitle } from '@/components/hero/GenericTitle';
-import { DescriptionSelectedEvent } from '@/components/collapsible/DescriptionSelectedEvent';
-import { ReportedIssueButtonEvent } from '@/components/dialog/ReportedIssueButtonEvent';
 import { ChooseEventPrices } from '@/features/events/selected-event/ChooseEventPrices';
+import { DescriptionCollapsible } from '@/components/collapsible/DescriptionCollapsible';
 
 export default function EventSelectedPage() {
   const params = useParams();
@@ -47,7 +46,7 @@ export default function EventSelectedPage() {
                 basePrice={event?.basePrice}
               />
               <Separator />
-              <DescriptionSelectedEvent
+              <DescriptionCollapsible
                 shortDescription={event?.shortDescription}
                 longDescription={event?.longDescription}
               />
@@ -59,7 +58,6 @@ export default function EventSelectedPage() {
                 basePrice={basePrice}
                 addItemToCartLocal={addItemToCartLocal}
               />
-              <ReportedIssueButtonEvent />
             </div>
           </section>
         </div>
