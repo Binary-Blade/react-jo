@@ -15,6 +15,7 @@ vi.mock('@/config/axiosConfig', async () => {
 describe('AuthenticationService', () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    localStorage.clear();
   });
 
   it('signup should resolve with SuccessResponse on successful request', async () => {

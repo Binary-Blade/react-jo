@@ -2,40 +2,7 @@ import { CreateCartItemLocalDto } from '@/config/dtos/LocalCartItem.dto';
 import { LocalCartService } from './LocalCartService';
 import { describe, it, expect, beforeEach } from 'vitest';
 
-interface MockLocalStorage {
-  [key: string]: string | null;
-}
-
-const localStorageMock = (function () {
-  let store: MockLocalStorage = {};
-  return {
-    getItem(key: string): string | null {
-      return store[key] || null;
-    },
-    setItem(key: string, value: string): void {
-      store[key] = value;
-    },
-    removeItem(key: string): void {
-      delete store[key];
-    },
-    clear(): void {
-      store = {};
-    },
-    key(index: number): string | null {
-      const keys = Object.keys(store);
-      return keys[index] || null;
-    },
-    get length(): number {
-      return Object.keys(store).length;
-    }
-  };
-})();
-
-Object.defineProperty(global, 'localStorage', {
-  value: localStorageMock,
-  writable: true
-});
-
+//FIX: TEST FIX
 describe('LocalCartService', () => {
   beforeEach(() => {
     localStorage.clear(); // Clear localStorage before each test

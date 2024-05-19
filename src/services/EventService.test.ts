@@ -14,6 +14,7 @@ vi.mock('@/config/axiosConfig', () => ({
 describe('EventService', () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    localStorage.clear();
   });
 
   it('getAllValues should return all events successfully', async () => {
