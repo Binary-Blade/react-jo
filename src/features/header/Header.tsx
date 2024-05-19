@@ -1,7 +1,7 @@
 import { useAuthStore } from '@/stores/useAuthStore';
-import { NavBar } from '@/components/navbar/NavBar';
-import { SideBarMenu } from '@/components/navbar/SideBarMenu';
 import { useDisplayTotalItems } from '@/hooks/useDisplayTotalItems';
+import { SideBarMenu } from '../navbar/SideBarMenu';
+import { NavBar } from '../navbar/NavBar';
 
 export const Header = () => {
   const { isAuthenticated, role } = useAuthStore();

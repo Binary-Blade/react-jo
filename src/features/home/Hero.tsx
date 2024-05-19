@@ -2,8 +2,7 @@ import { Link } from 'wouter';
 import placeholderImage from '@/assets/images/PlaceholderParis.svg';
 import { useAuthStore } from '@/stores/useAuthStore';
 
-// TODO: Create a Link Universal Component that accepts a path and text as props
-const Hero = () => {
+export const Hero = () => {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   return (
     <section className="relative bg-gray-900">
@@ -55,5 +54,3 @@ const Hero = () => {
     </section>
   );
 };
-
-export default Hero;

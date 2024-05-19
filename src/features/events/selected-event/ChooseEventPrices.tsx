@@ -1,9 +1,9 @@
 import { FC, useCallback } from 'react';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { useTicketManager } from '@/hooks';
-import { CardTicketSelect } from '@/components/cards/CardTicketSelect';
 import { Toast } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
+import { EventAddToCart } from './EventAddToCart';
 
 type CardEventPricesProps = {
   eventId: number | undefined;
@@ -43,7 +43,7 @@ export const ChooseEventPrices: FC<CardEventPricesProps> = ({
 
   return (
     <>
-      <CardTicketSelect
+      <EventAddToCart
         currentPrice={totalPrice} // Use total price here
         selectedTicketType={selectedTicketType}
         quantity={quantity}

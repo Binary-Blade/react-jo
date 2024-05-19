@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { FC } from 'react';
-import { ArrowUpDownIcon } from '../ui/IconComponents';
+import { ArrowUpDownIcon } from '@/components/ui/IconComponents';
 
 interface SortOrderDropdownProps {
   sortOrder: string;

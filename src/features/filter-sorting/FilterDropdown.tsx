@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { FC } from 'react';
-import { FilterIcon } from '../ui/IconComponents';
+import { FilterIcon } from '@/components/ui/IconComponents';
 
 interface FilterDropdownGroup {
   label: string;

@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { FC } from 'react';
-import { ListIcon } from '../ui/IconComponents';
+import { ListIcon } from '@/components/ui/IconComponents';
 
 interface SortProps {
   sortBy: string;

@@ -2,7 +2,7 @@ import { Card } from '@/components/ui/card';
 import { PlusIcon } from '@/components/ui/IconComponents';
 import { CollapsibleTrigger, CollapsibleContent, Collapsible } from '@/components/ui/collapsible';
 import { Button } from '@/components/ui/button';
-import { FormAddNewEvent } from '../form/FormAddNewEvent';
+import { FormAddNewEvent } from '@/components/form/FormAddNewEvent';
 
 export const CollapsibleAddEvent = () => {
   return (

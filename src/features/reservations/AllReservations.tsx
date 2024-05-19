@@ -4,14 +4,14 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { useFilter, usePagination } from '@/hooks';
 import { Button } from '@/components/ui/button';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
-import { CardReservations } from '@/components/cards/CardReservations';
-import { SortOrderDropdown } from '@/components/dropdown/SortOrderDropdown';
-import { FilterDropdown } from '@/components/dropdown/FilterDropdown';
-import { SortByDropdown } from '@/components/dropdown/SortByDropdown';
 import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
 import { SORTING_RESERVATION_PUBLIC } from '@/config/sorting/sortingReservation';
 import { ReservationEmpty } from '@/components/empty/ReservationEmpty';
 import { Separator } from '@/components/ui/separator';
+import { CardReservations } from './CardReservations';
+import { FilterDropdown } from '../filter-sorting/FilterDropdown';
+import { SortOrderDropdown } from '../filter-sorting/SortOrderDropdown';
+import { SortByDropdown } from '../filter-sorting/SortByDropdown';
 
 export const AllReservations = () => {
   const { reservations, fetchReservations, total } = useReservationStore();

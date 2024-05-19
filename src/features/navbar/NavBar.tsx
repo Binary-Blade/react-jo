@@ -1,10 +1,10 @@
 import { Link } from 'wouter';
-import { MedalIcon } from '../ui/IconComponents';
 import { NAVLINKS_PUBLIC } from '@/config/navlink';
 import { FC } from 'react';
 import { DropDownAccount } from '@/features/header/DropDownAccount';
 import { UserRole } from '@/config/enums/UserRole.enum';
 import { CartPopoverPreview } from '@/features/cart/CartPopoverPreview';
+import { MedalIcon } from '@/components/ui/IconComponents';
 
 interface NavBarProps {
   isAuthenticated: boolean;

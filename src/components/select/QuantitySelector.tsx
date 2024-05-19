@@ -24,6 +24,7 @@ export const QuantitySelector = ({ quantity, onQuantityChange }: QuantitySelecto
         className="w-10 h-10 grid place-items-center"
         variant="outline"
         onClick={decrementQuantity}
+        aria-label="decrement"
       >
         <MinusIcon className="w-4 h-4" />
       </Button>
@@ -32,6 +33,7 @@ export const QuantitySelector = ({ quantity, onQuantityChange }: QuantitySelecto
         className="w-10 h-10 grid place-items-center"
         variant="outline"
         onClick={incrementQuantity}
+        aria-label="increment"
       >
         <PlusIcon className="w-4 h-4" />
       </Button>

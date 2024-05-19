@@ -17,7 +17,6 @@ import {
 import { MoveHorizontalIcon } from '../ui/IconComponents';
 import { Button } from '../ui/button';
 
-// Assuming each column in the data can have a custom renderer for more flexibility
 export type Column = {
   key: string;
   header?: string;
@@ -30,17 +29,17 @@ type TableGenericProps = {
   data: Record<string, any>[];
   columns: Column[];
   onDelete?: (item: Record<string, any>) => void;
-  onEdit?: (item: any) => void; // Specific handler for edit actions
+  onEdit?: (item: any) => void;
 };
 
 export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelete, onEdit }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" data-testid="table-container">
       <Table>
         <TableHeader>
           <TableRow>
             {columns.map(col => (
-              <TableHead key={col.key} className={col.className}>
+              <TableHead key={col.key} className={col.className} data-testid={`header-${col.key}`}>
                 {col.header}
               </TableHead>
             ))}
@@ -48,9 +47,13 @@ export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelet
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableRow key={index}>
+            <TableRow key={index} data-testid={`row-${index}`}>
               {columns.map(col => (
-                <TableCell key={col.key} className={col.className}>
+                <TableCell
+                  key={col.key}
+                  className={col.className}
+                  data-testid={`cell-${index}-${col.key}`}
+                >
                   {col.render ? col.render(item[col.key]) : item[col.key]}
                 </TableCell>
               ))}

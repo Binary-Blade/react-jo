@@ -1,10 +1,17 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
 import { FC } from 'react';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { QuantitySelector } from '../select/QuantitySelector';
+import { QuantitySelector } from '@/components/select/QuantitySelector';
+import { Button } from '@/components/ui/button';
 
 interface CardTicketPriceProps {
   currentPrice: number | undefined;
@@ -15,7 +22,7 @@ interface CardTicketPriceProps {
   handleAddToCart: () => any;
 }
 
-export const CardTicketSelect: FC<CardTicketPriceProps> = ({
+export const EventAddToCart: FC<CardTicketPriceProps> = ({
   currentPrice,
   selectedTicketType,
   quantity,

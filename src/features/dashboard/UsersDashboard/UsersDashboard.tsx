@@ -4,17 +4,17 @@ import { useEffect } from 'react';
 import { useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useAggregateUsersData } from '@/hooks/useAggregateUsersData';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
-import { HeaderCardInfo } from '@/components/header/HeaderCardInfo';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
-import { SortByDropdown } from '@/components/dropdown/SortByDropdown';
-import { SortOrderDropdown } from '@/components/dropdown/SortOrderDropdown';
-import { FilterDropdown } from '@/components/dropdown/FilterDropdown';
 import { cardDataUsers } from '@/utils/cardDataDashbord';
 import { FILTER_USERS_DASHBOARD } from '@/config/filters/filterUsers';
 import { usersColumnsTable } from '@/config/columns-table/usersColumnsTable';
 import { SORTING_USERS_DASHBOARD } from '@/config/sorting/sortingUsers';
 import { FilterBarDashboard } from '@/components/hero/FilterBarDashboard';
 import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
+import { SortByDropdown } from '@/features/filter-sorting/SortByDropdown';
+import { SortOrderDropdown } from '@/features/filter-sorting/SortOrderDropdown';
+import { FilterDropdown } from '@/features/filter-sorting/FilterDropdown';
+import { HeaderCardInfoDashboard } from '@/components/header/HeaderCardInfoDashboard';
 
 export const UsersDashboard = () => {
   const { users, fetchAllUsersFiltered, deleteUser, total } = useUserStore();
@@ -38,7 +38,7 @@ export const UsersDashboard = () => {
     <>
       <DashboardHeader />
       <FilterBarDashboard title="Users" />
-      <HeaderCardInfo cardData={cardDataUser} />
+      <HeaderCardInfoDashboard cardData={cardDataUser} />
       <div className="flex items-center gap-4">
         <div className="ml-auto flex items-center gap-2">
           <SortByDropdown

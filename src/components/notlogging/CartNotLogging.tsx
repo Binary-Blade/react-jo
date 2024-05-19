@@ -4,10 +4,10 @@ import { Header } from '@/features/header/Header';
 
 export const CartNotLogging = () => (
   <>
-    <Header />
+    <Header data-testid="header" />
     <main className="flex min-h-screen flex-col items-center justify-center p-6">
       <div className="container flex flex-col items-center justify-center gap-6 text-center">
-        <UserIcon className="h-16 w-16" />
+        <UserIcon data-testid="user-icon" className="h-16 w-16" />
         <h1 className="text-4xl font-bold">You are not logged in</h1>
         <p className="max-w-lg text-gray-500 dark:text-gray-400">
           To access your cart and continue shopping, please log in or create an account.

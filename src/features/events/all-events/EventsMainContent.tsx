@@ -1,16 +1,16 @@
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
 import { useFilter, usePagination } from '@/hooks';
-import { EventCard } from '@/components/cards/EventCard';
+import { EventCard } from './EventCard';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
-import { SortByDropdown } from '@/components/dropdown/SortByDropdown';
-import { SortOrderDropdown } from '@/components/dropdown/SortOrderDropdown';
-import { FilterDropdown } from '@/components/dropdown/FilterDropdown';
 import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
 import { SORTING_EVENTS_PUBLIC } from '@/config/sorting/sortingEvents';
 import { GenericTitle } from '@/components/hero/GenericTitle';
 import { Separator } from '@/components/ui/separator';
 import LoadingPage from '@/pages/LoadingPage';
+import { FilterDropdown } from '@/features/filter-sorting/FilterDropdown';
+import { SortOrderDropdown } from '@/features/filter-sorting/SortOrderDropdown';
+import { SortByDropdown } from '@/features/filter-sorting/SortByDropdown';
 
 export const EventsMainContent: React.FC = () => {
   const { events, fetchEvents, total, loading } = useEventStore();

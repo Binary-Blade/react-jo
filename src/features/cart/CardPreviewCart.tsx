@@ -1,8 +1,8 @@
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
 import { FC } from 'react';
-import { XIcon } from '../ui/IconComponents';
 import { CartItemLocal } from '@/config/types/Cart/CartTypes';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { XIcon } from '@/components/ui/IconComponents';
 
 interface CardPreviewCartProps {
   cartItemsLocal: any;

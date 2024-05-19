@@ -14,14 +14,14 @@ export const CardPaymentCheckout = () => (
         <div className="flex items-center gap-2">
           <RadioGroupItem id="credit-card" value="credit-card" />
           <Label className="flex items-center gap-2" htmlFor="credit-card">
-            <CreditCardIcon className="h-6 w-6" />
+            <CreditCardIcon data-testid="credit-card-icon" className="h-6 w-6" />
             Carte de Crédit
           </Label>
         </div>
         <div className="flex items-center gap-2">
           <RadioGroupItem id="paypal" value="paypal" />
           <Label className="flex items-center gap-2" htmlFor="paypal">
-            <WalletCardsIcon className="h-6 w-6" />
+            <WalletCardsIcon data-testid="paypal-icon" className="h-6 w-6" />
             PayPal
           </Label>
         </div>

@@ -1,7 +1,7 @@
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'wouter';
 
-export default function SectionTickets() {
+export const SectionTickets = () => {
   return (
     <>
       <Separator />
@@ -31,4 +31,4 @@ export default function SectionTickets() {
       </section>
     </>
   );
-}
+};

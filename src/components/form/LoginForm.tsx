@@ -11,7 +11,7 @@ import { AlertDestructive } from '@/components/alert/AlertDestructive';
 
 export const LoginForm = () => {
   const [, navigate] = useLocation();
-  const login = useAuthStore(state => state.login);
+  const { login } = useAuthStore();
   const [error, setError] = useState<string | null | undefined>(null);
 
   const {
