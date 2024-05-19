@@ -1,7 +1,8 @@
 // Define the shape of the success response with a message
-export interface SuccessResponse {
+export interface Response {
   success: boolean;
   message?: string;
+  error?: string;
 }
 
 // Define the shape of the login response

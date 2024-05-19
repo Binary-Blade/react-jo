@@ -1,6 +1,6 @@
 import { ChangePasswordSchema } from '@/config/zod-schemas/changePasswordSchema';
 import { UserLoginData, UserSignupData } from '../FormType';
-import { SuccessResponse } from './AuthResponse';
+import { Response } from './AuthResponse';
 
 export interface AuthStoreTypes {
   accessToken: string | null;
@@ -9,10 +9,10 @@ export interface AuthStoreTypes {
   role: string | null;
   loading: boolean;
   error: string | null;
-  signup: (userData: UserSignupData) => Promise<SuccessResponse>;
-  login: (userData: UserLoginData) => Promise<SuccessResponse>;
+  signup: (userData: UserSignupData) => Promise<Response>;
+  login: (userData: UserLoginData) => Promise<Response>;
   logout: () => Promise<void>;
-  changePassword: (userData: ChangePasswordSchema) => Promise<SuccessResponse>;
+  changePassword: (userData: ChangePasswordSchema) => Promise<Response>;
   refreshToken: () => Promise<void>;
   accessProtectedRoute: () => Promise<void>;
 }
