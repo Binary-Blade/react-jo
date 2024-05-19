@@ -80,7 +80,7 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
         </div>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Amount</p>
-          <p className="text-sm font-medium">${data.transaction.totalAmount}</p>
+          <p className="text-sm font-medium">€{data.transaction.totalAmount}</p>
         </div>
       </div>
       <Button

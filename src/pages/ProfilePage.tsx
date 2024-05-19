@@ -3,7 +3,7 @@ import { CardAccount } from '@/features/profile-user/CardAccount';
 import { CardNotification } from '@/features/profile-user/CardNotification';
 import { HeroProfile } from '@/features/profile-user/HeaderProfileUser';
 import { Header } from '@/features/header/Header';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUserStore } from '@/stores/useUserStore';
@@ -16,6 +16,7 @@ export default function ProfilePage() {
   const { logout, userId, changePassword } = useAuthStore();
   const { fetchUserById, selectedUser, deleteUser, updateUser } = useUserStore();
   const [, navigate] = useLocation();
+  const [error, setError] = useState<string | null | undefined>(null);
 
   useEffect(() => {
     if (userId) {
@@ -41,15 +42,14 @@ export default function ProfilePage() {
     }
   };
   const handleChangePassword = async (data: ChangePasswordSchema) => {
-    try {
-      await changePassword(data);
+    const response = await changePassword(data);
+    if (response.success) {
       alert('Password changed successfully');
       await logout();
       navigate('/');
-    } catch (error: any) {
-      const errorMessage = error.message || 'Password change failed due to an unexpected error';
-      console.error('Failed to change password:', errorMessage);
-      alert(errorMessage);
+    } else {
+      console.error('Password change failed:', response.error);
+      setError(response.error);
     }
   };
 
@@ -90,6 +90,7 @@ export default function ProfilePage() {
               <div className="space-y-8">
                 <CardProfile selectedUser={selectedUser} handleUpdate={handleUpdate} />
                 <CardChangePassword handleChangePassword={handleChangePassword} />
+                {error && <div className="text-red-500">{error}</div>}
                 <CardAccount handleDelete={handleDelete} handleLogout={handleLogout} />
               </div>
               <div className="space-y-8">

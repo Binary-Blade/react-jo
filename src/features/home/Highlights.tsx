@@ -14,8 +14,8 @@ export const Highlights = () => {
                 Highlights
               </div>
               <GenericTitle
-                title="Witness History in the Making"
-                subtitle="The Olympic Games are a celebration of human achievement, bringing together the world's finest athletes to compete on the grandest stage."
+                title="Assistez à l'Histoire en Marche"
+                subtitle="Les Jeux Olympiques sont une célébration des réalisations humaines, réunissant les meilleurs athlètes du monde pour concourir sur la plus grande scène."
                 titleClass="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-100"
                 subtitleClass="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400"
               />
@@ -23,23 +23,23 @@ export const Highlights = () => {
             <div className="grid gap-6 lg:grid-cols-3">
               <div className="flex flex-col items-center gap-2">
                 <MedalIcon className="w-12 h-12 text-blue-500" />
-                <h3 className="text-lg font-bold">Medal Moments</h3>
+                <h3 className="text-lg font-bold">Moments de médaille</h3>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Watch as records are broken and legends are born.
+                  Regardez les records se briser et les légendes naître.
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <FlameIcon className="w-12 h-12 text-primary" />
-                <h3 className="text-lg font-bold">Opening Ceremony</h3>
+                <h3 className="text-lg font-bold">Cérémonie d'ouverture</h3>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Experience the spectacle of the opening ceremony.
+                  Vivez le spectacle de la cérémonie d'ouverture.
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <FlameIcon className="w-12 h-12 text-rose-500" />
-                <h3 className="text-lg font-bold">Closing Celebration</h3>
+                <h3 className="text-lg font-bold">Célébration de clôture</h3>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Join the celebration as the games come to an end.
+                  Participez à la célébration de la clôture des jeux.
                 </p>
               </div>
             </div>

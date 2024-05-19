@@ -7,24 +7,21 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { SignupFormData, signupSchema } from '@/config/zod-schemas/signupSchema';
 import { Checkbox } from '@/components/ui/checkbox';
+import { AlertDestructive } from '@/components/alert/AlertDestructive';
+import { useState } from 'react';
 
 export const SignUpForm = () => {
-  const signup = useAuthStore(state => state.signup);
+  const { signup } = useAuthStore();
   const [, navigate] = useLocation();
+  const [error, setError] = useState<string | null | undefined>(null);
 
-  const handleSignUp = async (formData: SignupFormData): Promise<void> => {
-    try {
-      await signup(formData);
-      console.log('Signup successful');
-      navigate('/');
-    } catch (error: any) {
-      console.error('Signup failed:', error.response?.data || error.message);
-      alert('Signup failed: ' + (error.response?.data?.message || error.message));
-    }
-  };
-
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid }
+  } = useForm({
     resolver: zodResolver(signupSchema),
+    mode: 'onChange',
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -32,6 +29,17 @@ export const SignUpForm = () => {
       password: ''
     }
   });
+
+  const handleSignUp = async (formData: SignupFormData): Promise<void> => {
+    const response = await signup(formData);
+    if (response.success) {
+      console.log('Signup successful');
+      navigate('/');
+    } else {
+      console.error('Signup failed:', response.error);
+      setError(response.error);
+    }
+  };
 
   return (
     <>
@@ -100,9 +108,10 @@ export const SignUpForm = () => {
             terms of service
           </Link>
         </Label>
-        <Button className="w-full" type="submit">
+        <Button className="w-full" type="submit" disabled={!isValid}>
           Sign Up
         </Button>
+        {error && <AlertDestructive errorMessage={error} />}
       </form>
     </>
   );

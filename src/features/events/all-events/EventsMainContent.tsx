@@ -40,8 +40,8 @@ export const EventsMainContent: React.FC = () => {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <GenericTitle
-                title="Explore All Events"
-                subtitle="Browse the complete schedule of events and competitions for the Paris 2024 Olympic Games."
+                title="Découvrez Tous les Événements"
+                subtitle="Parcourez le programme complet des événements et compétitions des Jeux Olympiques de Paris 2024."
                 titleClass="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-100"
                 subtitleClass="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300"
               />

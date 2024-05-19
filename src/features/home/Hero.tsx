@@ -25,29 +25,29 @@ const Hero = () => {
           Paris 2024
         </h1>
         <p className="max-w-3xl mt-6 text-xl text-gray-300">
-          Experience the thrill of the Olympic Games in the City of Light. Witness history unfold as
-          the world's greatest athletes compete for glory.
+          Vivez l'excitation des Jeux Olympiques dans la Ville Lumière. Assistez à un moment
+          historique où les plus grands athlètes du monde s'affrontent pour la gloire.
         </p>
         <div className="flex gap-4 mt-12">
           <Link
             className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-rose-500 border border-transparent rounded-md shadow-sm hover:bg-rose-600"
             href="/events"
           >
-            Explore
+            Explorer
           </Link>
           {isAuthenticated ? (
             <Link
               className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
               href="/reservations"
             >
-              My Reservations
+              Mes Réservations
             </Link>
           ) : (
             <Link
               className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
               href="/auth"
             >
-              Login
+              Connexion
             </Link>
           )}
         </div>

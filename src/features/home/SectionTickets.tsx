@@ -9,11 +9,11 @@ export default function SectionTickets() {
         <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
           <div className="space-y-3">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight lg:text-5xl/leading-tight">
-              Get Your Tickets
+              Obtenez vos billets
             </h2>
             <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Don't miss your chance to be part of history. Get your tickets to the Paris 2024
-              Olympics today.
+              Ne manquez pas l'occasion de faire partie de l'histoire. Obtenez vos billets pour les
+              Jeux Olympiques de Paris 2024 dès aujourd'hui.
             </p>
           </div>
           <div className="mx-auto w-full max-w-sm space-y-2">
@@ -24,7 +24,7 @@ export default function SectionTickets() {
                             dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
               href="/offers"
             >
-              Get Tickets
+              Obtenir des billets
             </Link>
           </div>
         </div>

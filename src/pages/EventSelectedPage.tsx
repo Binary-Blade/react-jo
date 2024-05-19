@@ -3,9 +3,7 @@ import { Separator } from '@/components/ui/separator';
 import { useParams } from 'wouter';
 import { useEventStore } from '@/stores/useEventStore';
 import { useEffect } from 'react';
-import { useAuthStore } from '@/stores/useAuthStore';
 import { useFormattedDates } from '@/hooks';
-import useCartStore from '@/stores/useCartStore';
 import useLocalCartStore from '@/stores/useLocalCartStore';
 import { Header } from '@/features/header/Header';
 import { OverviewOneEvent } from '@/features/events/selected-event/OverviewOneEvent';
@@ -17,11 +15,9 @@ import { ReportedIssueButtonEvent } from '@/components/dialog/ReportedIssueButto
 import { ChooseEventPrices } from '@/features/events/selected-event/ChooseEventPrices';
 
 export default function EventSelectedPage() {
-  const { userId, isAuthenticated } = useAuthStore();
   const params = useParams();
   const eventId = Number(params.eventId);
-  const { syncCartItems } = useCartStore();
-  const { cartItemsLocal, addItemToCartLocal, removeCartItemLocal } = useLocalCartStore();
+  const { addItemToCartLocal } = useLocalCartStore();
   const { getEvent, event } = useEventStore();
   const basePrice = event?.basePrice;
   const eventDate = useFormattedDates(event?.startDate, event?.endDate);
@@ -38,7 +34,7 @@ export default function EventSelectedPage() {
           <section className="hidden sm:flex flex-col gap-4 sm:flex-row sm:items-center pb-4 sm:pb-8">
             <ButtonToEvent />
             <h1 className="text-xl lg:text-3xl font-semibold tracking-tight">
-              Buy Tickets for the Olympic Games Paris 2024
+              Achetez des billets pour les Jeux Olympiques de Paris 2024
             </h1>
           </section>
           <ImagesCoverEvent />
@@ -60,13 +56,8 @@ export default function EventSelectedPage() {
               <GenericTitle title={event?.title} subtitle={eventDate} isMobile={true} />
               <ChooseEventPrices
                 eventId={eventId}
-                userId={userId}
-                isAuthenticated={isAuthenticated}
                 basePrice={basePrice}
-                syncCartItems={syncCartItems}
-                cartItemsLocal={cartItemsLocal}
                 addItemToCartLocal={addItemToCartLocal}
-                removeCartItemLocal={removeCartItemLocal}
               />
               <ReportedIssueButtonEvent />
             </div>

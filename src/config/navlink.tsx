@@ -3,37 +3,32 @@ import {
   LandmarkIcon,
   LayoutDashboardIcon,
   SettingsIcon,
-  TicketIcon,
   UsersIcon
 } from '@/components/ui/IconComponents';
 import { NavLink } from '@/config/types/NavLink';
 import { HomeIcon } from 'lucide-react';
 
 export const NAVLINKS_PUBLIC: NavLink[] = [
-  { icon: <HomeIcon className="h-4 w-4" />, name: 'Home', href: '/' },
-  { icon: <LandmarkIcon className="h-4 w-4" />, name: 'Events', href: '/events' },
-  { icon: <CalendarIcon className="h-4 w-4" />, name: 'Reservations', href: '/reservations' }
+  { icon: <HomeIcon className="h-4 w-4" />, name: 'Accueil', href: '/' },
+  { icon: <LandmarkIcon className="h-4 w-4" />, name: 'Evenements', href: '/events' },
+  { icon: <CalendarIcon className="h-4 w-4" />, name: 'Reservations', href: '/reservations' },
+  { icon: <UsersIcon className="h-4 w-4" />, name: 'Commandes', href: '/checkout' }
 ];
 
 export const NAVLINKS_ADMIN: NavLink[] = [
   {
     icon: <LayoutDashboardIcon className="h-4 w-4" />,
-    name: 'Dashboard - Events',
+    name: 'Tableau de bord - Événements',
     href: '/dashboard'
   },
   {
-    icon: <TicketIcon className="h-4 w-4" />,
-    name: 'Dashboard - Statistic',
-    href: '/dashboard/events'
-  },
-  {
     icon: <UsersIcon className="h-4 w-4" />,
-    name: 'Dashboard - Customers',
+    name: 'Tableau de bord - Clients',
     href: '/dashboard/customers'
   },
   {
     icon: <SettingsIcon className="h-4 w-4" />,
-    name: 'Dashboard - Settings',
+    name: 'Tableau de bord - Paramètres',
     href: '/dashboard/settings'
   }
 ];

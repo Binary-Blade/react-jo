@@ -20,7 +20,7 @@ export const OverviewOneEvent: FC<OlympicsOverviewEventSelectedProps> = ({
         <CardContent className="p-4 sm:p-6 flex items-center gap-6 relative">
           <AwardIcon className="w-10 h-10" />
           <div className="flex-1 font-semibold max-w-[16rem] hidden sm:flex md:hidden lg:flex">
-            Experience the thrill of the Olympic Games in the City of Lights!
+            Vivez l'excitation des Jeux Olympiques dans la Ville Lumière !
           </div>
           <div className="flex items-center gap-6 ml-auto">
             <div className="flex flex-col gap-1 text-center">
@@ -48,9 +48,9 @@ export const OverviewOneEvent: FC<OlympicsOverviewEventSelectedProps> = ({
           <CalendarCheckIcon className="w-7 h-7" />
         </div>
         <div className="grid gap-0.5">
-          <div className="font-semibold">Available Spots : {quantityAvailable}</div>
+          <div className="font-semibold">Places disponibles : {quantityAvailable}</div>
           <div className="text-gray-500 text-sm dark:text-gray-400">
-            Hurry, limited spots available!
+            Dépêchez-vous, places limitées disponibles !
           </div>
         </div>
       </div>
@@ -59,9 +59,9 @@ export const OverviewOneEvent: FC<OlympicsOverviewEventSelectedProps> = ({
           <TicketIcon className="w-7 h-7" />
         </div>
         <div className="grid gap-0.5">
-          <div className="font-semibold">Reserve Your Seats Now!</div>
+          <div className="font-semibold">Réservez vos places maintenant !</div>
           <div className="text-gray-500 text-sm dark:text-gray-400">
-            Ticket for just one person starting at just {basePrice}.
+            Billet pour une personne à partir de seulement {basePrice}.
           </div>
         </div>
       </div>
