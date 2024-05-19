@@ -13,7 +13,7 @@ import ProtectedRoute from './hoc/ProtectedRoute';
 
 // Lazy loading pages
 const AuthPage = lazy(() => import('./pages/AuthPage'));
-const CartPage = lazy(() => import('./pages/CartPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -39,7 +39,7 @@ export default function App() {
           <Route path="/auth" component={AuthPage} />
           <Route path="/events/:eventId" component={EventSelectedPage} />
           <Route path="/events" component={EventsPage} />
-          <Route path="/cart" component={CartPage} />
+          <Route path="/checkout" component={CheckoutPage} />
           <ProtectedRoute path="/reservations" component={ReservationPage} />
           <ProtectedRoute path="/profile" component={ProfilePage} />
           <AdminRoute path="/dashboard" component={DashboardPage} />
