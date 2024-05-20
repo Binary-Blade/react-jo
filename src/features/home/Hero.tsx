@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import placeholderImage from '@/assets/images/PlaceholderParis.svg';
+import placeholderImage from '@/assets/images/bg_image4.webp';
 import { useAuthStore } from '@/stores/useAuthStore';
 
 export const Hero = () => {
@@ -9,7 +9,7 @@ export const Hero = () => {
       <div className="absolute inset-0 overflow-hidden">
         <img
           alt="Paris Skyline"
-          className="object-cover w-full h-full opacity-60 z-10"
+          className="object-cover w-full h-full opacity-35 z-10"
           height={1080}
           src={placeholderImage}
           style={{
@@ -39,7 +39,7 @@ export const Hero = () => {
               className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
               href="/reservations"
             >
-              Mes Réservations
+              Mes Reservations
             </Link>
           ) : (
             <Link

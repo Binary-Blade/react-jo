@@ -14,18 +14,18 @@ interface NavBarProps {
 
 export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) => {
   return (
-    <header className="w-full bg-white shadow-sm dark:bg-gray-950">
+    <header className="w-full shadow-sm dark:bg-gray-950">
       <div className="container flex items-center justify-between h-16 px-4 md:px-2">
         <div className="flex items-center gap-2">
           <MedalIcon className="w-8 h-8 text-rose-500" />
-          <span className="text-xl font-semibold tracking-tight">Paris 2024</span>
+          <span className="text-xl font-bold tracking-tight text-white ml-2">Paris 2024</span>
         </div>
         <nav className="hidden md:flex items-center gap-6 text-md font-medium">
           {NAVLINKS_PUBLIC.map(link => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              className="text-md font-medium text-gray-300 hover:text-white transition-colors"
             >
               {link.name}
             </Link>
@@ -33,7 +33,7 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) =
           {isAuthenticated && role === UserRole.ADMIN && (
             <Link
               href={'/dashboard'}
-              className="text-md font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              className="text-md font-medium text-gray-300 hover:text-white transition-colors"
             >
               Dashboard
             </Link>

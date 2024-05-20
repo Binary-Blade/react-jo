@@ -35,7 +35,7 @@ export const EventsMainContent: React.FC = () => {
 
   return (
     <>
-      <section className="w-full py-12 md:py-14 lg:py-14 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
+      <section className="w-full h-full py-6 md:py-6 lg:py-6 ">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -60,7 +60,7 @@ export const EventsMainContent: React.FC = () => {
               />
             </div>
           </div>
-          <div className="mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-4 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
             {events.map(event => (
               <EventCard
                 eventId={event.eventId}

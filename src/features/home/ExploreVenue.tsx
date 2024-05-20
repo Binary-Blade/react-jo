@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import placeholderImage from '@/assets/images/PlaceholderParis.svg';
+import placeholderImage from '@/assets/images/card_home.webp';
 
 export const ExploreVenue = () => {
   return (

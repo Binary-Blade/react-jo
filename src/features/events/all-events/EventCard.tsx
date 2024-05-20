@@ -1,4 +1,6 @@
 import { FC } from 'react';
+
+import placeholderImage from '@/assets/images/bg_image2.webp';
 import {
   CardTitle,
   CardDescription,
@@ -36,14 +38,26 @@ export const EventCard: FC<EventCardProps> = ({
   const IconComponent = iconMapping[categoryType] || ActivityIcon;
 
   return (
-    <Card className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-950">
+    <Card
+      className="group relative overflow-hidden rounded-lg 
+      border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-950"
+    >
+      <img
+        alt="Profile picture"
+        className="object-cover w-full"
+        height="30"
+        src={placeholderImage}
+        style={{
+          objectFit: 'cover'
+        }}
+      />
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{shortDescription}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-4">
-          <IconComponent className="h-8 w-8 text-primary group-hover:text-primary-600 transition-colors duration-300" />
+          <IconComponent className="h-8 w-8 text-rose-500 group-hover:text-primary-600 transition-colors duration-300" />
           <div>
             <div className="font-medium">{categoryType}</div>
             <div className="text-sm text-gray-500 dark:text-gray-400">

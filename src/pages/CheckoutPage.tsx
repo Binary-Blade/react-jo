@@ -8,13 +8,12 @@ import { Header } from '@/features/header/Header';
 import { CardPromoCode } from '@/components/cards/CardPromoCode';
 import { CardPaymentCheckout } from '@/components/cards/CardPaymentCheckout';
 import { CartNotLogging } from '@/components/notlogging/CartNotLogging';
-import LoadingPage from './LoadingPage';
 import { CheckoutSummary } from '@/features/checkout/CheckoutSummary';
 import { CardFormule } from '@/features/checkout/CardFormule';
 import { CheckoutEmpty } from '@/components/empty/CheckoutEmpty';
 
 export default function CheckoutPage() {
-  const { fetchCartItems, cartId, cartItems, loading } = useCartStore();
+  const { fetchCartItems, cartId, cartItems } = useCartStore();
   const { userId, isAuthenticated } = useAuthStore();
 
   useEffect(() => {
@@ -24,10 +23,6 @@ export default function CheckoutPage() {
   }, [userId, cartId, fetchCartItems]);
 
   const groupedItems = useGroupByTicketType(cartItems);
-
-  if (loading) {
-    return <LoadingPage />;
-  }
 
   if (cartItems.length === 0 && isAuthenticated) {
     return <CheckoutEmpty />;

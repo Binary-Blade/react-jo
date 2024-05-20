@@ -33,7 +33,10 @@ export const CartPopoverPreview = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <ShoppingCartIcon className="w-6 h-6 navbar-cart-button" aria-label="Open Cart" />
+        <ShoppingCartIcon
+          className="w-6 h-6 navbar-cart-button  text-white"
+          aria-label="Open Cart"
+        />
       </PopoverTrigger>
       <PopoverContent className="w-96 mx-4 my-10 p-6">
         <div className="space-y-4">

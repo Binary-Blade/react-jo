@@ -55,7 +55,7 @@ export const AllReservations = () => {
   return (
     <>
       <section className="p-10">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between ">
           <div className="flex items-center space-x-4 ">
             <SortByDropdown
               sortBy={sortBy}
@@ -76,7 +76,7 @@ export const AllReservations = () => {
           </div>
         </div>
       </section>
-      <div className="px-10 pb-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="px-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {reservations.map(reservation => (
           <CardReservations key={reservation.reservationId} reservation={reservation} />
         ))}
