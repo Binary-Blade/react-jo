@@ -3,7 +3,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { AuthContextType, AuthProviderProps } from '@/config/types/Auth/AuthContexteType';
 import LoadingPage from '@/pages/LoadingPage';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { accessProtectedRoute, isAuthenticated, userId, role } = useAuthStore();
