@@ -17,7 +17,7 @@ export const SideBarMenu = ({ hiddenValue }: SideBarMenuProps) => {
       <Sheet>
         <SheetTrigger asChild>
           <Button className={`${hiddenValue}:hidden`} size="icon" variant="ghost">
-            <MenuIcon className="h-6 w-6 text-white" />
+            <MenuIcon className="h-6 w-6 text-gray-900" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>

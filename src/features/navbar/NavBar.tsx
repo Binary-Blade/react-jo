@@ -4,15 +4,21 @@ import { FC } from 'react';
 import { DropDownAccount } from '@/features/header/DropDownAccount';
 import { UserRole } from '@/config/enums/UserRole.enum';
 import { CartPopoverPreview } from '@/features/cart/CartPopoverPreview';
-import { MedalIcon } from '@/components/ui/IconComponents';
+import { MedalIcon, PackageIcon } from '@/components/ui/IconComponents';
 
 interface NavBarProps {
   isAuthenticated: boolean;
-  totalItems: number;
+  totalItemsCart: number;
   role: string | null;
+  totalCommands: number;
 }
 
-export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) => {
+export const NavBar: FC<NavBarProps> = ({
+  isAuthenticated,
+  totalItemsCart,
+  role,
+  totalCommands
+}) => {
   return (
     <div className="w-full shadow-md bg-white dark:bg-gray-950">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-6">
@@ -41,12 +47,12 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) =
             </Link>
           )}
         </nav>
-        <div className="flex items-center gap-6">
-          <div className="relative">
+        <div className="flex items-center gap-3 ">
+          <div className="relative flex items-center gap-2">
             <CartPopoverPreview />
-            {totalItems > 0 && (
+            {totalItemsCart > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-medium">
-                {totalItems}
+                {totalItemsCart}
               </span>
             )}
           </div>
@@ -58,10 +64,24 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) =
               Connexion
             </Link>
           ) : (
-            <div className="pb-1">
+            <div className="">
               <DropDownAccount />
             </div>
           )}
+
+          <div className="relative flex items-center gap-2">
+            <Link
+              href="/checkout"
+              className="text-gray-700 dark:text-gray-300 hover:text-rose-500 dark:hover:text-rose-500 transition-colors"
+            >
+              <PackageIcon className="w-7 h-7" />
+              {totalCommands > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-medium">
+                  {totalCommands}
+                </span>
+              )}
+            </Link>
+          </div>
         </div>
       </div>
     </div>
