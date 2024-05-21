@@ -7,13 +7,16 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { SignupFormData, signupSchema } from '@/config/zod-schemas/signupSchema';
 import { Checkbox } from '@/components/ui/checkbox';
-import { AlertDestructive } from '@/components/alert/AlertDestructive';
 import { useState } from 'react';
+import { EyeOffIcon } from '@/components/ui/IconComponents';
+import { EyeIcon } from 'lucide-react';
+import { useToast } from '../ui/use-toast';
 
 export const SignUpForm = () => {
   const { signup } = useAuthStore();
   const [, navigate] = useLocation();
-  const [error, setError] = useState<string | null | undefined>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const { toast } = useToast();
 
   const {
     control,
@@ -21,7 +24,6 @@ export const SignUpForm = () => {
     formState: { isValid }
   } = useForm({
     resolver: zodResolver(signupSchema),
-    mode: 'onChange',
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -33,11 +35,13 @@ export const SignUpForm = () => {
   const handleSignUp = async (formData: SignupFormData): Promise<void> => {
     const response = await signup(formData);
     if (response.success) {
-      console.log('Signup successful');
-      navigate('/');
+      navigate('/success-creation');
     } else {
-      console.error('Signup failed:', response.error);
-      setError(response.error);
+      toast({
+        variant: 'destructive',
+        title: 'Erreur lors de la création du compte',
+        description: response.error
+      });
     }
   };
 
@@ -50,7 +54,7 @@ export const SignUpForm = () => {
             control={control}
             render={({ field, fieldState }) => (
               <div className="flex flex-col space-y-1">
-                <Label htmlFor="firstName">First Name</Label>
+                <Label htmlFor="firstName">Prénom</Label>
                 <Input {...field} id="firstName" type="text" placeholder="Enter your first name" />
                 {fieldState.error && (
                   <span className="text-red-500 text-sm">{fieldState.error.message}</span>
@@ -63,7 +67,7 @@ export const SignUpForm = () => {
             control={control}
             render={({ field, fieldState }) => (
               <div className="flex flex-col space-y-1">
-                <Label htmlFor="lastName">Last Name</Label>
+                <Label htmlFor="lastName">Nom de famille</Label>
                 <Input {...field} id="lastName" type="text" placeholder="Enter your last name" />
                 {fieldState.error && (
                   <span className="text-red-500 text-sm">{fieldState.error.message}</span>
@@ -89,8 +93,26 @@ export const SignUpForm = () => {
             control={control}
             render={({ field, fieldState }) => (
               <div className="flex flex-col space-y-1">
-                <Label htmlFor="password">Password</Label>
-                <Input {...field} id="password" type="password" placeholder="Enter your password" />
+                <Label htmlFor="password">Mot de passe</Label>
+                <div className="relative">
+                  <Input
+                    {...field}
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className="h-5 w-5" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
                 {fieldState.error && (
                   <span className="text-red-500 text-sm">{fieldState.error.message}</span>
                 )}
@@ -99,19 +121,18 @@ export const SignUpForm = () => {
           />
         </div>
         <Checkbox id="terms" />
-        <Label className="text-sm p2 " htmlFor="terms">
-          I agree to the{' '}
+        <Label className="text-sm p-2 " htmlFor="terms">
+          Je suis d'accord avec les{' '}
           <Link
             className="underline underline-offset-2 hover:text-gray-900 dark:hover:text-gray-50"
             href="#"
           >
-            terms of service
+            termes et conditions
           </Link>
         </Label>
         <Button className="w-full" type="submit" disabled={!isValid}>
-          Sign Up
+          Créer un compte
         </Button>
-        {error && <AlertDestructive errorMessage={error} />}
       </form>
     </>
   );

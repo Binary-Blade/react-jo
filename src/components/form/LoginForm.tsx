@@ -8,11 +8,15 @@ import { LoginFormData, loginSchema } from '@/config/zod-schemas/loginSchema';
 import { useLocation } from 'wouter';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useToast } from '../ui/use-toast';
+import { useState } from 'react';
+import { EyeOffIcon } from '@/components/ui/IconComponents';
+import { EyeIcon } from 'lucide-react';
 
 export const LoginForm = () => {
   const [, navigate] = useLocation();
   const { login } = useAuthStore();
   const { toast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     control,
@@ -30,8 +34,7 @@ export const LoginForm = () => {
   const handleLogin = async (formData: LoginFormData) => {
     const response = await login(formData);
     if (response.success) {
-      console.log('Login successful');
-      navigate('/');
+      navigate('/success-connexion');
     } else {
       console.error('Signup failed:', response.error);
       toast({
@@ -64,7 +67,23 @@ export const LoginForm = () => {
             render={({ field }) => (
               <div>
                 <Label htmlFor="password">Mot de passe</Label>
-                <Input {...field} id="password" type="password" />
+                <div className="relative">
+                  {' '}
+                  {/* Ajout de cette ligne */}
+                  <Input {...field} id="password" type={showPassword ? 'text' : 'password'} />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className="h-5 w-5" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>{' '}
+                {/* Ajout de cette ligne */}
                 {errors.password && <span className="text-red-500">{errors.password.message}</span>}
               </div>
             )}
