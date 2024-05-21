@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { EuroIcon } from 'lucide-react';
 import { TbCategoryMinus } from 'react-icons/tb';
 import { Reservation } from '@/config/types/Reservation/ReservationTypes';
+import { StatusPaymentEnum } from '@/config/enums/StatusPayment.enum';
 
 type CardReservationsProps = {
   reservation: Reservation;
@@ -51,7 +52,7 @@ export const CardReservations: FC<CardReservationsProps> = ({ reservation, statu
           </div>
           <div className="mt-4 flex items-center justify-center">
             <div className="flex items-center gap-2">
-              {statusPayment === 'APPROVED' && (
+              {statusPayment === StatusPaymentEnum.APPROVED && (
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -64,7 +65,10 @@ export const CardReservations: FC<CardReservationsProps> = ({ reservation, statu
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
-                    <TicketModal reservationId={reservation.reservationId} />
+                    <TicketModal
+                      reservationId={reservation.reservationId}
+                      title={reservation.reservationDetails?.title}
+                    />
                   </DialogContent>
                 </Dialog>
               )}
