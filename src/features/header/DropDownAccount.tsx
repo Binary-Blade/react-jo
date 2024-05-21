@@ -5,6 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenu
 } from '@/components/ui/dropdown-menu';
+import { useToast } from '@/components/ui/use-toast';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUserStore } from '@/stores/useUserStore';
 import { UserCircleIcon } from 'lucide-react';
@@ -15,6 +16,7 @@ export const DropDownAccount = () => {
   const { logout, userId } = useAuthStore();
   const { fetchUserById } = useUserStore();
   const [, navigate] = useLocation();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (userId) {
@@ -25,12 +27,13 @@ export const DropDownAccount = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      console.log('Logout successful');
       navigate('/');
     } catch (error: any) {
-      const errorMessage = error.message || 'Logout failed due to an unexpected error';
-      console.error('Logout failed:', errorMessage);
-      alert(errorMessage);
+      toast({
+        title: 'Erreur',
+        description: error.message || 'Logout failed due to an unexpected error',
+        variant: 'destructive'
+      });
     }
   };
 
@@ -43,13 +46,13 @@ export const DropDownAccount = () => {
       <DropdownMenuTrigger asChild>
         <button className="flex items-center justify-center h-10 w-10 rounded-full focus:outline-none">
           <UserCircleIcon className="h-7 w-7 text-gray-800 hover:text-rose-500 dark:text-gray-200" />
-          <span className="sr-only">Toggle user menu</span>
+          <span className="sr-only">Ouverture du menu de l'utilisateur</span>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={handleSettings}>My Account</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSettings}>Mon compte</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>Déconnexion</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
