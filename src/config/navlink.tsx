@@ -10,8 +10,8 @@ import { HomeIcon } from 'lucide-react';
 
 export const NAVLINKS_PUBLIC: NavLink[] = [
   { icon: <HomeIcon className="h-4 w-4" />, name: 'Accueil', href: '/' },
-  { icon: <LandmarkIcon className="h-4 w-4" />, name: 'Evenements', href: '/events' },
-  { icon: <CalendarIcon className="h-4 w-4" />, name: 'Reservations', href: '/reservations' },
+  { icon: <LandmarkIcon className="h-4 w-4" />, name: 'Événements', href: '/events' },
+  { icon: <CalendarIcon className="h-4 w-4" />, name: 'Réservations', href: '/reservations' },
   { icon: <UsersIcon className="h-4 w-4" />, name: 'Commandes', href: '/checkout' }
 ];
 
