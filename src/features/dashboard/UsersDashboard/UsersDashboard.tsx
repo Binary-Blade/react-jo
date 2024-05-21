@@ -3,7 +3,6 @@ import { useUserStore } from '@/stores/useUserStore';
 import { useEffect } from 'react';
 import { useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useAggregateUsersData } from '@/hooks/useAggregateUsersData';
-import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
 import { cardDataUsers } from '@/utils/cardDataDashbord';
 import { FILTER_USERS_DASHBOARD } from '@/config/filters/filterUsers';
@@ -14,8 +13,9 @@ import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 import { SortByDropdown } from '@/features/filter-sorting/SortByDropdown';
 import { SortOrderDropdown } from '@/features/filter-sorting/SortOrderDropdown';
 import { FilterDropdown } from '@/features/filter-sorting/FilterDropdown';
-import { HeaderCardInfoDashboard } from '@/components/header/HeaderCardInfoDashboard';
+import { HeaderCardInfoDashboard } from '@/components/cards/HeaderCardInfoDashboard';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { DropDownAccount } from '@/features/header/DropDownAccount';
 
 export const UsersDashboard = () => {
   const { users, fetchAllUsersFiltered, total } = useUserStore();
@@ -38,7 +38,9 @@ export const UsersDashboard = () => {
 
   return (
     <>
-      <DashboardHeader />
+      <div className="flex items-center gap-4 justify-end">
+        <DropDownAccount />
+      </div>
       <FilterBarDashboard title="Users" />
       <HeaderCardInfoDashboard cardData={cardDataUser} />
       <div className="flex items-center gap-4">

@@ -5,7 +5,6 @@ import { EditEventSidebar } from './EditEventSideBar';
 import { useAggregateEventData, useDelConfirmation, useFilter, usePagination } from '@/hooks';
 import { useSidebarForm } from '@/hooks/useSideBarForm';
 import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
-import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
 import { eventColumnsTable } from '@/config/columns-table/eventColumnsTable';
 import { SORTING_EVENTS_DASHBOARD } from '@/config/sorting/sortingEvents';
@@ -16,8 +15,9 @@ import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 import { FilterDropdown } from '@/features/filter-sorting/FilterDropdown';
 import { SortOrderDropdown } from '@/features/filter-sorting/SortOrderDropdown';
 import { SortByDropdown } from '@/features/filter-sorting/SortByDropdown';
-import { CollapsibleAddEvent } from './CollapsibleAddEvent';
-import { HeaderCardInfoDashboard } from '@/components/header/HeaderCardInfoDashboard';
+import { HeaderCardInfoDashboard } from '@/components/cards/HeaderCardInfoDashboard';
+import { DropDownAccount } from '@/features/header/DropDownAccount';
+import { AlertDialogAddEvent } from './AlertDialogAddEvent';
 
 export const EventsDashboard = () => {
   const eventColumn = eventColumnsTable();
@@ -53,11 +53,13 @@ export const EventsDashboard = () => {
   }, [setPage, sortBy, sortOrder, filterBy, filterValue]);
   return (
     <>
-      <DashboardHeader />
+      <div className="flex items-center gap-4 justify-end">
+        <DropDownAccount />
+      </div>
       <FilterBarDashboard title="Events" />
       <HeaderCardInfoDashboard cardData={cardDataEvent} />
       <div className="flex items-center gap-4">
-        <CollapsibleAddEvent />
+        <AlertDialogAddEvent />
         <div className="ml-auto flex items-center gap-2">
           <SortByDropdown
             sortBy={sortBy}
