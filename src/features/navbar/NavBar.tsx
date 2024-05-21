@@ -78,19 +78,21 @@ export const NavBar: FC<NavBarProps> = ({
             </div>
           )}
 
-          <div className="relative flex items-center gap-2">
-            <button
-              onClick={handleCheckoutClick}
-              className="text-gray-700 dark:text-gray-300 hover:text-rose-500 dark:hover:text-rose-500 transition-colors"
-            >
-              <PackageIcon className="w-7 h-7" />
-              {totalCommands > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-medium">
-                  {totalCommands}
-                </span>
-              )}
-            </button>
-          </div>
+          {isAuthenticated && (
+            <div className="relative flex items-center gap-2">
+              <button
+                onClick={handleCheckoutClick}
+                className="text-gray-700 dark:text-gray-300 hover:text-rose-500 dark:hover:text-rose-500 transition-colors"
+              >
+                <PackageIcon className="w-7 h-7" />
+                {totalCommands > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-medium">
+                    {totalCommands}
+                  </span>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
