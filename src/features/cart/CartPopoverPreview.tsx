@@ -13,7 +13,7 @@ import { useGroupByTitle } from '@/hooks/useGroupByTitle';
 import placeholderImage from '@/assets/images/card_home.webp';
 
 export const CartPopoverPreview = () => {
-  const { userId } = useAuthStore();
+  const { userId, isAuthenticated } = useAuthStore();
   const { cartItemsLocal, removeCartItemLocal } = useLocalCartStore();
   const { syncCartItems } = useCartStore();
   const { toast } = useToast();
@@ -34,6 +34,9 @@ export const CartPopoverPreview = () => {
     if (!userId) {
       console.error('User ID is missing.');
       return;
+    }
+    if (!isAuthenticated) {
+      return navigate('/auth');
     }
     await syncCartItems(userId);
     navigate('/checkout');
