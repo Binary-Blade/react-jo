@@ -10,12 +10,12 @@ import { SortOrderDropdown } from '../filter-sorting/SortOrderDropdown';
 import { SortByDropdown } from '../filter-sorting/SortByDropdown';
 import { useTransactionStore } from '@/stores/useTransactionStore';
 import { STATUSCOLOR } from '@/config/constants';
-import { Card } from '@/components/ui/card';
 import { FaCalendarAlt, FaEuroSign, FaReceipt } from 'react-icons/fa';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronRightIcon } from '@/components/ui/IconComponents';
 import { FILTER_OPTIONS_TRANSACTIONS } from '@/config/filters/filtersTransactions';
 import { SORTING_OPTIONS_TRANSACTIONS } from '@/config/sorting/sortingTransactions';
+import { Reservation } from '@/config/types/Reservation/ReservationTypes';
 
 export const AllReservations = () => {
   const { transactions, fetchTransactions, total } = useTransactionStore();
@@ -105,7 +105,7 @@ export const AllReservations = () => {
                 <CollapsibleContent className="transition-opacity duration-300 ease-in-out">
                   <div className=" rounded-lg overflow-hidden py-8">
                     <div className="px-2 pb-4 grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5">
-                      {transaction.reservation.map(reservation => (
+                      {transaction.reservation.map((reservation: Reservation) => (
                         <CardReservations
                           key={reservation.reservationId}
                           reservation={reservation}

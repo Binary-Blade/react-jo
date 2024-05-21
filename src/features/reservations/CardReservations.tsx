@@ -7,17 +7,19 @@ import { TicketModal } from '@/features/ticket/TicketModal';
 import { Badge } from '@/components/ui/badge';
 import { EuroIcon } from 'lucide-react';
 import { TbCategoryMinus } from 'react-icons/tb';
+import { Reservation } from '@/config/types/Reservation/ReservationTypes';
 
 type CardReservationsProps = {
-  reservation: any;
+  reservation: Reservation;
   statusPayment: string;
 };
 
 export const CardReservations: FC<CardReservationsProps> = ({ reservation, statusPayment }) => {
+  console.log(typeof reservation.reservationId);
   return (
     <>
       <Card
-        id={reservation.reservationId}
+        id={String(reservation.reservationId)}
         className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all 
         duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-rose-500 "
       >
