@@ -12,15 +12,15 @@ export const AlertDialogAddEvent = () => {
   };
 
   const handleSuccess = () => {
-    setIsOpen(false); // Fermer l'AlertDialog après une soumission réussie
+    setIsOpen(false);
   };
 
   return (
     <AlertDialog open={isOpen} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger>
-        <Button className="w-44">
+        <Button className="w-52">
           <PlusIcon className="mr-2 h-4 w-4" />
-          Add Event
+          Ajouter un événement
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

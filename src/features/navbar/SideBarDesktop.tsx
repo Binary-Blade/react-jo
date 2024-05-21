@@ -1,4 +1,4 @@
-import { CalendarIcon, MedalIcon, SettingsIcon, UsersIcon } from '@/components/ui/IconComponents';
+import { CalendarIcon, MedalIcon, UsersIcon } from '@/components/ui/IconComponents';
 import { Link } from 'wouter';
 
 type SideBarDesktopProps = {
@@ -12,7 +12,7 @@ export const SideBarDesktop = ({ setActiveComponent }: SideBarDesktopProps) => {
         <div className="flex h-[60px] items-center border-b px-6">
           <Link className="flex items-center gap-2 font-semibold" href="/">
             <MedalIcon className="h-6 w-6" />
-            <span className="">Dashboard Admin</span>
+            <span>Tableau de bord</span>
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-2">
@@ -23,7 +23,7 @@ export const SideBarDesktop = ({ setActiveComponent }: SideBarDesktopProps) => {
               onClick={() => setActiveComponent('events')}
             >
               <CalendarIcon className="h-4 w-4" />
-              Events
+              Événements
             </button>
             <button
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500
@@ -31,15 +31,8 @@ export const SideBarDesktop = ({ setActiveComponent }: SideBarDesktopProps) => {
               onClick={() => setActiveComponent('users')}
             >
               <UsersIcon className="h-4 w-4" />
-              Users
+              Utilisateurs
             </button>
-            <Link
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              href="#"
-            >
-              <SettingsIcon className="h-4 w-4" />
-              Settings
-            </Link>
           </nav>
         </div>
       </div>

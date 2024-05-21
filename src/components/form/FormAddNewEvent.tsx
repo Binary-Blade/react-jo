@@ -38,14 +38,14 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
   return (
     <>
       <div>
-        <h2 className="text-2xl font-semibold">Add New Event</h2>
-        <p> Fill out the form below to create a new event. </p>
+        <h2 className="text-2xl font-semibold">Ajouter un Nouvel Événement</h2>
+        <p>Remplissez le formulaire ci-dessous pour créer un nouvel événement.</p>
       </div>
       <div className="gap-4">
         <form onSubmit={handleSubmit} className="grid gap-4">
           <InputFieldEvent
             id="title"
-            label="Title"
+            label="Titre"
             onChange={handleChange}
             value={formData.title}
             errors={errors.title}
@@ -53,30 +53,32 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputFieldEvent
               id="startDate"
-              label="Start Date"
+              label="Date de Début"
               type="date"
               onChange={handleChange}
               value={formData.startDate}
+              errors={errors.startDate}
             />
             <InputFieldEvent
               id="endDate"
-              label="End Date"
+              label="Date de Fin"
               type="date"
               onChange={handleChange}
               value={formData.endDate}
+              errors={errors.endDate}
             />
           </div>
           <div className="space-y-2">
             <Label className="font-medium" htmlFor="categoryType">
-              Event Category *
+              Catégorie d'Événement *
             </Label>
             <Select onValueChange={handleCategoryChange} value={formData.categoryType}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a category" />
+                <SelectValue placeholder="Sélectionnez une catégorie" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Categories</SelectLabel>
+                  <SelectLabel>Catégories</SelectLabel>
                   {Object.entries(CategoryEventAdmin).map(([key, value]) => (
                     <SelectItem key={key} value={value}>
                       {value}
@@ -85,11 +87,12 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
                 </SelectGroup>
               </SelectContent>
             </Select>
+            {errors.categoryType && <p className="text-red-500">{errors.categoryType[0]}</p>}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputFieldEvent
               id="basePrice"
-              label="Price"
+              label="Prix"
               type="number"
               onChange={handleChange}
               value={formData.basePrice}
@@ -97,7 +100,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
             />
             <InputFieldEvent
               id="quantityAvailable"
-              label="Quantity Available"
+              label="Quantité Disponible"
               type="number"
               onChange={handleChange}
               value={formData.quantityAvailable}

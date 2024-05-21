@@ -24,8 +24,8 @@ export const GenericAlertDialog: React.FC<GenericAlertDialogProps> = ({
   onConfirm,
   title,
   description,
-  cancelText = 'Cancel',
-  confirmText = 'Continue'
+  cancelText = 'Annuler',
+  confirmText = 'Continuer'
 }) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>

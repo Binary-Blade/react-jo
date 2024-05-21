@@ -28,7 +28,7 @@ export const InputFieldEvent: FC<InputFieldEventProps> = ({
       id={id}
       name={id}
       type={type}
-      placeholder={`Enter event ${label.toLowerCase()}`}
+      placeholder={`Ajouter un ${label.toLowerCase()}`}
       required
       onChange={onChange}
       value={value}

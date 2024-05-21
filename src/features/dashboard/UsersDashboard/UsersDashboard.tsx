@@ -41,7 +41,7 @@ export const UsersDashboard = () => {
       <div className="flex items-center gap-4 justify-end">
         <DropDownAccount />
       </div>
-      <FilterBarDashboard title="Users" />
+      <FilterBarDashboard title="Utilisateurs" />
       <HeaderCardInfoDashboard cardData={cardDataUser} />
       <div className="flex items-center gap-4">
         <div className="ml-auto flex items-center gap-2">
@@ -66,8 +66,8 @@ export const UsersDashboard = () => {
             isOpen={isDialogOpen}
             onClose={cancelDeletion}
             onConfirm={confirmDeletion}
-            title="Are you sure?"
-            description="This action cannot be undone. This will permanently delete that user."
+            title="Êtes-vous sûr ?"
+            description="Cette action est irréversible. Cela supprimera définitivement cet utilisateur."
           />
         )}
       </div>

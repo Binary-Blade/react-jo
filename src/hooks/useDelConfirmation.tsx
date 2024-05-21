@@ -1,3 +1,4 @@
+import { useToast } from '@/components/ui/use-toast';
 import { Response } from '@/config/types/Auth/AuthResponse';
 import { useCallback, useState } from 'react';
 
@@ -15,6 +16,7 @@ export const useDelConfirmation = (deleteFunction: DeleteFunctionType, elementId
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [itemToDelete, setItemToDelete] = useState<DeletableItem | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const requestDelete = useCallback((item: DeletableItem) => {
     setItemToDelete(item);
@@ -28,9 +30,17 @@ export const useDelConfirmation = (deleteFunction: DeleteFunctionType, elementId
       await deleteFunction(itemToDelete[elementId] as number); // Assume elementId is always a number
       setIsDialogOpen(false);
       setItemToDelete(null);
+      toast({
+        title: "L'élément a été supprimé avec succès",
+        variant: 'success'
+      });
     } catch (error: any) {
-      setError('Failed to delete item. Please try again.');
-      console.error('Deletion error:', error);
+      setError(error.message);
+      toast({
+        title: 'Erreur lors de la suppression',
+        description: error.message,
+        variant: 'destructive'
+      });
     }
   }, [deleteFunction, itemToDelete, elementId]);
 

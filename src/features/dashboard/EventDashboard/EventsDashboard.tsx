@@ -51,12 +51,13 @@ export const EventsDashboard = () => {
   useEffect(() => {
     setPage(1); // Reset to the first page whenever filters or sorting change
   }, [setPage, sortBy, sortOrder, filterBy, filterValue]);
+
   return (
     <>
       <div className="flex items-center gap-4 justify-end">
         <DropDownAccount />
       </div>
-      <FilterBarDashboard title="Events" />
+      <FilterBarDashboard title="Événements" />
       <HeaderCardInfoDashboard cardData={cardDataEvent} />
       <div className="flex items-center gap-4">
         <AlertDialogAddEvent />
@@ -94,8 +95,8 @@ export const EventsDashboard = () => {
             isOpen={isDialogOpen}
             onClose={cancelDeletion}
             onConfirm={confirmDeletion}
-            title="Are you sure?"
-            description="This action cannot be undone. This will permanently delete the event."
+            title="Êtes-vous sûr ?"
+            description="Cette action est irréversible. Cela supprimera définitivement l'événement."
           />
         )}
       </div>

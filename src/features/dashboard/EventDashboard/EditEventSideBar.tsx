@@ -90,7 +90,7 @@ export const EditEventSidebar: FC<EditEventSidebarProps> = ({ event, onClose, on
             </div>
             <div className="space-y-2">
               <Label className="font-medium" htmlFor="shortDescription">
-                Description *
+                Courte présentation *
               </Label>
               <Textarea
                 rows={3}
@@ -104,7 +104,7 @@ export const EditEventSidebar: FC<EditEventSidebarProps> = ({ event, onClose, on
             </div>
             <div className="space-y-2">
               <Label className="font-medium" htmlFor="longDescription">
-                Description *
+                Longue description *
               </Label>
               <Textarea
                 rows={3}
@@ -120,7 +120,7 @@ export const EditEventSidebar: FC<EditEventSidebarProps> = ({ event, onClose, on
           <CardFooter>
             <div className="flex justify-end">
               <Button className="mr-2" variant="outline" onClick={onClose}>
-                Cancel
+                Annuler
               </Button>
               <Button onClick={() => onSave(formData)}>Save Changes</Button>
             </div>

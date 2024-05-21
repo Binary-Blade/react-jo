@@ -9,35 +9,35 @@ import {
 
 export const cardDataEvents = (totalQuantity: number, totalSold: number, totalRevenue: number) => [
   {
-    title: 'Quantity Available',
+    title: 'Quantité Disponible',
     value: totalQuantity.toLocaleString(),
     Icon: PackageIcon
   },
   {
-    title: 'Total Ticket Sold',
+    title: 'Total des Billets Vendus',
     value: totalSold.toLocaleString(),
     Icon: ShoppingCartIcon
   },
   {
-    title: 'Total Revenue',
-    value: `$${totalRevenue.toLocaleString()}`,
+    title: 'Revenu Total',
+    value: `${totalRevenue.toLocaleString()} €`,
     Icon: DollarSignIcon
   }
 ];
 
 export const cardDataUsers = (totalClients: number, totalRevenue: number, newSignUps: number) => [
   {
-    title: 'Total Clients',
+    title: 'Nombre Total de Clients',
     value: totalClients.toLocaleString(),
     Icon: UsersIcon
   },
   {
-    title: 'Total Revenue',
-    value: `$${totalRevenue.toLocaleString()}`,
+    title: 'Revenu Total',
+    value: `${totalRevenue.toLocaleString()} €`,
     Icon: LandmarkIcon
   },
   {
-    title: 'New Sign-ups',
+    title: 'Nouvelles Inscriptions',
     value: newSignUps.toLocaleString(),
     Icon: PlusIcon
   }

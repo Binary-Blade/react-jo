@@ -11,28 +11,30 @@ export const CardAccount: FC<CardAccountProps> = ({ handleDelete, handleLogout }
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Account</CardTitle>
-        <CardDescription>Manage your account settings.</CardDescription>
+        <CardTitle>Compte</CardTitle>
+        <CardDescription>Gérez les paramètres de votre compte.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium">Delete Account</p>
+            <p className="text-sm font-medium">Supprimer le Compte</p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Permanently delete your account and all its data.
+              Supprimez définitivement votre compte et toutes ses données.
             </p>
           </div>
           <Button variant="destructive" onClick={handleDelete}>
-            Delete
+            Supprimer
           </Button>
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium">Logout</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Sign out of your account.</p>
+            <p className="text-sm font-medium">Déconnexion</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Déconnectez-vous de votre compte.
+            </p>
           </div>
           <Button variant="outline" onClick={handleLogout}>
-            Logout
+            Déconnexion
           </Button>
         </div>
       </CardContent>

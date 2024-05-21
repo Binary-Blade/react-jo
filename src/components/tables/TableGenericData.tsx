@@ -68,10 +68,10 @@ export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelet
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <DropdownMenuItem onSelect={() => onEdit && onEdit(item)}>
-                      Edit
+                      Éditer
                     </DropdownMenuItem>
                     <DropdownMenuItem onSelect={() => onDelete && onDelete(item)}>
-                      Delete
+                      Supprimer
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
