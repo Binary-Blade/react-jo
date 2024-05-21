@@ -10,8 +10,10 @@ import { OverviewOneEvent } from '@/features/events/selected-event/OverviewOneEv
 import { ButtonToEvent } from '@/components/button/ButtonToEvent';
 import { ImagesCoverEvent } from '@/components/cards/ImagesCoverEvent';
 import { GenericTitle } from '@/components/hero/GenericTitle';
-import { ChooseEventPrices } from '@/features/events/selected-event/ChooseEventPrices';
 import { DescriptionCollapsible } from '@/components/collapsible/DescriptionCollapsible';
+import { AddItemEventToCart } from '@/features/events/selected-event/AddItemEventToCart';
+import { EventHero } from '@/components/hero/EventHero';
+import { Card } from '@/components/ui/card';
 
 export default function EventSelectedPage() {
   const params = useParams();
@@ -20,6 +22,7 @@ export default function EventSelectedPage() {
   const { getEvent, event } = useEventStore();
   const basePrice = event?.basePrice;
   const eventDate = useFormattedDates(event?.startDate, event?.endDate);
+  const title = event?.title;
 
   useEffect(() => {
     getEvent(eventId);
@@ -28,17 +31,20 @@ export default function EventSelectedPage() {
   return (
     <>
       <Header />
-      <div className="flex flex-col min-h-screen">
-        <div className="max-w-6xl mx-auto p-4 lg:px-6 sm:py-8 md:py-10">
-          <section className="hidden sm:flex flex-col gap-4 sm:flex-row sm:items-center pb-4 sm:pb-8">
-            <ButtonToEvent />
-            <h1 className="text-xl lg:text-3xl font-semibold tracking-tight">
-              Achetez des billets pour les Jeux Olympiques de Paris 2024
-            </h1>
-          </section>
-          <ImagesCoverEvent />
-          <section className="py-8 grid md:grid-cols-2 lg:grid-cols-[1fr_400px] gap-8 sm:gap-12 md:gap-16 items-start">
-            <div className="grid gap-8 row-start-2 md:row-start-auto">
+      <EventHero />
+      <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-6xl mx-auto px-4 lg:px-6 py-8">
+          <div className="py-4">
+            <section className="hidden sm:flex flex-col gap-4 sm:flex-row sm:items-center pb-4 sm:pb-8">
+              <ButtonToEvent />
+              <h1 className="text-2xl lg:text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+                Achetez des billets pour les Jeux Olympiques de Paris 2024
+              </h1>
+            </section>
+            <ImagesCoverEvent />
+          </div>
+          <Card className="p-8 grid md:grid-cols-2 lg:grid-cols-[1fr_400px] gap-8 sm:gap-12 md:gap-16 items-start">
+            <div className="grid gap-5 row-start-2 md:row-start-auto">
               <GenericTitle title={event?.title} subtitle={eventDate} isDesktop={true} />
               <OverviewOneEvent
                 quantitySold={event?.quantitySold}
@@ -51,15 +57,16 @@ export default function EventSelectedPage() {
                 longDescription={event?.longDescription}
               />
             </div>
-            <div className="grid gap-4 row-start-1 md:row-start-auto">
+            <div className="grid gap-8 row-start-1 md:row-start-auto">
               <GenericTitle title={event?.title} subtitle={eventDate} isMobile={true} />
-              <ChooseEventPrices
+              <AddItemEventToCart
+                title={title}
                 eventId={eventId}
                 basePrice={basePrice}
                 addItemToCartLocal={addItemToCartLocal}
               />
             </div>
-          </section>
+          </Card>
         </div>
       </div>
       <Footer />

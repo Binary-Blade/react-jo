@@ -11,6 +11,8 @@ import { CartNotLogging } from '@/components/notlogging/CartNotLogging';
 import { CheckoutSummary } from '@/features/checkout/CheckoutSummary';
 import { CardFormule } from '@/features/checkout/CardFormule';
 import { CheckoutEmpty } from '@/components/empty/CheckoutEmpty';
+import { EventHero } from '@/components/hero/EventHero';
+import { GenericTitle } from '@/components/hero/GenericTitle';
 
 export default function CheckoutPage() {
   const { fetchCartItems, cartId, cartItems } = useCartStore();
@@ -32,9 +34,14 @@ export default function CheckoutPage() {
   return (
     <>
       <Header />
-      <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold mb-8">Payez vos billets pour les Jeux Olympiques 2024</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <EventHero />
+      <div className="container mx-auto py-6 px-4 md:px-6 lg:px-8">
+        <GenericTitle
+          title="Payez vos billets pour les Jeux Olympiques 2024"
+          titleClass="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-100"
+          subtitleClass="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
           {Object.entries(groupedItems).map(([type, items]) => (
             <CardFormule key={type} priceFormula={type} items={items} />
           ))}
