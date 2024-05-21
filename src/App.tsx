@@ -10,10 +10,10 @@ import EventsPage from './pages/EventsPage';
 import EventSelectedPage from './pages/EventSelectedPage';
 import AdminRoute from './hoc/AdminRoute';
 import ProtectedRoute from './hoc/ProtectedRoute';
+import CheckoutPage from './pages/CheckoutPage';
+import AuthPage from './pages/AuthPage';
 
 // Lazy loading pages
-const AuthPage = lazy(() => import('./pages/AuthPage'));
-const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
