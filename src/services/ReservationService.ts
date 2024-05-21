@@ -32,6 +32,16 @@ export class ReservationService {
     }
   }
 
+  static async findAllDataReservations(userId: number) {
+    try {
+      const response = await axiosClient.get(`/reservations/find-all-data/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Failed to retrieve all data reservations', error);
+      throw new Error('Failed to retrieve all data reservations');
+    }
+  }
+
   static async catchTicketById(reservationId: number) {
     try {
       const response = await axiosClient.get(`/reservations/${reservationId}`);

@@ -37,6 +37,19 @@ export const useReservationStore = create<ReservationStoreType>(set => ({
     }
   },
 
+  fetchAllDataReservations: async (userId: number) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await ReservationService.findAllDataReservations(userId);
+      set({
+        reservations: data,
+        loading: false
+      });
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch reservation' });
+    }
+  },
+
   catchTicket: async reservationId => {
     set({ loading: true, error: null });
     try {
