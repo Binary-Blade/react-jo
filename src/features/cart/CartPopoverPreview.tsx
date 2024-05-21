@@ -31,14 +31,10 @@ export const CartPopoverPreview = () => {
   };
 
   const handleReserve = useCallback(async () => {
-    if (!userId) {
-      console.error('User ID is missing.');
-      return;
-    }
     if (!isAuthenticated) {
       return navigate('/auth');
     }
-    await syncCartItems(userId);
+    if (userId) await syncCartItems(userId);
     navigate('/checkout');
   }, [userId, navigate, syncCartItems]);
 
