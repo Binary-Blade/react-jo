@@ -15,9 +15,11 @@ import { SortByDropdown } from '@/features/filter-sorting/SortByDropdown';
 import { SortOrderDropdown } from '@/features/filter-sorting/SortOrderDropdown';
 import { FilterDropdown } from '@/features/filter-sorting/FilterDropdown';
 import { HeaderCardInfoDashboard } from '@/components/header/HeaderCardInfoDashboard';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 export const UsersDashboard = () => {
-  const { users, fetchAllUsersFiltered, deleteUser, total } = useUserStore();
+  const { users, fetchAllUsersFiltered, total } = useUserStore();
+  const { deleteUser } = useAuthStore();
   const { isDialogOpen, error, requestDelete, confirmDeletion, cancelDeletion } =
     useDelConfirmation(deleteUser, 'userId');
   const { totalClients, totalRevenue, newSignUps } = useAggregateUsersData();

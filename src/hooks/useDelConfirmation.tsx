@@ -1,3 +1,4 @@
+import { Response } from '@/config/types/Auth/AuthResponse';
 import { useCallback, useState } from 'react';
 
 // Define a generic type for items to be deleted
@@ -5,8 +6,10 @@ interface DeletableItem {
   [key: string]: any; // This will allow any key to access properties of the item
 }
 
+type ResponseDelete = Response | void;
+
 // Define the type for the delete function
-type DeleteFunctionType = (id: number) => Promise<void>;
+type DeleteFunctionType = (id: number) => Promise<ResponseDelete>;
 
 export const useDelConfirmation = (deleteFunction: DeleteFunctionType, elementId: string) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
