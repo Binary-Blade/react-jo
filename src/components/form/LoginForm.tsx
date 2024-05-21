@@ -38,7 +38,7 @@ export const LoginForm = () => {
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
         description: `${response.error}`,
-        action: <ToastAction altText="Try again">Try again</ToastAction>
+        action: <ToastAction altText="Try again">Ressayez</ToastAction>
       });
     }
   };
@@ -63,7 +63,7 @@ export const LoginForm = () => {
             control={control}
             render={({ field }) => (
               <div>
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Mot de passe</Label>
                 <Input {...field} id="password" type="password" />
                 {errors.password && <span className="text-red-500">{errors.password.message}</span>}
               </div>
