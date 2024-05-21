@@ -13,9 +13,10 @@ import { CardFormule } from '@/features/checkout/CardFormule';
 import { CheckoutEmpty } from '@/components/empty/CheckoutEmpty';
 import { EventHero } from '@/components/hero/EventHero';
 import { GenericTitle } from '@/components/hero/GenericTitle';
+import { SkeletonCheckoutPage } from '@/components/skeletons/SkelettonCheckoutPage';
 
 export default function CheckoutPage() {
-  const { fetchCartItems, cartId, cartItems } = useCartStore();
+  const { fetchCartItems, cartId, cartItems, loading } = useCartStore();
   const { userId, isAuthenticated } = useAuthStore();
 
   useEffect(() => {
@@ -26,11 +27,16 @@ export default function CheckoutPage() {
 
   const groupedItems = useGroupByTicketType(cartItems);
 
+  if (loading) {
+    return <SkeletonCheckoutPage />;
+  }
+
   if (cartItems.length === 0 && isAuthenticated) {
     return <CheckoutEmpty />;
   } else if (cartItems.length === 0 && !isAuthenticated) {
     return <CartNotLogging />;
   }
+
   return (
     <>
       <Header />
