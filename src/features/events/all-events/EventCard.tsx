@@ -39,7 +39,7 @@ export const EventCard: FC<EventCardProps> = ({
   return (
     <Card
       className="group relative overflow-hidden rounded-lg 
-      border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+      border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-rose-500 "
     >
       <img
         alt="Card Event"
