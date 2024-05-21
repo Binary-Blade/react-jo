@@ -15,4 +15,5 @@ export interface AuthStoreTypes {
   changePassword: (userData: ChangePasswordSchema) => Promise<Response>;
   refreshToken: () => Promise<void>;
   accessProtectedRoute: () => Promise<void>;
+  deleteUser: (userId: number) => Promise<Response>;
 }

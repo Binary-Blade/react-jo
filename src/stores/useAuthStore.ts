@@ -75,7 +75,6 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
       return { success: true, message: 'Password changed successfully' };
     } catch (error: any) {
       const errorMessage = error.response?.data.message || 'An error occurred';
-      set({ loading: false, error: errorMessage });
       return { success: false, error: errorMessage };
     }
   },
@@ -118,6 +117,18 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
         loading: false,
         error: error.message || 'Failed to verify session'
       });
+    }
+  },
+
+  deleteUser: async (userId: number) => {
+    set({ loading: true, error: null });
+    try {
+      await AuthenticationService.deleteUser(userId);
+      set({ loading: false });
+      return { success: true, message: 'User is now inactive' };
+    } catch (error: any) {
+      const errorMessage = error.response?.data.message || 'An error occurred';
+      return { success: false, error: errorMessage };
     }
   }
 }));

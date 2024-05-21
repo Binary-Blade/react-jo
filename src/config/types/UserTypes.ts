@@ -1,4 +1,5 @@
 import { ProfileSchema } from '../zod-schemas/profileSchema';
+import { Response } from './Auth/AuthResponse';
 import { PaginationParams } from './common/PaginationTypes';
 
 export interface User {
@@ -27,8 +28,8 @@ export interface UserActions {
   fetchAllUsersFiltered: (params: PaginationParams) => Promise<void>;
   fetchAllUsersValues: () => Promise<void>;
   fetchUserById: (userId: number) => Promise<void>;
-  updateUser: (userId: number, updateData: ProfileSchema) => Promise<void>;
-  deleteUser: (userId: number) => Promise<void>;
+  updateUser: (userId: number, updateData: ProfileSchema) => Promise<Response>;
+  makeInactive: (userId: number) => Promise<Response>;
 }
 
 export type UserStore = UserState & UserActions;

@@ -66,20 +66,16 @@ export class UserService {
     }
   }
 
-  /**
-   * Deletes a user.
-   * @param {number} userId The ID of the user to delete.
-   */
-  static async deleteUser(userId: number) {
+  static async makeInInactive(userId: number) {
     try {
-      const response = await axiosClient.delete(`/users/${userId}`);
+      const response = await axiosClient.patch(`/users/make-inactive/${userId}`);
       return {
         success: true,
         data: response.data
       };
     } catch (error) {
-      console.error(`Delete user error: ${userId}`, error);
-      throw new Error('Failed to delete user');
+      console.error(`Update user error: ${userId}`, error);
+      throw new Error('Failed to update user');
     }
   }
 }

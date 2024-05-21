@@ -24,4 +24,5 @@ export interface CartItemLocal {
   priceFormula: PriceFormula;
   eventId: number;
   quantity: number;
+  title: string;
 }

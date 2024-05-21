@@ -49,13 +49,7 @@ export class AuthenticationService {
 
   static async changePassword(userData: ChangePasswordSchema): Promise<LoginResponse> {
     const response = await axiosClient.patch('/auth/change-password', userData);
-    if (response.data) {
-      return {
-        success: true,
-        data: response.data
-      };
-    }
-    throw new Error('Login failed: No access token received');
+    return response.data;
   }
 
   /**
@@ -89,6 +83,15 @@ export class AuthenticationService {
    */
   static async accessProtectedRoute(): Promise<TokenResponse> {
     const response = await axiosClient.post('/auth/access-token');
+    return response.data;
+  }
+
+  /**
+   * Deletes a user.
+   * @param {number} userId The ID of the user to delete.
+   */
+  static async deleteUser(userId: number) {
+    const response = await axiosClient.delete(`/auth/delete/${userId}`);
     return response.data;
   }
 }

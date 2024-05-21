@@ -66,21 +66,34 @@ export const useUserStore = create<UserStore>((set, get) => ({
           users: state.users.map(user => (user.id === userId ? { ...user, ...updateData } : user))
         }));
       }
+      return { success: true, message: 'Update profile successful' };
     } catch (error: any) {
       set({ loading: false, error: error.message || 'Failed to update User' });
+      return {
+        success: false,
+        message: 'Update profile failed, incorrect value or that email should already exist'
+      };
     }
   },
 
-  deleteUser: async (userId: number) => {
+  makeInactive: async (userId: number) => {
     set({ loading: true, error: null });
     try {
-      await UserService.deleteUser(userId);
-      set(state => ({
-        users: state.users.filter(user => user.id !== userId),
-        selectedUser: state.selectedUser?.id === userId ? null : state.selectedUser
-      }));
+      const result = await UserService.makeInInactive(userId);
+      set({
+        selectedUser: result.data,
+        loading: false
+      });
+      // Optionally update the local list of users
+      if (get().users.length > 0) {
+        set(state => ({
+          users: state.users.map(user => (user.id === userId ? { ...user, isActive: false } : user))
+        }));
+      }
+      return { success: true, message: 'User is now inactive' };
     } catch (error: any) {
-      set({ loading: false, error: error.message || 'Failed to delete User' });
+      const errorMessage = error.response?.data.message || 'An error occurred';
+      return { success: false, error: errorMessage };
     }
   }
 }));

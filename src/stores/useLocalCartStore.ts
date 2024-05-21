@@ -19,7 +19,8 @@ export const useLocalCartStore = create<LocalCartStoreType>(set => ({
         eventId: cartItem.eventId,
         priceFormula: cartItem.priceFormula,
         quantity: cartItem.quantity,
-        price: cartItem.price
+        price: cartItem.price,
+        title: cartItem.title
       };
 
       if (existingItemIndex !== -1) {
