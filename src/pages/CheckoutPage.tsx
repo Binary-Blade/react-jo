@@ -27,7 +27,7 @@ export default function CheckoutPage() {
 
   const groupedItems = useGroupByTicketType(cartItems);
 
-  if (loading) {
+  if (loading && cartItems.length === 0) {
     return <SkeletonCheckoutPage />;
   }
 

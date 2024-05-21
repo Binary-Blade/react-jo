@@ -1,6 +1,6 @@
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { NAVLINKS_PUBLIC } from '@/config/navlink';
-import { FC } from 'react';
+import { FC, useTransition } from 'react';
 import { DropDownAccount } from '@/features/header/DropDownAccount';
 import { UserRole } from '@/config/enums/UserRole.enum';
 import { CartPopoverPreview } from '@/features/cart/CartPopoverPreview';
@@ -19,6 +19,15 @@ export const NavBar: FC<NavBarProps> = ({
   role,
   totalCommands
 }) => {
+  const [, startTransition] = useTransition();
+  const [, setLocation] = useLocation();
+
+  const handleCheckoutClick = () => {
+    startTransition(() => {
+      setLocation('/checkout');
+    });
+  };
+
   return (
     <div className="w-full shadow-md bg-white dark:bg-gray-950">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-6">
@@ -70,8 +79,8 @@ export const NavBar: FC<NavBarProps> = ({
           )}
 
           <div className="relative flex items-center gap-2">
-            <Link
-              href="/checkout"
+            <button
+              onClick={handleCheckoutClick}
               className="text-gray-700 dark:text-gray-300 hover:text-rose-500 dark:hover:text-rose-500 transition-colors"
             >
               <PackageIcon className="w-7 h-7" />
@@ -80,7 +89,7 @@ export const NavBar: FC<NavBarProps> = ({
                   {totalCommands}
                 </span>
               )}
-            </Link>
+            </button>
           </div>
         </div>
       </div>
