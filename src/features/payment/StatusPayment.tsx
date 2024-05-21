@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { FC } from 'react';
 import { navigate } from 'wouter/use-browser-location';
-import { CheckIcon, CircleEllipsisIcon, XIcon } from '@/components/ui/IconComponents';
+import { CheckIcon, XIcon } from '@/components/ui/IconComponents';
 import { Button } from '@/components/ui/button';
 
 interface StatusPaymentProps {
@@ -45,8 +45,6 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
     switch (data.transaction.statusPayment) {
       case 'APPROVED':
         return <CheckIcon className="w-10 h-10 text-green-600 dark:text-green-400" />;
-      case 'PENDING':
-        return <CircleEllipsisIcon className="w-10 h-10 text-yellow-600 dark:text-yellow-400" />;
       case 'REJECTED':
         return <XIcon className="w-10 h-10 text-red-600 dark:text-red-400" />;
       default:
@@ -54,6 +52,7 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
     }
   };
 
+  console.log(data);
   if (!reservation.length) {
     return <p>No reservation data available.</p>;
   }

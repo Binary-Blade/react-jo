@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import useReservationStore from '@/stores/useReservationStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useFilter, usePagination } from '@/hooks';
-import { Button } from '@/components/ui/button';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
 import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
 import { SORTING_RESERVATION_PUBLIC } from '@/config/sorting/sortingReservation';
@@ -69,14 +68,9 @@ export const AllReservations = () => {
               onChange={setFilterValue}
             />
           </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline">Rejected</Button>
-            <Button variant="outline">Approved</Button>
-            <Button variant="outline">Pending</Button>
-          </div>
         </div>
       </section>
-      <div className="px-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="px-10 pb-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {reservations.map(reservation => (
           <CardReservations key={reservation.reservationId} reservation={reservation} />
         ))}

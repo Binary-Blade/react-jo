@@ -1,5 +1,6 @@
-import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/components/ui/card';
 import { FC } from 'react';
+import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import { ticketDescriptions } from '@/config/constants';
 import { CardOneTicket } from './CardOneTicket';
 import { CartItem } from '@/config/types/Cart/CartTypes';
@@ -12,10 +13,15 @@ interface CartFormuleProps {
 export const CardFormule: FC<CartFormuleProps> = ({ priceFormula, items }) => {
   const description = ticketDescriptions[priceFormula];
   return (
-    <Card>
+    <Card className="bg-white dark:bg-gray-900 rounded-lg shadow-md">
       <CardHeader>
-        <CardTitle>{priceFormula} Tickets</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          {priceFormula} Tickets
+        </CardTitle>
+        <CardDescription className="text-md text-gray-600 dark:text-gray-400">
+          {description}
+        </CardDescription>
+        <Separator className="my-2" />
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">

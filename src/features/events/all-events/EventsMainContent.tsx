@@ -21,6 +21,7 @@ export const EventsMainContent: React.FC = () => {
   });
   const { sortBy, setSortBy, sortOrder, setSortOrder, filterBy, filterValue, setFilterValue } =
     useFilter('title', 'DESC', 'categoryType', 'ALL');
+
   useEffect(() => {
     fetchEvents({ limit, offset, sortBy, sortOrder, filterBy, filterValue });
   }, [currentPage, limit, sortBy, sortOrder, filterBy, filterValue, fetchEvents]);
@@ -35,18 +36,18 @@ export const EventsMainContent: React.FC = () => {
 
   return (
     <>
-      <section className="w-full h-full py-6 md:py-6 lg:py-6 ">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
+      <section className="w-full h-full py-8 md:py-12 lg:py-14 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-6 text-center">
+            <div className="space-y-4">
               <GenericTitle
                 title="Découvrez Tous les Événements"
                 subtitle="Parcourez le programme complet des événements et compétitions des Jeux Olympiques de Paris 2024."
-                titleClass="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-100"
-                subtitleClass="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300"
+                titleClass="text-4xl font-extrabold tracking-tight sm:text-5xl text-gray-900 dark:text-white"
+                subtitleClass="max-w-[900px] text-gray-600 md:text-xl lg:text-lg xl:text-xl dark:text-gray-300"
               />
             </div>
-            <div className="ml-auto flex items-center gap-2">
+            <div className="flex items-center space-x-4">
               <SortByDropdown
                 sortBy={sortBy}
                 onSortChange={setSortBy}
@@ -60,7 +61,7 @@ export const EventsMainContent: React.FC = () => {
               />
             </div>
           </div>
-          <div className="mt-4 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {events.map(event => (
               <EventCard
                 eventId={event.eventId}
@@ -76,13 +77,14 @@ export const EventsMainContent: React.FC = () => {
           </div>
         </div>
       </section>
-      <Separator />
-
-      <PaginationComponent
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
+      <Separator className="my-8" />
+      <div className="container mx-auto px-4 md:px-6">
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      </div>
     </>
   );
 };

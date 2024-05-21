@@ -39,7 +39,6 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
 
   const handleCheckout = async () => {
     if (!isAuthenticated) {
-      console.log('Please login to proceed to payment');
       return navigate('/login');
     }
     setLoading(true);
@@ -63,7 +62,12 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
       {!paymentProcess && (
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button className="w-full" size="lg" onClick={handleCheckout} disabled={loading}>
+            <Button
+              className="w-full bg-rose-600 hover:bg:rose-700 text-white font-semibold rounded-lg"
+              size="lg"
+              onClick={handleCheckout}
+              disabled={loading}
+            >
               {loading ? 'Processing...' : 'Proceed to Payment'}
             </Button>
           </AlertDialogTrigger>

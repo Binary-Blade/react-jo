@@ -1,4 +1,3 @@
-import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
 import {
   DropdownMenuTrigger,
   DropdownMenuItem,
@@ -6,15 +5,15 @@ import {
   DropdownMenuContent,
   DropdownMenu
 } from '@/components/ui/dropdown-menu';
-import { useUserInitials } from '@/hooks/useUserInitial';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUserStore } from '@/stores/useUserStore';
+import { UserCircleIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
 export const DropDownAccount = () => {
   const { logout, userId } = useAuthStore();
-  const { fetchUserById, selectedUser } = useUserStore();
+  const { fetchUserById } = useUserStore();
   const [, navigate] = useLocation();
 
   useEffect(() => {
@@ -23,10 +22,6 @@ export const DropDownAccount = () => {
     }
   }, [userId, fetchUserById]);
 
-  const initials = useUserInitials({
-    firstName: selectedUser?.firstName,
-    lastName: selectedUser?.lastName
-  });
   const handleLogout = async () => {
     try {
       await logout();
@@ -46,11 +41,10 @@ export const DropDownAccount = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="h-9 w-9">
-          <AvatarImage alt="@shadcn" src="/placeholder-avatar.jpg" />
-          <AvatarFallback className="text-white bg-rose-500 ">{initials}</AvatarFallback>
+        <button className="flex items-center justify-center h-10 w-10 rounded-full focus:outline-none">
+          <UserCircleIcon className="h-7 w-7 text-gray-800 hover:text-rose-500 dark:text-gray-200" />
           <span className="sr-only">Toggle user menu</span>
-        </Avatar>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={handleSettings}>My Account</DropdownMenuItem>

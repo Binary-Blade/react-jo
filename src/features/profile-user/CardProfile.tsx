@@ -1,11 +1,4 @@
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  Card
-} from '@/components/ui/card';
+import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -72,12 +65,12 @@ export const CardProfile: FC<CardProfileProps> = ({ selectedUser, handleUpdate }
             <Input id="email" type="email" {...register('email')} />
             {errors.email && <span className="text-red-500">{errors.email.message}</span>}
           </div>
-          <CardFooter className="gap-4">
+          <div className="pt-4 space-x-4">
             <Button type="submit">Save Changes</Button>
             <Button variant="outline" onClick={() => reset()}>
               Reset
             </Button>
-          </CardFooter>
+          </div>
         </form>
       </CardContent>
     </Card>

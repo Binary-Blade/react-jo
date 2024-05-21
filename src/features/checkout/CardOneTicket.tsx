@@ -72,18 +72,30 @@ export const CardOneTicket: FC<CartItemsProps> = ({
   }, [initialQuantity]);
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between p-2 ">
       <div>
         <h3 className="font-semibold">{eventName}</h3>
         <p className="text-gray-500 dark:text-gray-400">{dateText}</p>
       </div>
       <div className="flex items-center gap-2">
-        <Button size="icon" variant="outline" onClick={handleDecrement}>
-          <MinusIcon className="h-4 w-4" />
+        <Button
+          size="icon"
+          variant="outline"
+          onClick={handleDecrement}
+          aria-label="Decrease Quantity"
+          className="hover:bg-red-500 hover:text-white transition-colors"
+        >
+          <MinusIcon className="h-5 w-5" />
         </Button>
-        <span className="font-medium">{quantity}</span>
-        <Button size="icon" variant="outline" onClick={handleIncrement}>
-          <PlusIcon className="h-4 w-4" />
+        <span className="text-lg font-medium text-gray-900 dark:text-white">{quantity}</span>
+        <Button
+          size="icon"
+          variant="outline"
+          onClick={handleIncrement}
+          aria-label="Increase Quantity"
+          className="hover:bg-green-500 hover:text-white transition-colors"
+        >
+          <PlusIcon className="h-5 w-5" />
         </Button>
       </div>
       <Separator />
