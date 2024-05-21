@@ -12,7 +12,6 @@ export default function HomePage() {
       <Hero />
       <Highlights />
       <ExploreVenue />
-      {/* <NewsPresents />*/}
       <SectionTickets />
       <Footer />
     </>
