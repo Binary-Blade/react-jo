@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type GenericTitleProps = {
   title: string | undefined;
-  subtitle: string | undefined;
+  subtitle?: string | undefined;
   isMobile?: boolean;
   isDesktop?: boolean;
   titleClass?: string;

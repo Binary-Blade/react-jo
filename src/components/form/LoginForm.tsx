@@ -1,4 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
+import { ToastAction } from '@/components/ui/toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -6,13 +7,12 @@ import { Button } from '@/components/ui/button';
 import { LoginFormData, loginSchema } from '@/config/zod-schemas/loginSchema';
 import { useLocation } from 'wouter';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useState } from 'react';
-import { AlertDestructive } from '@/components/alert/AlertDestructive';
+import { useToast } from '../ui/use-toast';
 
 export const LoginForm = () => {
   const [, navigate] = useLocation();
   const { login } = useAuthStore();
-  const [error, setError] = useState<string | null | undefined>(null);
+  const { toast } = useToast();
 
   const {
     control,
@@ -34,7 +34,12 @@ export const LoginForm = () => {
       navigate('/');
     } else {
       console.error('Signup failed:', response.error);
-      setError(response.error);
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: `${response.error}`,
+        action: <ToastAction altText="Try again">Try again</ToastAction>
+      });
     }
   };
 
@@ -69,7 +74,6 @@ export const LoginForm = () => {
           </Button>
         </form>
       </div>
-      {error && <AlertDestructive errorMessage={error} />}
     </>
   );
 };

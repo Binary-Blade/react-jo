@@ -1,11 +1,11 @@
-import placeholderImage from '@/assets/images/bg_image2.webp';
+import placeholderImage from '@/assets/images/crop_bg.webp';
 
 export const EventHero = () => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+  <div className="bg-white shadow-md overflow-hidden">
     <div className="relative">
       <img
         alt="Olympic Games"
-        className="w-full h-48 object-cover "
+        className="w-full h-48 object-cover aspect-h-9"
         height={360}
         src={placeholderImage}
         style={{

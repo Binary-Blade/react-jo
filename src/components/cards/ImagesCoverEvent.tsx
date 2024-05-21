@@ -1,5 +1,9 @@
 import { Link } from 'wouter';
-import imageTicket from '@/assets/images/GamesTicketOptions.svg';
+import boxing from '@/assets/images/boxingg.webp';
+import archery from '@/assets/images/archery.webp';
+import basketball from '@/assets/images/Basketball.webp';
+import badminton from '@/assets/images/badminton.webp';
+import fencing from '@/assets/images/fencing.webp';
 import { Button } from '../ui/button';
 import { GripIcon } from '@/components/ui/IconComponents';
 
@@ -15,7 +19,7 @@ export const ImagesCoverEvent = () => (
           alt="Olympic Stadium"
           className="aspect-square object-cover"
           height="600"
-          src={imageTicket}
+          src={fencing}
           width="600"
         />
       </Link>
@@ -27,7 +31,7 @@ export const ImagesCoverEvent = () => (
           alt="Olympic Torch"
           className="aspect-square object-cover"
           height="600"
-          src={imageTicket}
+          src={archery}
           width="600"
         />
       </Link>
@@ -39,7 +43,7 @@ export const ImagesCoverEvent = () => (
           alt="Olympic Rings"
           className="aspect-square object-cover"
           height="600"
-          src={imageTicket}
+          src={badminton}
           width="600"
         />
       </Link>
@@ -51,7 +55,7 @@ export const ImagesCoverEvent = () => (
           alt="Olympic Medals"
           className="aspect-square object-cover"
           height="600"
-          src={imageTicket}
+          src={boxing}
           width="600"
         />
       </Link>
@@ -63,7 +67,7 @@ export const ImagesCoverEvent = () => (
           alt="Olympic Athletes"
           className="aspect-square object-cover"
           height="600"
-          src={imageTicket}
+          src={basketball}
           width="600"
         />
       </Link>
