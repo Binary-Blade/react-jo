@@ -1,34 +1,62 @@
-import { Event, EventResponse } from '@/types/EventTypes';
-import axiosClient from './axiosConfig';
+import axiosClient from '@/config/axiosConfig';
+import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
+import { EventResponse } from '@/config/types/Event/ResponseEventTypes';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 
 /**
  * Service class for handling API requests related to events.
+ *
+ * @class EventService
  */
 export class EventService {
-
   /**
    * Fetches all events from the server.
-   * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the events data.
+   *
+   * @static getAllEvents
+   * @return {Promise<{success: boolean; data: any}>} The response data
+   * @throws {Error} If the request fails
    */
-  static async getAllEvents(): Promise<EventResponse> {
+  static async getAllValues(): Promise<EventResponse> {
     try {
-      const response = await axiosClient.get('/events/get-all');
+      const response = await axiosClient.get('/events/get-events-values');
       return {
         success: true,
         data: response.data
       };
     } catch (error) {
       console.error('Get all events error:', error);
-      throw new Error("Failed to fetch events");
+      throw new Error('Failed to fetch events');
+    }
+  }
+
+  /**
+   * Fetches all events from the server.
+   *
+   * @static getAllEvents
+   * @return {Promise<{success: boolean; data: any}>} The response data
+   * @throws {Error} If the request fails
+   */
+  static async getAllEventsFiltered(params?: PaginationParams): Promise<EventResponse> {
+    try {
+      const response = await axiosClient.get('/events/get-all-filtered', { params });
+      return {
+        success: true,
+        data: response.data
+      };
+    } catch (error) {
+      console.error('Get all events error:', error);
+      throw new Error('Failed to fetch events');
     }
   }
 
   /**
    * Creates a new event with the specified details.
+   *
+   * @static createEvent
    * @param {Event} createEventDto - The event data to create.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the created event data.
    */
-  static async createEvent(createEventDto: Event): Promise<EventResponse> {
+  static async createEvent(createEventDto: CreateEventDto): Promise<EventResponse> {
     try {
       const response = await axiosClient.post('/events/create', createEventDto);
       return {
@@ -37,16 +65,21 @@ export class EventService {
       };
     } catch (error) {
       console.error('Create event error:', error);
-      throw new Error("Failed to create event");
+      throw new Error('Failed to create event');
     }
   }
   /**
    * Fetches the price of a ticket for a specific event and ticket type.
+   *
+   * @static getTicketPrice
    * @param {number} eventId - The ID of the event to get the ticket price for.
    * @param {string} ticketType - The type of ticket to get the price for.
    * @returns {Promise<{success: boolean; price: number}>} A promise that resolves with the ticket price.
    */
-  static async getTicketPrice(eventId: number, ticketType: string): Promise<{ success: boolean; price: number }> {
+  static async getTicketPrice(
+    eventId: number,
+    ticketType: string
+  ): Promise<{ success: boolean; price: number }> {
     try {
       const response = await axiosClient.get(`/events/${eventId}/price/${ticketType}`);
       return {
@@ -55,12 +88,14 @@ export class EventService {
       };
     } catch (error) {
       console.error('Get ticket price error:', error);
-      throw new Error("Failed to fetch ticket price");
+      throw new Error('Failed to fetch ticket price');
     }
   }
 
   /**
    * Fetches a single event by its ID.
+   *
+   * @static getEventById
    * @param {number} eventId - The ID of the event to retrieve.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the event data.
    */
@@ -73,17 +108,22 @@ export class EventService {
       };
     } catch (error) {
       console.error(`Get event by ID error: ${eventId}`, error);
-      throw new Error("Failed to fetch event");
+      throw new Error('Failed to fetch event');
     }
   }
 
   /**
    * Updates an event by its ID with the given data.
+   *
+   * @static updateEvent
    * @param {number} eventId - The ID of the event to update.
    * @param {Event} updateEventDto - The data to update the event with.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the updated event data.
    */
-  static async updateEvent(eventId: number, updateEventDto: Event): Promise<EventResponse> {
+  static async updateEvent(
+    eventId: number,
+    updateEventDto: UpdateEventDto
+  ): Promise<EventResponse> {
     try {
       const response = await axiosClient.patch(`/events/${eventId}`, updateEventDto);
       return {
@@ -92,12 +132,14 @@ export class EventService {
       };
     } catch (error) {
       console.error(`Update event error: ${eventId}`, error);
-      throw new Error("Failed to update event");
+      throw new Error('Failed to update event');
     }
   }
 
   /**
    * Deletes an event by its ID.
+   *
+   * @static deleteEvent
    * @param {number} eventId - The ID of the event to delete.
    * @returns {Promise<{success: boolean; data: any}>} A promise that resolves with the confirmation of deletion.
    */
@@ -110,7 +152,7 @@ export class EventService {
       };
     } catch (error) {
       console.error(`Delete event error: ${eventId}`, error);
-      throw new Error("Failed to delete event");
+      throw new Error('Failed to delete event');
     }
   }
 }

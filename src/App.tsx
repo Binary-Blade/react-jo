@@ -7,23 +7,22 @@ import useCartStore from './stores/useCartStore';
 // Eager loading pages
 import HomePage from './pages/HomePage';
 import EventsPage from './pages/EventsPage';
-import { NotFoundPage } from './pages/NotFound';
+import EventSelectedPage from './pages/EventSelectedPage';
+import AdminRoute from './hoc/AdminRoute';
+import ProtectedRoute from './hoc/ProtectedRoute';
 
 // Lazy loading pages
 const AuthPage = lazy(() => import('./pages/AuthPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
-const CartPage = lazy(() => import('./pages/CartPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
 export default function App() {
-  const { userId } = useAuthStore(state => ({
-    userId: state.userId,
-  }));
-
+  const { userId } = useAuthStore();
   const { cartId, fetchCartItems } = useCartStore(state => ({
     fetchCartItems: state.fetchCartItems,
-    cartId: state.cartId,
+    cartId: state.cartId
   }));
 
   useEffect(() => {
@@ -38,12 +37,12 @@ export default function App() {
         <Switch>
           <Route path="/" component={HomePage} />
           <Route path="/auth" component={AuthPage} />
+          <Route path="/events/:eventId" component={EventSelectedPage} />
           <Route path="/events" component={EventsPage} />
-          <Route path="/reservations" component={ReservationPage} />
-          <Route path="/cart" component={CartPage} />
-          <Route path="/profile*" component={ProfilePage} />
-          <Route path="/dashboard*" component={DashboardPage} />
-          <Route path="*" component={NotFoundPage} />
+          <Route path="/checkout" component={CheckoutPage} />
+          <ProtectedRoute path="/reservations" component={ReservationPage} />
+          <ProtectedRoute path="/profile" component={ProfilePage} />
+          <AdminRoute path="/dashboard" component={DashboardPage} />
         </Switch>
       </Suspense>
     </AuthProvider>

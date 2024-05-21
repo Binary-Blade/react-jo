@@ -1,44 +1,54 @@
+import { ReservationStoreType } from '@/config/types/ReservationTypes';
+import { PaginationParams } from '@/config/types/common/PaginationTypes';
 import { ReservationService } from '@/services/ReservationService';
 import { create } from 'zustand';
 
-interface ReservationState {
-    newReservation: any;  // This holds a single reservation for the list view
-    reservations: any[];  // This holds all reservations
-    reservation: any;     // This holds a single reservation for details view
-    addReservation: (userId: number, cartId: number) => Promise<void>;
-    fetchReservations: (userId: number) => Promise<void>;
-    fetchOneReservation: (reservationId: number) => Promise<void>;
-}
+export const useReservationStore = create<ReservationStoreType>(set => ({
+  newReservation: null,
+  reservations: [],
+  reservation: null,
+  total: 0,
+  loading: false,
+  error: null,
 
-export const useReservationStore = create<ReservationState>((set) => ({
-    newReservation: null,
-    reservations: [],
-    reservation: null,
-
-    addReservation: async (userId, cartId) => {
-        try {
-            const data = await ReservationService.addReservation(userId, cartId);
-            set(state => ({ newReservation: [...state.reservations, data] }));
-        } catch (error) {
-            console.error('Failed to add reservation', error);
-        }
-    },
-    fetchReservations: async (userId: number) => {
-        try {
-            const data = await ReservationService.findAllReservations(userId);
-            set({ reservations: data });
-        } catch (error) {
-            console.error('Failed to fetch reservations', error);
-        }
-    },
-    fetchOneReservation: async (reservationId) => {
-        try {
-            const data = await ReservationService.findReservationById(reservationId);
-            set({ reservation: data });  // Update the single reservation state
-        } catch (error) {
-            console.error('Failed to fetch reservation', error);
-        }
+  addReservation: async (userId, cartId) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await ReservationService.addReservation(userId, cartId);
+      set(state => ({
+        newReservation: [...state.reservations, data],
+        loading: false
+      }));
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to add reservation' });
     }
+  },
+  fetchReservations: async (userId: number, params: PaginationParams) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await ReservationService.findAllReservations(userId, params);
+      set({
+        reservations: data.reservations,
+        total: data.total,
+        loading: false
+      });
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch reservation' });
+    }
+  },
+
+  catchTicket: async reservationId => {
+    set({ loading: true, error: null });
+    try {
+      const data = await ReservationService.catchTicketById(reservationId);
+      set({
+        reservation: data,
+        loading: false
+      }); // Update the single reservation state
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to fetch reservation' });
+    }
+  }
 }));
 
 export default useReservationStore;

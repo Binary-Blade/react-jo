@@ -1,94 +1,85 @@
-import { useAuthStore } from "@/stores/useAuthStore";
-import { navigate } from "wouter/use-browser-location";
-import useReservationStore from "@/stores/useReservationStore";
-import { FC, useEffect, useState } from "react";
-import {
-    AlertDialog,
-    AlertDialogContent,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button";
-import { StatusPayment } from "./StatusPayment";
-import { PaymentProcessLoading } from "./PaymentProcessLoading";
+import { useAuthStore } from '@/stores/useAuthStore';
+import { navigate } from 'wouter/use-browser-location';
+import useReservationStore from '@/stores/useReservationStore';
+import { FC, useEffect, useState } from 'react';
+import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { StatusPayment } from './StatusPayment';
+import { PaymentProcessLoading } from './PaymentProcessLoading';
 
 interface CheckOutPaymentProps {
-    cartId: number | null | undefined;
-    totalTaxes: string;
+  cartId: number | null | undefined;
 }
 
-export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ totalTaxes, cartId }) => {
-    const [progress, setProgress] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [paymentProcess] = useState(false);
-    const { userId, isAuthenticated } = useAuthStore(state => ({
-        userId: state.userId,
-        isAuthenticated: state.isAuthenticated,
-    }));
-    const { newReservation, addReservation } = useReservationStore(state => ({
-        newReservation: state.newReservation,
-        addReservation: state.addReservation,
-    }));
+/**
+ * ButtonCheckoutPayment component.
+ */
+export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [paymentProcess] = useState(false);
+  const { userId, isAuthenticated } = useAuthStore();
+  const { newReservation, addReservation } = useReservationStore();
 
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setProgress(prevProgress => {
+          const nextProgress = prevProgress + 2;
+          if (nextProgress > 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return nextProgress;
+        });
+      }, 150); // Update progress every 100ms
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
 
-    useEffect(() => {
-        if (loading) {
-            const interval = setInterval(() => {
-                setProgress((prevProgress) => {
-                    const nextProgress = prevProgress + 2;
-                    if (nextProgress > 100) {
-                        clearInterval(interval);
-                        return 100;
-                    }
-                    return nextProgress;
-                });
-            }, 150); // Update progress every 100ms
-            return () => clearInterval(interval);
-        }
-    }, [loading]);
+  const handleCheckout = async () => {
+    if (!isAuthenticated) {
+      return navigate('/login');
+    }
+    setLoading(true);
+    try {
+      if (userId && cartId) {
+        await addReservation(userId, cartId);
 
-    const handleCheckout = async () => {
-        if (!isAuthenticated) {
-            console.log("Please login to proceed to payment");
-            return navigate("/login");
-        }
-        setLoading(true);
-        try {
-            if (userId && cartId) {
-                await addReservation(userId, cartId);
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000); // Simulate a delay for the payment process
+      }
+    } catch (error) {
+      console.error('Failed to add reservation:', error);
+      setLoading(false);
+      setProgress(0);
+    }
+  };
 
-                setTimeout(() => {
-                    setLoading(false);
-                }, 4000); // Simulate a delay for the payment process
-            }
-        } catch (error) {
-            console.error("Failed to add reservation:", error);
-            setLoading(false);
-            setProgress(0);
-        }
-    };
-
-    return (
-        <>
-            {!paymentProcess &&
-                <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                        <Button className="w-full" size="lg" onClick={handleCheckout} disabled={loading}>
-                            {loading ? "Processing..." : "Proceed to Payment"}
-                        </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className="">
-                        {loading ?
-                            <PaymentProcessLoading progress={progress} />
-                            :
-                            <StatusPayment
-                                totalTaxes={totalTaxes}
-                                reservation={newReservation}
-                            />
-                        }
-                    </AlertDialogContent>
-                </AlertDialog>
-            }
-        </>
-    )
-}
-
+  return (
+    <>
+      {!paymentProcess && (
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              className="w-full bg-rose-600 hover:bg:rose-700 text-white font-semibold rounded-lg"
+              size="lg"
+              onClick={handleCheckout}
+              disabled={loading}
+            >
+              {loading ? 'Processing...' : 'Proceed to Payment'}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="">
+            {loading ? (
+              <PaymentProcessLoading progress={progress} />
+            ) : (
+              <StatusPayment reservation={newReservation} />
+            )}
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
+    </>
+  );
+};

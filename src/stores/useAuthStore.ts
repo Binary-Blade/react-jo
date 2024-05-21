@@ -1,91 +1,134 @@
-import { AuthenticationService } from '@/services/AuthenticationService';
-import { SessionService } from '@/services/SessionService';
-import { AuthState } from '@/types/AuthType';
-import { LoginFormData } from '@/utils/zod-schemas/loginSchema';
-import { SignupFormData } from '@/utils/zod-schemas/signupSchema';
 import { create } from 'zustand';
+import { jwtDecode } from 'jwt-decode';
+import { LoginFormData } from '@/config/zod-schemas/loginSchema';
+import { SignupFormData } from '@/config/zod-schemas/signupSchema';
+import { AuthenticationService } from '@/services/AuthenticationService';
+import useCartStore from './useCartStore';
+import { AuthStoreTypes } from '@/config/types/Auth/AuthStoreType';
+import useLocalCartStore from './useLocalCartStore';
+import { handleAsyncError } from '@/config/errors/handleErrorResponse';
 
-export const useAuthStore = create<AuthState>((set) => ({
-    accessToken: null,
-    expiresAt: null,
-    isAuthenticated: false,
-    userId: null,
+interface DecodedToken {
+  role: string;
+}
+export const useAuthStore = create<AuthStoreTypes>(set => ({
+  accessToken: null,
+  isAuthenticated: false,
+  userId: null,
+  role: null,
+  loading: false,
+  error: null,
 
-    signup: async (userData: SignupFormData) => {
-        try {
-            await AuthenticationService.signup(userData);
-            return { success: true, message: "Signup successful" };
-        } catch (error: any) {
-            console.error('Signup error:', error);
-            return { success: false, message: error.message || "Signup failed" };
-        }
-    },
+  signup: async (userData: SignupFormData) => {
+    set({ loading: true, error: null });
+    try {
+      await AuthenticationService.signup(userData);
+      set({ loading: false });
+      return { success: true, message: 'Signup successful' };
+    } catch (error: any) {
+      return handleAsyncError(error, set);
+    }
+  },
 
-    login: async (userData: LoginFormData) => {
-        try {
-            const { data } = await AuthenticationService.login(userData);
-            set({
-                accessToken: data.accessToken,
-                expiresAt: new Date(new Date().getTime() + (data.expiresIn || 3600) * 1000),
-                isAuthenticated: true,
-            });
-            return { success: true };
-        } catch (error: any) {
-            console.error('Login error:', error);
-            return { success: false, message: error.message || "Login failed" };
-        }
-    },
+  login: async (userData: LoginFormData) => {
+    set({ loading: true, error: null });
+    try {
+      const { data } = await AuthenticationService.login(userData);
+      const decodedToken = jwtDecode<DecodedToken>(data.accessToken);
+      set({
+        accessToken: data.accessToken,
+        userId: data.userId,
+        isAuthenticated: true,
+        role: decodedToken.role,
+        loading: false
+      });
+      await useCartStore.getState().syncCartItems(data.userId);
+      return { success: true };
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || 'An error occurred';
+      set({ loading: false, error: errorMessage });
+      return { success: false, error: errorMessage };
+    }
+  },
 
-    logout: async () => {
-        try {
-            await AuthenticationService.logout();
-            set({
-                accessToken: null,
-                expiresAt: null,
-                isAuthenticated: false,
-                userId: null,
-            });
-        } catch (error: any) {
-            console.error('Logout error:', error);
-            throw new Error(error.message || "Logout failed: Server error");
-        }
-    },
+  logout: async () => {
+    set({ loading: true, error: null });
+    try {
+      await AuthenticationService.logout();
+      set({
+        accessToken: null,
+        isAuthenticated: false,
+        userId: null,
+        loading: false
+      });
+      useLocalCartStore.getState().clearCartLocal();
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Logout failed: Server error' });
+    }
+  },
 
-    refreshToken: async () => {
-        try {
-            const data = await AuthenticationService.refreshToken();
-            if (data.accessToken && data.expiresIn) {
+  changePassword: async userData => {
+    set({ loading: true, error: null });
+    try {
+      await AuthenticationService.changePassword(userData);
+      set({ loading: false });
+      return { success: true, message: 'Password changed successfully' };
+    } catch (error: any) {
+      const errorMessage = error.response?.data.message || 'An error occurred';
+      return { success: false, error: errorMessage };
+    }
+  },
 
-                set({
-                    accessToken: data.accessToken,
-                    expiresAt: new Date(new Date().getTime() + data.expiresIn * 1000)
-                });
-            }
-        } catch (error: any) {
-            console.error('Error refreshing token:', error);
-            throw new Error(error.message || "Failed to refresh token");
-        }
-    },
+  refreshToken: async () => {
+    set({ loading: true, error: null });
+    try {
+      const data = await AuthenticationService.refreshToken();
+      if (data.accessToken) {
+        set({
+          accessToken: data.accessToken,
+          userId: data.userId,
+          isAuthenticated: true,
+          loading: false
+        });
+      }
+    } catch (error: any) {
+      set({ loading: false, error: error.message || 'Failed to refresh token' });
+    }
+  },
 
-    initializeSession: async () => {
-        try {
-            const { accessToken, expiresIn, userId } = await SessionService.initializeSession();
-            if (accessToken || expiresIn || userId) {
-                set({
-                    isAuthenticated: true,
-                    accessToken: accessToken,
-                    expiresAt: new Date(new Date().getTime() + expiresIn * 1000),
-                    userId: userId,
-                });
-            }
-        } catch (error) {
-            console.error('Error verifying user session:', error);
-            set({
-                isAuthenticated: false,
-                accessToken: null,
-                expiresAt: null,
-                userId: null,
-            });
-        }
-    },
+  accessProtectedRoute: async () => {
+    set({ loading: true, error: null });
+    try {
+      const { accessToken, userId } = await AuthenticationService.accessProtectedRoute();
+      if (accessToken || userId) {
+        set({
+          isAuthenticated: true,
+          accessToken: accessToken,
+          userId: userId,
+          role: jwtDecode<DecodedToken>(accessToken).role,
+          loading: false
+        });
+      }
+    } catch (error: any) {
+      set({
+        isAuthenticated: false,
+        accessToken: null,
+        userId: null,
+        loading: false,
+        error: error.message || 'Failed to verify session'
+      });
+    }
+  },
+
+  deleteUser: async (userId: number) => {
+    set({ loading: true, error: null });
+    try {
+      await AuthenticationService.deleteUser(userId);
+      set({ loading: false });
+      return { success: true, message: 'User is now inactive' };
+    } catch (error: any) {
+      const errorMessage = error.response?.data.message || 'An error occurred';
+      return { success: false, error: errorMessage };
+    }
+  }
 }));

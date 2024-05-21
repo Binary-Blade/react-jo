@@ -1,7 +1,7 @@
-import { LoginForm } from "@/features/auth/LoginForm";
-import { MedalIcon } from "@/assets/icons/IconComponents";
-import { SignUpForm } from "@/features/auth/SignUpForm";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LoginForm } from '@/components/form/LoginForm';
+import { SignUpForm } from '@/components/form/SignUpForm';
+import { MedalIcon } from '@/components/ui/IconComponents';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function AuthPage() {
   return (
@@ -13,8 +13,8 @@ export default function AuthPage() {
         </div>
         <Tabs className="w-full" defaultValue="login">
           <TabsList className="grid w-full grid-cols-2 rounded-md bg-gray-100 p-1 dark:bg-gray-800">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsTrigger value="login">Connexion</TabsTrigger>
+            <TabsTrigger value="signup">Inscription</TabsTrigger>
           </TabsList>
           <TabsContent className="mt-6 space-y-4" value="login">
             <LoginForm />
@@ -25,5 +25,5 @@ export default function AuthPage() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
