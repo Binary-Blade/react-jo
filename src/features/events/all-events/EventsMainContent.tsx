@@ -16,7 +16,7 @@ export const EventsMainContent: React.FC = () => {
   const { events, fetchEvents, total, loading } = useEventStore();
   const { currentPage, setPage, limit, totalPages, offset } = usePagination({
     initialPage: 1,
-    initialLimit: 9,
+    initialLimit: 8,
     totalCount: total
   });
   const { sortBy, setSortBy, sortOrder, setSortOrder, filterBy, filterValue, setFilterValue } =
