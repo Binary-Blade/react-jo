@@ -1,10 +1,10 @@
 export const FILTER_OPTIONS_TRANSACTIONS = [
   {
-    label: 'Status',
+    label: 'Statuts de paiement',
     options: [
-      { value: 'ALL', label: 'All' },
-      { value: 'APPROVED', label: 'Approved' },
-      { value: 'REJECTED', label: 'Rejected' }
+      { value: 'ALL', label: 'TOUS' },
+      { value: 'APPROVED', label: 'APPROUVÉ' },
+      { value: 'REJECTED', label: 'REJETÉ' }
     ]
   }
 ];
