@@ -12,6 +12,8 @@ import AdminRoute from './hoc/AdminRoute';
 import ProtectedRoute from './hoc/ProtectedRoute';
 import CheckoutPage from './pages/CheckoutPage';
 import AuthPage from './pages/AuthPage';
+import SuccessAccountCreation from './pages/successful/SuccessAccountCreation';
+import SuccessAccountConnexion from './pages/successful/SuccessAccountLogin';
 
 // Lazy loading pages
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
@@ -37,6 +39,8 @@ export default function App() {
         <Switch>
           <Route path="/" component={HomePage} />
           <Route path="/auth" component={AuthPage} />
+          <Route path="/success-creation" component={SuccessAccountCreation} />
+          <Route path="/success-connexion" component={SuccessAccountConnexion} />
           <Route path="/events/:eventId" component={EventSelectedPage} />
           <Route path="/events" component={EventsPage} />
           <Route path="/checkout" component={CheckoutPage} />
