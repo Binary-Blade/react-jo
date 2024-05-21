@@ -58,7 +58,9 @@ export const NavBar: FC<NavBarProps> = ({ isAuthenticated, totalItems, role }) =
               Connexion
             </Link>
           ) : (
-            <DropDownAccount />
+            <div className="pb-1">
+              <DropDownAccount />
+            </div>
           )}
         </div>
       </div>

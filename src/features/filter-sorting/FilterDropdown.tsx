@@ -30,10 +30,10 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({ groups, filterValue, o
           Filtrer
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="max-h-64 overflow-y-scroll">
         {groups.map(group => (
           <div key={group.label}>
-            <DropdownMenuLabel>{group.label}</DropdownMenuLabel>
+            <DropdownMenuLabel className="">{group.label}</DropdownMenuLabel>
             <DropdownMenuRadioGroup value={filterValue} onValueChange={onChange}>
               {group.options.map(option => (
                 <DropdownMenuRadioItem key={option.value} value={option.value}>

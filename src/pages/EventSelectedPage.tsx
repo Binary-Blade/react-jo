@@ -13,7 +13,6 @@ import { GenericTitle } from '@/components/hero/GenericTitle';
 import { DescriptionCollapsible } from '@/components/collapsible/DescriptionCollapsible';
 import { AddItemEventToCart } from '@/features/events/selected-event/AddItemEventToCart';
 import { EventHero } from '@/components/hero/EventHero';
-import { Card } from '@/components/ui/card';
 
 export default function EventSelectedPage() {
   const params = useParams();
@@ -34,17 +33,15 @@ export default function EventSelectedPage() {
       <EventHero />
       <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-4 lg:px-6 py-8">
-          <div className="py-4">
-            <section className="hidden sm:flex flex-col gap-4 sm:flex-row sm:items-center pb-4 sm:pb-8">
-              <ButtonToEvent />
-              <h1 className="text-2xl lg:text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
-                Achetez des billets pour les Jeux Olympiques de Paris 2024
-              </h1>
-            </section>
-            <ImagesCoverEvent />
-          </div>
-          <Card className="p-8 grid md:grid-cols-2 lg:grid-cols-[1fr_400px] gap-8 sm:gap-12 md:gap-16 items-start">
-            <div className="grid gap-5 row-start-2 md:row-start-auto">
+          <section className="hidden sm:flex flex-col gap-4 sm:flex-row sm:items-center pb-4 sm:pb-8">
+            <ButtonToEvent />
+            <h1 className="text-2xl lg:text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+              Achetez des billets pour les Jeux Olympiques de Paris 2024
+            </h1>
+          </section>
+          <ImagesCoverEvent />
+          <section className="py-8 grid md:grid-cols-2 lg:grid-cols-[1fr_400px] gap-8 sm:gap-12 md:gap-16 items-start">
+            <div className="grid gap-8 row-start-2 md:row-start-auto">
               <GenericTitle title={event?.title} subtitle={eventDate} isDesktop={true} />
               <OverviewOneEvent
                 quantitySold={event?.quantitySold}
@@ -52,10 +49,6 @@ export default function EventSelectedPage() {
                 basePrice={event?.basePrice}
               />
               <Separator />
-              <DescriptionCollapsible
-                shortDescription={event?.shortDescription}
-                longDescription={event?.longDescription}
-              />
             </div>
             <div className="grid gap-8 row-start-1 md:row-start-auto">
               <GenericTitle title={event?.title} subtitle={eventDate} isMobile={true} />
@@ -66,7 +59,11 @@ export default function EventSelectedPage() {
                 addItemToCartLocal={addItemToCartLocal}
               />
             </div>
-          </Card>
+          </section>
+          <DescriptionCollapsible
+            shortDescription={event?.shortDescription}
+            longDescription={event?.longDescription}
+          />
         </div>
       </div>
       <Footer />

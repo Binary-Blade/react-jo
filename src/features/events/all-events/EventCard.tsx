@@ -52,8 +52,10 @@ export const EventCard: FC<EventCardProps> = ({
         }}
       />
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">{title}</CardTitle>
-        <CardDescription className="text-sm text-gray-500 dark:text-gray-400">
+        <CardTitle className="text-xl font-bold text-gray-900 dark:text-white truncate">
+          {title}
+        </CardTitle>
+        <CardDescription className="text-sm text-gray-500 dark:text-gray-400 break-words">
           {shortDescription}
         </CardDescription>
       </CardHeader>
