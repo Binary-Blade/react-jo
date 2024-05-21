@@ -5,7 +5,7 @@ export const eventSchema = z.object({
   title: z
     .string()
     .min(4, 'Title must be at least 4 characters')
-    .max(50, 'Title must be less than 50 characters'),
+    .max(25, 'Title must be less than 50 characters'),
   startDate: z.string().min(1, 'Date is required'),
   endDate: z.string().min(1, 'Date is required'),
   categoryType: z.nativeEnum(CategoryEvent, {
