@@ -1,4 +1,3 @@
-import { CardTitle, CardHeader, CardContent, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,11 +10,16 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { CategoryEvent } from '@/config/enums/CategoryEvent.enum';
+import { CategoryEvent, CategoryEventAdmin } from '@/config/enums/CategoryEvent.enum';
 import { useEventForm } from '@/hooks/useEventForm';
 import { InputFieldEvent } from './InputFieldEvent';
+import { FC } from 'react';
 
-export const FormAddNewEvent = () => {
+interface FormAddNewEventProps {
+  onSuccess: () => void;
+}
+
+export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
   const initialData = {
     title: '',
     startDate: '',
@@ -26,16 +30,18 @@ export const FormAddNewEvent = () => {
     shortDescription: '',
     longDescription: ''
   };
-  const { formData, handleChange, handleCategoryChange, handleSubmit, errors } =
-    useEventForm(initialData);
+  const { formData, handleChange, handleCategoryChange, handleSubmit, errors } = useEventForm(
+    initialData,
+    onSuccess
+  );
 
   return (
     <>
-      <CardHeader>
-        <CardTitle>Add New Event</CardTitle>
-        <CardDescription> Fill out the form below to create a new event. </CardDescription>
-      </CardHeader>
-      <CardContent className="gap-4">
+      <div>
+        <h2 className="text-2xl font-semibold">Add New Event</h2>
+        <p> Fill out the form below to create a new event. </p>
+      </div>
+      <div className="gap-4">
         <form onSubmit={handleSubmit} className="grid gap-4">
           <InputFieldEvent
             id="title"
@@ -71,7 +77,7 @@ export const FormAddNewEvent = () => {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Categories</SelectLabel>
-                  {Object.entries(CategoryEvent).map(([key, value]) => (
+                  {Object.entries(CategoryEventAdmin).map(([key, value]) => (
                     <SelectItem key={key} value={value}>
                       {value}
                     </SelectItem>
@@ -100,39 +106,41 @@ export const FormAddNewEvent = () => {
           </div>
           <div className="space-y-2">
             <Label className="font-medium" htmlFor="shortDescription">
-              Short Description *
+              Courte Description *
             </Label>
             <Textarea
               className="w-full"
               id="shortDescription"
               name="shortDescription"
-              placeholder="Enter a short description (max 250 characters)"
+              placeholder="Entrez une courte description (max 250 caractères)"
               required
               onChange={handleChange}
               value={formData.shortDescription}
             />
+            {errors.shortDescription && (
+              <p className="text-red-500">{errors.shortDescription[0]}</p>
+            )}
           </div>
           <div className="space-y-2">
             <Label className="font-medium" htmlFor="longDescription">
-              Long Description *
+              Description Longue *
             </Label>
             <Textarea
               className="w-full"
               id="longDescription"
               name="longDescription"
-              placeholder="Enter a long description (max 500 characters)"
+              placeholder="Entrez une description longue (max 500 caractères)"
               required
               onChange={handleChange}
               value={formData.longDescription}
             />
+            {errors.longDescription && <p className="text-red-500">{errors.longDescription[0]}</p>}
           </div>
-
-          {errors.description && <p className="text-red-500">{errors.description[0]}</p>}
           <Button className="w-full" type="submit">
-            Register Event
+            Enregistrer l'Événement
           </Button>
         </form>
-      </CardContent>
+      </div>
     </>
   );
 };
