@@ -1,4 +1,4 @@
-import placeholderImage from '@/assets/images/PlaceholderParis.svg';
+import placeholderImage from '@/assets/images/fencing.webp';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'wouter';
 export const NewsPresents = () => {
