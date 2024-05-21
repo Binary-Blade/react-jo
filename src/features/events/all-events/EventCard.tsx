@@ -39,10 +39,10 @@ export const EventCard: FC<EventCardProps> = ({
   return (
     <Card
       className="group relative overflow-hidden rounded-lg 
-      border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-rose-500 "
+      border border-gray-200 bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-rose-500 "
     >
       <img
-        alt="Card Event"
+        alt="Événement de la carte"
         className="object-cover w-full"
         height={200}
         src={placeholderImage}
@@ -51,35 +51,37 @@ export const EventCard: FC<EventCardProps> = ({
           objectFit: 'cover'
         }}
       />
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-900 dark:text-white truncate">
-          {title}
-        </CardTitle>
-        <CardDescription className="text-sm text-gray-500 dark:text-gray-400 break-words">
-          {shortDescription}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex items-center gap-4">
-          <IconComponent className="h-8 w-8 text-rose-500 group-hover:text-rose-600 transition-colors duration-300" />
-          <div>
-            <div className="font-medium text-gray-900 dark:text-white">{categoryType}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Places available: {quantityAvailable}
+      <div className="flex flex-col flex-grow justify-between">
+        <CardHeader>
+          <CardTitle className="text-xl font-bold text-gray-900 dark:text-white truncate">
+            {title}
+          </CardTitle>
+          <CardDescription className="text-sm text-gray-500 dark:text-gray-400 break-words">
+            {shortDescription}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-4">
+            <IconComponent className="h-8 w-8 text-rose-500 group-hover:text-rose-600 transition-colors duration-300" />
+            <div>
+              <div className="font-medium text-gray-900 dark:text-white">{categoryType}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                Places disponibles : {quantityAvailable}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{dateText}</div>
             </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">{dateText}</div>
           </div>
-        </div>
-      </CardContent>
-      <CardFooter className="pt-4">
-        {eventId && (
-          <Link to={`/events/${eventId}`}>
-            <Button variant="default" className="bg-gray-900 text-white hover:bg-rose-600">
-              View Event
-            </Button>
-          </Link>
-        )}
-      </CardFooter>
+        </CardContent>
+        <CardFooter className="pt-4">
+          {eventId && (
+            <Link to={`/events/${eventId}`} className="w-full">
+              <Button variant="default" className="bg-gray-900 text-white hover:bg-rose-600 w-full">
+                Voir l'événement
+              </Button>
+            </Link>
+          )}
+        </CardFooter>
+      </div>
     </Card>
   );
 };
