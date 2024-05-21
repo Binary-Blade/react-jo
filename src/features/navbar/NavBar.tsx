@@ -32,8 +32,8 @@ export const NavBar: FC<NavBarProps> = ({
     <div className="w-full shadow-md bg-white dark:bg-gray-950">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-6">
         <div className="flex items-center gap-2">
-          <MedalIcon className="w-8 h-8 text-rose-500" />
-          <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white ml-2">
+          <MedalIcon className="w-8 h-8 text-rose-500 hidden md:block" />
+          <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white md:ml-2">
             Paris 2024
           </span>
         </div>
