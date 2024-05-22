@@ -1,6 +1,10 @@
 import { z } from 'zod';
 
 const nameValidationPattern = /^[A-Za-z-]+$/;
+const specialCharacters = '!@#$%^&*?';
+const passwordValidationPattern = new RegExp(
+  `^(?=.*[A-Z])(?=.*[${specialCharacters.replace(/./g, '\\$&')}])(?=.*[0-9]).{8,50}$`
+);
 
 export const nameSchema = z
   .string()
@@ -12,7 +16,7 @@ export const passwordSchema = z
   .string()
   .min(8, 'Le mot de passe doit comporter au moins 8 caractères')
   .regex(
-    /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/,
-    'Le mot de passe doit contenir au moins une lettre majuscule, un caractère spécial (!, @, #, $, %, &, ?) et un chiffre'
+    passwordValidationPattern,
+    'Le mot de passe doit contenir au moins une lettre majuscule, un caractère spécial (!, @, #, $, %, &, ?, *) et un chiffre'
   )
   .max(50);
