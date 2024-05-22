@@ -69,7 +69,7 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
             onClick={handleCheckout}
             disabled={loading}
           >
-            Proceed to Payment
+            Procéder au paiement
           </Button>
         )}
 

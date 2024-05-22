@@ -21,7 +21,7 @@ export const SignUpForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { isValid }
+    formState: {}
   } = useForm({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -130,7 +130,7 @@ export const SignUpForm = () => {
             termes et conditions
           </Link>
         </Label>
-        <Button className="w-full" type="submit" disabled={!isValid}>
+        <Button className="w-full" type="submit">
           Créer un compte
         </Button>
       </form>
