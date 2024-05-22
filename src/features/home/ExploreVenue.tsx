@@ -11,7 +11,7 @@ export const ExploreVenue = () => {
             </h2>
             <div
               className="flex flex-col items-center justify-center px-6 py-3 mt-8 text-base font-semibold text-white 
-               border border-transparent rounded-md shadow-sm bg-blue-600"
+               border border-transparent rounded-md shadow-sm bg-rose-600"
             >
               <p>
                 Les Jeux Olympiques d'été de 2024, officiellement connus sous le nom de Jeux de la
