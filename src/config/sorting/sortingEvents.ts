@@ -1,14 +1,14 @@
 export const SORTING_EVENTS_DASHBOARD = [
-  { value: 'title', label: 'Alphabetical' },
-  { value: 'quantityAvailable', label: 'Quantity Available' },
-  { value: 'quantitySold', label: 'Sold' },
-  { value: 'revenueGenerated', label: 'Revenue' },
-  { value: 'basePrice', label: 'Price' },
-  { value: 'startDate', label: 'Start Date' }
+  { value: 'title', label: 'Titre' },
+  { value: 'quantityAvailable', label: 'Quantité disponible' },
+  { value: 'quantitySold', label: 'Quantité vendue' },
+  { value: 'revenueGenerated', label: 'Revenu généré' },
+  { value: 'basePrice', label: 'Prix de base' },
+  { value: 'startDate', label: 'Date de début' }
 ];
 
 export const SORTING_EVENTS_PUBLIC = [
-  { value: 'title', label: 'Alphabetical' },
-  { value: 'quantityAvailable', label: 'Number available' },
-  { value: 'startDate', label: 'Start Date' }
+  { value: 'title', label: 'Titre' },
+  { value: 'quantityAvailable', label: 'Quantité disponible' },
+  { value: 'startDate', label: 'Date de début' }
 ];

@@ -1,4 +1,4 @@
 export const SORTING_RESERVATION_PUBLIC = [
-  { value: 'reservationDetails.price', label: 'Total price' },
-  { value: 'reservationDetails.title', label: 'Alphabetical' }
+  { value: 'reservationDetails.price', label: 'Prix total' },
+  { value: 'reservationDetails.title', label: 'Titre' }
 ];
