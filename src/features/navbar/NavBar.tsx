@@ -32,7 +32,9 @@ export const NavBar: FC<NavBarProps> = ({
     <div className="w-full shadow-md bg-white dark:bg-gray-950">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-6">
         <div className="flex items-center gap-2">
-          <MedalIcon className="w-8 h-8 text-rose-500 hidden md:block" />
+          <Link href="/" className="flex items-center gap-2">
+            <MedalIcon className="w-8 h-8 text-rose-500 hidden md:block" />
+          </Link>
           <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white md:ml-2">
             Paris 2024
           </span>
@@ -68,7 +70,8 @@ export const NavBar: FC<NavBarProps> = ({
           {!isAuthenticated ? (
             <Link
               href="/auth"
-              className="inline-flex items-center justify-center px-4 py-2 text-base font-semibold text-white bg-rose-500 border border-transparent rounded-md shadow-sm hover:bg-rose-600 transition-all"
+              className="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold text-white bg-rose-500 border 
+              border-transparent rounded-md shadow-sm hover:bg-rose-600 transition-all"
             >
               Connexion
             </Link>

@@ -6,12 +6,13 @@ import {
   UsersIcon
 } from '@/components/ui/IconComponents';
 import { NavLink } from '@/config/types/NavLink';
-import { HomeIcon } from 'lucide-react';
+import { ContactIcon, HomeIcon } from 'lucide-react';
 
 export const NAVLINKS_PUBLIC: NavLink[] = [
   { icon: <HomeIcon className="h-4 w-4" />, name: 'Accueil', href: '/' },
   { icon: <LandmarkIcon className="h-4 w-4" />, name: 'Événements', href: '/events' },
-  { icon: <CalendarIcon className="h-4 w-4" />, name: 'Réservations', href: '/reservations' }
+  { icon: <CalendarIcon className="h-4 w-4" />, name: 'Réservations', href: '/reservations' },
+  { icon: <ContactIcon className="h-4 w-4" />, name: 'Contact', href: '/contact' }
 ];
 
 export const NAVLINKS_ADMIN: NavLink[] = [
