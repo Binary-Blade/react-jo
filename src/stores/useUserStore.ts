@@ -66,7 +66,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
           users: state.users.map(user => (user.id === userId ? { ...user, ...updateData } : user))
         }));
       }
-      return { success: true, message: 'Update profile successful' };
+      return { success: true, message: 'Le profil a bien été mis à jour. ' };
     } catch (error: any) {
       set({ loading: false, error: error.message || 'Failed to update User' });
       return {
@@ -90,7 +90,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
           users: state.users.map(user => (user.id === userId ? { ...user, isActive: false } : user))
         }));
       }
-      return { success: true, message: 'User is now inactive' };
+      return { success: true, message: 'Le compte a bien été supprimé. ' };
     } catch (error: any) {
       const errorMessage = error.response?.data.message || 'An error occurred';
       return { success: false, error: errorMessage };
