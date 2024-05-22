@@ -22,11 +22,11 @@ export const SortByDropdown: FC<SortProps> = ({ sortBy, onSortChange, options })
       <DropdownMenuTrigger asChild>
         <Button className="hidden sm:flex" variant="outline">
           <ListIcon className="w-5 h-5 mr-2" />
-          Trier par
+          Trier
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+        <DropdownMenuLabel>Trier par</DropdownMenuLabel>
         <DropdownMenuRadioGroup value={sortBy} onValueChange={onSortChange}>
           {options.map(option => (
             <DropdownMenuRadioItem key={option.value} value={option.value}>
