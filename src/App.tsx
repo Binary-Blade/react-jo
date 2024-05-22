@@ -15,11 +15,13 @@ import AuthPage from './pages/AuthPage';
 import SuccessAccountCreation from './pages/successful/SuccessAccountCreation';
 import SuccessAccountConnexion from './pages/successful/SuccessAccountLogin';
 import SuccessAccountDeleted from './pages/successful/SuccessAccountDeleted';
+import NotFoundPage from './pages/NotFoundPage';
 
 // Lazy loading pages
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const ContactUsPage = lazy(() => import('./pages/ContactUsPage'));
 
 export default function App() {
   const { userId } = useAuthStore();
@@ -46,9 +48,13 @@ export default function App() {
           <Route path="/events" component={EventsPage} />
           <Route path="/checkout" component={CheckoutPage} />
           <Route path="/success-delete" component={SuccessAccountDeleted} />
+          <Route path="/contact" component={ContactUsPage} />
           <ProtectedRoute path="/reservations" component={ReservationPage} />
           <ProtectedRoute path="/profile" component={ProfilePage} />
           <AdminRoute path="/dashboard" component={DashboardPage} />
+          <Route>
+            <NotFoundPage />
+          </Route>
         </Switch>
       </Suspense>
     </AuthProvider>
