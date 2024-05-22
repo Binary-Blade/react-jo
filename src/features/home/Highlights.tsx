@@ -11,7 +11,7 @@ export const Highlights = () => {
           <div className="flex flex-col items-center justify-center space-y-8 text-center">
             <div className="space-y-2 ">
               <div className="inline-block rounded-lg bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700">
-                Highlights
+                Moments forts
               </div>
               <GenericTitle
                 title="Assistez à l'Histoire en Marche"
