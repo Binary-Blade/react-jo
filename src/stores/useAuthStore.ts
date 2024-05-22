@@ -67,6 +67,23 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  deleteUser: async (userId: number) => {
+    set({ loading: true, error: null });
+    try {
+      await AuthenticationService.deleteUser(userId);
+      set({
+        accessToken: null,
+        isAuthenticated: false,
+        userId: null,
+        loading: false
+      });
+      return { success: true, message: 'User is now inactive' };
+    } catch (error: any) {
+      const errorMessage = error.response?.data.message || 'An error occurred';
+      return { success: false, error: errorMessage };
+    }
+  },
+
   changePassword: async userData => {
     set({ loading: true, error: null });
     try {
@@ -117,18 +134,6 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
         loading: false,
         error: error.message || 'Failed to verify session'
       });
-    }
-  },
-
-  deleteUser: async (userId: number) => {
-    set({ loading: true, error: null });
-    try {
-      await AuthenticationService.deleteUser(userId);
-      set({ loading: false });
-      return { success: true, message: 'User is now inactive' };
-    } catch (error: any) {
-      const errorMessage = error.response?.data.message || 'An error occurred';
-      return { success: false, error: errorMessage };
     }
   }
 }));

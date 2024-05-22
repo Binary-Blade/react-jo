@@ -14,6 +14,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import AuthPage from './pages/AuthPage';
 import SuccessAccountCreation from './pages/successful/SuccessAccountCreation';
 import SuccessAccountConnexion from './pages/successful/SuccessAccountLogin';
+import SuccessAccountDeleted from './pages/successful/SuccessAccountDeleted';
 
 // Lazy loading pages
 const ReservationPage = lazy(() => import('./pages/ReservationPage'));
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/events/:eventId" component={EventSelectedPage} />
           <Route path="/events" component={EventsPage} />
           <Route path="/checkout" component={CheckoutPage} />
+          <Route path="/success-delete" component={SuccessAccountDeleted} />
           <ProtectedRoute path="/reservations" component={ReservationPage} />
           <ProtectedRoute path="/profile" component={ProfilePage} />
           <AdminRoute path="/dashboard" component={DashboardPage} />

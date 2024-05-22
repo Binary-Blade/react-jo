@@ -85,7 +85,11 @@ export default function ProfilePage() {
     if (!userId) return;
     const response = await deleteUser(userId);
     if (response.success) {
-      navigate('/');
+      toast({
+        variant: 'success',
+        title: 'User deleted',
+        description: `${response.message}`
+      });
     } else {
       toast({
         variant: 'destructive',

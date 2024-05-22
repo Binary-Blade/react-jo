@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 import { FC } from 'react';
+import { navigate } from 'wouter/use-browser-location';
 
 interface CardAccountProps {
   handleDelete: () => void;
@@ -8,6 +11,17 @@ interface CardAccountProps {
 }
 
 export const CardAccount: FC<CardAccountProps> = ({ handleDelete, handleLogout }) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => setIsDialogOpen(true);
+  const closeDialog = () => setIsDialogOpen(false);
+
+  const confirmDelete = () => {
+    handleDelete();
+    closeDialog();
+    navigate('/success-delete');
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -22,7 +36,7 @@ export const CardAccount: FC<CardAccountProps> = ({ handleDelete, handleLogout }
               Supprimez définitivement votre compte et toutes ses données.
             </p>
           </div>
-          <Button variant="destructive" onClick={handleDelete}>
+          <Button variant="destructive" onClick={openDialog}>
             Supprimer
           </Button>
         </div>
@@ -38,6 +52,15 @@ export const CardAccount: FC<CardAccountProps> = ({ handleDelete, handleLogout }
           </Button>
         </div>
       </CardContent>
+      <GenericAlertDialog
+        isOpen={isDialogOpen}
+        onClose={closeDialog}
+        onConfirm={confirmDelete}
+        title="Êtes-vous sûr ?"
+        description="Cette action est irréversible. Cela supprimera définitivement votre compte."
+        cancelText="Annuler"
+        confirmText="Supprimer"
+      />
     </Card>
   );
 };
