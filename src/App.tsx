@@ -16,9 +16,9 @@ import SuccessAccountCreation from './pages/successful/SuccessAccountCreation';
 import SuccessAccountConnexion from './pages/successful/SuccessAccountLogin';
 import SuccessAccountDeleted from './pages/successful/SuccessAccountDeleted';
 import NotFoundPage from './pages/NotFoundPage';
+import ReservationPage from './pages/ReservationPage';
 
 // Lazy loading pages
-const ReservationPage = lazy(() => import('./pages/ReservationPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const ContactUsPage = lazy(() => import('./pages/ContactUsPage'));
