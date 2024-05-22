@@ -21,7 +21,7 @@ export const LoginForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { isValid, errors }
+    formState: { errors }
   } = useForm({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
@@ -88,9 +88,7 @@ export const LoginForm = () => {
               </div>
             )}
           />
-          <Button type="submit" disabled={!isValid}>
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
         </form>
       </div>
     </>
