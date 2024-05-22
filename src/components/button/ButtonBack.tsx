@@ -8,7 +8,7 @@ export const ButtonBack = () => {
   return (
     <button onClick={handleBack} className="button ghost">
       <LogOutIcon className="h-8 w-8 rotate-180" />
-      <span className="sr-only">Logout</span>
+      <span className="sr-only">Back</span>
     </button>
   );
 };
