@@ -55,7 +55,7 @@ export const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <div className="flex flex-col space-y-1">
                 <Label htmlFor="firstName">Prénom</Label>
-                <Input {...field} id="firstName" type="text" placeholder="Enter your first name" />
+                <Input {...field} id="firstName" type="text" placeholder="Entrez votre prénom" />
                 {fieldState.error && (
                   <span className="text-red-500 text-sm">{fieldState.error.message}</span>
                 )}
@@ -68,7 +68,7 @@ export const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <div className="flex flex-col space-y-1">
                 <Label htmlFor="lastName">Nom de famille</Label>
-                <Input {...field} id="lastName" type="text" placeholder="Enter your last name" />
+                <Input {...field} id="lastName" type="text" placeholder="Entrez votre nom" />
                 {fieldState.error && (
                   <span className="text-red-500 text-sm">{fieldState.error.message}</span>
                 )}
@@ -81,7 +81,7 @@ export const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <div className="flex flex-col space-y-1">
                 <Label htmlFor="email">Email</Label>
-                <Input {...field} id="email" type="email" placeholder="Enter your email" />
+                <Input {...field} id="email" type="email" placeholder="Entrez votre email" />
                 {fieldState.error && (
                   <span className="text-red-500 text-sm">{fieldState.error.message}</span>
                 )}
@@ -99,7 +99,7 @@ export const SignUpForm = () => {
                     {...field}
                     id="password"
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your password"
+                    placeholder="Entrez votre mot de passe"
                   />
                   <button
                     type="button"
