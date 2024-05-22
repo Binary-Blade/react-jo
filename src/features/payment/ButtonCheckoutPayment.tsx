@@ -49,7 +49,7 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
         setTimeout(() => {
           setLoading(false);
           setShowAlert(true);
-        }, 7400);
+        }, 7000);
       }
     } catch (error) {
       console.error("Échec de l'ajout de la réservation :", error);
