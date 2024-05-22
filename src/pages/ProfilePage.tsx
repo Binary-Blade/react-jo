@@ -72,7 +72,6 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     try {
       await logout();
-      console.log('Logout successful');
       navigate('/');
     } catch (error: any) {
       const errorMessage = error.message || 'Logout failed due to an unexpected error';

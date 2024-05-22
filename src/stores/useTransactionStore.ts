@@ -13,7 +13,6 @@ export const useTransactionStore = create<TransactionStoreType>(set => ({
     set({ loading: true, error: null });
     try {
       const data = await TransactionService.findAllTransactions(userId, params);
-      console.log(data);
       set({
         transactions: data.transactions,
         total: data.total,

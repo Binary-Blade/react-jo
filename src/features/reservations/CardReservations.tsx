@@ -16,7 +16,6 @@ type CardReservationsProps = {
 };
 
 export const CardReservations: FC<CardReservationsProps> = ({ reservation, statusPayment }) => {
-  console.log(typeof reservation.reservationId);
   return (
     <>
       <Card
