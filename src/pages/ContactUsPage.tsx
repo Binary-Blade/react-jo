@@ -3,11 +3,16 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/features/header/Header';
+import { EventHero } from '@/components/hero/EventHero';
+import { useContactForm } from '@/hooks/useContactForm';
 
 export default function ContactUsPage() {
+  const { register, handleSubmit, onSubmit, errors } = useContactForm();
+
   return (
     <>
       <Header />
+      <EventHero />
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="space-y-8">
@@ -29,20 +34,34 @@ export default function ContactUsPage() {
                     Partagez vos questions, commentaires ou préoccupations.
                   </p>
                 </div>
-                <form className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">Nom</Label>
-                      <Input id="name" placeholder="Entrez votre nom" required />
+                      <Input id="name" placeholder="Entrez votre nom" {...register('name')} />
+                      {errors.name && (
+                        <span className="text-red-500 text-sm">{errors.name.message}</span>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" placeholder="Entrez votre email" required type="email" />
+                      <Input
+                        id="email"
+                        placeholder="Entrez votre email"
+                        type="email"
+                        {...register('email')}
+                      />
+                      {errors.email && (
+                        <span className="text-red-500 text-sm">{errors.email.message}</span>
+                      )}
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="subject">Sujet</Label>
-                    <Input id="subject" placeholder="Entrez le sujet" required />
+                    <Input id="subject" placeholder="Entrez le sujet" {...register('subject')} />
+                    {errors.subject && (
+                      <span className="text-red-500 text-sm">{errors.subject.message}</span>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
@@ -50,8 +69,11 @@ export default function ContactUsPage() {
                       className="min-h-[120px]"
                       id="message"
                       placeholder="Entrez votre message"
-                      required
+                      {...register('message')}
                     />
+                    {errors.message && (
+                      <span className="text-red-500 text-sm">{errors.message.message}</span>
+                    )}
                   </div>
                   <Button type="submit">Envoyer le message</Button>
                 </form>
