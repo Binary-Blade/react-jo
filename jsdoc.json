@@ -1,0 +1,28 @@
+{
+  "plugins": [
+    "node_modules/jsdoc-babel"
+  ],
+  "babel": {
+    "extensions": ["ts", "tsx"],
+    "presets": ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"]
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.(js|jsx|ts|tsx)$",
+    "excludePattern": "(node_modules|dist)"
+  },
+ "opts": {
+    "encoding": "utf8",
+    "destination": "./docs/",
+    "recurse": true,
+    "template": "node_modules/docdash",
+    "readme": "README.md"
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "includeDate": false
+    }
+  }
+}
