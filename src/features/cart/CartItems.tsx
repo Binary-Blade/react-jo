@@ -2,13 +2,6 @@ import { Button } from '@/components/ui/button';
 import { TrashIcon } from '@/components/ui/IconComponents';
 import { CartItemLocal } from '@/config/interfaces/cart/cart-item.interface';
 
-/**
- * Props for the `GroupedCartItems` component.
- *
- * @interface GroupedCartItemsProps
- * @property {Object<string, CartItemLocal[]>} groupedItems - A dictionary where keys are event titles and values are arrays of cart items.
- * @property {Function} handleDelete - Function to handle the deletion of a cart item.
- */
 interface GroupedCartItemsProps {
   groupedItems: { [eventTitle: string]: CartItemLocal[] };
   handleDelete: (item: CartItemLocal) => void;
