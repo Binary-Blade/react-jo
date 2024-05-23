@@ -7,7 +7,22 @@ interface AdminRouteProps {
   component: React.ComponentType<any>;
 }
 
-const AdminRoute: React.FC<AdminRouteProps> = ({ component: Component, ...rest }) => {
+/**
+ * `AdminRoute` is a higher-order component that wraps a route and ensures only admin users can access it.
+ *
+ * @component
+ * @param {AdminRouteProps} props - The properties object.
+ * @param {string} props.path - The path for the route.
+ * @param {React.ComponentType<any>} props.component - The component to render for the route.
+ * @returns {JSX.Element} The rendered route component, or a redirect to the home page if the user is not an admin.
+ *
+ * @example
+ * <AdminRoute path="/admin" component={AdminDashboard} />
+ *
+ * @remarks
+ * This component uses `useAuthStore` to get the current user's ID and role, and `UserRole` to check if the user is an admin.
+ */
+const AdminRoute = ({ component: Component, ...rest }: AdminRouteProps): JSX.Element => {
   const { userId, role } = useAuthStore();
   return (
     <Route

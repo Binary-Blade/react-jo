@@ -1,21 +1,30 @@
 import axiosClient from '@/config/axiosConfig';
 import { CreateCartItemDto } from '@/config/dtos/CartItem.dto';
-import { CartItem } from '@/config/types/Cart/CartTypes';
+import { CartItem } from '@/config/interfaces/cart/cart-item.interface';
 
 /**
- * Service class for handling cart-related requests
+ * `CartService` provides methods for managing cart-related operations.
+ * It includes methods for adding items to the cart, finding all items in a cart, updating cart items, and removing items from the cart.
  *
  * @class CartService
  */
 export class CartService {
   /**
-   * Sends a POST request to the server to add an item to the cart
+   * Add an item to the cart.
    *
-   * @static addItemToCart
-   * @param {number} userId - The user's ID
-   * @param {Partial<CreateCartItemDto>} cartItem - The cart item data
-   * @return {Promise<CartItem>} The response data
-   * @throws {Error} If the request fails
+   * @param {number} userId - The ID of the user adding the item.
+   * @param {Partial<CreateCartItemDto>} cartItem - The data for the cart item to add.
+   * @returns {Promise<CartItem>} The response from the server.
+   *
+   * @example
+   * const cartItem: Partial<CreateCartItemDto> = {
+   *   eventId: 1,
+   *   priceFormula: 'standard',
+   *   quantity: 2,
+   *   price: 50
+   * };
+   * const response = await CartService.addItemToCart(1, cartItem);
+   * console.log(response);
    */
   static async addItemToCart(
     userId: number,
@@ -30,13 +39,15 @@ export class CartService {
   }
 
   /**
-   * Sends a GET request to the server to find all items in the cart
+   * Find all items in the cart.
    *
-   * @static findAllItemsInCart
-   * @param {number} userId - The user's ID
-   * @param {number} cartId - The cart's ID
-   * @return {Promise<CartItem[]>} The response data
-   * @throws {Error} If the request fails
+   * @param {number} userId - The ID of the user.
+   * @param {number} cartId - The ID of the cart.
+   * @returns {Promise<CartItem[]>} The response from the server.
+   *
+   * @example
+   * const response = await CartService.findAllItemsInCart(1, 10);
+   * console.log(response);
    */
   static async findAllItemsInCart(userId: number, cartId: number): Promise<CartItem[]> {
     try {
@@ -48,15 +59,17 @@ export class CartService {
   }
 
   /**
-   * Sends a PATCH request to the server to update a cart item
+   * Update an item in the cart.
    *
-   * @static updateCartItem
-   * @param {number} userId - The user's ID
-   * @param {number} cartId - The cart's ID
-   * @param {number} cartItemId - The cart item's ID
-   * @param {number} quantity - The new quantity
-   * @return {Promise<CartItem>} The response data
-   * @throws {Error} If the request fails
+   * @param {number} userId - The ID of the user.
+   * @param {number} cartId - The ID of the cart.
+   * @param {number} cartItemId - The ID of the cart item.
+   * @param {number} quantity - The new quantity of the cart item.
+   * @returns {Promise<CartItem>} The response from the server.
+   *
+   * @example
+   * const response = await CartService.updateCartItem(1, 10, 5, 3);
+   * console.log(response);
    */
   static async updateCartItem(
     userId: number,
@@ -77,14 +90,16 @@ export class CartService {
   }
 
   /**
-   * Sends a DELETE request to the server to remove an item from the cart
+   * Remove an item from the cart.
    *
-   * @static removeItemFromCart
-   * @param {number} userId - The user's ID
-   * @param {number} cartId - The cart's ID
-   * @param {number} cartItemId - The cart item's ID
-   * @return {Promise<void>} The response data
-   * @throws {Error} If the request fails
+   * @param {number} userId - The ID of the user.
+   * @param {number} cartId - The ID of the cart.
+   * @param {number} cartItemId - The ID of the cart item.
+   * @returns {Promise<void>} The response from the server.
+   *
+   * @example
+   * await CartService.removeItemFromCart(1, 10, 5);
+   * console.log('Item removed from cart');
    */
   static async removeItemFromCart(
     userId: number,

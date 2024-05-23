@@ -1,12 +1,20 @@
 import { CreateCartItemLocalDto } from '@/config/dtos/LocalCartItem.dto';
 
+/**
+ * `LocalCartService` provides methods for managing cart-related operations using the browser's localStorage.
+ * It includes methods for getting and setting the cart ID and items, and clearing stored cart data.
+ *
+ * @class LocalCartService
+ */
 export class LocalCartService {
   /**
-   * Fetches the cart ID stored in localStorage.
+   * Get the stored cart ID from localStorage.
    *
-   * @returns {number | null} The cart ID if found, otherwise null.
-   * @static
-   * @memberof LocalCartService
+   * @returns {number | null} The stored cart ID, or null if not found or expired.
+   *
+   * @example
+   * const cartId = LocalCartService.getStoredCartId();
+   * console.log(cartId);
    */
   static getStoredCartId(): number | null {
     try {
@@ -29,6 +37,14 @@ export class LocalCartService {
     }
   }
 
+  /**
+   * Set the cart ID in localStorage with an expiry time.
+   *
+   * @param {number} cartId - The cart ID to store.
+   *
+   * @example
+   * LocalCartService.setStoredCartId(123);
+   */
   static setStoredCartId(cartId: number): void {
     try {
       const now = new Date();
@@ -40,6 +56,15 @@ export class LocalCartService {
     }
   }
 
+  /**
+   * Get the stored cart items from localStorage.
+   *
+   * @returns {any[]} An array of stored cart items.
+   *
+   * @example
+   * const cartItems = LocalCartService.getStoredCartItems();
+   * console.log(cartItems);
+   */
   static getStoredCartItems(): any[] {
     try {
       const items = localStorage.getItem('cartItems');
@@ -50,6 +75,17 @@ export class LocalCartService {
     }
   }
 
+  /**
+   * Set the cart items in localStorage.
+   *
+   * @param {CreateCartItemLocalDto[]} cartItems - The cart items to store.
+   *
+   * @example
+   * const cartItems: CreateCartItemLocalDto[] = [
+   *   { eventId: 1, priceFormula: 'standard', quantity: 2, price: 50 }
+   * ];
+   * LocalCartService.setStoredCartItems(cartItems);
+   */
   static setStoredCartItems(cartItems: CreateCartItemLocalDto[]): void {
     try {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -58,6 +94,12 @@ export class LocalCartService {
     }
   }
 
+  /**
+   * Clear the stored cart items from localStorage.
+   *
+   * @example
+   * LocalCartService.clearStoredCartItems();
+   */
   static clearStoredCartItems(): void {
     try {
       localStorage.removeItem('cartItems');
@@ -66,6 +108,12 @@ export class LocalCartService {
     }
   }
 
+  /**
+   * Clear all stored cart data from localStorage.
+   *
+   * @example
+   * LocalCartService.clearStoredCartAll();
+   */
   static clearStoredCartAll(): void {
     try {
       localStorage.removeItem('cartItems');

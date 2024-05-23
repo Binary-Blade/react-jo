@@ -3,15 +3,37 @@ import { CartService } from '@/services/CartService';
 import { debounce, filterProperties } from '@/lib/utils';
 import { LocalCartService } from '@/services/LocalCartService';
 import { useLocalCartStore } from './useLocalCartStore';
-import { CartStoreType } from '@/config/types/Cart/CartStoreType';
 import { CreateCartItemDto } from '@/config/dtos/CartItem.dto';
+import { CartStoreType } from '@/config/interfaces/cart/cart-store.interface';
 
+/**
+ * `useCartStore` is a Zustand store for managing cart state and actions.
+ *
+ * @constant
+ *
+ * @example
+ * const { cartItems, addItemToCart, removeCartItem } = useCartStore();
+ *
+ * @remarks
+ * This store handles cart operations such as adding, updating, syncing, fetching, and removing cart items.
+ */
 export const useCartStore = create<CartStoreType>((set, get) => ({
   cartItems: [],
   cartId: LocalCartService.getStoredCartId(),
   loading: false,
   error: null,
 
+  /**
+   * Add an item to the cart.
+   *
+   * @param {number} userId - The ID of the user.
+   * @param {CreateCartItemDto} cartItem - The data for the cart item to add.
+   *
+   * @example
+   * const cartItem: CreateCartItemDto = { eventId: 1, priceFormula: 'standard', quantity: 2, price: 50 };
+   * await useCartStore.getState().addItemToCart(1, cartItem);
+   * console.log('Item added to cart');
+   */
   addItemToCart: async (userId: number, cartItem: CreateCartItemDto) => {
     set({ loading: true, error: null });
     try {
@@ -34,6 +56,19 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
     }
   },
 
+  /**
+   * Update a cart item quantity with debouncing.
+   *
+   * @param {number} userId - The ID of the user.
+   * @param {number} cartId - The ID of the cart.
+   * @param {number} cartItemId - The ID of the cart item.
+   * @param {number} newQuantity - The new quantity of the cart item.
+   * @returns {Promise<void>}
+   *
+   * @example
+   * await useCartStore.getState().updateCartItem(1, 1, 1, 3);
+   * console.log('Cart item updated');
+   */
   updateCartItem: debounce(async (userId, cartId, cartItemId, newQuantity) => {
     set({ loading: true, error: null });
     try {
@@ -52,6 +87,15 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
     }
   }, 500),
 
+  /**
+   * Sync local cart items with the server.
+   *
+   * @param {number} userId - The ID of the user.
+   *
+   * @example
+   * await useCartStore.getState().syncCartItems(1);
+   * console.log('Cart items synced');
+   */
   syncCartItems: async (userId: number) => {
     const localCartItems = LocalCartService.getStoredCartItems();
     if (localCartItems && localCartItems.length > 0) {
@@ -67,6 +111,16 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
     }
   },
 
+  /**
+   * Fetch all items in the cart.
+   *
+   * @param userId - The ID of the user.
+   * @param cartId - The ID of the cart.
+   *
+   * @example
+   * await useCartStore.getState().fetchCartItems(1, 1);
+   * console.log('Cart items fetched');
+   */
   fetchCartItems: async (userId, cartId) => {
     set({ loading: true, error: null });
     try {
@@ -81,6 +135,17 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
     }
   },
 
+  /**
+   * Remove an item from the cart.
+   *
+   * @param  userId - The ID of the user.
+   * @param  cartId - The ID of the cart.
+   * @param  cartItemId - The ID of the cart item.
+   *
+   * @example
+   * await useCartStore.getState().removeCartItem(1, 1, 1);
+   * console.log('Cart item removed');
+   */
   removeCartItem: async (userId, cartId, cartItemId) => {
     set({ loading: true, error: null });
     try {
@@ -94,11 +159,17 @@ export const useCartStore = create<CartStoreType>((set, get) => ({
     }
   },
 
+  /**
+   * Clear all items from the cart.
+   *
+   * @example
+   * await useCartStore.getState().clearCart();
+   * console.log('Cart cleared');
+   */
   clearCart: async () => {
     set({ loading: true, error: null });
     try {
       useLocalCartStore.getState().clearCartLocal();
-
       set({ cartItems: [], loading: false });
     } catch (error: any) {
       set({ loading: false, error: error.message || 'Failed to clear cart' });

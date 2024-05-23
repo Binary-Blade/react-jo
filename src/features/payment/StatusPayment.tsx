@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
-import { FC } from 'react';
 import { navigate } from 'wouter/use-browser-location';
 import { CheckIcon, XIcon } from '@/components/ui/IconComponents';
 import { Button } from '@/components/ui/button';
@@ -22,13 +21,49 @@ interface StatusPaymentProps {
   }[];
 }
 
-export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
+/**
+ * `StatusPayment` component displays the status of a payment transaction.
+ * It shows different messages and icons based on the payment status.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {Array} props.reservation - The reservation data array.
+ * @returns {JSX.Element} The rendered StatusPayment component.
+ *
+ * @example
+ * return (
+ *   <StatusPayment
+ *     reservation={[{
+ *       reservationId: 1,
+ *       reservationDetails: [],
+ *       user: { firstName: 'John', lastName: 'Doe' },
+ *       transaction: { statusPayment: 'APPROVED', paymentId: '123456', totalAmount: 100 }
+ *     }]}
+ *   />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `useCartStore` to access and clear the cart state.
+ * - `CheckIcon`, `XIcon` for status icons.
+ * - `Button` for the return button.
+ * - `useMemo` to memoize the description status based on payment status.
+ */
+export const StatusPayment = ({ reservation }: StatusPaymentProps): JSX.Element => {
   const data = reservation[0];
   const clearCart = useCartStore(state => state.clearCart);
+
+  /**
+   * Handle navigation to the home page and clear the cart.
+   */
   const handleHome = () => {
     navigate('/');
     clearCart();
   };
+
+  /**
+   * Get the description of the payment status.
+   */
   const descriptionStatus = useMemo(() => {
     if (!data) return 'No payment data available.';
     switch (data.transaction.statusPayment) {
@@ -41,6 +76,9 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
     }
   }, [data]);
 
+  /**
+   * Get the icon component based on the payment status.
+   */
   const StatusIcon = () => {
     if (!data) return null;
     switch (data.transaction.statusPayment) {

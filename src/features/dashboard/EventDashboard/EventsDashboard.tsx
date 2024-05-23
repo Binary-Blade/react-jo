@@ -6,10 +6,7 @@ import { useAggregateEventData, useDelConfirmation, useFilter, usePagination } f
 import { useSidebarForm } from '@/hooks/useSideBarForm';
 import { CreateEventDto, UpdateEventDto } from '@/config/dtos/Event.dto';
 import { PaginationComponent } from '@/components/pagination/PaginationComponent';
-import { eventColumnsTable } from '@/config/columns-table/eventColumnsTable';
-import { SORTING_EVENTS_DASHBOARD } from '@/config/sorting/sortingEvents';
-import { FILTERS_EVENT } from '@/config/filters/filtersEvents';
-import { cardDataEvents } from '@/utils/cardDataDashbord';
+import { cardDataEvents } from '@/config/constants/cardDataDashbord';
 import { FilterBarDashboard } from '@/components/hero/FilterBarDashboard';
 import { GenericAlertDialog } from '@/components/dialog/AlertDialogGeneric';
 import { FilterDropdown } from '@/features/filter-sorting/FilterDropdown';
@@ -18,21 +15,59 @@ import { SortByDropdown } from '@/features/filter-sorting/SortByDropdown';
 import { HeaderCardInfoDashboard } from '@/components/cards/HeaderCardInfoDashboard';
 import { DropDownAccount } from '@/features/header/DropDownAccount';
 import { AlertDialogAddEvent } from './AlertDialogAddEvent';
+import { eventColumnsTable } from '@/config/constants/columns-table/eventColumnsTable';
+import { SORTING_EVENTS_DASHBOARD } from '@/config/constants/sorting/sortingEvents';
+import { FILTERS_EVENT } from '@/config/constants/filters/filtersEvents';
 
-export const EventsDashboard = () => {
+/**
+ * `EventsDashboard` component is responsible for displaying and managing the events dashboard.
+ * It includes filtering, sorting, pagination, and CRUD operations on events.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered events dashboard component.
+ *
+ * @example
+ * return (
+ *   <EventsDashboard />
+ * )
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components, hooks, and stores:
+ * - `TableGenericData` for displaying event data in a table.
+ * - `EditEventSidebar` for editing event details.
+ * - `PaginationComponent` for handling pagination.
+ * - `FilterBarDashboard`, `HeaderCardInfoDashboard`, `GenericAlertDialog`, `FilterDropdown`,
+ *   `SortOrderDropdown`, `SortByDropdown`, `DropDownAccount`, `AlertDialogAddEvent` for UI elements.
+ * - `useEventStore` for managing event state.
+ * - `useAggregateEventData`, `useDelConfirmation`, `useFilter`, `usePagination` hooks for state and data management.
+ */
+export const EventsDashboard = (): JSX.Element => {
+  // Get the event columns configuration
   const eventColumn = eventColumnsTable();
+
+  // Extract state and actions from the event store
   const { events, fetchEvents, total, updateEvent, deleteEvent } = useEventStore();
+
+  // Manage deletion confirmation dialog state
   const { isDialogOpen, error, requestDelete, confirmDeletion, cancelDeletion } =
     useDelConfirmation(deleteEvent, 'eventId');
+
+  // Manage filtering and sorting state
   const { sortBy, setSortBy, sortOrder, setSortOrder, filterBy, filterValue, setFilterValue } =
     useFilter('basePrice', 'DESC', 'categoryType', 'ALL');
+
+  // Manage pagination state
   const { currentPage, setPage, limit, totalPages, offset } = usePagination({
     initialPage: 1,
     initialLimit: 10,
     totalCount: total
   });
+
+  // Aggregate event data for dashboard cards
   const { totalQuantity, totalSold, totalRevenue } = useAggregateEventData();
   const cardDataEvent = cardDataEvents(totalQuantity, totalSold, totalRevenue);
+
+  // Manage sidebar form state for editing events
   const {
     isSidebarOpen,
     selectedItem: selectedEvent,
@@ -44,21 +79,30 @@ export const EventsDashboard = () => {
     event => event.eventId as number
   );
 
+  // Fetch events when filters, sorting, or pagination changes
   useEffect(() => {
     fetchEvents({ limit, offset, sortBy, sortOrder, filterBy, filterValue });
   }, [currentPage, limit, sortBy, sortOrder, filterBy, filterValue, fetchEvents]);
 
+  // Reset to the first page whenever filters or sorting change
   useEffect(() => {
-    setPage(1); // Reset to the first page whenever filters or sorting change
+    setPage(1);
   }, [setPage, sortBy, sortOrder, filterBy, filterValue]);
 
   return (
     <>
+      {/* User account dropdown */}
       <div className="flex items-center gap-4 justify-end">
         <DropDownAccount />
       </div>
+
+      {/* Dashboard filter bar */}
       <FilterBarDashboard title="Événements" />
+
+      {/* Header card info */}
       <HeaderCardInfoDashboard cardData={cardDataEvent} />
+
+      {/* Action bar with sorting and filtering options */}
       <div className="flex items-center gap-4">
         <AlertDialogAddEvent />
         <div className="ml-auto flex items-center gap-2">
@@ -75,12 +119,14 @@ export const EventsDashboard = () => {
           />
         </div>
       </div>
+
+      {/* Events data table with sidebar for editing */}
       <div className="border shadow-sm rounded-lg" key={events.length}>
         {isSidebarOpen && (
           <EditEventSidebar
             event={selectedEvent}
             onClose={handleCloseSidebar}
-            onSave={handleSave} // Implement saving logic
+            onSave={handleSave}
           />
         )}
         <TableGenericData
@@ -101,6 +147,7 @@ export const EventsDashboard = () => {
         )}
       </div>
 
+      {/* Pagination component */}
       <PaginationComponent
         currentPage={currentPage}
         totalPages={totalPages}

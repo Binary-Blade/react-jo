@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { useCallback } from 'react';
 import { PriceFormula } from '@/config/enums/PriceFormula.enum';
 import { useTicketManager } from '@/hooks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,12 +16,44 @@ type CardEventPricesProps = {
   addItemToCartLocal: (item: any) => void;
 };
 
-export const AddItemEventToCart: FC<CardEventPricesProps> = ({
+/**
+ * `AddItemEventToCart` component allows the user to select ticket types and quantities,
+ * and add the selected tickets to the cart.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {string} props.title - The title of the event.
+ * @param {number} props.eventId - The ID of the event.
+ * @param {number} props.basePrice - The base price of the tickets.
+ * @param {function} props.addItemToCartLocal - Function to add items to the local cart.
+ * @returns {JSX.Element} The rendered add item to cart component.
+ *
+ * @example
+ * return (
+ *   <AddItemEventToCart
+ *     title="Event Name"
+ *     eventId={123}
+ *     basePrice={50}
+ *     addItemToCartLocal={handleAddToCart}
+ *   />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `Card`, `CardContent`, `CardHeader`, `CardTitle` for card layout.
+ * - `Label` for labeling form elements.
+ * - `RadioGroup`, `RadioGroupItem` for selecting ticket types.
+ * - `QuantitySelector` for selecting the quantity of tickets.
+ * - `Button` for the add to cart button.
+ * - `toast` for displaying notifications.
+ * - `useTicketManager` hook for managing ticket selection state.
+ */
+export const AddItemEventToCart = ({
   title,
   eventId,
   basePrice,
   addItemToCartLocal
-}) => {
+}: CardEventPricesProps): JSX.Element => {
   const initialTicketType = PriceFormula.SOLO;
   const {
     selectedTicketType,
@@ -32,6 +64,9 @@ export const AddItemEventToCart: FC<CardEventPricesProps> = ({
     handleTicketTypeChange
   } = useTicketManager(basePrice, eventId, initialTicketType);
 
+  /**
+   * Handle adding the selected tickets to the cart.
+   */
   const handleAddToCart = useCallback(() => {
     if (eventId && unitPrice && selectedTicketType) {
       const cartItemLocal = {

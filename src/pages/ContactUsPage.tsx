@@ -6,6 +6,7 @@ import { Header } from '@/features/header/Header';
 import { EventHero } from '@/components/hero/EventHero';
 import { useContactForm } from '@/hooks/useContactForm';
 
+// HACK: IMPROVE IT
 export default function ContactUsPage() {
   const { register, handleSubmit, onSubmit, errors } = useContactForm();
 

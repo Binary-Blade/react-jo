@@ -4,13 +4,25 @@ import { LoginFormData } from '@/config/zod-schemas/loginSchema';
 import { SignupFormData } from '@/config/zod-schemas/signupSchema';
 import { AuthenticationService } from '@/services/AuthenticationService';
 import useCartStore from './useCartStore';
-import { AuthStoreTypes } from '@/config/types/Auth/AuthStoreType';
 import useLocalCartStore from './useLocalCartStore';
 import { handleAsyncError } from '@/config/errors/handleErrorResponse';
+import { AuthStoreTypes } from '@/config/interfaces/authentication/auth-store.interface';
 
 interface DecodedToken {
   role: string;
 }
+
+/**
+ * `useAuthStore` is a Zustand store for managing authentication state and actions.
+ *
+ * @constant
+ *
+ * @example
+ * const { isAuthenticated, login, logout } = useAuthStore();
+ *
+ * @remarks
+ * This store handles user authentication, including signup, login, logout, token refresh, and password change.
+ */
 export const useAuthStore = create<AuthStoreTypes>(set => ({
   accessToken: null,
   isAuthenticated: false,
@@ -19,6 +31,16 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
   loading: false,
   error: null,
 
+  /**
+   * Signup a new user.
+   *
+   * @param {SignupFormData} userData - The data for signing up a new user.
+   *
+   * @example
+   * const signupData: SignupFormData = { firstName: 'John', lastName: 'Doe', email: 'john@example.com', password: 'password123' };
+   * const response = await useAuthStore.getState().signup(signupData);
+   * console.log(response);
+   */
   signup: async (userData: SignupFormData) => {
     set({ loading: true, error: null });
     try {
@@ -30,6 +52,16 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  /**
+   * Login an existing user.
+   *
+   * @param {LoginFormData} userData - The data for logging in a user.
+   *
+   * @example
+   * const loginData: LoginFormData = { email: 'john@example.com', password: 'password123' };
+   * const response = await useAuthStore.getState().login(loginData);
+   * console.log(response);
+   */
   login: async (userData: LoginFormData) => {
     set({ loading: true, error: null });
     try {
@@ -51,6 +83,14 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  /**
+   * Logout the current user.
+   *
+   *
+   * @example
+   * await useAuthStore.getState().logout();
+   * console.log('Logged out successfully');
+   */
   logout: async () => {
     set({ loading: true, error: null });
     try {
@@ -67,6 +107,15 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  /**
+   * Delete the current user by their ID.
+   *
+   * @param {number} userId - The ID of the user to delete.
+   *
+   * @example
+   * const response = await useAuthStore.getState().deleteUser(1);
+   * console.log(response);
+   */
   deleteUser: async (userId: number) => {
     set({ loading: true, error: null });
     try {
@@ -84,6 +133,16 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  /**
+   * Change the password of the current user.
+   *
+   * @param  userData - The data for changing the password.
+   *
+   * @example
+   * const passwordData: ChangePasswordSchema = { oldPassword: 'oldPass123', newPassword: 'newPass123' };
+   * const response = await useAuthStore.getState().changePassword(passwordData);
+   * console.log(response);
+   */
   changePassword: async userData => {
     set({ loading: true, error: null });
     try {
@@ -96,6 +155,14 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  /**
+   * Refresh the authentication token.
+   *
+   *
+   * @example
+   * await useAuthStore.getState().refreshToken();
+   * console.log('Token refreshed successfully');
+   */
   refreshToken: async () => {
     set({ loading: true, error: null });
     try {
@@ -113,6 +180,14 @@ export const useAuthStore = create<AuthStoreTypes>(set => ({
     }
   },
 
+  /**
+   * Access a protected route using the authentication token.
+   *
+   *
+   * @example
+   * await useAuthStore.getState().accessProtectedRoute();
+   * console.log('Accessed protected route successfully');
+   */
   accessProtectedRoute: async () => {
     set({ loading: true, error: null });
     try {

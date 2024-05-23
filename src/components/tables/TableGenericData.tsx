@@ -6,7 +6,7 @@ import {
   TableBody,
   Table
 } from '@/components/ui/table';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
@@ -32,7 +32,46 @@ type TableGenericProps = {
   onEdit?: (item: any) => void;
 };
 
-export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelete, onEdit }) => {
+/**
+ * `TableGenericData` component displays tabular data with customizable columns and actions.
+ * It supports rendering custom content in cells and provides actions via a dropdown menu.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {Record<string, any>[]} props.data - The data to be displayed in the table.
+ * @param {Column[]} props.columns - The columns configuration for the table.
+ * @param {function} [props.onDelete] - Function to handle the deletion of a row.
+ * @param {function} [props.onEdit] - Function to handle the editing of a row.
+ * @returns {JSX.Element} The rendered TableGenericData component.
+ *
+ * @example
+ * const data = [{ id: 1, name: 'John Doe' }, { id: 2, name: 'Jane Doe' }];
+ * const columns = [
+ *   { key: 'id', header: 'ID' },
+ *   { key: 'name', header: 'Name' }
+ * ];
+ * return (
+ *   <TableGenericData
+ *     data={data}
+ *     columns={columns}
+ *     onDelete={handleDelete}
+ *     onEdit={handleEdit}
+ *   />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components:
+ * - `Table`, `TableHead`, `TableRow`, `TableHeader`, `TableCell`, `TableBody` for the table layout.
+ * - `DropdownMenu`, `DropdownMenuTrigger`, `DropdownMenuLabel`, `DropdownMenuItem`, `DropdownMenuContent` for the action menu.
+ * - `Button` for the action buttons.
+ * - `MoveHorizontalIcon` for the icon in the action menu trigger button.
+ */
+export const TableGenericData = ({
+  data,
+  columns,
+  onDelete,
+  onEdit
+}: TableGenericProps): JSX.Element => {
   return (
     <div className="overflow-x-auto" data-testid="table-container">
       <Table>
@@ -54,6 +93,7 @@ export const TableGenericData: FC<TableGenericProps> = ({ data, columns, onDelet
                   className={col.className}
                   data-testid={`cell-${index}-${col.key}`}
                 >
+                  {/* Render custom content if a render function is provided, otherwise display the raw value */}
                   {col.render ? col.render(item[col.key]) : item[col.key]}
                 </TableCell>
               ))}

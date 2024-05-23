@@ -1,6 +1,6 @@
 import { MultiStepLoader as Loader } from '@/components/ui/multi-step-loader';
 import { IconSquareRoundedX } from '@tabler/icons-react';
-import { useState, FC } from 'react';
+import { useState } from 'react';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { navigate } from 'wouter/use-browser-location';
 import useReservationStore from '@/stores/useReservationStore';
@@ -28,14 +28,38 @@ const loadingStates = [
 ];
 
 /**
- * ButtonCheckoutPayment component.
+ * `ButtonCheckoutPayment` component handles the checkout process,
+ * including loading states and displaying the payment status.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {number | null | undefined} props.cartId - The ID of the cart.
+ * @returns {JSX.Element} The rendered ButtonCheckoutPayment component.
+ *
+ * @example
+ * return (
+ *   <ButtonCheckoutPayment cartId={123} />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `Loader` for displaying the multi-step loading process.
+ * - `AlertDialog` and `AlertDialogContent` for displaying the status after checkout.
+ * - `Button` for the checkout button.
+ * - `StatusPayment` for displaying the reservation status.
+ * It also interacts with the authentication and reservation stores to manage state.
  */
-export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
+export const ButtonCheckoutPayment = ({ cartId }: CheckOutPaymentProps): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const { userId, isAuthenticated } = useAuthStore();
   const { newReservation, addReservation } = useReservationStore();
 
+  /**
+   * Handle the checkout process.
+   * If the user is not authenticated, navigate to the login page.
+   * Otherwise, add the reservation and manage loading states.
+   */
   const handleCheckout = async () => {
     if (!isAuthenticated) {
       return navigate('/login');
@@ -85,7 +109,7 @@ export const ButtonCheckoutPayment: FC<CheckOutPaymentProps> = ({ cartId }) => {
 
       {showAlert && (
         <AlertDialog open={showAlert} onOpenChange={setShowAlert}>
-          <AlertDialogContent className="">
+          <AlertDialogContent>
             <StatusPayment reservation={newReservation} />
           </AlertDialogContent>
         </AlertDialog>

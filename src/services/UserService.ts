@@ -1,11 +1,25 @@
 import axiosClient from '@/config/axiosConfig';
-import { PaginationParams } from '@/config/types/common/PaginationTypes';
+import { PaginationParams } from '@/config/interfaces/common/pagination-params.interface';
 
+/**
+ * `UserService` provides methods for managing user-related operations.
+ * It includes methods for fetching all users, fetching all user values, fetching a user by ID, updating a user, and making a user inactive.
+ *
+ * @class UserService
+ */
 export class UserService {
   /**
-   * Fetches all users from the server. This is typically restricted to admin users.
+   * Get all users with optional pagination parameters.
+   *
+   * @param {PaginationParams} [params] - Optional pagination and filtering parameters.
+   * @returns {Promise<{ success: boolean; data: any }>} The response from the server.
+   *
+   * @example
+   * const params: PaginationParams = { limit: 10, offset: 0, sortBy: 'date', sortOrder: 'asc' };
+   * const response = await UserService.getAllUsers(params);
+   * console.log(response);
    */
-  static async getAllUsers(params?: PaginationParams) {
+  static async getAllUsers(params?: PaginationParams): Promise<{ success: boolean; data: any }> {
     try {
       const response = await axiosClient.get('/users/get-all', { params });
       return {
@@ -18,7 +32,16 @@ export class UserService {
     }
   }
 
-  static async getAllValuesUsers() {
+  /**
+   * Get all user values.
+   *
+   * @returns {Promise<{ success: boolean; data: any }>} The response from the server.
+   *
+   * @example
+   * const response = await UserService.getAllValuesUsers();
+   * console.log(response);
+   */
+  static async getAllValuesUsers(): Promise<{ success: boolean; data: any }> {
     try {
       const response = await axiosClient.get('/users/get-all-values');
       return {
@@ -32,10 +55,16 @@ export class UserService {
   }
 
   /**
-   * Fetches a single user by ID.
-   * @param {number} userId The ID of the user to fetch.
+   * Get a user by their ID.
+   *
+   * @param {number} userId - The ID of the user.
+   * @returns {Promise<{ success: boolean; data: any }>} The response from the server.
+   *
+   * @example
+   * const response = await UserService.getUserById(1);
+   * console.log(response);
    */
-  static async getUserById(userId: number) {
+  static async getUserById(userId: number): Promise<{ success: boolean; data: any }> {
     try {
       const response = await axiosClient.get(`/users/${userId}`);
       return {
@@ -49,11 +78,21 @@ export class UserService {
   }
 
   /**
-   * Updates a user's data.
-   * @param {number} userId The ID of the user to update.
-   * @param {Object} updateData The data to update the user with.
+   * Update a user by their ID.
+   *
+   * @param {number} userId - The ID of the user.
+   * @param {Object} updateData - The data to update the user with.
+   * @returns {Promise<{ success: boolean; data: any }>} The response from the server.
+   *
+   * @example
+   * const updateData = { firstName: 'John', lastName: 'Doe' };
+   * const response = await UserService.updateUser(1, updateData);
+   * console.log(response);
    */
-  static async updateUser(userId: number, updateData: Object) {
+  static async updateUser(
+    userId: number,
+    updateData: Object
+  ): Promise<{ success: boolean; data: any }> {
     try {
       const response = await axiosClient.patch(`/users/${userId}`, updateData);
       return {
@@ -66,7 +105,17 @@ export class UserService {
     }
   }
 
-  static async makeInInactive(userId: number) {
+  /**
+   * Make a user inactive by their ID.
+   *
+   * @param {number} userId - The ID of the user.
+   * @returns {Promise<{ success: boolean; data: any }>} The response from the server.
+   *
+   * @example
+   * const response = await UserService.makeInInactive(1);
+   * console.log(response);
+   */
+  static async makeInInactive(userId: number): Promise<{ success: boolean; data: any }> {
     try {
       const response = await axiosClient.patch(`/users/make-inactive/${userId}`);
       return {

@@ -12,7 +12,27 @@ import { useState } from 'react';
 import { EyeOffIcon } from '@/components/ui/IconComponents';
 import { EyeIcon } from 'lucide-react';
 
-export const LoginForm = () => {
+/**
+ * `LoginForm` component provides a login form for user authentication.
+ * It includes fields for email and password with validation and error handling.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered LoginForm component.
+ *
+ * @example
+ * return <LoginForm />;
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `useForm`, `Controller` from `react-hook-form` for form handling and validation.
+ * - `zodResolver` for schema validation with Zod.
+ * - `Label`, `Input`, `Button` for form elements.
+ * - `useLocation` from `wouter` for navigation.
+ * - `useAuthStore` for authentication state management.
+ * - `useToast` for displaying toast notifications.
+ * - `EyeOffIcon`, `EyeIcon` for showing/hiding password visibility.
+ */
+export const LoginForm = (): JSX.Element => {
   const [, navigate] = useLocation();
   const { login } = useAuthStore();
   const { toast } = useToast();
@@ -22,7 +42,7 @@ export const LoginForm = () => {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm({
+  } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
     defaultValues: {
@@ -31,6 +51,11 @@ export const LoginForm = () => {
     }
   });
 
+  /**
+   * Handle the login form submission.
+   *
+   * @param {LoginFormData} formData - The form data containing email and password.
+   */
   const handleLogin = async (formData: LoginFormData) => {
     const response = await login(formData);
     if (response.success) {
@@ -50,6 +75,7 @@ export const LoginForm = () => {
     <>
       <div className="grid gap-4">
         <form onSubmit={handleSubmit(handleLogin)} className="grid gap-4">
+          {/* Email Field */}
           <Controller
             name="email"
             control={control}
@@ -61,6 +87,7 @@ export const LoginForm = () => {
               </div>
             )}
           />
+          {/* Password Field */}
           <Controller
             name="password"
             control={control}
@@ -68,8 +95,6 @@ export const LoginForm = () => {
               <div>
                 <Label htmlFor="password">Mot de passe</Label>
                 <div className="relative">
-                  {' '}
-                  {/* Ajout de cette ligne */}
                   <Input {...field} id="password" type={showPassword ? 'text' : 'password'} />
                   <button
                     type="button"
@@ -82,13 +107,13 @@ export const LoginForm = () => {
                       <EyeIcon className="h-5 w-5" />
                     )}
                   </button>
-                </div>{' '}
-                {/* Ajout de cette ligne */}
+                </div>
                 {errors.password && <span className="text-red-500">{errors.password.message}</span>}
               </div>
             )}
           />
-          <Button type="submit">Login</Button>
+          {/* Submit Button */}
+          <Button type="submit">Se connecter</Button>
         </form>
       </div>
     </>

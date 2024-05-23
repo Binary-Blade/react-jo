@@ -23,7 +23,20 @@ const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const ContactUsPage = lazy(() => import('./pages/ContactUsPage'));
 
-export default function App() {
+/**
+ * `App` is the main application component that sets up routes and provides global context.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered application.
+ *
+ * @example
+ * return <App />;
+ *
+ * @remarks
+ * This component uses `useAuthStore` to get the current user's ID and `useCartStore` to fetch cart items.
+ * It includes both eagerly and lazily loaded pages, with protected routes for authenticated and admin users.
+ */
+export default function App(): JSX.Element {
   const { userId } = useAuthStore();
   const { cartId, fetchCartItems } = useCartStore(state => ({
     fetchCartItems: state.fetchCartItems,

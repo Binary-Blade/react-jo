@@ -1,13 +1,31 @@
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'wouter';
 
-export const SectionTickets = () => {
+/**
+ * `SectionTickets` component displays a call-to-action section for obtaining tickets.
+ * It includes a title, a description, and a button that links to the events page.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered section tickets component.
+ *
+ * @example
+ * return (
+ *   <SectionTickets />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and includes:
+ * - `Separator` for visual separation of sections.
+ * - `Link` from 'wouter' for client-side navigation to the events page.
+ */
+export const SectionTickets = (): JSX.Element => {
   return (
     <>
       <Separator />
       <section className="w-full py-12 z-8">
         <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
           <div className="space-y-3">
+            {/* Section title */}
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight lg:text-5xl/leading-tight">
               Obtenez vos billets
             </h2>
@@ -17,6 +35,7 @@ export const SectionTickets = () => {
             </p>
           </div>
           <div className="mx-auto w-full max-w-sm space-y-2">
+            {/* Call-to-action button */}
             <Link
               className="inline-flex h-10 items-center rounded-md 
                             bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors 

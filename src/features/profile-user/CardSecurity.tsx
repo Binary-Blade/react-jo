@@ -2,7 +2,23 @@ import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/com
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 
-export const CardSecurity = () => {
+/**
+ * `CardSecurity` component allows the user to manage their account's security settings.
+ * It provides options for enabling two-factor authentication and managing logout sessions.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered CardSecurity component.
+ *
+ * @example
+ * return <CardSecurity />;
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components:
+ * - `Card`, `CardTitle`, `CardDescription`, `CardHeader`, `CardContent` for the card layout.
+ * - `Button` for action buttons.
+ * - `Switch` for toggling two-factor authentication.
+ */
+export const CardSecurity = (): JSX.Element => {
   return (
     <Card>
       <CardHeader>
@@ -10,6 +26,7 @@ export const CardSecurity = () => {
         <CardDescription>Manage your account's security settings.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Two-Factor Authentication Section */}
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium">Two-Factor Authentication</p>
@@ -19,6 +36,7 @@ export const CardSecurity = () => {
           </div>
           <Switch />
         </div>
+        {/* Logout Sessions Section */}
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium">Logout Sessions</p>

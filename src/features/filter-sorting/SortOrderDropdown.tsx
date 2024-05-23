@@ -6,7 +6,6 @@ import {
   DropdownMenuRadioItem
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { FC } from 'react';
 import { ArrowUpDownIcon } from '@/components/ui/IconComponents';
 
 interface SortOrderDropdownProps {
@@ -14,7 +13,36 @@ interface SortOrderDropdownProps {
   setSortOrder: (value: string) => void;
 }
 
-export const SortOrderDropdown: FC<SortOrderDropdownProps> = ({ sortOrder, setSortOrder }) => {
+/**
+ * `SortOrderDropdown` component provides a dropdown menu for selecting the sort order.
+ * It allows the user to choose between ascending and descending order.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {string} props.sortOrder - The currently selected sort order.
+ * @param {function(string): void} props.setSortOrder - Function to handle sort order change.
+ * @returns {JSX.Element} The rendered sort order dropdown component.
+ *
+ * @example
+ * const [sortOrder, setSortOrder] = useState<string>('ASC');
+ * return (
+ *   <SortOrderDropdown
+ *     sortOrder={sortOrder}
+ *     setSortOrder={setSortOrder}
+ *   />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components:
+ * - `DropdownMenu`, `DropdownMenuTrigger`, `DropdownMenuContent`, `DropdownMenuRadioGroup`,
+ *   `DropdownMenuRadioItem` for dropdown functionality.
+ * - `Button` for the trigger button.
+ * - `ArrowUpDownIcon` for the sort order icon.
+ */
+export const SortOrderDropdown = ({
+  sortOrder,
+  setSortOrder
+}: SortOrderDropdownProps): JSX.Element => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,6 +52,7 @@ export const SortOrderDropdown: FC<SortOrderDropdownProps> = ({ sortOrder, setSo
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {/* Radio group for selecting sort order */}
         <DropdownMenuRadioGroup value={sortOrder} onValueChange={setSortOrder}>
           <DropdownMenuRadioItem value="ASC">Ascendant</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="DESC">Descendant</DropdownMenuRadioItem>

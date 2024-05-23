@@ -12,7 +12,28 @@ import { EyeOffIcon } from '@/components/ui/IconComponents';
 import { EyeIcon } from 'lucide-react';
 import { useToast } from '../ui/use-toast';
 
-export const SignUpForm = () => {
+/**
+ * `SignUpForm` component provides a sign-up form for user registration.
+ * It includes fields for first name, last name, email, password, and a terms and conditions checkbox.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered SignUpForm component.
+ *
+ * @example
+ * return <SignUpForm />;
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `useForm`, `Controller` from `react-hook-form` for form handling and validation.
+ * - `zodResolver` for schema validation with Zod.
+ * - `Label`, `Input`, `Button` for form elements.
+ * - `Checkbox` for the terms and conditions checkbox.
+ * - `useLocation` from `wouter` for navigation.
+ * - `useAuthStore` for authentication state management.
+ * - `useToast` for displaying toast notifications.
+ * - `EyeOffIcon`, `EyeIcon` for showing/hiding password visibility.
+ */
+export const SignUpForm = (): JSX.Element => {
   const { signup } = useAuthStore();
   const [, navigate] = useLocation();
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +43,7 @@ export const SignUpForm = () => {
     control,
     handleSubmit,
     formState: {}
-  } = useForm({
+  } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
       firstName: '',
@@ -32,6 +53,11 @@ export const SignUpForm = () => {
     }
   });
 
+  /**
+   * Handle the sign-up form submission.
+   *
+   * @param {SignupFormData} formData - The form data containing first name, last name, email, and password.
+   */
   const handleSignUp = async (formData: SignupFormData): Promise<void> => {
     const response = await signup(formData);
     if (response.success) {
@@ -49,6 +75,7 @@ export const SignUpForm = () => {
     <>
       <form onSubmit={handleSubmit(handleSignUp)} className="space-y-2">
         <div className="grid gap-4 py-4">
+          {/* First Name Field */}
           <Controller
             name="firstName"
             control={control}
@@ -62,6 +89,7 @@ export const SignUpForm = () => {
               </div>
             )}
           />
+          {/* Last Name Field */}
           <Controller
             name="lastName"
             control={control}
@@ -75,6 +103,7 @@ export const SignUpForm = () => {
               </div>
             )}
           />
+          {/* Email Field */}
           <Controller
             name="email"
             control={control}
@@ -88,6 +117,7 @@ export const SignUpForm = () => {
               </div>
             )}
           />
+          {/* Password Field */}
           <Controller
             name="password"
             control={control}
@@ -120,6 +150,7 @@ export const SignUpForm = () => {
             )}
           />
         </div>
+        {/* Terms and Conditions Checkbox */}
         <Checkbox id="terms" />
         <Label className="text-sm p-2 " htmlFor="terms">
           Je suis d'accord avec les{' '}
@@ -130,6 +161,7 @@ export const SignUpForm = () => {
             termes et conditions
           </Link>
         </Label>
+        {/* Submit Button */}
         <Button className="w-full" type="submit">
           Créer un compte
         </Button>

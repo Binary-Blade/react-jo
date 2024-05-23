@@ -2,9 +2,29 @@ import { useState } from 'react';
 import { AtSignIcon, BellIcon, EyeOffIcon } from '@/components/ui/IconComponents';
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/components/ui/card';
 
-export const CardNotification = () => {
+/**
+ * `CardNotification` component allows the user to select their notification preferences.
+ * It provides options to choose between receiving all notifications, only mentions, or no notifications at all.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered CardNotification component.
+ *
+ * @example
+ * return <CardNotification />;
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components:
+ * - `Card`, `CardTitle`, `CardDescription`, `CardHeader`, `CardContent` for the card layout.
+ * - `AtSignIcon`, `BellIcon`, `EyeOffIcon` for the notification icons.
+ */
+export const CardNotification = (): JSX.Element => {
   const [selected, setSelected] = useState('Available');
 
+  /**
+   * Handle the selection of a notification option.
+   *
+   * @param {string} option - The selected notification option.
+   */
   const handleSelect = (option: string) => {
     setSelected(option);
   };
@@ -16,6 +36,7 @@ export const CardNotification = () => {
         <CardDescription>Choose what you want to be notified about.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
+        {/* Option for receiving all notifications */}
         <div
           onClick={() => handleSelect('Everything')}
           className={`-mx-2 flex items-start space-x-4 rounded-md p-2 transition-all cursor-pointer 
@@ -29,6 +50,7 @@ export const CardNotification = () => {
             </p>
           </div>
         </div>
+        {/* Option for receiving mentions and comments only */}
         <div
           onClick={() => handleSelect('Available')}
           className={`-mx-2 flex items-start space-x-4 rounded-md p-2 transition-all cursor-pointer 
@@ -40,6 +62,7 @@ export const CardNotification = () => {
             <p className="text-sm text-gray-500 dark:text-gray-400">Only mentions and comments.</p>
           </div>
         </div>
+        {/* Option for turning off all notifications */}
         <div
           onClick={() => handleSelect('Ignoring')}
           className={`-mx-2 flex items-start space-x-4 rounded-md p-2 transition-all cursor-pointer 

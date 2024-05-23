@@ -9,15 +9,31 @@ import { FilterDropdown } from '../filter-sorting/FilterDropdown';
 import { SortOrderDropdown } from '../filter-sorting/SortOrderDropdown';
 import { SortByDropdown } from '../filter-sorting/SortByDropdown';
 import { useTransactionStore } from '@/stores/useTransactionStore';
-import { STATUSCOLOR } from '@/config/constants';
 import { FaCalendarAlt, FaEuroSign, FaReceipt } from 'react-icons/fa';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronRightIcon } from '@/components/ui/IconComponents';
-import { FILTER_OPTIONS_TRANSACTIONS } from '@/config/filters/filtersTransactions';
-import { SORTING_OPTIONS_TRANSACTIONS } from '@/config/sorting/sortingTransactions';
-import { Reservation } from '@/config/types/Reservation/ReservationTypes';
+import { Reservation } from '@/config/interfaces/reservation/reservation-type.interface';
+import { STATUSCOLOR } from '@/config/constants/constants-common';
+import { FILTER_OPTIONS_TRANSACTIONS } from '@/config/constants/filters/filtersTransactions';
+import { SORTING_OPTIONS_TRANSACTIONS } from '@/config/constants/sorting/sortingTransactions';
 
-export const AllReservations = () => {
+/**
+ * `AllReservations` component displays a list of reservations with pagination, filtering, and sorting options.
+ * It fetches transaction data and renders each transaction along with its details.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered AllReservations component.
+ *
+ * @example
+ * return <AllReservations />;
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `useAuthStore` and `useTransactionStore` for state management.
+ * - `useFilter` and `usePagination` for filtering and pagination logic.
+ * - `PaginationComponent`, `ReservationEmpty`, `Separator`, `CardReservations`, `FilterDropdown`, `SortOrderDropdown`, `SortByDropdown`, `Collapsible`, `CollapsibleContent`, `CollapsibleTrigger` for UI components.
+ */
+export const AllReservations = (): JSX.Element => {
   const { transactions, fetchTransactions, total } = useTransactionStore();
   const { userId } = useAuthStore();
   const { currentPage, setPage, limit, totalPages, offset } = usePagination({
@@ -55,6 +71,7 @@ export const AllReservations = () => {
 
   return (
     <>
+      {/* Filter and Sort Options Section */}
       <section className="p-10">
         <div className="flex items-center space-x-4">
           <SortByDropdown
@@ -74,6 +91,7 @@ export const AllReservations = () => {
         {transactions.length > 0 ? (
           transactions.map(transaction => (
             <div key={transaction.transactionId} className="mb-6">
+              {/* Transaction Header */}
               <div className="mb-4 flex flex-row justify-between items-center">
                 <h3 className="text-2xl font-bold flex items-center">
                   <FaReceipt className="mr-2 text-rose-600" /> Transaction #
@@ -85,6 +103,7 @@ export const AllReservations = () => {
                   {transaction.statusPayment}
                 </div>
               </div>
+              {/* Transaction Details */}
               <div className="px-3">
                 <div className="text-md font-semibold flex items-center mb-2">
                   <FaCalendarAlt className="mr-2 text-gray-600" />
@@ -97,13 +116,14 @@ export const AllReservations = () => {
                   <span className="text-sm text-gray-500 ml-1">{transaction.totalAmount}€</span>
                 </div>
               </div>
+              {/* Collapsible Reservation Details */}
               <Collapsible>
                 <CollapsibleTrigger className="font-semibold flex items-center gap-1 transition-transform duration-300 ease-in-out [&[data-state=open]>svg]:rotate-90">
                   Voir plus
                   <ChevronRightIcon className="w-4 h-4 translate-y-px transition-transform duration-300 ease-in-out" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="transition-opacity duration-300 ease-in-out">
-                  <div className=" rounded-lg overflow-hidden py-8">
+                  <div className="rounded-lg overflow-hidden py-8">
                     <div className="px-2 pb-4 grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5">
                       {transaction.reservation.map((reservation: Reservation) => (
                         <CardReservations

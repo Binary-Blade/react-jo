@@ -13,13 +13,31 @@ import {
 import { CategoryEvent, CategoryEventAdmin } from '@/config/enums/CategoryEvent.enum';
 import { useEventForm } from '@/hooks/useEventForm';
 import { InputFieldEvent } from './InputFieldEvent';
-import { FC } from 'react';
 
 interface FormAddNewEventProps {
   onSuccess: () => void;
 }
 
-export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
+/**
+ * `FormAddNewEvent` component provides a form to add a new event.
+ * It includes fields for event details such as title, dates, category, price, quantity, and descriptions.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {Function} props.onSuccess - Callback function to be called upon successful form submission.
+ * @returns {JSX.Element} The rendered FormAddNewEvent component.
+ *
+ * @example
+ * return <FormAddNewEvent onSuccess={() => console.log('Event added successfully')} />;
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components and hooks:
+ * - `InputFieldEvent` for input fields.
+ * - `Select`, `SelectContent`, `SelectGroup`, `SelectItem`, `SelectLabel`, `SelectTrigger`, `SelectValue` for the category selection.
+ * - `Button`, `Label`, `Textarea` for other form elements.
+ * - `useEventForm` for form handling logic.
+ */
+export const FormAddNewEvent = ({ onSuccess }: FormAddNewEventProps): JSX.Element => {
   const initialData = {
     title: '',
     startDate: '',
@@ -30,6 +48,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
     shortDescription: '',
     longDescription: ''
   };
+
   const { formData, handleChange, handleCategoryChange, handleSubmit, errors } = useEventForm(
     initialData,
     onSuccess
@@ -43,6 +62,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
       </div>
       <div className="gap-4">
         <form onSubmit={handleSubmit} className="grid gap-4">
+          {/* Title Field */}
           <InputFieldEvent
             id="title"
             label="Titre"
@@ -51,6 +71,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
             errors={errors.title}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Start Date Field */}
             <InputFieldEvent
               id="startDate"
               label="Date de Début"
@@ -59,6 +80,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
               value={formData.startDate}
               errors={errors.startDate}
             />
+            {/* End Date Field */}
             <InputFieldEvent
               id="endDate"
               label="Date de Fin"
@@ -68,6 +90,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
               errors={errors.endDate}
             />
           </div>
+          {/* Category Field */}
           <div className="space-y-2">
             <Label className="font-medium" htmlFor="categoryType">
               Catégorie d'Événement *
@@ -90,6 +113,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
             {errors.categoryType && <p className="text-red-500">{errors.categoryType[0]}</p>}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Base Price Field */}
             <InputFieldEvent
               id="basePrice"
               label="Prix"
@@ -98,6 +122,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
               value={formData.basePrice}
               errors={errors.basePrice}
             />
+            {/* Quantity Available Field */}
             <InputFieldEvent
               id="quantityAvailable"
               label="Quantité Disponible"
@@ -108,6 +133,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
             />
           </div>
           <div className="space-y-2">
+            {/* Short Description Field */}
             <Label className="font-medium" htmlFor="shortDescription">
               Courte Description *
             </Label>
@@ -125,6 +151,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
             )}
           </div>
           <div className="space-y-2">
+            {/* Long Description Field */}
             <Label className="font-medium" htmlFor="longDescription">
               Description Longue *
             </Label>
@@ -139,6 +166,7 @@ export const FormAddNewEvent: FC<FormAddNewEventProps> = ({ onSuccess }) => {
             />
             {errors.longDescription && <p className="text-red-500">{errors.longDescription[0]}</p>}
           </div>
+          {/* Submit Button */}
           <Button className="w-full" type="submit">
             Enregistrer l'Événement
           </Button>

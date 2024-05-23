@@ -1,7 +1,26 @@
 import placeholderImage from '@/assets/images/fencing.webp';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'wouter';
-export const NewsPresents = () => {
+
+/**
+ * `NewsPresents` component displays a section for the latest news related to the Olympics.
+ * It includes a section title, subtitle, and a grid of news articles with images, titles, and summaries.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered news section component.
+ *
+ * @example
+ * return (
+ *   <NewsPresents />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and includes:
+ * - `Separator` for visual separation of sections.
+ * - `Link` from 'wouter' for client-side navigation.
+ * - A placeholder image for the news articles.
+ */
+export const NewsPresents = (): JSX.Element => {
   return (
     <>
       <Separator />
@@ -16,9 +35,12 @@ export const NewsPresents = () => {
               Paris 2024.
             </p>
           </div>
+
+          {/* News articles grid */}
           <div className="grid max-w-md grid-cols-1 mx-auto mt-12 gap-x-4 gap-y-8 sm:max-w-lg sm:grid-cols-2 lg:max-w-none lg:grid-cols-3">
             <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
               <div className="flex-shrink-0">
+                {/* News article image */}
                 <img
                   alt="News 1"
                   className="object-cover w-full h-48"
@@ -80,6 +102,7 @@ export const NewsPresents = () => {
                 </div>
               </div>
             </div>
+            {/* Additional news articles would be added here in a similar structure */}
           </div>
         </div>
       </section>

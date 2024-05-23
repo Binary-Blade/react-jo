@@ -2,15 +2,37 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { MedalIcon, MenuIcon } from '@/components/ui/IconComponents';
-import { NAVLINKS_PUBLIC, NAVLINKS_ADMIN } from '@/config/navlink';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { UserRole } from '@/config/enums/UserRole.enum';
+import { NAVLINKS_ADMIN, NAVLINKS_PUBLIC } from '@/config/constants/navbar/navlink';
 
 type SideBarMenuProps = {
   hiddenValue: 'lg' | 'md'; // specifying possible values for better type checking
 };
 
-export const SideBarMenu = ({ hiddenValue }: SideBarMenuProps) => {
+/**
+ * `SideBarMenu` component displays a sidebar navigation menu that can be toggled.
+ * It supports different visibility settings for large and medium screens.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {'lg' | 'md'} props.hiddenValue - The screen size at which the menu should be hidden.
+ * @returns {JSX.Element} The rendered SideBarMenu component.
+ *
+ * @example
+ * return (
+ *   <SideBarMenu hiddenValue="lg" />
+ * );
+ *
+ * @remarks
+ * The component uses Tailwind CSS for styling and relies on several custom components:
+ * - `Sheet`, `SheetContent`, `SheetTrigger` for the sliding menu.
+ * - `Button` for the menu toggle button.
+ * - `MedalIcon`, `MenuIcon` for icons used in the navigation menu.
+ * - `useAuthStore` to get the user's role.
+ * It also conditionally renders links for public and admin users based on their role.
+ */
+export const SideBarMenu = ({ hiddenValue }: SideBarMenuProps): JSX.Element => {
   const { role } = useAuthStore();
   return (
     <>
