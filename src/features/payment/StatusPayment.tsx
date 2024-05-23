@@ -61,9 +61,8 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
     }
   };
 
-  console.log(data);
-  if (!reservation.length) {
-    return <p>No reservation data available.</p>;
+  if (!reservation.length || !data || !data.user || !data.transaction) {
+    return <p>Aucune donnée de paiement disponible.</p>;
   }
 
   return (
