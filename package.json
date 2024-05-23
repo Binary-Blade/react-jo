@@ -12,7 +12,8 @@
     "test:ui": "vitest --ui",
     "serve": "serve -s build",
     "coverage": "c8 vitest run",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json",
+    "docs:md": "jsdoc2md 'src/**/*.{js,jsx,ts,tsx}' > docs/README.md"
   },
   "dependencies": {
     "@babel/cli": "^7.24.5",
@@ -101,6 +102,7 @@
     "jsdoc": "^4.0.3",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-plugin-typescript": "^2.2.1",
+    "jsdoc-to-markdown": "^8.0.1",
     "jsdom": "^24.0.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
