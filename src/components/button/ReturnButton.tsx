@@ -9,7 +9,7 @@ type ButtonToEventProps = {
 export const ReturnButton = ({ href, className }: ButtonToEventProps) => {
   return (
     <Link className="button ghost" href={href}>
-      <LogOutIcon className={`rotate-180 ${className}`} />
+      <LogOutIcon className={`rotate-180 ${className}`} role="svg" />
       <span className="sr-only">Logout</span>
     </Link>
   );
