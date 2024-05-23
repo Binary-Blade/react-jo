@@ -22,13 +22,38 @@ interface StatusPaymentProps {
   }[];
 }
 
-export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
+/**
+ * `StatusPayment` is a component that displays the status of a payment for a reservation.
+ *
+ * @component
+ * @param {StatusPaymentProps} props - The properties object.
+ * @param {Array} props.reservation - An array containing reservation and transaction details.
+ * @returns {JSX.Element} The rendered status payment component.
+ *
+ * @example
+ * return <StatusPayment reservation={reservationData} />;
+ *
+ * @remarks
+ * This component uses `useCartStore` to clear the cart after navigating to the home page.
+ * It uses `useMemo` to memoize the description of the payment status.
+ */
+export const StatusPayment: FC<StatusPaymentProps> = ({
+  reservation
+}: StatusPaymentProps): JSX.Element => {
   const data = reservation[0];
   const clearCart = useCartStore(state => state.clearCart);
+
+  /**
+   * Handle navigation to the home page and clear the cart.
+   */
   const handleHome = () => {
     navigate('/');
     clearCart();
   };
+
+  /**
+   * Memoized description of the payment status based on the transaction status.
+   */
   const descriptionStatus = useMemo(() => {
     if (!data) return 'No payment data available.';
     switch (data.transaction.statusPayment) {
@@ -41,6 +66,9 @@ export const StatusPayment: FC<StatusPaymentProps> = ({ reservation }) => {
     }
   }, [data]);
 
+  /**
+   * Conditionally render the appropriate status icon based on the transaction status.
+   */
   const StatusIcon = () => {
     if (!data) return null;
     switch (data.transaction.statusPayment) {
