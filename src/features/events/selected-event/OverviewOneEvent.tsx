@@ -67,7 +67,7 @@ export const OverviewOneEvent = ({
                 {quantitySold}
               </div>
               <div className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                Tickets Sold
+                Quantité vendue
               </div>
             </div>
           </div>
