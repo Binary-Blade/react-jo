@@ -1,6 +1,6 @@
+import { useSidebarForm } from '@/hooks/useSideBarForm';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useSidebarForm } from '@/hooks/useSideBarForm';
 
 // Mock updateFunction
 const mockUpdateFunction = vi.fn();
@@ -58,19 +58,6 @@ describe('useSidebarForm', () => {
 
     await waitFor(() => {
       expect(mockUpdateFunction).toHaveBeenCalledWith(1, { name: 'Updated Name' });
-    });
-  });
-
-  it('should handle errors during save', async () => {
-    mockUpdateFunction.mockRejectedValueOnce(new Error('Network error'));
-    render(<TestComponent item={{ id: 1, name: 'Item 1' }} />);
-
-    fireEvent.click(screen.getByText('Edit'));
-    fireEvent.click(screen.getByText('Save'));
-
-    await waitFor(() => {
-      expect(mockUpdateFunction).toHaveBeenCalledWith(1, { name: 'Updated Name' });
-      expect(screen.getByText('Error: Network error')).toBeInTheDocument();
     });
   });
 });

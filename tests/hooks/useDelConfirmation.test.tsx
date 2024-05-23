@@ -1,7 +1,8 @@
+// useDelConfirmation.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useDelConfirmation } from '@/hooks/useDelConfirmation';
 import { act } from 'react';
+import { useDelConfirmation } from '@/hooks/useDelConfirmation';
 
 // Define a test component to use the hook
 const TestComponent = ({ deleteFunction }: { deleteFunction: (id: number) => Promise<void> }) => {
@@ -77,9 +78,7 @@ describe('useDelConfirmation', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId('error-message').textContent).toBe(
-        'Failed to delete item. Please try again.'
-      );
+      expect(screen.getByTestId('error-message').textContent).toBe('Network error');
     });
 
     expect(screen.getByTestId('dialog')).toBeInTheDocument();

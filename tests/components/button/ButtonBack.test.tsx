@@ -6,7 +6,7 @@ describe('ButtonBack', () => {
   it('renders the button with LogOutIcon', () => {
     render(<ButtonBack />);
 
-    const button = screen.getByRole('button', { name: /logout/i });
+    const button = screen.getByRole('button', { name: /back/i });
     expect(button).toBeInTheDocument();
     expect(button.querySelector('svg')).toBeInTheDocument();
   });
@@ -20,7 +20,7 @@ describe('ButtonBack', () => {
 
     render(<ButtonBack />);
 
-    const button = screen.getByRole('button', { name: /logout/i });
+    const button = screen.getByRole('button', { name: /back/i });
     fireEvent.click(button);
 
     expect(historyBackMock).toHaveBeenCalled();

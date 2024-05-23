@@ -1,7 +1,9 @@
+// CheckoutEmpty.test.tsx
 import { CheckoutEmpty } from '@/components/empty/CheckoutEmpty';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 
+// Mock the Header component
 vi.mock('@/features/header/Header', () => ({
   Header: () => <div data-testid="header">Header</div>
 }));
@@ -22,16 +24,16 @@ describe('CheckoutEmpty', () => {
   it('renders the title and description', () => {
     render(<CheckoutEmpty />);
 
-    expect(screen.getByText('Your Commands is empty')).toBeInTheDocument();
+    expect(screen.getByText('Votre panier est vide')).toBeInTheDocument();
     expect(
-      screen.getByText("Looks like you haven't commands anything yet. Start shopping to add items!")
+      screen.getByText("Vous n'avez pas encore ajouté d'événements à votre panier.")
     ).toBeInTheDocument();
   });
 
-  it('renders the "Continue Shopping" link with correct href', () => {
+  it('renders the "Parcourir les événements" link with correct href', () => {
     render(<CheckoutEmpty />);
 
-    const link = screen.getByRole('link', { name: /continue shopping/i });
+    const link = screen.getByRole('link', { name: /parcourir les événements/i });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', '/events');
   });

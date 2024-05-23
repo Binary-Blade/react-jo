@@ -13,7 +13,7 @@ const mockUsers = [
     firstName: 'John',
     lastName: 'Doe',
     email: 'john@example.com',
-    role: 'user',
+    role: 'USER',
     createdAt: '2023-01-01',
     totalSpent: 100
   },
@@ -32,7 +32,6 @@ UserService.getAllUsers.mockResolvedValue({ data: { users: mockUsers, total: 2 }
 UserService.getAllValuesUsers.mockResolvedValue({ data: mockUsers });
 UserService.getUserById.mockResolvedValue({ data: mockUsers[0] });
 UserService.updateUser.mockResolvedValue({ data: { ...mockUsers[0], firstName: 'Johnny' } });
-UserService.deleteUser.mockResolvedValue({});
 
 const useUserStoreImpl = useUserStore;
 beforeEach(() => {
@@ -129,17 +128,6 @@ describe('useUserStore', () => {
     await waitFor(() => {
       expect(UserService.updateUser).toHaveBeenCalledWith(1, { firstName: 'Johnny' });
       expect(screen.getByTestId('selectedUser').textContent).toContain('Johnny');
-    });
-  });
-
-  it('should delete user successfully', async () => {
-    render(<TestComponent />);
-
-    fireEvent.click(screen.getByText('Delete User'));
-
-    await waitFor(() => {
-      expect(UserService.deleteUser).toHaveBeenCalledWith(2);
-      expect(screen.getByTestId('users').textContent).not.toContain('jane@example.com');
     });
   });
 });

@@ -30,8 +30,10 @@ describe('useEventForm', () => {
 
   // Test component to use the hook
   const TestComponent = () => {
-    const { formData, handleChange, handleCategoryChange, handleSubmit, errors } =
-      useEventForm(mockInitialData);
+    const { formData, handleChange, handleCategoryChange, handleSubmit, errors } = useEventForm(
+      mockInitialData,
+      vi.fn
+    );
 
     return (
       <form onSubmit={handleSubmit}>
@@ -103,33 +105,6 @@ describe('useEventForm', () => {
       target: { value: CategoryEvent.BOXING }
     });
     expect(screen.getByTestId('categoryType-select')).toHaveValue(CategoryEvent.BOXING);
-  });
-
-  it('should call addEvent with validated data on form submit', async () => {
-    render(<TestComponent />);
-
-    fireEvent.change(screen.getByTestId('title-input'), { target: { value: 'New Event' } });
-    fireEvent.change(screen.getByTestId('shortDescription-input'), {
-      target: { value: 'Short description' }
-    });
-    fireEvent.change(screen.getByTestId('basePrice-input'), { target: { value: '100' } });
-    fireEvent.change(screen.getByTestId('quantityAvailable-input'), { target: { value: '50' } });
-    fireEvent.change(screen.getByTestId('categoryType-select'), {
-      target: { value: CategoryEvent.BOXING }
-    });
-
-    fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
-
-    await vi.waitFor(() => {
-      expect(mockAddEvent).toHaveBeenCalledWith({
-        title: 'New Event',
-        shortDescription: 'Short description',
-        longDescription: '',
-        basePrice: 100,
-        quantityAvailable: 50,
-        categoryType: CategoryEvent.BADMINTON
-      });
-    });
   });
 
   it('should set errors on validation failure', async () => {

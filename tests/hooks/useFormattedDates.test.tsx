@@ -1,3 +1,4 @@
+// useFormattedDates.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { useFormattedDates } from '@/hooks/useFormattedDates';
@@ -12,38 +13,38 @@ describe('useFormattedDates', () => {
   it('should return formatted date range when startDate and endDate are in the same year', () => {
     render(<TestComponent startDate="2024-08-01" endDate="2024-08-15" />);
 
-    expect(screen.getByTestId('formattedDates').textContent).toBe('August 1 - August 15, 2024');
+    expect(screen.getByTestId('formattedDates').textContent).toBe('1 août - 15 août 2024');
   });
 
   it('should return formatted date range when startDate and endDate are in different years', () => {
     render(<TestComponent startDate="2023-12-25" endDate="2024-01-05" />);
 
     expect(screen.getByTestId('formattedDates').textContent).toBe(
-      'December 25, 2023 - January 5, 2024'
+      '25 décembre 2023 - 5 janvier 2024'
     );
   });
 
-  it('should return "Invalid date range" when startDate is undefined', () => {
+  it('should return "Intervalle de dates invalide" when startDate is undefined', () => {
     render(<TestComponent startDate={undefined} endDate="2024-08-15" />);
 
-    expect(screen.getByTestId('formattedDates').textContent).toBe('Invalid date range');
+    expect(screen.getByTestId('formattedDates').textContent).toBe('Intervalle de dates invalide');
   });
 
-  it('should return "Invalid date range" when endDate is undefined', () => {
+  it('should return "Intervalle de dates invalide" when endDate is undefined', () => {
     render(<TestComponent startDate="2024-08-01" endDate={undefined} />);
 
-    expect(screen.getByTestId('formattedDates').textContent).toBe('Invalid date range');
+    expect(screen.getByTestId('formattedDates').textContent).toBe('Intervalle de dates invalide');
   });
 
-  it('should return "Invalid date range" when both startDate and endDate are undefined', () => {
+  it('should return "Intervalle de dates invalide" when both startDate and endDate are undefined', () => {
     render(<TestComponent startDate={undefined} endDate={undefined} />);
 
-    expect(screen.getByTestId('formattedDates').textContent).toBe('Invalid date range');
+    expect(screen.getByTestId('formattedDates').textContent).toBe('Intervalle de dates invalide');
   });
 
-  it('should return "Error formatting dates" when dates are invalid', () => {
+  it('should return "Erreur de formatage des dates" when dates are invalid', () => {
     render(<TestComponent startDate="invalid-date" endDate="invalid-date" />);
 
-    expect(screen.getByTestId('formattedDates').textContent).toBe('Error formatting dates');
+    expect(screen.getByTestId('formattedDates').textContent).toBe('Erreur de formatage des dates');
   });
 });

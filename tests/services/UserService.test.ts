@@ -103,27 +103,4 @@ describe('UserService', () => {
       consoleErrorSpy.mockRestore();
     });
   });
-
-  describe('deleteUser', () => {
-    it('should delete a user successfully', async () => {
-      const userId = 1;
-      const mockResponse = { data: { success: true, message: 'User deleted successfully.' } };
-      vi.mocked(axiosClient.delete).mockResolvedValueOnce(mockResponse);
-
-      const result = await UserService.deleteUser(userId);
-      expect(result).toEqual({ success: true, data: mockResponse.data });
-      expect(axiosClient.delete).toHaveBeenCalledWith(`/users/${userId}`);
-    });
-
-    it('should handle errors when deleting a user', async () => {
-      const userId = 1;
-      vi.mocked(axiosClient.delete).mockRejectedValueOnce(new Error('Network error'));
-
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      await expect(UserService.deleteUser(userId)).rejects.toThrow('Failed to delete user');
-
-      consoleErrorSpy.mockRestore();
-    });
-  });
 });

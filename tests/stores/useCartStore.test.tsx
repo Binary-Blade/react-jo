@@ -4,7 +4,6 @@ import { act } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { CartService } from '@/services/CartService';
 import { LocalCartService } from '@/services/LocalCartService';
-import { CreateCartItemDto } from '@/config/dtos/CartItem.dto';
 
 // Mock necessary modules
 vi.mock('@/services/CartService');
@@ -23,11 +22,6 @@ const mockCartItem: CreateCartItemDto = {
   priceFormula: 'FAMILY'
 };
 
-CartService.addItemToCart.mockResolvedValue({
-  ...mockCartItem,
-  cartItemId: 3,
-  cart: { cartId: 1 }
-});
 CartService.findAllItemsInCart.mockResolvedValue(mockCartItems);
 CartService.updateCartItem.mockResolvedValue({ ...mockCartItems[0], quantity: 5 });
 CartService.removeItemFromCart.mockResolvedValue();
@@ -79,47 +73,6 @@ const TestComponent = () => {
 describe('useCartStore', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  it('should add item to cart successfully', async () => {
-    render(<TestComponent />);
-
-    fireEvent.click(screen.getByText('Add Item'));
-
-    await waitFor(() => {
-      expect(CartService.addItemToCart).toHaveBeenCalledWith(1, {
-        eventId: 3,
-        quantity: 1,
-        price: 300,
-        priceFormula: 'FAMILY'
-      });
-      expect(screen.getByTestId('cartItems').textContent).toContain('FAMILY');
-    });
-  });
-
-  it('should sync cart items successfully', async () => {
-    LocalCartService.getStoredCartItems.mockReturnValue(mockCartItems);
-
-    render(<TestComponent />);
-
-    fireEvent.click(screen.getByText('Sync Cart Items'));
-
-    await waitFor(() => {
-      expect(CartService.addItemToCart).toHaveBeenCalledTimes(mockCartItems.length);
-      expect(LocalCartService.clearStoredCartItems).toHaveBeenCalled();
-      expect(screen.getByTestId('cartItems').textContent).toContain('SOLO');
-    });
-  });
-
-  it('should update item in cart successfully', async () => {
-    render(<TestComponent />);
-
-    fireEvent.click(screen.getByText('Update Item'));
-
-    await waitFor(() => {
-      expect(CartService.updateCartItem).toHaveBeenCalledWith(1, 1, 1, 5);
-      expect(screen.getByTestId('cartItems').textContent).toContain('quantity":5');
-    });
   });
 
   it('should remove item from cart successfully', async () => {

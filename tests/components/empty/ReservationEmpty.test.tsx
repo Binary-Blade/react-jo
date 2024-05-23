@@ -12,9 +12,9 @@ describe('ReservationEmpty', () => {
   it('renders the title and description', () => {
     render(<ReservationEmpty />);
 
-    expect(screen.getByText('No reservations found')).toBeInTheDocument();
+    expect(screen.getByText('Réservation introuvable')).toBeInTheDocument();
     expect(
-      screen.getByText('Please try adjusting your filters or check back later.')
+      screen.getByText("Aucune réservation n'a été trouvée pour cette date.")
     ).toBeInTheDocument();
   });
 });

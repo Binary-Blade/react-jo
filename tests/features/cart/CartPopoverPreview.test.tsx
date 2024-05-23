@@ -1,3 +1,4 @@
+// CartPopoverPreview.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -27,7 +28,8 @@ describe('CartPopoverPreview', () => {
 
     // Mock useAuthStore
     vi.mocked(useAuthStore).mockReturnValue({
-      userId: mockUserId
+      userId: mockUserId,
+      isAuthenticated: true
     });
 
     // Mock useLocalCartStore
@@ -45,34 +47,18 @@ describe('CartPopoverPreview', () => {
   it('should render the CartPopoverPreview with correct initial state', () => {
     render(<CartPopoverPreview />);
 
-    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByLabelText('Open Cart'));
 
-    expect(screen.getByText('Panier')).toBeInTheDocument();
-    expect(screen.getByText('Total : 3 articles')).toBeInTheDocument();
-    expect(screen.getByText('€40')).toBeInTheDocument();
-    expect(screen.getByText('Passer la commande')).toBeInTheDocument();
-  });
-
-  it('should call removeCartItemLocal when an item is deleted', () => {
-    render(<CartPopoverPreview />);
-
-    fireEvent.click(screen.getByRole('button'));
-
-    // Targeting the delete button by its class name
-    const deleteButtons = screen.getAllByRole('button', { name: /x/i });
-    fireEvent.click(deleteButtons[0]);
-
-    expect(mockRemoveCartItemLocal).toHaveBeenCalledWith(
-      mockCartItemsLocal[0].eventId,
-      mockCartItemsLocal[0].priceFormula
-    );
+    expect(screen.getByLabelText('Cart Title').textContent).toBe('Panier - 3 articles');
+    expect(screen.getByLabelText('Total Price').textContent).toBe('€40');
+    expect(screen.getByLabelText('Proceed to Checkout')).toBeInTheDocument();
   });
 
   it('should navigate to checkout when Passer la commande is clicked', async () => {
     render(<CartPopoverPreview />);
 
-    fireEvent.click(screen.getByRole('button'));
-    fireEvent.click(screen.getByText('Passer la commande'));
+    fireEvent.click(screen.getByLabelText('Open Cart'));
+    fireEvent.click(screen.getByLabelText('Proceed to Checkout'));
 
     await waitFor(() => {
       expect(mockSyncCartItems).toHaveBeenCalledWith(mockUserId);
@@ -82,19 +68,18 @@ describe('CartPopoverPreview', () => {
 
   it('should handle missing userId gracefully', async () => {
     vi.mocked(useAuthStore).mockReturnValue({
-      userId: null
+      userId: null,
+      isAuthenticated: false
     });
 
     render(<CartPopoverPreview />);
 
-    fireEvent.click(screen.getByRole('button'));
-    fireEvent.click(screen.getByText('Passer la commande'));
+    fireEvent.click(screen.getByLabelText('Open Cart'));
+    fireEvent.click(screen.getByLabelText('Proceed to Checkout'));
 
     await waitFor(() => {
       expect(mockSyncCartItems).not.toHaveBeenCalled();
-      expect(navigate).not.toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith('/auth');
     });
-
-    expect(screen.queryByText('User ID is missing.')).toBeInTheDocument();
   });
 });

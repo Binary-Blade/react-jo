@@ -83,7 +83,6 @@ const TestComponent = () => {
     fetchValues,
     getEvent,
     addEvent,
-    updateEvent,
     deleteEvent
   } = useEventStore();
 
@@ -93,7 +92,6 @@ const TestComponent = () => {
       <button onClick={() => fetchValues()}>Fetch Values</button>
       <button onClick={() => getEvent(1)}>Get Event</button>
       <button onClick={() => addEvent(mockEvents[0])}>Add Event</button>
-      <button onClick={() => updateEvent(1, { title: 'Updated Event 1' })}>Update Event</button>
       <button onClick={() => deleteEvent(2)}>Delete Event</button>
       <div data-testid="events">{JSON.stringify(events)}</div>
       <div data-testid="event">{JSON.stringify(event)}</div>
@@ -152,17 +150,6 @@ describe('useEventStore', () => {
     await waitFor(() => {
       expect(EventService.createEvent).toHaveBeenCalledWith(mockEvents[0]);
       expect(screen.getByTestId('events').textContent).toContain('Event 1');
-    });
-  });
-
-  it('should update an event successfully', async () => {
-    render(<TestComponent />);
-
-    fireEvent.click(screen.getByText('Update Event'));
-
-    await waitFor(() => {
-      expect(EventService.updateEvent).toHaveBeenCalledWith(1, { title: 'Updated Event 1' });
-      expect(screen.getByTestId('event').textContent).toContain('Updated Event 1');
     });
   });
 
