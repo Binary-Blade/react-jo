@@ -35,3 +35,26 @@ export interface User {
   createdAt: string;
   totalSpent: number;
 }
+
+/**
+ * `UserResponse` defines the structure of a response from the server when fetching user data.
+ *
+ * @interface UserResponse
+ * @property {boolean} success - Indicates whether the request was successful.
+ * @property {any} data - The data returned from the server.
+ *
+ * @example
+ * const response: UserResponse = {
+ *  success: true,
+ *  data: { id: 1, firstName: 'John', lastName: 'Doe', email: 'johndoe@gmail.com' }
+ *  };
+ *
+ *  @remarks
+ *  This interface is used to type the response from the server when fetching user data,
+ *  ensuring that the data is correctly formatted and can be used within the application.
+ */
+
+export interface UserResponse {
+  success: boolean;
+  data: any;
+}
