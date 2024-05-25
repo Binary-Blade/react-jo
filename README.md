@@ -5,9 +5,6 @@
     <h1 align="center">REACT-JO</h1>
 </p>
 <p align="center">
-    <em>Where Coding Excellence Meets Innovation!</em>
-</p>
-<p align="center">
 	<img src="https://img.shields.io/github/license/Binary-Blade/react-jo?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/Binary-Blade/react-jo?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/Binary-Blade/react-jo?style=default&color=0080ff" alt="repo-top-language">
