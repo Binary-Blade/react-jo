@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { EyeOffIcon } from '@/components/ui/IconComponents';
 import { EyeIcon } from 'lucide-react';
 import { useToast } from '../ui/use-toast';
+import DOMPurify from 'dompurify';
 
 /**
  * `SignUpForm` component provides a sign-up form for user registration.
@@ -59,7 +60,14 @@ export const SignUpForm = (): JSX.Element => {
    * @param {SignupFormData} formData - The form data containing first name, last name, email, and password.
    */
   const handleSignUp = async (formData: SignupFormData): Promise<void> => {
-    const response = await signup(formData);
+    const sanitizedData = {
+      firstName: DOMPurify.sanitize(formData.firstName),
+      lastName: DOMPurify.sanitize(formData.lastName),
+      email: DOMPurify.sanitize(formData.email),
+      password: DOMPurify.sanitize(formData.password)
+    };
+
+    const response = await signup(sanitizedData);
     if (response.success) {
       navigate('/success-creation');
     } else {
