@@ -119,7 +119,7 @@ export const CartPopoverPreview: FC = (): JSX.Element => {
             onClick={handleReserve}
             aria-label="Proceed to Checkout"
           >
-            Passer la commande
+            Valider le panier
           </Button>
           <div className="text-sm text-gray-400 text-center">Vous ne serez pas encore facturé</div>
         </div>
