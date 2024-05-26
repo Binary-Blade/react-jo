@@ -92,7 +92,7 @@ export const CardReservations = ({
                       className="gap-2 hover:bg-rose-500 hover:text-white"
                     >
                       <TicketIcon className="w-4 h-4" />
-                      View Ticket
+                      Voir mon billet
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
