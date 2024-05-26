@@ -15,7 +15,7 @@
  * allowing users to sort events by different attributes to better manage and analyze event data.
  */
 export const SORTING_EVENTS_DASHBOARD = [
-  { value: 'title', label: 'Titre' }, // Option to sort by event title
+  { value: 'title', label: 'Alphabet' }, // Option to sort by event title
   { value: 'quantityAvailable', label: 'Quantité disponible' }, // Option to sort by quantity available
   { value: 'quantitySold', label: 'Quantité vendue' }, // Option to sort by quantity sold
   { value: 'revenueGenerated', label: 'Revenu généré' }, // Option to sort by revenue generated
@@ -40,7 +40,7 @@ export const SORTING_EVENTS_DASHBOARD = [
  * allowing users to sort events by different attributes for easier navigation and selection of events.
  */
 export const SORTING_EVENTS_PUBLIC = [
-  { value: 'title', label: 'Titre' }, // Option to sort by event title
+  { value: 'title', label: 'Alphabet' }, // Option to sort by event title
   { value: 'quantityAvailable', label: 'Places disponibles' }, // Option to sort by quantity available
   { value: 'startDate', label: 'Date' } // Option to sort by start date
 ];

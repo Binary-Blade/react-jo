@@ -16,5 +16,5 @@
  */
 export const SORTING_RESERVATION_PUBLIC = [
   { value: 'reservationDetails.price', label: 'Prix total' }, // Option to sort by total price
-  { value: 'reservationDetails.title', label: 'Titre' } // Option to sort by reservation title
+  { value: 'reservationDetails.title', label: 'Alphabet' } // Option to sort by reservation title
 ];
