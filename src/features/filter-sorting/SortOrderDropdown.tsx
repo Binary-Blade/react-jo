@@ -54,8 +54,8 @@ export const SortOrderDropdown = ({
       <DropdownMenuContent>
         {/* Radio group for selecting sort order */}
         <DropdownMenuRadioGroup value={sortOrder} onValueChange={setSortOrder}>
-          <DropdownMenuRadioItem value="ASC">Ascendant</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="DESC">Descendant</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="ASC">Croissant</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="DESC">Décroissant</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
