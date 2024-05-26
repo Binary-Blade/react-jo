@@ -48,7 +48,7 @@ export const TotalEventTicketPerFormula = ({
     <div className="flex items-center justify-between">
       <div>
         {/* Display the price formula as the title */}
-        <h3 className="font-semibold">{priceFormula} Tickets</h3>
+        <h3 className="font-semibold">{priceFormula} Billets</h3>
         {/* Display the list of events and their quantities */}
         <p className="text-gray-500 dark:text-gray-400">
           {items.map((item, index) => (

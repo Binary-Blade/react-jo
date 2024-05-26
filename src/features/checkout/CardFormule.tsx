@@ -42,7 +42,7 @@ export const CardFormule = ({ priceFormula, items }: CartFormuleProps): JSX.Elem
       <CardHeader>
         {/* CardTitle: Displays the price formula as the title */}
         <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
-          {priceFormula} Tickets
+          {priceFormula} Billets
         </CardTitle>
         {/* CardDescription: Displays the description for the price formula */}
         <CardDescription className="text-md text-gray-600 dark:text-gray-400">
