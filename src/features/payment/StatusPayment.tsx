@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { FC } from 'react';
 import { navigate } from 'wouter/use-browser-location';
-import { CheckIcon, XIcon } from '@/components/ui/IconComponents';
+import { CheckIcon, CircleEllipsisIcon, XIcon } from '@/components/ui/IconComponents';
 import { Button } from '@/components/ui/button';
 import { StatusPaymentEnum } from '@/config/enums/StatusPayment.enum';
 
@@ -70,22 +70,26 @@ export const StatusPayment: FC<StatusPaymentProps> = ({
    * Conditionally render the appropriate status icon based on the transaction status.
    */
   const StatusIcon = () => {
-    if (!data) return null;
+    if (!data || !data.transaction) return null;
     switch (data.transaction.statusPayment) {
       case StatusPaymentEnum.APPROVED:
         return (
-          <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
-            <CheckIcon className="h-8 w-8 text-green-500 dark:text-green-400" />
+          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900">
+            <CheckIcon className="w-10 h-10 text-green-600 dark:text-green-400" />
           </div>
         );
       case StatusPaymentEnum.REJECTED:
         return (
-          <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900">
-            <XIcon className="h-8 w-8 text-red-500 dark:text-red-400" />
+          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-900">
+            <XIcon className="w-10 h-10 text-red-600 dark:text-red-400" />
           </div>
         );
       default:
-        return null;
+        return (
+          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full bg-yellow-100 dark:bg-yellow-900">
+            <CircleEllipsisIcon className="w-10 h-10 text-yellow-600 dark:text-yellow-400" />
+          </div>
+        );
     }
   };
 
