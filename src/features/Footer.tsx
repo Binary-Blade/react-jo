@@ -23,7 +23,7 @@ export const Footer = (): JSX.Element => {
         <div className="flex items-center">
           {/* Logo Section */}
           <MedalIcon className="w-8 h-8 text-rose-500" />
-          <span className="text-xl font-bold tracking-tight text-white ml-2">OlymTickets</span>
+          <span className="text-xl font-bold tracking-tight text-white ml-2">OlymTicket</span>
         </div>
         {/* Navigation Links */}
         <nav className="flex space-x-4">

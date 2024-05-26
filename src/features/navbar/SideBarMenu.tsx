@@ -48,7 +48,7 @@ export const SideBarMenu = ({ hiddenValue }: SideBarMenuProps): JSX.Element => {
             <div className="flex items-center justify-between px-4 py-6 border-b">
               <div className="flex items-center gap-2">
                 <MedalIcon className="h-6 w-6" />
-                <span className="font-semibold text-xl">OlymTickets</span>
+                <span className="font-semibold text-xl">OlymTicket</span>
               </div>
             </div>
             <div className="flex-1 overflow-auto py-2">

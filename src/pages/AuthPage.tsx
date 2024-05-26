@@ -34,7 +34,7 @@ export default function AuthPage(): JSX.Element {
         <div className="flex flex-col items-center gap-2">
           {/* MedalIcon: Display an icon for visual branding */}
           <MedalIcon className="h-12 w-12 text-rose-500" />
-          <h1 className="text-3xl font-bold">OlymTickets</h1>
+          <h1 className="text-3xl font-bold">OlymTicket</h1>
         </div>
 
         {/* Tabs Component: Handles the tab-based navigation */}

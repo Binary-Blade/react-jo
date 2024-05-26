@@ -28,7 +28,7 @@ export default function LoadingPage(): JSX.Element {
 
         {/* Title Section */}
         <h1 className="text-4xl font-bold tracking-tight text-black sm:text-5xl md:text-6xl">
-          OlymTickets
+          OlymTicket
         </h1>
 
         {/* Spacer for Alignment */}

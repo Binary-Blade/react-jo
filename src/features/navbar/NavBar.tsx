@@ -69,7 +69,7 @@ export const NavBar = ({
             <MedalIcon className="w-8 h-8 text-rose-500 hidden md:block" />
           </Link>
           <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white md:ml-2">
-            OlymTickets
+            OlymTicket
           </span>
         </div>
         <nav className="hidden md:flex items-center gap-6 text-md font-medium">
