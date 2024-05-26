@@ -61,10 +61,10 @@ export const HeroReservation = (): JSX.Element => {
           <div className="flex flex-col justify-center space-y-6">
             <div className="space-y-4">
               <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl xl:text-6xl">
-                Vos Transactions
+                Vos Billets
               </h1>
               <p className="text-lg text-gray-400 md:text-xl">
-                Bienvenue, {fullName}! Voici un récapitulatif de vos réservations.
+                Bienvenue, {fullName}! Voici un récapitulatif de vos billets.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-lg mx-auto">

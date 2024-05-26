@@ -20,10 +20,10 @@ export const ReservationEmpty = (): JSX.Element => {
       {/* No Reservations Icon */}
       <CalendarIcon data-testid="calendar-icon" className="w-16 h-16 text-gray-400" />
       {/* No Reservations Title */}
-      <h2 className="text-xl font-semibold mt-4">Réservation introuvable</h2>
+      <h2 className="text-xl font-semibold mt-4">Billets introuvable</h2>
       {/* No Reservations Description */}
       <p className="text-gray-500 dark:text-gray-400 mt-2">
-        Aucune réservation n'a été trouvée pour cette date.
+        Aucun billet n'a été trouvée pour cette date.
       </p>
     </div>
   );

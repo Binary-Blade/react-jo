@@ -62,7 +62,7 @@ export default function App(): JSX.Element {
           <Route path="/checkout" component={CheckoutPage} />
           <Route path="/success-delete" component={SuccessAccountDeleted} />
           <Route path="/contact" component={ContactUsPage} />
-          <ProtectedRoute path="/reservations" component={ReservationPage} />
+          <ProtectedRoute path="/billets" component={ReservationPage} />
           <ProtectedRoute path="/profile" component={ProfilePage} />
           <AdminRoute path="/dashboard" component={DashboardPage} />
           <Route>
