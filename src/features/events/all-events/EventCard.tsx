@@ -109,7 +109,8 @@ export const EventCard = ({
               <div className="font-medium text-gray-900 dark:text-white">{categoryType}</div>
               {/* Available quantity */}
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                Places disponibles : {quantityAvailable}
+                Places disponibles :{' '}
+                <span className="text-rose-500 font-semibold">{quantityAvailable}</span>
               </div>
               {/* Formatted event dates */}
               <div className="text-sm text-gray-500 dark:text-gray-400">{dateText}</div>
