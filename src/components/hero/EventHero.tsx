@@ -30,7 +30,7 @@ export const EventHero = (): JSX.Element => (
       />
       {/* Hero Label */}
       <div className="absolute top-4 left-4 bg-gray-900 text-white bg-rose-500 px-3 py-1 rounded-full text-xs ">
-        Paris 2024
+        OlymTickets
       </div>
     </div>
   </div>

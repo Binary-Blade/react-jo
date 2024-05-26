@@ -15,10 +15,10 @@ describe('EventHero', () => {
     expect(image).toHaveStyle({ objectFit: 'cover' });
   });
 
-  it('renders the "Paris 2024" badge', () => {
+  it('renders the "OlymTickets" badge', () => {
     render(<EventHero />);
 
-    const badge = screen.getByText('Paris 2024');
+    const badge = screen.getByText('OlymTickets');
     expect(badge).toBeInTheDocument();
     expect(badge).toHaveClass(
       'absolute top-4 left-4 bg-gray-900 text-white bg-rose-500 px-3 py-1 rounded-full text-xs'
