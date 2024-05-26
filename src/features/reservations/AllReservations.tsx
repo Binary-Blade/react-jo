@@ -118,8 +118,8 @@ export const AllReservations = (): JSX.Element => {
               </div>
               {/* Collapsible Reservation Details */}
               <Collapsible>
-                <CollapsibleTrigger className="font-semibold flex items-center gap-1 transition-transform duration-300 ease-in-out [&[data-state=open]>svg]:rotate-90">
-                  Voir plus
+                <CollapsibleTrigger className="font-semibold text-2xl flex items-center text-rose-600 gap-1 transition-transform duration-300 ease-in-out [&[data-state=open]>svg]:rotate-90">
+                  Voir vos Billets
                   <ChevronRightIcon className="w-4 h-4 translate-y-px transition-transform duration-300 ease-in-out" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="transition-opacity duration-300 ease-in-out">
