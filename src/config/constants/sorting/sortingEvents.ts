@@ -20,7 +20,7 @@ export const SORTING_EVENTS_DASHBOARD = [
   { value: 'quantitySold', label: 'Quantité vendue' }, // Option to sort by quantity sold
   { value: 'revenueGenerated', label: 'Revenu généré' }, // Option to sort by revenue generated
   { value: 'basePrice', label: 'Prix de base' }, // Option to sort by base price
-  { value: 'startDate', label: 'Date de début' } // Option to sort by start date
+  { value: 'startDate', label: 'Date' } // Option to sort by start date
 ];
 
 /**
@@ -41,6 +41,6 @@ export const SORTING_EVENTS_DASHBOARD = [
  */
 export const SORTING_EVENTS_PUBLIC = [
   { value: 'title', label: 'Titre' }, // Option to sort by event title
-  { value: 'quantityAvailable', label: 'Quantité disponible' }, // Option to sort by quantity available
-  { value: 'startDate', label: 'Date de début' } // Option to sort by start date
+  { value: 'quantityAvailable', label: 'Places disponibles' }, // Option to sort by quantity available
+  { value: 'startDate', label: 'Date' } // Option to sort by start date
 ];
