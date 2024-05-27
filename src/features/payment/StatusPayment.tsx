@@ -40,7 +40,7 @@ interface StatusPaymentProps {
 export const StatusPayment: FC<StatusPaymentProps> = ({
   reservation
 }: StatusPaymentProps): JSX.Element => {
-  const data = reservation[0];
+  const data = reservation?.[0];
   const clearCart = useCartStore(state => state.clearCart);
 
   /**
@@ -55,7 +55,6 @@ export const StatusPayment: FC<StatusPaymentProps> = ({
    * Memoized description of the payment status based on the transaction status.
    */
   const descriptionStatus = useMemo(() => {
-    if (!data) return 'No payment data available.';
     switch (data.transaction.statusPayment) {
       case StatusPaymentEnum.APPROVED:
         return 'Votre paiement a été accepté.';
@@ -70,7 +69,6 @@ export const StatusPayment: FC<StatusPaymentProps> = ({
    * Conditionally render the appropriate status icon based on the transaction status.
    */
   const StatusIcon = () => {
-    if (!data || !data.transaction) return null;
     switch (data.transaction.statusPayment) {
       case StatusPaymentEnum.APPROVED:
         return (
@@ -85,16 +83,31 @@ export const StatusPayment: FC<StatusPaymentProps> = ({
           </div>
         );
       default:
-        return (
-          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full bg-yellow-100 dark:bg-yellow-900">
-            <CircleEllipsisIcon className="w-10 h-10 text-yellow-600 dark:text-yellow-400" />
-          </div>
-        );
+        return null;
     }
   };
 
   if (!reservation.length || !data || !data.user || !data.transaction) {
-    return <p>Aucune donnée de paiement disponible.</p>;
+    return (
+      <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900 sm:py-8 sm:px-12">
+        <CircleEllipsisIcon className="w-10 h-10 text-yellow-600 dark:text-yellow-400" />
+        <div className="space-y-2 text-center">
+          <h1 className="text-2xl font-bold sm:text-3xl">Paiement en attente</h1>
+          <p className="text-gray-500 dark:text-gray-400">
+            Votre paiement est en attente de validation...
+          </p>
+        </div>
+        <Button
+          onClick={handleHome}
+          className="inline-flex h-10 items-center justify-center rounded-md bg-rose-500 
+        px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 
+        focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none 
+        disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
+        >
+          Retour à l'accueil
+        </Button>
+      </div>
+    );
   }
 
   return (
