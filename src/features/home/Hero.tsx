@@ -65,7 +65,7 @@ export const Hero = (): JSX.Element => {
           {isAuthenticated ? (
             <Link
               className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50"
-              href="/reservations"
+              href="/billets"
             >
               Mes Billets
             </Link>
