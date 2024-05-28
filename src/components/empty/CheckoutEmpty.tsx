@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { ShoppingCartIcon } from '../ui/IconComponents';
+import { PackageIcon } from '../ui/IconComponents';
 import { Header } from '@/features/header/Header';
 
 /**
@@ -26,7 +26,7 @@ export const CheckoutEmpty = (): JSX.Element => {
       <main className="flex min-h-screen flex-col items-center justify-center p-6">
         <div className="container flex flex-col items-center justify-center gap-6 text-center">
           {/* Empty Cart Icon */}
-          <ShoppingCartIcon data-testid="shopping-cart-icon" className="h-16 w-16" />
+          <PackageIcon data-testid="shopping-cart-icon" className="h-16 w-16" />
           {/* Empty Cart Message */}
           <h1 className="text-4xl font-bold">Votre panier est vide</h1>
           <p className="max-w-lg text-gray-500 dark:text-gray-400">

@@ -168,8 +168,8 @@ export const CardOneTicket = ({
         isOpen={showDialog}
         onClose={cancelRemoveItem}
         onConfirm={confirmRemoveItem}
-        title="Are you sure?"
-        description="This action cannot be undone. This will permanently remove the item from your cart."
+        title="Êtes-vous sur?"
+        description="Cette action est irréversible. Cela supprimera définitivement l'article de votre panier."
       />
     </div>
   );

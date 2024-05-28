@@ -77,7 +77,7 @@ export default function CheckoutPage(): JSX.Element {
       <div className="container mx-auto py-6 px-4 md:px-6 lg:px-8">
         {/* GenericTitle: Displays the main title and subtitle of the page */}
         <GenericTitle
-          title="Payez vos billets pour les Jeux Olympiques 2024"
+          title="Vos réservations de billets pour les Jeux Olympiques 2024"
           titleClass="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-100"
           subtitleClass="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300"
         />
