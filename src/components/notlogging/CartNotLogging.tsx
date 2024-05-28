@@ -29,8 +29,8 @@ export const CartNotLogging = (): JSX.Element => (
         {/* Message Non Connecté */}
         <h1 className="text-4xl font-bold">Vous n'êtes pas connecté</h1>
         <p className="max-w-lg text-gray-500 dark:text-gray-400">
-          Pour accéder à votre panier et continuer vos achats, veuillez vous connecter ou créer un
-          compte.
+          Pour accéder à vos reservations et continuer vos achats, veuillez vous connecter ou créer
+          un compte.
         </p>
         {/* Lien de Connexion */}
         <Link
