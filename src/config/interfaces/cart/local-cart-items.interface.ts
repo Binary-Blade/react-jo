@@ -44,6 +44,8 @@ export interface LocalCartStoreType {
    */
   updateCartItemLocal: (cartItemId: number, updateData: Partial<CreateCartItemLocalDto>) => void;
 
+  updateCartItemQuantity: (eventId: number, priceFormula: string, quantity: number) => void;
+
   /**
    * Method to remove an item from the local cart.
    *

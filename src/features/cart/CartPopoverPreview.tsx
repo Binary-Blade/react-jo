@@ -41,7 +41,7 @@ export const CartPopoverPreview: FC = (): JSX.Element => {
   const { userId, isAuthenticated } = useAuthStore();
 
   // Extract local cart state and actions
-  const { cartItemsLocal, removeCartItemLocal } = useLocalCartStore();
+  const { cartItemsLocal, removeCartItemLocal, updateCartItemQuantity } = useLocalCartStore();
 
   // Extract cart synchronization action
   const { syncCartItems } = useCartStore();
@@ -69,6 +69,16 @@ export const CartPopoverPreview: FC = (): JSX.Element => {
       description: `Formule ${item.priceFormula} supprimée du panier`
     });
     removeCartItemLocal(item.eventId, item.priceFormula);
+  };
+
+  /**
+   * Handle updating item quantity in the cart.
+   *
+   * @param {CartItemLocal} item - The cart item to update.
+   * @param {number} newQuantity - The new quantity of the item.
+   */
+  const handleUpdateQuantity = (item: CartItemLocal, newQuantity: number) => {
+    updateCartItemQuantity(item.eventId, item.priceFormula, newQuantity);
   };
 
   /**
@@ -105,7 +115,11 @@ export const CartPopoverPreview: FC = (): JSX.Element => {
             </h2>
           </div>
           <Separator />
-          <GroupedCartItems groupedItems={groupedItems} handleDelete={handleDelete} />
+          <GroupedCartItems
+            groupedItems={groupedItems}
+            handleDelete={handleDelete}
+            handleUpdateQuantity={handleUpdateQuantity}
+          />
           <div className="flex justify-between items-center">
             <div className="font-semibold">Total</div>
             <div className="font-semibold" aria-label="Total Price">

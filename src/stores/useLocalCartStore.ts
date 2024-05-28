@@ -85,6 +85,29 @@ export const useLocalCartStore = create<LocalCartStoreType>(set => ({
   },
 
   /**
+   * Update the quantity of a local cart item.
+   *
+   * @param eventId - The ID of the event.
+   * @param priceFormula - The price formula of the cart item.
+   * @param newQuantity - The new quantity of the cart item.
+   *
+   * @example
+   * useLocalCartStore.getState().updateCartItemQuantity(1, 'standard', 3);
+   * console.log('Local cart item quantity updated');
+   */
+  updateCartItemQuantity: (eventId, priceFormula, newQuantity) => {
+    set(state => {
+      const newCartItems = state.cartItemsLocal.map(item =>
+        item.eventId === eventId && item.priceFormula === priceFormula
+          ? { ...item, quantity: newQuantity }
+          : item
+      );
+
+      LocalCartService.setStoredCartItems(newCartItems);
+      return { cartItemsLocal: newCartItems };
+    });
+  },
+  /**
    * Remove a local cart item.
    *
    * @param eventId - The ID of the event.
