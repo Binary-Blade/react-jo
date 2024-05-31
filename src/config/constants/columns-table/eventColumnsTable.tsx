@@ -59,6 +59,6 @@ export const eventColumnsTable = (): Column[] => [
   {
     key: 'revenueGenerated',
     header: 'Revenue Generated',
-    render: revenue => `$${revenue}` // Format revenue to include dollar sign
+    render: revenue => `€${revenue}` // Format revenue to include dollar sign
   }
 ];
