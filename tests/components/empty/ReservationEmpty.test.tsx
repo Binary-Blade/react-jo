@@ -12,9 +12,7 @@ describe('ReservationEmpty', () => {
   it('renders the title and description', () => {
     render(<ReservationEmpty />);
 
-    expect(screen.getByText('Réservation introuvable')).toBeInTheDocument();
-    expect(
-      screen.getByText("Aucune réservation n'a été trouvée pour cette date.")
-    ).toBeInTheDocument();
+    expect(screen.getByText('Billets introuvable')).toBeInTheDocument();
+    expect(screen.getByText("Aucun billet n'a été trouvée pour cette date.")).toBeInTheDocument();
   });
 });

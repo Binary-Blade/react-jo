@@ -22,18 +22,18 @@ describe('CartNotLogging', () => {
   it('renders the title and description', () => {
     render(<CartNotLogging />);
 
-    expect(screen.getByText('You are not logged in')).toBeInTheDocument();
+    expect(screen.getByText("Vous n'êtes pas connecté")).toBeInTheDocument();
     expect(
       screen.getByText(
-        'To access your cart and continue shopping, please log in or create an account.'
+        'Pour accéder à vos reservations et continuer vos achats, veuillez vous connecter ou créer un compte.'
       )
     ).toBeInTheDocument();
   });
 
-  it('renders the "Log in" link with correct href', () => {
+  it('renders the "Se connecter" link with correct href', () => {
     render(<CartNotLogging />);
 
-    const link = screen.getByRole('link', { name: /log in/i });
+    const link = screen.getByRole('link', { name: /se connecter/i });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', '/auth');
   });

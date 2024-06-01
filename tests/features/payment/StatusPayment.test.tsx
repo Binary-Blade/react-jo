@@ -40,6 +40,8 @@ const mockReservationRejected = [
   }
 ];
 
+const mockReservationEmpty = [];
+
 describe('StatusPayment', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -68,8 +70,9 @@ describe('StatusPayment', () => {
   });
 
   it('renders no payment data message when reservation is empty', () => {
-    render(<StatusPayment reservation={[]} />);
+    render(<StatusPayment reservation={mockReservationEmpty} />);
 
-    expect(screen.getByText('Aucune donnée de paiement disponible.')).toBeInTheDocument();
+    expect(screen.getByText('Paiement en attente')).toBeInTheDocument();
+    expect(screen.getByText('Votre paiement est en attente de validation...')).toBeInTheDocument();
   });
 });
