@@ -55,6 +55,10 @@ export const StatusPayment: FC<StatusPaymentProps> = ({
    * Memoized description of the payment status based on the transaction status.
    */
   const descriptionStatus = useMemo(() => {
+    if (!data || !data.transaction) {
+      return 'Pas de statut de paiement disponible.';
+    }
+
     switch (data.transaction.statusPayment) {
       case StatusPaymentEnum.APPROVED:
         return 'Votre paiement a été accepté.';
