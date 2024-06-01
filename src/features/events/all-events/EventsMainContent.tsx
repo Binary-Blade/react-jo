@@ -59,11 +59,6 @@ export const EventsMainContent = (): JSX.Element => {
     setPage(1);
   }, [setPage, sortBy, sortOrder, filterBy, filterValue]);
 
-  // Display loading page if data is still being fetched
-  if (loading) {
-    return <LoadingPage />;
-  }
-
   return (
     <>
       <section className="w-full h-full py-8 md:py-12 lg:py-14 bg-gray-50 dark:bg-gray-900">
@@ -94,19 +89,25 @@ export const EventsMainContent = (): JSX.Element => {
             </div>
           </div>
           {/* Event cards grid */}
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {events.map(event => (
-              <EventCard
-                eventId={event.eventId}
-                key={event.eventId}
-                title={event.title}
-                categoryType={event.categoryType}
-                shortDescription={event.shortDescription}
-                quantityAvailable={event.quantityAvailable}
-                startDate={event.startDate}
-                endDate={event.endDate}
-              />
-            ))}
+          <div className="mt-8">
+            {loading ? (
+              <LoadingPage />
+            ) : (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {events.map(event => (
+                  <EventCard
+                    eventId={event.eventId}
+                    key={event.eventId}
+                    title={event.title}
+                    categoryType={event.categoryType}
+                    shortDescription={event.shortDescription}
+                    quantityAvailable={event.quantityAvailable}
+                    startDate={event.startDate}
+                    endDate={event.endDate}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
