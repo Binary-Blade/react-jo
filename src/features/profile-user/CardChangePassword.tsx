@@ -53,7 +53,7 @@ export const CardChangePassword = (): JSX.Element => {
     if (response.success) {
       toast({
         variant: 'success',
-        title: 'Profile updated',
+        title: 'Votre mot de passe a été mis à jour',
         description: `${response.message}`
       });
       setTimeout(() => {
@@ -63,7 +63,7 @@ export const CardChangePassword = (): JSX.Element => {
     } else {
       toast({
         variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
+        title: 'Oh non ! Une erreur est survenue.',
         description: `${response.error}`
       });
     }
@@ -81,14 +81,14 @@ export const CardChangePassword = (): JSX.Element => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Change Password</CardTitle>
-        <CardDescription>Update your account password.</CardDescription>
+        <CardTitle>Changer le mot de passe</CardTitle>
+        <CardDescription>Mettre à jour le mot de passe de votre compte.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Old Password Field */}
           <div className="grid gap-2">
-            <Label htmlFor="oldPassword">Old Password</Label>
+            <Label htmlFor="oldPassword">Ancien mot de passe</Label>
             <div className="relative">
               <Input
                 id="oldPassword"
@@ -113,7 +113,7 @@ export const CardChangePassword = (): JSX.Element => {
           </div>
           {/* New Password Field */}
           <div className="grid gap-2">
-            <Label htmlFor="newPassword">New Password</Label>
+            <Label htmlFor="newPassword">Nouveau mot de passe</Label>
             <div className="relative">
               <Input
                 id="newPassword"
@@ -138,9 +138,9 @@ export const CardChangePassword = (): JSX.Element => {
           </div>
           {/* Form Actions */}
           <div className="pt-4 space-x-4">
-            <Button type="submit">Change Password</Button>
+            <Button type="submit">Changer le mot de passe</Button>
             <Button variant="outline" onClick={() => reset()}>
-              Reset
+              Réinitialiser
             </Button>
           </div>
         </form>

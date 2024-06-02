@@ -73,13 +73,13 @@ export const CardProfile = ({ selectedUser, userId }: CardProfileProps): JSX.Ele
     if (response.success) {
       toast({
         variant: 'success',
-        title: 'Profile updated',
+        title: 'Profil mis à jour',
         description: `${response.message}`
       });
     } else {
       toast({
         variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
+        title: 'Oh non ! Une erreur est survenue.',
         description: `${response.message}`
       });
     }
@@ -97,20 +97,20 @@ export const CardProfile = ({ selectedUser, userId }: CardProfileProps): JSX.Ele
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Profile</CardTitle>
-        <CardDescription>Update your profile information.</CardDescription>
+        <CardTitle>Profil</CardTitle>
+        <CardDescription>Mettre à jour les informations de votre profil.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* First Name Field */}
           <div className="grid gap-2">
-            <Label htmlFor="firstName">First Name</Label>
+            <Label htmlFor="firstName">Prénom</Label>
             <Input id="firstName" {...register('firstName')} />
             {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
           </div>
           {/* Last Name Field */}
           <div className="grid gap-2">
-            <Label htmlFor="lastName">Last Name</Label>
+            <Label htmlFor="lastName">Nom</Label>
             <Input id="lastName" {...register('lastName')} />
             {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
           </div>
@@ -122,9 +122,9 @@ export const CardProfile = ({ selectedUser, userId }: CardProfileProps): JSX.Ele
           </div>
           {/* Form Actions */}
           <div className="pt-4 space-x-4">
-            <Button type="submit">Save Changes</Button>
+            <Button type="submit">Enregistrer les modifications</Button>
             <Button variant="outline" onClick={() => reset()}>
-              Reset
+              Réinitialiser
             </Button>
           </div>
         </form>
