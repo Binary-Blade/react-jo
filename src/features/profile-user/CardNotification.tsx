@@ -33,7 +33,7 @@ export const CardNotification = (): JSX.Element => {
     <Card>
       <CardHeader>
         <CardTitle>Notifications</CardTitle>
-        <CardDescription>Choose what you want to be notified about.</CardDescription>
+        <CardDescription>Choisissez les notifications que vous souhaitez recevoir.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         {/* Option for receiving all notifications */}
@@ -44,9 +44,9 @@ export const CardNotification = (): JSX.Element => {
         >
           <BellIcon className="mt-px h-5 w-5" />
           <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">Everything</p>
+            <p className="text-sm font-medium leading-none">Tout</p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Email digest, mentions & all activity.
+              Digest par email, mentions et toutes les activités.
             </p>
           </div>
         </div>
@@ -58,8 +58,10 @@ export const CardNotification = (): JSX.Element => {
         >
           <AtSignIcon className="mt-px h-5 w-5" />
           <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">Available</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Only mentions and comments.</p>
+            <p className="text-sm font-medium leading-none">Disponible</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Seulement les mentions et commentaires.
+            </p>
           </div>
         </div>
         {/* Option for turning off all notifications */}
@@ -70,8 +72,10 @@ export const CardNotification = (): JSX.Element => {
         >
           <EyeOffIcon className="mt-px h-5 w-5" />
           <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">Ignoring</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Turn off all notifications.</p>
+            <p className="text-sm font-medium leading-none">Ignorer</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Désactiver toutes les notifications.
+            </p>
           </div>
         </div>
       </CardContent>
